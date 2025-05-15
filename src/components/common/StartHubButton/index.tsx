@@ -1,4 +1,4 @@
-import { CSSObject, } from "styled-components";
+import { CSSObject } from "styled-components";
 import styled from "styled-components";
 import { StartHubColors } from "../../../Design/color/StartHubColors";
 import type { Interpolation } from 'styled-components';
