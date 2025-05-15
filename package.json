@@ -12,7 +12,10 @@
   "dependencies": {
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+<<<<<<< HEAD
     "react-router-dom": "^7.6.0",
+=======
+>>>>>>> e5fda89 (chore: styled-components 추가 및 TypeScript 버전 업데이트)
     "styled-components": "^6.1.18"
   },
   "devDependencies": {
