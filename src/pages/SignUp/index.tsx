@@ -1,6 +1,4 @@
-import React from 'react'
-
-const index = () => {
+const SignUp = () => {
   return (
     <div>
       
@@ -8,4 +6,4 @@ const index = () => {
   )
 }
 
-export default index
+export default SignUp
