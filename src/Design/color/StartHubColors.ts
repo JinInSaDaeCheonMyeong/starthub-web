@@ -14,7 +14,7 @@ export const StartHubColors = Object.freeze({
     Gray1 : "#242424",
     Gray2 : "#9B9B9B",
     Gray3 : "#CFCFCF",
-    ㅇGray4 : "#F3F4F6",
+    Gray4 : "#F3F4F6",
 
     //BlueColors
     Blue02 : "#2E74ED",

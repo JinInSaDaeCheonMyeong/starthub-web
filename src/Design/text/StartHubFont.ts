@@ -1,7 +1,6 @@
 import { css } from "styled-components";
 
 export const StartHubFont = Object.freeze({
-
   //Pretendard 폰트
   Pretendard: {
     Title1: css`
