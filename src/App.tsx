@@ -1,4 +1,3 @@
-import './App.css'
 import Router from './components/router';
 import { GlobalStyle } from './style/webfont.style';
 
