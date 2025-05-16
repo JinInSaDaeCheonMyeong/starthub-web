@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # startHub-web
 =======
 # React + TypeScript + Vite
@@ -55,4 +54,3 @@ export default tseslint.config({
   },
 })
 ```
->>>>>>> 4819475 (Feat: first commit)
