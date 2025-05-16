@@ -4,7 +4,7 @@ import { StartHubColors } from "../../../Design/color/StartHubColors";
 import type { Interpolation } from 'styled-components';
 
 
-type FlattenSimpleInterpolation = Interpolation<any>[];
+type FlattenSimpleInterpolation = Interpolation<object>[];
 
 export interface ButtonProps {
   text: string;
