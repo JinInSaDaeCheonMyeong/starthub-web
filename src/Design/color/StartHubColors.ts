@@ -1,7 +1,7 @@
 export const StartHubColors = Object.freeze({
     
     // brandColors
-    Primary : "#3671F0",
+    Primary : "#2466F4",
     Secondary : "#2D2D2D",
 
     //BlackColors

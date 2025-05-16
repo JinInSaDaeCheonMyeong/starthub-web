@@ -38,24 +38,10 @@ const StyledButton = styled.button<StyledButtonProps>`
   border: none;
   border-radius: 8px;
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
-  transition: all 0.2s ease-in-out;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0 16px;
-  &:hover {
-    opacity: ${({ disabled }) => (disabled ? 1 : 0.9)};
-    background-color: ${({ backgroundColor, disabled }) =>
-      disabled
-        ? StartHubColors.Gray3
-        : backgroundColor === 'Primary'
-        ? StartHubColors.Blue02
-        : backgroundColor};
-  }
-
-  &:active {
-    opacity: ${({ disabled }) => (disabled ? 1 : 0.8)};
-  }
 
   ${({ typography }) => typography} 
   ${({ customStyle }) => customStyle}
