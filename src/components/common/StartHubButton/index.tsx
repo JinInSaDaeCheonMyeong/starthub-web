@@ -15,7 +15,7 @@ export interface ButtonProps {
   backgroundColor: string;
   onClick: () => void;
   disabled?: boolean;
-  customStyle?: CSSObject;
+  $customStyle?: CSSObject;
   icon ?: React.ReactNode;
 }
 
@@ -25,7 +25,7 @@ interface StyledButtonProps {
   backgroundColor: string;
   textTheme?: string;
   disabled?: boolean;
-  customStyle?: CSSObject;
+  $customStyle?: CSSObject;
   typography?:  FlattenSimpleInterpolation;
   hasIcon?: boolean;
 }
@@ -47,7 +47,7 @@ const StyledButton = styled.button<StyledButtonProps>`
   position: relative;
 
   ${({ typography }) => typography} 
-  ${({ customStyle }) => customStyle}
+  ${({ $customStyle }) => $customStyle}
 `;
 
 const IconContainer = styled.span`
@@ -71,7 +71,7 @@ export const StartHubButton = ({
   backgroundColor,
   onClick,
   disabled = false,
-  customStyle,
+  $customStyle,
   icon
 }: ButtonProps) => {
 
@@ -84,7 +84,7 @@ export const StartHubButton = ({
       onClick={disabled ? undefined : onClick}
       disabled={disabled}
       typography={typography}
-      customStyle={customStyle}
+      $customStyle={$customStyle}
       hasIcon={!!icon}
     >
       {icon && <IconContainer>{icon}</IconContainer>}
