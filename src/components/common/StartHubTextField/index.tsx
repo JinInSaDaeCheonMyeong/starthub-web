@@ -16,12 +16,12 @@ export interface StartHubTextFieldProps {
   placeholder: string;
   isDisabled?: boolean;
   supportingText?: string;
-  $customStyle?: CSSObject;
+  customStyle?: CSSObject;
   onChange: ChangeEventHandler<HTMLInputElement>;
   onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
 }
 
-const Wrapper = styled.div<{ width?: number}>`
+const Wrapper = styled.div<{ width?: number }>`
   display: flex;
   flex-direction: column;
   width: ${({ width }) => (width ? `${width}px` : "100%")};
@@ -32,6 +32,7 @@ const Label = styled.label`
   margin-bottom: 12px;
   color: ${StartHubColors.Black1};
   ${StartHubFont.Pretendard.Body1.Medium}
+  
   div {
     ${StartHubFont.Pretendard.Caption1.Medium}
     color: ${StartHubColors.Primary};
@@ -39,7 +40,9 @@ const Label = styled.label`
   }
 `;
 
-const Input = styled.input<{ isError?: boolean; $customStyle ?: CSSObject }>`
+const Input = styled.input.withConfig({
+  shouldForwardProp: (prop) => !["customStyle", "isError"].includes(prop),
+})<{ isError?: boolean; customStyle?: CSSObject }>`
   padding: 20px 20px;
   ${StartHubFont.Pretendard.Body2.Medium}
   border: 1px solid ${({ isError }) =>
@@ -47,6 +50,7 @@ const Input = styled.input<{ isError?: boolean; $customStyle ?: CSSObject }>`
   border-radius: 8px;
   outline: none;
   height: 50px;
+  
   &::placeholder {
     color: ${StartHubColors.Gray3};
   }
@@ -60,7 +64,8 @@ const Input = styled.input<{ isError?: boolean; $customStyle ?: CSSObject }>`
     background-color: #f5f5f5;
     color: #999;
   }
-  ${({ $customStyle }) => $customStyle || ""}
+
+  ${({ customStyle }) => customStyle || ""}
 `;
 
 const SupportingText = styled.span<{ isError?: boolean }>`
@@ -80,7 +85,7 @@ export const StartHubTextField: React.FC<StartHubTextFieldProps> = ({
   placeholder,
   isDisabled,
   supportingText,
-  $customStyle,
+  customStyle,
   onChange,
   onKeyDown,
 }) => {
@@ -100,7 +105,7 @@ export const StartHubTextField: React.FC<StartHubTextFieldProps> = ({
         disabled={isDisabled}
         onChange={onChange}
         onKeyDown={onKeyDown}
-        $customStyle={$customStyle}
+        customStyle={customStyle}
       />
       {supportingText && (
         <SupportingText isError={isError}>{supportingText}</SupportingText>
