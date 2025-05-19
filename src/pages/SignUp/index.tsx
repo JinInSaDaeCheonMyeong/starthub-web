@@ -4,10 +4,10 @@ const SignUp = () => {
   return (
     <div>
       <S.Container>
-
+        
       </S.Container>
     </div>
   )
 }
 
-export default SignUp
+export default SignUp;

@@ -21,11 +21,10 @@ export interface StartHubTextFieldProps {
   onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
 }
 
-const Wrapper = styled.div<{ width?: number; customStyle?: CSSObject }>`
+const Wrapper = styled.div<{ width?: number}>`
   display: flex;
   flex-direction: column;
   width: ${({ width }) => (width ? `${width}px` : "100%")};
-  ${({ customStyle }) => customStyle || ""}
 `;
 
 const Label = styled.label`
@@ -40,14 +39,14 @@ const Label = styled.label`
   }
 `;
 
-const Input = styled.input<{ isError?: boolean }>`
+const Input = styled.input<{ isError?: boolean; customStyle ?: CSSObject }>`
   padding: 20px 20px;
   ${StartHubFont.Pretendard.Body2.Medium}
   border: 1px solid ${({ isError }) =>
     isError ? "#f44336" : StartHubColors.Gray3};
   border-radius: 8px;
   outline: none;
-  height: 60px;
+  height: 50px;
   &::placeholder {
     color: ${StartHubColors.Gray3};
   }
@@ -61,6 +60,7 @@ const Input = styled.input<{ isError?: boolean }>`
     background-color: #f5f5f5;
     color: #999;
   }
+  ${({ customStyle }) => customStyle || ""}
 `;
 
 const SupportingText = styled.span<{ isError?: boolean }>`
@@ -85,7 +85,7 @@ export const StartHubTextField: React.FC<StartHubTextFieldProps> = ({
   onKeyDown,
 }) => {
   return (
-    <Wrapper width={width} customStyle={customStyle}>
+    <Wrapper width={width}>
       <Label htmlFor={name}>
         {label}
         <div>{detailLabel}</div>
@@ -100,6 +100,7 @@ export const StartHubTextField: React.FC<StartHubTextFieldProps> = ({
         disabled={isDisabled}
         onChange={onChange}
         onKeyDown={onKeyDown}
+        customStyle={customStyle}
       />
       {supportingText && (
         <SupportingText isError={isError}>{supportingText}</SupportingText>
