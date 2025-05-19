@@ -16,7 +16,7 @@ export interface StartHubTextFieldProps {
   placeholder: string;
   isDisabled?: boolean;
   supportingText?: string;
-  customStyle?: CSSObject;
+  $customStyle?: CSSObject;
   onChange: ChangeEventHandler<HTMLInputElement>;
   onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
 }
@@ -39,7 +39,7 @@ const Label = styled.label`
   }
 `;
 
-const Input = styled.input<{ isError?: boolean; customStyle ?: CSSObject }>`
+const Input = styled.input<{ isError?: boolean; $customStyle ?: CSSObject }>`
   padding: 20px 20px;
   ${StartHubFont.Pretendard.Body2.Medium}
   border: 1px solid ${({ isError }) =>
@@ -60,7 +60,7 @@ const Input = styled.input<{ isError?: boolean; customStyle ?: CSSObject }>`
     background-color: #f5f5f5;
     color: #999;
   }
-  ${({ customStyle }) => customStyle || ""}
+  ${({ $customStyle }) => $customStyle || ""}
 `;
 
 const SupportingText = styled.span<{ isError?: boolean }>`
@@ -80,7 +80,7 @@ export const StartHubTextField: React.FC<StartHubTextFieldProps> = ({
   placeholder,
   isDisabled,
   supportingText,
-  customStyle,
+  $customStyle,
   onChange,
   onKeyDown,
 }) => {
@@ -100,7 +100,7 @@ export const StartHubTextField: React.FC<StartHubTextFieldProps> = ({
         disabled={isDisabled}
         onChange={onChange}
         onKeyDown={onKeyDown}
-        customStyle={customStyle}
+        $customStyle={$customStyle}
       />
       {supportingText && (
         <SupportingText isError={isError}>{supportingText}</SupportingText>
