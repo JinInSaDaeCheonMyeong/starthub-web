@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+// import { StartHubColors } from "../../Design/color/StartHubColors";
+// import { StartHubFont } from "../../Design/text/StartHubFont";
 
 export const Container = styled.div`
     display: flex;
