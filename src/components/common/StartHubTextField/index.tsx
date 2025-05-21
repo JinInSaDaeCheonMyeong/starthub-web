@@ -31,7 +31,7 @@ const Label = styled.label`
   font-size: 14px;
   margin-bottom: 12px;
   color: ${StartHubColors.Black1};
-  ${StartHubFont.Pretendard.Caption1.Regular}
+  ${StartHubFont.Pretendard.Body1.Medium}
   
   div {
     ${StartHubFont.Pretendard.Caption1.Medium}
@@ -44,7 +44,7 @@ const Input = styled.input.withConfig({
   shouldForwardProp: (prop) => !["customStyle", "isError"].includes(prop),
 })<{ isError?: boolean; customStyle?: CSSObject }>`
   padding: 20px 20px;
-  ${StartHubFont.Pretendard.Body2.Medium}
+  ${StartHubFont.Pretendard.Caption1.Regular}
   border: 1px solid ${({ isError }) =>
     isError ? "#f44336" : StartHubColors.Gray3};
   border-radius: 8px;
