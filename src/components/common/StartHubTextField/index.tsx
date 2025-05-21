@@ -31,7 +31,7 @@ const Label = styled.label`
   font-size: 14px;
   margin-bottom: 12px;
   color: ${StartHubColors.Black1};
-  ${StartHubFont.Pretendard.Body1.Medium}
+  ${StartHubFont.Pretendard.Caption1.Regular}
   
   div {
     ${StartHubFont.Pretendard.Caption1.Medium}
