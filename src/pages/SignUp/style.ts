@@ -31,7 +31,7 @@ export const Logo = styled.div`
 
 export const Title = styled.h2`
   font:${StartHubFont.Pretendard.Body1.SemiBold};
-  color: #333;
+  color: ${StartHubColors.Black1};
   text-align: center;
 `;
 
