@@ -14,13 +14,13 @@ export const LoginContainer = styled.div`
 export const LoginForm = styled.form`
   width: 100%;
   max-width: 500px;
-  background-color: white;
   border-radius: 20px;
-  padding: 40px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  gap: 10px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  background-color: white;
+  padding: 40px 80px;
+  width: 100%;
 `;
 
 export const Logo = styled.div`
@@ -64,7 +64,9 @@ export const VerificationCodeContainer = styled.div`
   gap: 10px;
   width: 100%;
   margin-bottom: 10px;
+  flex-wrap: nowrap;
 `;
+
 
 export const VerificationInputContainer = styled.div`
   position: relative;
@@ -73,22 +75,31 @@ export const VerificationInputContainer = styled.div`
 `;
 
 export const VerifyButton = styled.button`
-  padding: 0 20px;
+  display: flex;  
+  justify-content: center;
+  align-items: center;
+  padding: 0 16px;
+
   background-color: white;
   color: ${StartHubColors.Primary};
   font: ${StartHubFont.Pretendard.Caption1.Medium};
-  width: 108px;
+
   height: 50px;
   border: 1px solid #4169E1;
   border-radius: 8px;
   cursor: pointer;
   white-space: nowrap;
   transition: background-color 0.3s;
-  
+
+
+  width: 100%;
+  max-width: 108px;
+
   &:hover {
     background-color: #f0f5ff;
   }
 `;
+
 
 
 export const PasswordInputContainer = styled.div`
