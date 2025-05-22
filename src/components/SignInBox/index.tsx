@@ -82,7 +82,7 @@ const SignInBox = () => {
 
       <StartHubButton
         icon={<Naver style={{ width: "16px", height: "16px" }} />}
-        text="Naver로 로그인"
+        text="네이버로 로그인"
         backgroundColor="#00C300"
         onClick={() => console.log("click!")}
         typography={StartHubFont.Pretendard.Caption1.Medium}
