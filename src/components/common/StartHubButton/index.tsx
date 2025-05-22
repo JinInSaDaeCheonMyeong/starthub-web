@@ -1,8 +1,6 @@
-import { CSSObject } from "styled-components";
-import styled from "styled-components";
+import styled, { CSSObject } from "styled-components";
 import { StartHubColors } from "../../../Design/color/StartHubColors";
 import type { Interpolation } from 'styled-components';
-
 
 type FlattenSimpleInterpolation = Interpolation<object>[];
 
@@ -16,7 +14,8 @@ export interface ButtonProps {
   onClick: () => void;
   disabled?: boolean;
   customStyle?: CSSObject;
-  icon ?: React.ReactNode;
+  icon?: React.ReactNode;
+  hover ?: string;
 }
 
 interface StyledButtonProps {
@@ -26,17 +25,21 @@ interface StyledButtonProps {
   textTheme?: string;
   disabled?: boolean;
   customStyle?: CSSObject;
-  typography?:  FlattenSimpleInterpolation;
+  typography?: FlattenSimpleInterpolation;
   hasIcon?: boolean;
+  hover ?: string;
 }
 
-const StyledButton = styled.button<StyledButtonProps>`
+const StyledButton = styled.button.withConfig({
+  shouldForwardProp: (prop) =>
+    !["backgroundColor", "textTheme", "customStyle", "typography", "hasIcon", "hover"].includes(prop),
+})<StyledButtonProps>`
   width: ${({ width }) => (width ? `${width}px` : '100%')};
   height: ${({ height }) => (height ? `${height}px` : '48px')};
   background-color: ${({ backgroundColor, disabled }) =>
     disabled ? StartHubColors.Gray3 : backgroundColor};
   color: ${({ textTheme, disabled }) =>
-    disabled ? StartHubColors.Gray2 : textTheme ? textTheme : StartHubColors.White1};
+    disabled ? StartHubColors.Gray2 : textTheme ?? StartHubColors.White1};
   border: none;
   border-radius: 8px;
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
@@ -45,8 +48,11 @@ const StyledButton = styled.button<StyledButtonProps>`
   justify-content: ${({ hasIcon }) => (hasIcon ? 'space-between' : 'center')};
   padding: 0 22px;
   position: relative;
-
-  ${({ typography }) => typography} 
+  &:hover {
+    background-color: ${({ hover, disabled }) =>
+      !disabled && hover ? hover : undefined};
+  }
+  ${({ typography }) => typography}
   ${({ customStyle }) => customStyle}
 `;
 
@@ -64,7 +70,7 @@ const TextContainer = styled.span`
 
 export const StartHubButton = ({
   text,
-  textTheme = 'White1',
+  textTheme,
   width,
   height,
   typography,
@@ -72,9 +78,9 @@ export const StartHubButton = ({
   onClick,
   disabled = false,
   customStyle,
-  icon
+  icon,
+  hover,
 }: ButtonProps) => {
-
   return (
     <StyledButton
       width={width}
@@ -86,6 +92,7 @@ export const StartHubButton = ({
       typography={typography}
       customStyle={customStyle}
       hasIcon={!!icon}
+      hover={hover}
     >
       {icon && <IconContainer>{icon}</IconContainer>}
       <TextContainer>{text}</TextContainer>

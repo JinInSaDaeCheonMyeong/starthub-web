@@ -5,15 +5,21 @@ export const StartHubFont = Object.freeze({
   Pretendard: {
     Title1: css`
       font-family: "Pretendard Variable";
-      font-size: "56px";
-      font-weight: "700";
-      line-height: "120%";
+      font-size: 56px;
+      font-weight: 700;
+      line-height: 120%;
     `,
     Title2: css`
       font-family: "Pretendard Variable";
-      font-size: "40px";
-      font-weight: "700";
-      line-height: "120%";
+      font-size: 40px;
+      font-weight: 700;
+      line-height: 120%;
+    `,
+    Title3: css`
+      font-family: "Pretendard Variable";
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 120%;
     `,
     Headlines1: {
       SemiBold: css`
@@ -35,15 +41,15 @@ export const StartHubFont = Object.freeze({
         font-size: 20px;
         font-weight: 600;
         line-height: 120%;
-    `,
+      `,
       Bold: css`
         font-family: "Pretendard Variable";
         font-size: 20px;
         font-weight: 700;
         line-height: 120%;
-    `,
+      `,
     },
-    Body1 : {
+    Body1: {
       Regular: css`
         font-family: "Pretendard Variable";
         font-size: 18px;
@@ -63,7 +69,7 @@ export const StartHubFont = Object.freeze({
         line-height: 120%;
       `,
     },
-    Body2 : {
+    Body2: {
       Regular: css`
         font-family: "Pretendard Variable";
         font-size: 16px;
@@ -92,7 +98,7 @@ export const StartHubFont = Object.freeze({
       `,
       Medium: css`
         font-family: "Pretendard Variable";
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 500;
         line-height: 120%;
       `,
@@ -100,7 +106,7 @@ export const StartHubFont = Object.freeze({
     Caption2: {
       Regular: css`
         font-family: "Pretendard Variable";
-        font-size: 14px;
+        font-size: 12px;
         font-weight: 400;
         line-height: 120%;
       `,
@@ -110,9 +116,8 @@ export const StartHubFont = Object.freeze({
         font-weight: 500;
         line-height: 120%;
       `,
-    }
+    },
   },
-
 
   //WantedSans 폰트
   WantedSans: {

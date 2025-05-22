@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, KeyboardEventHandler } from "react";
+import { ChangeEventHandler, KeyboardEventHandler } from "react";
 import styled, { CSSObject } from "styled-components";
 import { StartHubFont } from "../../../Design/text/StartHubFont";
 import { StartHubColors } from "../../../Design/color/StartHubColors";
@@ -21,7 +21,7 @@ export interface StartHubTextFieldProps {
   onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
 }
 
-const Wrapper = styled.div<{ width?: number}>`
+const Wrapper = styled.div<{ width?: number }>`
   display: flex;
   flex-direction: column;
   width: ${({ width }) => (width ? `${width}px` : "100%")};
@@ -32,6 +32,7 @@ const Label = styled.label`
   margin-bottom: 12px;
   color: ${StartHubColors.Black1};
   ${StartHubFont.Pretendard.Body1.Medium}
+  
   div {
     ${StartHubFont.Pretendard.Caption1.Medium}
     color: ${StartHubColors.Primary};
@@ -39,14 +40,17 @@ const Label = styled.label`
   }
 `;
 
-const Input = styled.input<{ isError?: boolean; customStyle ?: CSSObject }>`
+const Input = styled.input.withConfig({
+  shouldForwardProp: (prop) => !["customStyle", "isError"].includes(prop),
+})<{ isError?: boolean; customStyle?: CSSObject }>`
   padding: 20px 20px;
-  ${StartHubFont.Pretendard.Body2.Medium}
+  ${StartHubFont.Pretendard.Caption1.Regular}
   border: 1px solid ${({ isError }) =>
     isError ? "#f44336" : StartHubColors.Gray3};
   border-radius: 8px;
   outline: none;
   height: 50px;
+  
   &::placeholder {
     color: ${StartHubColors.Gray3};
   }
@@ -60,6 +64,7 @@ const Input = styled.input<{ isError?: boolean; customStyle ?: CSSObject }>`
     background-color: #f5f5f5;
     color: #999;
   }
+
   ${({ customStyle }) => customStyle || ""}
 `;
 
@@ -69,7 +74,7 @@ const SupportingText = styled.span<{ isError?: boolean }>`
   color: ${({ isError }) => (isError ? "#f44336" : "#666")};
 `;
 
-export const StartHubTextField: React.FC<StartHubTextFieldProps> = ({
+export const StartHubTextField = ({
   type,
   label,
   detailLabel,
@@ -83,13 +88,15 @@ export const StartHubTextField: React.FC<StartHubTextFieldProps> = ({
   customStyle,
   onChange,
   onKeyDown,
-}) => {
+} : StartHubTextFieldProps) => {
   return (
     <Wrapper width={width}>
-      <Label htmlFor={name}>
-        {label}
-        <div>{detailLabel}</div>
-      </Label>
+      {(label || detailLabel) && (
+        <Label htmlFor={name}>
+          {label}
+          {detailLabel && <div>{detailLabel}</div>}
+        </Label>
+      )}
       <Input
         type={type}
         id={name}
