@@ -27,22 +27,18 @@ export const Logo = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 10px;
 `;
 
 export const Title = styled.h2`
-  font-size: 20px;
-  font-weight: bold;
+  font:${StartHubFont.Pretendard.Body1.SemiBold};
   color: #333;
   text-align: center;
-  margin-bottom: 30px;
 `;
 
 export const InputLabel = styled.label`
   font-size: 16px;
   font-weight: 500;
   color: #333;
-  margin-bottom: 5px;
 `;
 
 export const InputField = styled.input`
@@ -64,6 +60,7 @@ export const InputField = styled.input`
 
 export const VerificationCodeContainer = styled.div`
   display: flex;
+  align-items: center;
   gap: 10px;
   width: 100%;
   margin-bottom: 10px;
@@ -127,18 +124,17 @@ export const Checkbox = styled.input`
 
 export const CheckboxLabel = styled.label`
   font-size: 14px;
-  color: #555;
+  font: ${StartHubFont.Pretendard.Caption1.Regular};
+  color: ${StartHubColors.Gray2};
   flex-grow: 1;
 `;
 
-export const ArrowIcon = styled.span`
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23aaa'%3E%3Cpath d='M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z'%3E%3C/path%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: center;
-`;
+export const CheckboxLabelMain = styled.label`
+  font-size: 14px;
+  font: ${StartHubFont.Pretendard.Body2.Regular};
+  color: ${StartHubColors.Black1};
+  flex-grow: 1;
+`
 
 export const LoginButton = styled.button`
   width: 100%;

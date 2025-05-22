@@ -4,24 +4,13 @@ import { StartHubButton } from '../../components/common/StartHubButton';
 import { StartHubColors } from '../../Design/color/StartHubColors';
 import { StartHubFont } from '../../Design/text/StartHubFont';
 import { StartHubTextField } from "../../components/common/StartHubTextField";
+import { ReactComponent as LogoIcon } from "../../assets/logo/Vector.svg";
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [verificationCode, setVerificationCode] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [acceptAll, setAcceptAll] = useState(false);
-  const [isAdult, setIsAdult] = useState(false);
-  const [acceptTerms, setAcceptTerms] = useState(false);
-  const [acceptPrivacy, setAcceptPrivacy] = useState(false);
-
-  const handleAcceptAllChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const checked = e.target.checked;
-    setAcceptAll(checked);
-    setIsAdult(checked);
-    setAcceptTerms(checked);
-    setAcceptPrivacy(checked);
-  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,10 +21,11 @@ const SignUp = () => {
     <S.LoginContainer>
       <S.LoginForm onSubmit={handleSubmit}>
         <S.Logo>
-          <img src="../../assets/logo/Vector.svg" alt="Logo" />
+          <LogoIcon 
+          width={143}
+          height={55}/>
         </S.Logo>
         <S.Title>회원가입</S.Title>
-        
         <S.InputLabel>이메일</S.InputLabel>
         <S.VerificationCodeContainer>
           <StartHubTextField
@@ -56,7 +46,7 @@ const SignUp = () => {
             placeholder="인증번호를 입력해주세요"
             onChange={(e) => setVerificationCode(e.target.value)}
             width={320}
-            customStyle={{ height: "50px", paddingRight: "80px" }}
+            customStyle={{ height: "50px"}}
           />
         </S.VerificationInputContainer>
         
@@ -68,7 +58,7 @@ const SignUp = () => {
             placeholder="비밀번호를 입력해주세요"
             onChange={(e) => setPassword(e.target.value)}
             width={320}
-            customStyle={{ height: "50px", paddingRight: "40px" }}
+            customStyle={{ height: "50px"}}
           />
           <S.ShowPasswordButton type="button">
           </S.ShowPasswordButton>
@@ -81,53 +71,26 @@ const SignUp = () => {
             placeholder="비밀번호를 다시 한번 입력해주세요"
             onChange={(e) => setConfirmPassword(e.target.value)}
             width={320}
-            customStyle={{ height: "50px", paddingRight: "40px" }}
+            customStyle={{ height: "50px"}}
           />
           <S.ShowPasswordButton type="button">
           </S.ShowPasswordButton>
         </S.PasswordInputContainer>
         
         <S.CheckboxContainer>
-          <S.Checkbox 
-            type="checkbox" 
-            id="acceptAll" 
-            checked={acceptAll}
-            onChange={handleAcceptAllChange}
-          />
-          <S.CheckboxLabel htmlFor="acceptAll">전체 동의</S.CheckboxLabel>
+          <S.CheckboxLabelMain htmlFor="acceptAll">전체 동의</S.CheckboxLabelMain>
         </S.CheckboxContainer>
         
         <S.CheckboxContainer>
-          <S.Checkbox 
-            type="checkbox" 
-            id="isAdult" 
-            checked={isAdult}
-            onChange={(e) => setIsAdult(e.target.checked)}
-          />
           <S.CheckboxLabel htmlFor="isAdult">[필수] 만 14세 이상입니다.</S.CheckboxLabel>
-          <S.ArrowIcon />
         </S.CheckboxContainer>
         
         <S.CheckboxContainer>
-          <S.Checkbox 
-            type="checkbox" 
-            id="acceptTerms" 
-            checked={acceptTerms}
-            onChange={(e) => setAcceptTerms(e.target.checked)}
-          />
           <S.CheckboxLabel htmlFor="acceptTerms">[필수] 스타트허브 이용약관 동의</S.CheckboxLabel>
-          <S.ArrowIcon />
         </S.CheckboxContainer>
         
         <S.CheckboxContainer>
-          <S.Checkbox 
-            type="checkbox" 
-            id="acceptPrivacy" 
-            checked={acceptPrivacy}
-            onChange={(e) => setAcceptPrivacy(e.target.checked)}
-          />
           <S.CheckboxLabel htmlFor="acceptPrivacy">[필수] 스타트허브 개인정보 수집 및 이용 동의</S.CheckboxLabel>
-          <S.ArrowIcon />
         </S.CheckboxContainer>
         
         <StartHubButton
