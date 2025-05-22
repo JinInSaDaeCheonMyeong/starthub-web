@@ -39,6 +39,7 @@ export const InputLabel = styled.label`
   font-size: 16px;
   font-weight: 500;
   color: #333;
+  margin-top: 10px;
 `;
 
 export const InputField = styled.input`
@@ -83,11 +84,14 @@ export const InputButton = styled.button`
   transform: translateY(-50%);
   padding: 0 10px;
   background-color: ${StartHubColors.White1};
-  color: ${StartHubColors.Primary};
+  color: ${StartHubColors.Gray3};
   font: ${StartHubFont.Pretendard.Caption1.Medium};
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  &:hover {
+    color: ${StartHubColors.Primary};
+  }
 `
 
 export const VerificationInputContainer = styled.div`

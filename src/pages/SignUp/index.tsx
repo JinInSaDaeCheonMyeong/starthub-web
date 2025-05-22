@@ -28,9 +28,6 @@ const SignUp = () => {
         </S.Logo>
         <S.Title>회원가입</S.Title>
         <S.InputLabel>이메일</S.InputLabel>
-        <div>
-
-        </div>
         <S.VerificationCodeContainer>
           <StartHubTextField
             type="text"
@@ -38,7 +35,7 @@ const SignUp = () => {
             placeholder="이메일을 입력해주세요"
             onChange={(e) => setEmail(e.target.value)}
             width={200}
-            customStyle={{ height: "50px", ":hover": { border: "1px solid #4169E1" }}}
+            customStyle={{ height: "50px"}}
           />
           <S.VerifyButton type="button">인증번호 전송</S.VerifyButton>
         </S.VerificationCodeContainer>
