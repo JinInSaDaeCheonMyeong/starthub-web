@@ -7,41 +7,141 @@ import { StartHubTextField } from "../../components/common/StartHubTextField";
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
+  const [verificationCode, setVerificationCode] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [acceptAll, setAcceptAll] = useState(false);
+  const [isAdult, setIsAdult] = useState(false);
+  const [acceptTerms, setAcceptTerms] = useState(false);
+  const [acceptPrivacy, setAcceptPrivacy] = useState(false);
+
+  const handleAcceptAllChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const checked = e.target.checked;
+    setAcceptAll(checked);
+    setIsAdult(checked);
+    setAcceptTerms(checked);
+    setAcceptPrivacy(checked);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('회원가입 제출', { email, verificationCode, password, confirmPassword });
+  };
+
   return (
     <S.LoginContainer>
-      <S.LoginForm>
+      <S.LoginForm onSubmit={handleSubmit}>
         <S.Logo>
           <img src="../../assets/logo/Vector.svg" alt="Logo" />
-          <S.LogoText >회원가입</S.LogoText>
         </S.Logo>
+        <S.Title>회원가입</S.Title>
+        
         <S.InputLabel>이메일</S.InputLabel>
-        <StartHubTextField
-        type="text"
-        value={email} 
-        placeholder="이메일을 입력해주세요"
-        onChange={(e) => setEmail(e.target.value)}
-        width={200}
-        customStyle={{ height: "50px" }} 
-      />
         <S.VerificationCodeContainer>
-          <S.InputField 
-            type="email" 
-            placeholder="이메일을 입력해주세요" 
+          <StartHubTextField
+            type="text"
+            value={email}
+            placeholder="이메일을 입력해주세요"
+            onChange={(e) => setEmail(e.target.value)}
+            width={250}
+            customStyle={{ height: "50px" }}
           />
           <S.VerifyButton type="button">인증번호 전송</S.VerifyButton>
         </S.VerificationCodeContainer>
+        
+        <S.VerificationInputContainer>
+          <StartHubTextField
+            type="text"
+            value={verificationCode}
+            placeholder="인증번호를 입력해주세요"
+            onChange={(e) => setVerificationCode(e.target.value)}
+            width={320}
+            customStyle={{ height: "50px", paddingRight: "80px" }}
+          />
+        </S.VerificationInputContainer>
+        
+        <S.InputLabel>비밀번호</S.InputLabel>
+        <S.PasswordInputContainer>
+          <StartHubTextField
+            type="password"
+            value={password}
+            placeholder="비밀번호를 입력해주세요"
+            onChange={(e) => setPassword(e.target.value)}
+            width={320}
+            customStyle={{ height: "50px", paddingRight: "40px" }}
+          />
+          <S.ShowPasswordButton type="button">
+          </S.ShowPasswordButton>
+        </S.PasswordInputContainer>
+        
+        <S.PasswordInputContainer>
+          <StartHubTextField
+            type="password"
+            value={confirmPassword}
+            placeholder="비밀번호를 다시 한번 입력해주세요"
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            width={320}
+            customStyle={{ height: "50px", paddingRight: "40px" }}
+          />
+          <S.ShowPasswordButton type="button">
+          </S.ShowPasswordButton>
+        </S.PasswordInputContainer>
+        
+        <S.CheckboxContainer>
+          <S.Checkbox 
+            type="checkbox" 
+            id="acceptAll" 
+            checked={acceptAll}
+            onChange={handleAcceptAllChange}
+          />
+          <S.CheckboxLabel htmlFor="acceptAll">전체 동의</S.CheckboxLabel>
+        </S.CheckboxContainer>
+        
+        <S.CheckboxContainer>
+          <S.Checkbox 
+            type="checkbox" 
+            id="isAdult" 
+            checked={isAdult}
+            onChange={(e) => setIsAdult(e.target.checked)}
+          />
+          <S.CheckboxLabel htmlFor="isAdult">[필수] 만 14세 이상입니다.</S.CheckboxLabel>
+          <S.ArrowIcon />
+        </S.CheckboxContainer>
+        
+        <S.CheckboxContainer>
+          <S.Checkbox 
+            type="checkbox" 
+            id="acceptTerms" 
+            checked={acceptTerms}
+            onChange={(e) => setAcceptTerms(e.target.checked)}
+          />
+          <S.CheckboxLabel htmlFor="acceptTerms">[필수] 스타트허브 이용약관 동의</S.CheckboxLabel>
+          <S.ArrowIcon />
+        </S.CheckboxContainer>
+        
+        <S.CheckboxContainer>
+          <S.Checkbox 
+            type="checkbox" 
+            id="acceptPrivacy" 
+            checked={acceptPrivacy}
+            onChange={(e) => setAcceptPrivacy(e.target.checked)}
+          />
+          <S.CheckboxLabel htmlFor="acceptPrivacy">[필수] 스타트허브 개인정보 수집 및 이용 동의</S.CheckboxLabel>
+          <S.ArrowIcon />
+        </S.CheckboxContainer>
+        
         <StartHubButton
           text="회원가입"
           width={320}
           height={50}
           backgroundColor={StartHubColors.Primary}
           typography={StartHubFont.Pretendard.Body1.Medium}
-          onClick={() => console.log("click!")}
+          onClick={() => console.log("회원가입 클릭!")}
           textTheme={StartHubColors.White1}
         />
       </S.LoginForm>
     </S.LoginContainer>
-  )
-}
+  );
+};
 
 export default SignUp;
