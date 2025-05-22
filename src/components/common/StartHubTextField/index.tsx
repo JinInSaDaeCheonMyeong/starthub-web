@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, KeyboardEventHandler } from "react";
+import { ChangeEventHandler, KeyboardEventHandler } from "react";
 import styled, { CSSObject } from "styled-components";
 import { StartHubFont } from "../../../Design/text/StartHubFont";
 import { StartHubColors } from "../../../Design/color/StartHubColors";
@@ -74,7 +74,7 @@ const SupportingText = styled.span<{ isError?: boolean }>`
   color: ${({ isError }) => (isError ? "#f44336" : "#666")};
 `;
 
-export const StartHubTextField: React.FC<StartHubTextFieldProps> = ({
+export const StartHubTextField = ({
   type,
   label,
   detailLabel,
@@ -88,7 +88,7 @@ export const StartHubTextField: React.FC<StartHubTextFieldProps> = ({
   customStyle,
   onChange,
   onKeyDown,
-}) => {
+} : StartHubTextFieldProps) => {
   return (
     <Wrapper width={width}>
       <Label htmlFor={name}>
