@@ -55,6 +55,7 @@ const SignInBox = () => {
           marginBottom: "20px",
         }}
         disabled={false}
+        hover="#235FE0"
       />
 
       <S.SignInOptions>
@@ -78,6 +79,7 @@ const SignInBox = () => {
           boxShadow: `0 0 0 1px ${StartHubColors.Gray3} inset`,
           marginBottom: "12px",
         }}
+        hover={StartHubColors.White2}
       />
 
       <StartHubButton
@@ -93,6 +95,7 @@ const SignInBox = () => {
           boxShadow: `0 0 0 1px #00BC00 inset`,
           marginBottom: "12px",
         }}
+        hover="#10BC10"
       />
 
       <StartHubButton
@@ -105,6 +108,7 @@ const SignInBox = () => {
         height={50}
         textTheme={StartHubColors.White1}
         customStyle={{ boxShadow: `0 0 0 1px ${StartHubColors.Black1} inset` }}
+        hover={StartHubColors.Black2}
       />
     </S.SignBoxContainer>
   );
