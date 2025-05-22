@@ -16,14 +16,6 @@ export const SignInNormalText = styled.p`
   }
 `;
 
-export const SignInLogo = styled.div`
-  width: 135px;
-  height: 55px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-`;
-
 export const SignInLogoField = styled.div`
   justify-content: center;
   margin-bottom: 34px;
