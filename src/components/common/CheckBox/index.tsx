@@ -1,5 +1,5 @@
-import { ReactComponent as CheckBox } from '../../../assets/icon/checkbox.svg';
-import { ReactComponent as FilledCheckBox } from '../../../assets/icon/filledCheckbox.svg';
+import { ReactComponent as CheckBox } from "../../../assets/icon/checkbox.svg";
+import { ReactComponent as FilledCheckBox } from "../../../assets/icon/filledCheckbox.svg";
 
 export interface StartHubCheckBoxProps {
   checked?: boolean;
@@ -24,15 +24,19 @@ export function StartHubCheckBox({
       onClick={handleClick}
       disabled={disabled}
       style={{
-        background: 'transparent',
-        border: 'none',
+        background: "transparent",
+        border: "none",
         padding: 0,
-        cursor: disabled ? 'not-allowed' : 'pointer',
+        cursor: disabled ? "not-allowed" : "pointer",
       }}
       aria-pressed={checked}
       aria-disabled={disabled}
     >
-      {checked ? <FilledCheckBox /> : <CheckBox />}
+      {checked ? (
+        <FilledCheckBox width={20} height={20}/>
+      ) : (
+        <CheckBox width={20} height={20}/>
+      )}
     </button>
   );
 }

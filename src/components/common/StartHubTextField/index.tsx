@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, KeyboardEventHandler } from "react";
+import { ChangeEventHandler, KeyboardEventHandler } from "react";
 import styled, { CSSObject } from "styled-components";
 import { StartHubFont } from "../../../Design/text/StartHubFont";
 import { StartHubColors } from "../../../Design/color/StartHubColors";
