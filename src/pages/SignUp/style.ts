@@ -67,6 +67,28 @@ export const VerificationCodeContainer = styled.div`
   flex-wrap: nowrap;
 `;
 
+export const VerificationWrapper = styled.div`
+    height: 50px;
+    position: relative;
+    display: flex;
+    width: 320px;
+    align-items: center;
+    gap: 5px;
+`
+
+export const InputButton = styled.button`
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0 10px;
+  background-color: ${StartHubColors.White1};
+  color: ${StartHubColors.Primary};
+  font: ${StartHubFont.Pretendard.Caption1.Medium};
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+`
 
 export const VerificationInputContainer = styled.div`
   position: relative;
@@ -146,21 +168,3 @@ export const CheckboxLabelMain = styled.label`
   color: ${StartHubColors.Black1};
   flex-grow: 1;
 `
-
-export const LoginButton = styled.button`
-  width: 100%;
-  padding: 15px;
-  background-color: #4169E1;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  margin-top: 20px;
-  transition: background-color 0.3s;
-  
-  &:hover {
-    background-color: #3050C0;
-  }
-`;

@@ -29,7 +29,7 @@ const SignUp = () => {
         <S.Title>회원가입</S.Title>
         <S.InputLabel>이메일</S.InputLabel>
         <div>
-          
+
         </div>
         <S.VerificationCodeContainer>
           <StartHubTextField
@@ -38,21 +38,22 @@ const SignUp = () => {
             placeholder="이메일을 입력해주세요"
             onChange={(e) => setEmail(e.target.value)}
             width={200}
-            customStyle={{ height: "50px"}}
+            customStyle={{ height: "50px", ":hover": { border: "1px solid #4169E1" }}}
           />
           <S.VerifyButton type="button">인증번호 전송</S.VerifyButton>
         </S.VerificationCodeContainer>
         
-        <S.VerificationInputContainer>
-          <StartHubTextField
-            type="text"
-            value={verificationCode}
-            placeholder="인증번호를 입력해주세요"
-            onChange={(e) => setVerificationCode(e.target.value)}
-            width={320}
-            customStyle={{ height: "50px"}}
-          />
-        </S.VerificationInputContainer>
+        <S.VerificationWrapper>
+            <StartHubTextField
+              type="text"
+              value={verificationCode}
+              placeholder="인증번호를 입력해주세요"
+              onChange={(e) => setVerificationCode(e.target.value)}
+              width={320}
+              customStyle={{ height: "50px"}}
+            />
+            <S.InputButton>인증하기</S.InputButton>
+        </S.VerificationWrapper>
         
         <S.InputLabel>비밀번호</S.InputLabel>
         <S.PasswordInputContainer>
