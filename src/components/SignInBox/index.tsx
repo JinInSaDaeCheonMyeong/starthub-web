@@ -49,7 +49,7 @@ const SignInBox = () => {
         typography={StartHubFont.Pretendard.Body1.Medium}
         backgroundColor={StartHubColors.Primary}
         textTheme={StartHubColors.White1}
-        onClick={() => console.log("로그인 버튼 클릭")}
+        onClick={() => {}}
         customStyle={{
           borderRadius: "10px",
           marginBottom: "20px",
@@ -69,7 +69,7 @@ const SignInBox = () => {
         icon={<Google style={{ width: "18px", height: "18px" }} />}
         text="Google로 로그인"
         backgroundColor={StartHubColors.White1}
-        onClick={() => console.log("click!")}
+        onClick={() => {}}
         typography={StartHubFont.Pretendard.Caption1.Medium}
         width={320}
         height={50}
