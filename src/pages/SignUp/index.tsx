@@ -5,6 +5,7 @@ import { StartHubColors } from '../../Design/color/StartHubColors';
 import { StartHubFont } from '../../Design/text/StartHubFont';
 import { StartHubTextField } from "../../components/common/StartHubTextField";
 import { ReactComponent as LogoIcon } from "../../assets/logo/Vector.svg";
+import { StartHubCheckBox } from '../../components/common/CheckBox';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -78,14 +79,35 @@ const SignUp = () => {
         </S.PasswordInputContainer>
         
         <S.CheckboxContainer>
+          <StartHubCheckBox
+          checked = {false}
+          onChange={(checked: boolean) => {
+            console.log("체크 상태:", checked);
+          }}
+          disabled = {false}
+          />
           <S.CheckboxLabelMain htmlFor="acceptAll">전체 동의</S.CheckboxLabelMain>
         </S.CheckboxContainer>
         
         <S.CheckboxContainer>
+          <StartHubCheckBox
+            checked = {false}
+            onChange={(checked: boolean) => {
+              console.log("체크 상태:", checked);
+            }}
+            disabled = {false}
+            />
           <S.CheckboxLabel htmlFor="isAdult">[필수] 만 14세 이상입니다.</S.CheckboxLabel>
         </S.CheckboxContainer>
         
         <S.CheckboxContainer>
+          <StartHubCheckBox
+            checked = {false}
+            onChange={(checked: boolean) => {
+              console.log("체크 상태:", checked);
+            }}
+            disabled = {false}
+            />
           <S.CheckboxLabel htmlFor="acceptTerms">[필수] 스타트허브 이용약관 동의</S.CheckboxLabel>
         </S.CheckboxContainer>
         
