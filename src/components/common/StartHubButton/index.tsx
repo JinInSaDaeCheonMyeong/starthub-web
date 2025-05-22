@@ -15,6 +15,7 @@ export interface ButtonProps {
   disabled?: boolean;
   customStyle?: CSSObject;
   icon?: React.ReactNode;
+  hover ?: string;
 }
 
 interface StyledButtonProps {
@@ -26,11 +27,12 @@ interface StyledButtonProps {
   customStyle?: CSSObject;
   typography?: FlattenSimpleInterpolation;
   hasIcon?: boolean;
+  hover ?: string;
 }
 
 const StyledButton = styled.button.withConfig({
   shouldForwardProp: (prop) =>
-    !["backgroundColor", "textTheme", "customStyle", "typography", "hasIcon"].includes(prop),
+    !["backgroundColor", "textTheme", "customStyle", "typography", "hasIcon", "hover"].includes(prop),
 })<StyledButtonProps>`
   width: ${({ width }) => (width ? `${width}px` : '100%')};
   height: ${({ height }) => (height ? `${height}px` : '48px')};
@@ -46,7 +48,10 @@ const StyledButton = styled.button.withConfig({
   justify-content: ${({ hasIcon }) => (hasIcon ? 'space-between' : 'center')};
   padding: 0 22px;
   position: relative;
-
+  &:hover {
+    background-color: ${({ hover, disabled }) =>
+      !disabled && hover ? hover : undefined};
+  }
   ${({ typography }) => typography}
   ${({ customStyle }) => customStyle}
 `;
@@ -65,7 +70,7 @@ const TextContainer = styled.span`
 
 export const StartHubButton = ({
   text,
-  textTheme = 'White1',
+  textTheme,
   width,
   height,
   typography,
@@ -73,7 +78,8 @@ export const StartHubButton = ({
   onClick,
   disabled = false,
   customStyle,
-  icon
+  icon,
+  hover,
 }: ButtonProps) => {
   return (
     <StyledButton
@@ -86,6 +92,7 @@ export const StartHubButton = ({
       typography={typography}
       customStyle={customStyle}
       hasIcon={!!icon}
+      hover={hover}
     >
       {icon && <IconContainer>{icon}</IconContainer>}
       <TextContainer>{text}</TextContainer>
