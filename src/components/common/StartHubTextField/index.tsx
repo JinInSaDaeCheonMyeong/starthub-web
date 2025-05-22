@@ -91,10 +91,12 @@ export const StartHubTextField = ({
 } : StartHubTextFieldProps) => {
   return (
     <Wrapper width={width}>
-      <Label htmlFor={name}>
-        {label}
-        <div>{detailLabel}</div>
-      </Label>
+      {(label || detailLabel) && (
+        <Label htmlFor={name}>
+          {label}
+          {detailLabel && <div>{detailLabel}</div>}
+        </Label>
+      )}
       <Input
         type={type}
         id={name}
