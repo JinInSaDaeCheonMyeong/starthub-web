@@ -1,5 +1,5 @@
 import * as S from "./style";
-import SignIn from "@components/SignInBox";
+import SignInBox from "@/components/SignInBox";
 import {ReactComponent as SignInImage} from "@assets/images/signInImage.svg"
 
 const SignInPage = () => {
@@ -10,7 +10,7 @@ const SignInPage = () => {
       </S.LeftBoxField>
       
       <S.RightBoxField>
-        <SignIn />
+        <SignInBox/>
       </S.RightBoxField>
     </div>
   );
