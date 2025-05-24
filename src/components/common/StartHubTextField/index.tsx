@@ -57,7 +57,7 @@ const Input = styled.input.withConfig({
 
   &:focus {
     border-color: ${({ isError }) =>
-      isError ? "#f44336" : StartHubColors.Gray3};
+      isError ? "#f44336" : StartHubColors.Primary};
   }
 
   &:disabled {
