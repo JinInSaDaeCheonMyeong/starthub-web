@@ -7,7 +7,7 @@ export const LoginContainer = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: ${StartHubColors.White1};
+  background-color: ${StartHubColors.White2};
   padding: 20px;
 `;
 
