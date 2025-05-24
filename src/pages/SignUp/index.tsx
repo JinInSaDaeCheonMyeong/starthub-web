@@ -102,10 +102,7 @@ const SignUp = () => {
         <S.CheckboxContainer>
           <StartHubCheckBox
             checked={isChecked}
-            onChange={(checked: boolean) => {
-              console.log("체크 상태:", checked);
-              setIsChecked(checked); 
-            }}
+            onChange={setIsChecked}
             disabled={true}
             />
           <S.CheckboxLabel htmlFor="isAdult">[필수] 만 14세 이상입니다.</S.CheckboxLabel>
@@ -117,10 +114,7 @@ const SignUp = () => {
         <S.CheckboxContainer>
           <StartHubCheckBox
             checked={isChecked}
-            onChange={(checked: boolean) => {
-              console.log("체크 상태:", checked);
-              setIsChecked(checked); 
-            }}
+            onChange={setIsChecked}
             disabled={true}
             />
           <S.CheckboxLabel htmlFor="acceptTerms">[필수] 스타트허브 이용약관 동의</S.CheckboxLabel>
@@ -132,10 +126,7 @@ const SignUp = () => {
         <S.CheckboxContainer>
           <StartHubCheckBox
             checked={isChecked}
-            onChange={(checked: boolean) => {
-              console.log("체크 상태:", checked);
-              setIsChecked(checked); 
-            }}
+            onChange={setIsChecked}
             disabled={true}
             />
           <S.CheckboxLabel htmlFor="acceptPrivacy">[필수] 스타트허브 개인정보 수집 및 이용 동의</S.CheckboxLabel>

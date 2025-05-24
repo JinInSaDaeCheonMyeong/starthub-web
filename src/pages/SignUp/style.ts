@@ -69,7 +69,7 @@ export const InputField = styled.input`
   outline: none;
   
   &::placeholder {
-    color: #aaa;
+    color: ${StartHubColors.Gray3};
   }
   
   &:focus {
