@@ -4,9 +4,9 @@ import { ReactComponent as SignInImage } from "../../assets/images/signInImage.s
 
 const SignInPage = () => {
   return (
-    <div className="signin" style={{ display: "flex", height: "100vh" }}>
+    <div style={{ display: "flex", height: "100vh" }}>
       <S.LeftBoxField>
-        <SignInImage style={{ width: "601px", height: "724px" }} />
+        <SignInImage style={{ width: "100%", height: "100%" }} />
       </S.LeftBoxField>
       <S.RightBoxField>
         <SignIn />
