@@ -5,9 +5,9 @@ import { StartHubColors } from '../../Design/color/StartHubColors';
 import { StartHubFont } from '../../Design/text/StartHubFont';
 import { StartHubTextField } from "../../components/common/StartHubTextField";
 import { ReactComponent as LogoIcon } from "../../assets/logo/Vector.svg";
-import { ReactComponent as EyeIcon } from "../../assets/icon/eye.svg";
-import { ReactComponent as EyeOffIcon } from "../../assets/icon/eye.slash.svg";
-import { ReactComponent as CheckIcon } from "../../assets/icon/check.svg";
+import { ReactComponent as EyeIcon } from "../../assets/icons/eye.svg";
+import { ReactComponent as EyeOffIcon } from "../../assets/icons/eye.slash.svg";
+import { ReactComponent as CheckIcon } from "../../assets/icons/check.svg";
 import { StartHubCheckBox } from '../../components/common/CheckBox';
 
 const SignUp = () => {

@@ -5,9 +5,9 @@ import { StartHubTextField } from "../common/StartHubTextField";
 import { useState } from "react";
 import * as S from "./style";
 import { ReactComponent as StartHubLogo } from "../../assets/logo/logo.svg";
-import { ReactComponent as Google } from "../../assets/icon/google.svg";
-import { ReactComponent as Apple } from "../../assets/icon/apple.svg";
-import { ReactComponent as Naver } from "../../assets/icon/naver.svg";
+import { ReactComponent as Google } from "../../assets/icons/google.svg";
+import { ReactComponent as Apple } from "../../assets/icons/apple.svg";
+import { ReactComponent as Naver } from "../../assets/icons/naver.svg";
 import { StartHubCheckBox } from "../common/CheckBox";
 
 const SignInBox = () => {
