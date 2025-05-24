@@ -1,9 +1,9 @@
 import * as S from './style';
 import { useState } from 'react';
-import { StartHubButton } from '../../components/common/StartHubButton';
+import { StartHubButton } from '../../components/common/Button';
 import { StartHubColors } from '../../Design/color/StartHubColors';
 import { StartHubFont } from '../../Design/text/StartHubFont';
-import { StartHubTextField } from "../../components/common/StartHubTextField";
+import { StartHubTextField } from "../../components/common/TextField";
 import { ReactComponent as LogoIcon } from "../../assets/logo/Vector.svg";
 import { ReactComponent as EyeIcon } from "../../assets/icons/eye.svg";
 import { ReactComponent as EyeOffIcon } from "../../assets/icons/eye.slash.svg";

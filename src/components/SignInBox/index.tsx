@@ -1,7 +1,7 @@
-import { StartHubButton } from "../common/StartHubButton";
+import { StartHubButton } from "../common/Button";
 import { StartHubColors } from "../../Design/color/StartHubColors";
 import { StartHubFont } from "../../Design/text/StartHubFont";
-import { StartHubTextField } from "../common/StartHubTextField";
+import { StartHubTextField } from "../common/TextField";
 import { useState } from "react";
 import * as S from "./style";
 import { ReactComponent as StartHubLogo } from "../../assets/logo/logo.svg";
