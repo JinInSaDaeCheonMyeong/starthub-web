@@ -1,14 +1,14 @@
-import { StartHubButton } from "../common/Button";
-import { StartHubColors } from "../../Design/color/StartHubColors";
-import { StartHubFont } from "../../Design/text/StartHubFont";
-import { StartHubTextField } from "../common/TextField";
+import { StartHubButton } from "@components/common/Button";
+import { StartHubTextField } from "@components/common/TextField";
 import { useState } from "react";
 import * as S from "./style";
-import { ReactComponent as StartHubLogo } from "../../assets/logo/logo.svg";
-import { ReactComponent as Google } from "../../assets/icons/google.svg";
-import { ReactComponent as Apple } from "../../assets/icons/apple.svg";
-import { ReactComponent as Naver } from "../../assets/icons/naver.svg";
-import { StartHubCheckBox } from "../common/CheckBox";
+import { ReactComponent as StartHubLogo } from "@assets/logo/logo.svg";
+import { ReactComponent as Google } from "@assets/icons/google.svg";
+import { ReactComponent as Apple } from "@assets/icons/apple.svg";
+import { ReactComponent as Naver } from "@assets/icons/naver.svg";
+import { StartHubCheckBox } from "@components/common/CheckBox";
+import { StartHubColors } from "@/design/color/StartHubColors";
+import { StartHubFont } from "@/design/text/StartHubFont";
 
 const SignInBox = () => {
   const [password, setPassword] = useState("");

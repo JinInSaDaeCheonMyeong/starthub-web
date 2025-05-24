@@ -1,16 +1,16 @@
 import * as S from './style';
 import { useState } from 'react';
-import { StartHubButton } from '../../components/common/Button';
-import { StartHubColors } from '../../Design/color/StartHubColors';
-import { StartHubFont } from '../../Design/text/StartHubFont';
-import { StartHubTextField } from "../../components/common/TextField";
-import { ReactComponent as LogoIcon } from "../../assets/logo/Vector.svg";
-import { ReactComponent as EyeIcon } from "../../assets/icons/eye.svg";
-import { ReactComponent as EyeOffIcon } from "../../assets/icons/eye.slash.svg";
-import { ReactComponent as CheckIcon } from "../../assets/icons/check.svg";
-import { StartHubCheckBox } from '../../components/common/CheckBox';
+import { StartHubButton } from '@/components/common/Button';
+import { StartHubColors } from '@/design/color/StartHubColors';
+import { StartHubFont } from '@/design/text/StartHubFont';
+import { StartHubTextField } from '@/components/common/TextField';
+import { ReactComponent as LogoIcon } from "@/assets/logo/Vector.svg";
+import { ReactComponent as EyeIcon } from "@/assets/icons/eye.svg";
+import { ReactComponent as EyeOffIcon } from "@/assets/icons/eye.slash.svg";
+import { ReactComponent as CheckIcon } from "@/assets/icons/check.svg";
+import { StartHubCheckBox } from '@/components/common/CheckBox';
 
-const SignUp = () => {
+const SignUpPage = () => {
   const [email, setEmail] = useState('');
   const [verificationCode, setVerificationCode] = useState('');
   const [password, setPassword] = useState('');
@@ -150,4 +150,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default SignUpPage;

@@ -1,5 +1,5 @@
-import { ReactComponent as CheckBox } from "../../../assets/icons/checkbox.svg";
-import { ReactComponent as FilledCheckBox } from "../../../assets/icons/filledCheckbox.svg";
+import { ReactComponent as CheckBox } from "@/assets/icons/checkbox.svg";
+import { ReactComponent as FilledCheckBox } from "@/assets/icons/filledCheckbox.svg";
 
 export interface StartHubCheckBoxProps {
   checked?: boolean;

@@ -1,5 +1,5 @@
 import styled, { CSSObject } from "styled-components";
-import { StartHubColors } from "../../../Design/color/StartHubColors";
+import { StartHubColors } from "@/design/color/StartHubColors";
 import type { Interpolation } from 'styled-components';
 
 type FlattenSimpleInterpolation = Interpolation<object>[];

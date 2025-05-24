@@ -5,7 +5,22 @@
     { "path": "./tsconfig.node.json" }
   ],
   "compilerOptions": {
-    "types": ["node"],
     "baseUrl": ".",
-  },
+    "paths": {
+      "@/*": ["./src/*"],
+      "@components/*": ["./src/components/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@stores/*": ["./src/stores/*"],
+      "@types/*": ["./src/types/*"],
+      "@constants/*": ["./src/constants/*"],
+      "@design/*": ["./src/design/*"],
+      "@style/*": ["./src/style/*"],
+      "@queries/*": ["./src/queries/*"],
+      "@libs/*": ["./src/libs/*"],
+      "@api/*": ["./src/api/*"]
+    }
+  }
 }

@@ -1,7 +1,7 @@
 import { ChangeEventHandler, KeyboardEventHandler } from "react";
 import styled, { CSSObject } from "styled-components";
-import { StartHubFont } from "../../../Design/text/StartHubFont";
-import { StartHubColors } from "../../../Design/color/StartHubColors";
+import { StartHubFont } from "@/design/text/StartHubFont";
+import { StartHubColors } from "@/design/color/StartHubColors";
 
 type InputType = "text" | "password";
 

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { StartHubColors } from "../../Design/color/StartHubColors";
+import { StartHubColors } from "@/design/color/StartHubColors";
 
 export const LeftBoxField = styled.div`
   background-color: ${StartHubColors.Primary};

@@ -1,6 +1,6 @@
 import * as S from "./style";
-import SignIn from "../../components/SignInBox";
-import { ReactComponent as SignInImage } from "../../assets/images/signInImage.svg";
+import SignIn from "@components/SignInBox";
+import {ReactComponent as SignInImage} from "@assets/images/signInImage.svg"
 
 const SignInPage = () => {
   return (
