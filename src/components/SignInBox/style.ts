@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { StartHubColors } from "@/design/color/StartHubColors";
-import { StartHubFont } from "@/design/text/StartHubFont";
+import { StartHubColors, StartHubFont } from "@/design";
+
 export const StartHubButton = styled.div`
   color: ${StartHubColors.Primary};
   ${StartHubFont.Pretendard.Headlines1}

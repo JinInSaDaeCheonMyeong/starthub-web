@@ -8,6 +8,7 @@ const SignInPage = () => {
       <S.LeftBoxField>
         <SignInImage style={{ width: "100%", height: "100%" }} />
       </S.LeftBoxField>
+      
       <S.RightBoxField>
         <SignIn />
       </S.RightBoxField>

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-import { StartHubColors } from '@/design/color/StartHubColors';
-import { StartHubFont } from '@/design/text/StartHubFont';
+import { StartHubColors, StartHubFont } from '@/design';
 
 export const LoginContainer = styled.div`
   display: flex;

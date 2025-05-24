@@ -1,14 +1,9 @@
 import * as S from './style';
 import { useState } from 'react';
-import { StartHubButton } from '@/components/common/Button';
-import { StartHubColors } from '@/design/color/StartHubColors';
-import { StartHubFont } from '@/design/text/StartHubFont';
-import { StartHubTextField } from '@/components/common/TextField';
+import { StartHubColors, StartHubFont } from '@/design';
+import { StartHubButton, StartHubTextField, StartHubCheckBox } from '@/components/common';
+import { EyeIcon, EyeOffIcon } from '@/assets/icons';
 import { ReactComponent as LogoIcon } from "@/assets/logo/Vector.svg";
-import { ReactComponent as EyeIcon } from "@/assets/icons/eye.svg";
-import { ReactComponent as EyeOffIcon } from "@/assets/icons/eye.slash.svg";
-import { ReactComponent as CheckIcon } from "@/assets/icons/check.svg";
-import { StartHubCheckBox } from '@/components/common/CheckBox';
 
 const SignUpPage = () => {
   const [email, setEmail] = useState('');
@@ -106,9 +101,9 @@ const SignUpPage = () => {
             disabled={true}
             />
           <S.CheckboxLabel htmlFor="isAdult">[필수] 만 14세 이상입니다.</S.CheckboxLabel>
-          <CheckIcon
+          {/* <CheckIcon
           width={22}
-          height={17}/>
+          height={17}/> */}
         </S.CheckboxContainer>
         
         <S.CheckboxContainer>
@@ -118,9 +113,9 @@ const SignUpPage = () => {
             disabled={true}
             />
           <S.CheckboxLabel htmlFor="acceptTerms">[필수] 스타트허브 이용약관 동의</S.CheckboxLabel>
-          <CheckIcon
+          {/* <CheckIcon
           width={22}
-          height={17}/>
+          height={17}/> */}
         </S.CheckboxContainer>
         
         <S.CheckboxContainer>
@@ -130,9 +125,9 @@ const SignUpPage = () => {
             disabled={true}
             />
           <S.CheckboxLabel htmlFor="acceptPrivacy">[필수] 스타트허브 개인정보 수집 및 이용 동의</S.CheckboxLabel>
-          <CheckIcon
+          {/* <CheckIcon
           width={22}
-          height={17}/>
+          height={17}/> */}
         </S.CheckboxContainer>
         
         <StartHubButton
