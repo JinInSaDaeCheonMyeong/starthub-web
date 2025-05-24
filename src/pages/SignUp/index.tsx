@@ -24,7 +24,7 @@ const SignUp = () => {
 
   return (
     <S.LoginContainer>
-      <S.LoginForm onSubmit={handleSubmit}>
+      <S.LoginForm onSubmit={handleSubmit}> 
         <S.Logo>
           <LogoIcon 
           width={143}
