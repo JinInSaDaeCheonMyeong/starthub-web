@@ -44,9 +44,8 @@ export const Title = styled.h2`
 `;
 
 export const InputLabel = styled.label`
-  font-size: 16px;
-  font-weight: 500;
-  color: #333;
+  font: ${StartHubFont.Pretendard.Body2.Medium};
+  color: ${StartHubColors.Black1};
   margin-top: 10px;
 `;
 
@@ -74,7 +73,7 @@ export const InputField = styled.input`
   }
   
   &:focus {
-    border-color: #4169E1;
+    border-color: ${StartHubColors.Primary};
   }
 `;
 
