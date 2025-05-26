@@ -30,6 +30,10 @@ export const SignInOptions = styled.div`
   p {
     color: ${StartHubColors.Gray2};
     ${StartHubFont.Pretendard.Caption1.Medium}
+    cursor: pointer;
+    &:hover {
+      color: ${StartHubColors.Primary};
+    }
   }
 `;
 
