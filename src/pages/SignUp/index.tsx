@@ -12,7 +12,7 @@ const SignUpPage = () => {
         <S.Logo>
           <LogoIcon width={143} height={55} />
         </S.Logo>
-        <S.Title>회원가입</S.Title>
+        <h2>회원가입</h2>
         <SignUpBox/>
         <AgreementSection/>
         <StartHubButton

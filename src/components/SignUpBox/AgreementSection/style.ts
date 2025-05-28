@@ -1,13 +1,6 @@
 import styled from "styled-components";
 import { StartHubFont,StartHubColors } from "@/design";
 
-
-export const Checkbox = styled.input`
-  width: 18px;
-  height: 18px;
-  accent-color: #4169E1;
-`;
-
 export const CheckboxLabel = styled.label`
   font-size: 14px;
   font: ${StartHubFont.Pretendard.Caption1.Regular};

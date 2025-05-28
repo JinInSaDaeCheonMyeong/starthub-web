@@ -8,6 +8,12 @@ export const LoginContainer = styled.div`
   min-height: 100vh;
   background-color: ${StartHubColors.White2};
   padding: 20px;
+
+  h2{
+    font:${StartHubFont.Pretendard.Body1.SemiBold};
+    color: ${StartHubColors.Black1};
+    text-align: center;
+  }
 `;
 
 export const LoginForm = styled.form`
@@ -34,10 +40,4 @@ export const Logo = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-export const Title = styled.h2`
-  font:${StartHubFont.Pretendard.Body1.SemiBold};
-  color: ${StartHubColors.Black1};
-  text-align: center;
 `;
