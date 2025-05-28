@@ -3,7 +3,7 @@ import { StartHubColors } from "@/design/color/StartHubColors";
 
 export const LeftBoxField = styled.div`
   background-color: ${StartHubColors.Primary};
-  width: 55%;
+  width: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,7 +12,7 @@ export const LeftBoxField = styled.div`
 export const RightBoxField = styled.div`
   display: flex;
   position: relative;
-  width: 45%;
+  width: 50%;
   justify-content: center;
   align-items: center;
 `;

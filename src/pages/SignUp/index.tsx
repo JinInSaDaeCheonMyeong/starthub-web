@@ -24,6 +24,7 @@ const SignUpPage = () => {
           onClick={() => {}}
           textTheme={StartHubColors.White1}
           customStyle={{ marginTop: "20px" }}
+          hover="#235FE0"
         />
       </S.LoginForm>
     </S.LoginContainer>
