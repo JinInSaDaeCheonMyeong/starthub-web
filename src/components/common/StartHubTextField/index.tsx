@@ -45,7 +45,7 @@ const Input = styled.input.withConfig({
   padding: 20px 20px;
   ${StartHubFont.Pretendard.Caption1.Regular}
   border: 1px solid ${({ isError }) =>
-    isError ? "#f44336" : StartHubColors.Gray3};
+    isError ? StartHubColors.Error : StartHubColors.Gray3};
   border-radius: 8px;
   outline: none;
   height: 50px;
@@ -56,12 +56,12 @@ const Input = styled.input.withConfig({
 
   &:focus {
     border-color: ${({ isError }) =>
-      isError ? "#f44336" : StartHubColors.Primary};
+      isError ? StartHubColors.Error : StartHubColors.Primary};
   }
 
   &:disabled {
-    background-color: #f5f5f5;
-    color: #999;
+    background-color: ${StartHubColors.White2};
+    color: ${StartHubColors.Gray3};
   }
 
   ${({ customStyle }) => customStyle || ""}
@@ -70,7 +70,7 @@ const Input = styled.input.withConfig({
 const SupportingText = styled.span<{ isError?: boolean }>`
   margin-top: 4px;
   font-size: 12px;
-  color: ${({ isError }) => (isError ? "#f44336" : "#666")};
+  color: ${({ isError }) => (isError ? StartHubColors.Error : StartHubColors.Gray3)};
 `;
 
 export const StartHubTextField = ({
