@@ -1,24 +1,24 @@
-import { StartHubColors, StartHubFont } from "@/design"
-import { Google, Naver, Apple } from "@/assets/icons"
-import { StartHubButton } from "@components/common"
+import { StartHubColors, StartHubFont } from "@/shared/design";
+import { Google, Naver, Apple } from "@/assets/icons";
+import { StartHubButton } from "@/shared/ui";
 
-const SocialButton = () =>{
-    return(
-        <>
-        <StartHubButton
-          icon={<Google style={{ width: "18px", height: "18px" }} />}
-          text="Google로 로그인"
-          backgroundColor={StartHubColors.White1}
-          onClick={() => {}}
-          typography={StartHubFont.Pretendard.Caption1.Medium}
-          width={320}
-          height={50}
-          textTheme={StartHubColors.Black1}
-          customStyle={{
-            boxShadow: `0 0 0 1px ${StartHubColors.Gray3} inset`,
-            marginBottom: "12px",
-          }}
-          hover={StartHubColors.White2}
+const SocialButton = () => {
+  return (
+    <>
+      <StartHubButton
+        icon={<Google style={{ width: "18px", height: "18px" }} />}
+        text="Google로 로그인"
+        backgroundColor={StartHubColors.White1}
+        onClick={() => {}}
+        typography={StartHubFont.Pretendard.Caption1.Medium}
+        width={320}
+        height={50}
+        textTheme={StartHubColors.Black1}
+        customStyle={{
+          boxShadow: `0 0 0 1px ${StartHubColors.Gray3} inset`,
+          marginBottom: "12px",
+        }}
+        hover={StartHubColors.White2}
       />
 
       <StartHubButton
@@ -49,7 +49,7 @@ const SocialButton = () =>{
         customStyle={{ boxShadow: `0 0 0 1px ${StartHubColors.Black1} inset` }}
         hover={StartHubColors.Black2}
       />
-        </>
-    )
-}
-export default SocialButton
+    </>
+  );
+};
+export default SocialButton;

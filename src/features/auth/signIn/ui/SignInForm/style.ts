@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { StartHubColors, StartHubFont } from "@/design";
+import { StartHubColors, StartHubFont } from "@/shared/design";
 
 export const StartHubButton = styled.div`
   color: ${StartHubColors.Primary};

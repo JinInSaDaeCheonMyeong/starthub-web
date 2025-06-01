@@ -29,8 +29,8 @@
       "@stores/*": ["./src/stores/*"],
       "@types/*": ["./src/types/*"],
       "@constants/*": ["./src/constants/*"],
-      "@design/*": ["./src/design/*"],
-      "@style/*": ["./src/style/*"],
+      "@design/*": ["src/shared/design/*"],
+      "@style/*": ["src/shared/style/*"],
       "@queries/*": ["./src/queries/*"],
       "@libs/*": ["./src/libs/*"],
       "@api/*": ["./src/api/*"]

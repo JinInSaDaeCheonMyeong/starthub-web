@@ -1,6 +1,6 @@
 import * as S from "./style";
-import SignInBox from "@/components/SignInBox";
-import {ReactComponent as SignInImage} from "@assets/images/signInImage.svg"
+import SignInBox from "@/features/auth/signIn/ui/SignInForm";
+import { ReactComponent as SignInImage } from "@assets/images/signInImage.svg";
 
 const SignInPage = () => {
   return (
@@ -8,9 +8,9 @@ const SignInPage = () => {
       <S.LeftBoxField>
         <SignInImage style={{ width: "100%", height: "100%" }} />
       </S.LeftBoxField>
-      
+
       <S.RightBoxField>
-        <SignInBox/>
+        <SignInBox />
       </S.RightBoxField>
     </div>
   );

@@ -1,7 +1,11 @@
-import { StartHubButton, StartHubTextField, StartHubCheckBox } from "@components/common";
+import {
+  StartHubButton,
+  StartHubTextField,
+  StartHubCheckBox,
+} from "@/shared/ui";
 import { StartHubLogo } from "@assets/logo";
 import SocialButton from "./SocialButton";
-import { StartHubColors, StartHubFont } from "@/design";
+import { StartHubColors, StartHubFont } from "@/shared/design";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import * as S from "./style";
@@ -58,10 +62,12 @@ const SignInBox = () => {
           <StartHubCheckBox checked={autoSignIn} onChange={setAutoSignIn} />
           <p>자동 로그인</p>
         </S.AutoSignInField>
-        <Link to="/sign-up" style={{textDecoration:"none"}}><p>회원가입</p></Link>
+        <Link to="/sign-up" style={{ textDecoration: "none" }}>
+          <p>회원가입</p>
+        </Link>
       </S.SignInOptions>
 
-      <SocialButton/>
+      <SocialButton />
     </S.SignBoxContainer>
   );
 };

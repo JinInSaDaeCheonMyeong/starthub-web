@@ -1,4 +1,4 @@
-import { StartHubTextField } from "@/components/common";
+import { StartHubTextField } from "@/shared/ui";
 import { EyeIcon, EyeOffIcon } from "@/assets/icons";
 import { useState } from "react";
 import * as S from "./style";
@@ -29,7 +29,11 @@ const PasswordSection = () => {
           {isVisible ? (
             <EyeIcon width={22} height={17} onClick={() => setVisible(false)} />
           ) : (
-            <EyeOffIcon width={22} height={17} onClick={() => setVisible(true)} />
+            <EyeOffIcon
+              width={22}
+              height={17}
+              onClick={() => setVisible(true)}
+            />
           )}
         </S.IconWrapper>
       )}
@@ -39,8 +43,20 @@ const PasswordSection = () => {
   return (
     <>
       <S.InputLabel>비밀번호</S.InputLabel>
-      {renderPasswordField(password, setPassword, "비밀번호를 입력해주세요", showPassword, setShowPassword)}
-      {renderPasswordField(confirmPassword, setConfirmPassword, "비밀번호를 다시 한번 입력해주세요", showConfirmPassword, setShowConfirmPassword)}
+      {renderPasswordField(
+        password,
+        setPassword,
+        "비밀번호를 입력해주세요",
+        showPassword,
+        setShowPassword
+      )}
+      {renderPasswordField(
+        confirmPassword,
+        setConfirmPassword,
+        "비밀번호를 다시 한번 입력해주세요",
+        showConfirmPassword,
+        setShowConfirmPassword
+      )}
     </>
   );
 };

@@ -1,6 +1,6 @@
 import { ChangeEventHandler, KeyboardEventHandler } from "react";
 import styled, { CSSObject } from "styled-components";
-import { StartHubColors, StartHubFont } from "@/design";
+import { StartHubColors, StartHubFont } from "@/shared/design";
 
 type InputType = "text" | "password";
 
@@ -31,7 +31,7 @@ const Label = styled.label`
   margin-bottom: 12px;
   color: ${StartHubColors.Black1};
   ${StartHubFont.Pretendard.Body1.Medium}
-  
+
   div {
     ${StartHubFont.Pretendard.Caption1.Medium}
     color: ${StartHubColors.Primary};
@@ -49,7 +49,7 @@ const Input = styled.input.withConfig({
   border-radius: 8px;
   outline: none;
   height: 50px;
-  
+
   &::placeholder {
     color: ${StartHubColors.Gray3};
   }
@@ -70,7 +70,8 @@ const Input = styled.input.withConfig({
 const SupportingText = styled.span<{ isError?: boolean }>`
   margin-top: 4px;
   font-size: 12px;
-  color: ${({ isError }) => (isError ? StartHubColors.Error : StartHubColors.Gray3)};
+  color: ${({ isError }) =>
+    isError ? StartHubColors.Error : StartHubColors.Gray3};
 `;
 
 export const StartHubTextField = ({
@@ -87,7 +88,7 @@ export const StartHubTextField = ({
   customStyle,
   onChange,
   onKeyDown,
-} : StartHubTextFieldProps) => {
+}: StartHubTextFieldProps) => {
   return (
     <Wrapper width={width}>
       {(label || detailLabel) && (

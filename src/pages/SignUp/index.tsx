@@ -1,9 +1,9 @@
 import * as S from "./style";
-import { StartHubColors, StartHubFont } from "@/design";
-import { StartHubButton } from "@/components/common";
+import { StartHubColors, StartHubFont } from "@/shared/design";
+import { StartHubButton } from "@/shared/ui";
 import { ReactComponent as LogoIcon } from "@/assets/logo/Vector.svg";
-import SignUpBox from "@/components/SignUpBox";
-import AgreementSection from "@/components/SignUpBox/AgreementSection";
+import SignUpBox from "@/features/auth/signUp/ui/SignUpForm";
+import AgreementSection from "@/features/auth/signUp/ui/SignUpForm/AgreementSection";
 
 const SignUpPage = () => {
   return (
@@ -13,8 +13,8 @@ const SignUpPage = () => {
           <LogoIcon width={143} height={55} />
         </S.Logo>
         <h2>회원가입</h2>
-        <SignUpBox/>
-        <AgreementSection/>
+        <SignUpBox />
+        <AgreementSection />
         <StartHubButton
           text="회원가입"
           width={320}

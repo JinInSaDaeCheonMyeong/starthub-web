@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { StartHubFont, StartHubColors } from "@/design";
+import { StartHubFont, StartHubColors } from "@/shared/design";
 
 export const InputLabel = styled.label`
   font: ${StartHubFont.Pretendard.Body2.Medium};

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { StartHubFont,StartHubColors } from "@/design";
+import { StartHubFont,StartHubColors } from "@/shared/design";
 
 export const CheckboxLabel = styled.label`
   font-size: 14px;
