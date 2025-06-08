@@ -22,24 +22,31 @@ export const VerificationCodeContainer = styled.div`
   }
 `;
 
-export const InputButton = styled.button`
+export const InputButton = styled.button<{ $isActive: boolean }>`
   position: absolute;
   right: 5px;
   top: 50%;
   transform: translateY(-50%);
   padding: 0 10px;
   background-color: ${StartHubColors.White1};
-  color: ${StartHubColors.Gray3};
+  color: ${props => props.$isActive ? StartHubColors.Primary : StartHubColors.Gray3};
   font: ${StartHubFont.Pretendard.Caption1.Medium};
   border: none;
   border-radius: 4px;
-  cursor: pointer;
+  cursor: ${props => props.$isActive ? 'pointer' : 'not-allowed'};
   z-index: 1;
+  opacity: ${props => props.$isActive ? 1 : 0.6};
+  transition: all 0.2s ease;
   
   &:hover {
-    color: ${StartHubColors.Primary};
+    color: ${props => props.$isActive ? StartHubColors.Primary : StartHubColors.Gray3};
   }
-`
+  
+  &:disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+`;
 
 export const VerifyButton = styled.button`
   display: flex;  

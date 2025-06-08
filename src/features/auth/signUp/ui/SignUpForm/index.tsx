@@ -6,6 +6,7 @@ import PasswordSection from "./PasswordSection";
 const SignUpBox = () => {
   const [email, setEmail] = useState("");
   const [verificationCode, setVerificationCode] = useState("");
+  const isVerificationCodeEmpty = verificationCode.trim() === "";
 
   return (
     <>
@@ -29,7 +30,9 @@ const SignUpBox = () => {
           onChange={(e) => setVerificationCode(e.target.value)}
           width={320}
         />
-        <S.InputButton>인증하기</S.InputButton>
+        <S.InputButton
+        disabled={isVerificationCodeEmpty}
+        $isActive={!isVerificationCodeEmpty} >인증하기</S.InputButton>
       </S.VerificationWrapper>
       <PasswordSection />
     </>
