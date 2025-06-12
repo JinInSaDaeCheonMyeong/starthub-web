@@ -50,7 +50,7 @@ const Input = styled.input.withConfig({
   border-radius: 8px;
   outline: none;
   height: 50px;
-  margin-bottom: ${({ isError }) => (isError ? "0" : "10px")};
+  margin-bottom: ${({ isError }) => (isError || " " ? "0" : "10px")};
   &::placeholder {
     color: ${StartHubColors.Gray3};
   }
@@ -70,8 +70,8 @@ const Input = styled.input.withConfig({
 
 const SupportingText = styled.span<{ isError?: boolean }>`
   color: ${StartHubColors.Error};
-  ${StartHubFont.Pretendard.Body2}
-  font-size: 15px;
+  ${StartHubFont.Pretendard.Body2.Regular}
+  font-size: 13px;
   margin-bottom: 8px;
 `;
 

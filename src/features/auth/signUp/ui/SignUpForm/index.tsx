@@ -31,8 +31,11 @@ const SignUpBox = () => {
           width={320}
         />
         <S.InputButton
-        disabled={isVerificationCodeEmpty}
-        $isActive={!isVerificationCodeEmpty} >인증하기</S.InputButton>
+          disabled={isVerificationCodeEmpty}
+          $isActive={!isVerificationCodeEmpty}
+        >
+          인증하기
+        </S.InputButton>
       </S.VerificationWrapper>
       <PasswordSection />
     </>
