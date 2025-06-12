@@ -50,7 +50,7 @@ const Input = styled.input.withConfig({
   border-radius: 8px;
   outline: none;
   height: 50px;
-
+  margin-bottom: ${({ isError }) => (isError ? "0" : "10px")};
   &::placeholder {
     color: ${StartHubColors.Gray3};
   }
@@ -69,10 +69,10 @@ const Input = styled.input.withConfig({
 `;
 
 const SupportingText = styled.span<{ isError?: boolean }>`
-  margin-top: 4px;
-  font-size: 12px;
-  color: ${({ isError }) =>
-    isError ? StartHubColors.Error : StartHubColors.Gray3};
+  color: ${StartHubColors.Error};
+  ${StartHubFont.Pretendard.Body2}
+  font-size: 15px;
+  margin-bottom: 8px;
 `;
 
 export const StartHubTextField = ({
@@ -110,7 +110,7 @@ export const StartHubTextField = ({
         onKeyDown={onKeyDown}
         customStyle={customStyle}
       />
-      {supportingText && (
+      {isError && (
         <SupportingText isError={isError}>{supportingText}</SupportingText>
       )}
     </Wrapper>
