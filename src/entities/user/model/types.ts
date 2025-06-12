@@ -1,3 +1,5 @@
+import { BaseResponse } from "@/shared/types/baseResponse"
+
 export interface AuthRequest {
   email: string
   password: string
@@ -9,23 +11,17 @@ export interface OAuthRequest {
   redirectUri?: string
 }
 
-export interface AuthResponse {
-  data: {
-    access: string,
-    refresh: string
-  },
-  status: string,
-  message: string,
-  statusCode: number
+export interface AuthData {
+  access: string;
+  refresh: string;
 }
 
-export interface OAuthResponse {
-  data: {
-    access: string,
-    refresh: string,
-    isFirstLogin: boolean
-  },
-  status: string,
-  message: string,
-  statusCode: number
+export type AuthResponse = BaseResponse<AuthData>;
+
+export interface OAuthData {
+  access: string;
+  refresh: string;
+  isFirstLogin: boolean;
 }
+
+export type OAuthResponse = BaseResponse<OAuthData>;
