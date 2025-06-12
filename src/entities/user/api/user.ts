@@ -15,6 +15,6 @@ export const userApi = {
   oauthApple: (data: OAuthRequest): Promise<OAuthResponse> =>
     StartHubAxios.post('/oauth/apple', data).then(res => res.data),
 
-  me: () =>
+  userProfile: () =>
     StartHubAxios.get('/user/profile').then(res => res.data)
 }
