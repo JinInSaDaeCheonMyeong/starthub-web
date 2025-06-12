@@ -5,6 +5,7 @@ import { ReactComponent as LogoIcon } from "@/assets/logo/Vector.svg";
 import SignUpBox from "@/features/auth/signUp/ui/SignUpForm";
 import AgreementSection from "@/features/auth/signUp/ui/SignUpForm/AgreementSection";
 
+
 const SignUpPage = () => {
   return (
     <S.LoginContainer>
