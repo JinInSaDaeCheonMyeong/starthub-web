@@ -1,4 +1,4 @@
-import { BaseResponse } from "@/shared/types/baseResponse"
+import { BaseResponse } from "@/shared/types/BaseResponse"
 
 export interface AuthRequest {
   email: string
