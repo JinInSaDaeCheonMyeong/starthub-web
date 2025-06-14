@@ -1,10 +1,13 @@
 import StartHubAxios from '../../../shared/api/customAxios/StartHubAxios'
-import { AuthResponse, OAuthRequest, AuthRequest, OAuthResponse } from '../model/types'
+import { AuthResponse, OAuthRequest, AuthRequest, OAuthResponse, SignUpResponse} from '../model/types'
 
 
 export const userApi = {
   signIn: (data: AuthRequest): Promise<AuthResponse> =>
     StartHubAxios.post('/user/sign-in', data).then(res => res.data),
+
+  signUp: (data: AuthRequest): Promise<SignUpResponse> =>
+    StartHubAxios.post('/user/sign-up', data).then(res => res.data),
 
   oauthGoogle: (data: OAuthRequest): Promise<OAuthResponse> =>
     StartHubAxios.get('/oauth/google', { params: data }).then(res => res.data),
