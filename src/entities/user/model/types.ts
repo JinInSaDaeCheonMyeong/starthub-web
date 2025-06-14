@@ -24,4 +24,12 @@ export interface OAuthData {
   isFirstLogin: boolean;
 }
 
+
+export interface SignUpResponse {
+  data: any;
+  status: string;
+  message: string;
+  statusCode: number;
+}
+
 export type OAuthResponse = BaseResponse<OAuthData>;
