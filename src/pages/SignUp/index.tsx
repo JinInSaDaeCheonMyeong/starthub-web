@@ -1,10 +1,38 @@
 import * as S from "./style";
+import React, { useState } from "react";
 import { StartHubColors, StartHubFont } from "@/shared/design";
 import { StartHubButton } from "@/shared/ui";
 import { ReactComponent as LogoIcon } from "@/assets/logo/Vector.svg";
 import SignUpBox from "@/features/auth/signUp/ui/SignUpForm";
 import AgreementSection from "@/features/auth/signUp/ui/SignUpForm/AgreementSection";
+import { useSignUp } from "@/features/auth/signUp/model/useSignUp";
 
+const [formData, setFormData] = useState({
+  email: "",
+  password: "",
+  verificationCode: ""
+});
+
+const signUpMutation = useSignUp();
+
+const handleFormChange = (field: string, value: string) => {
+  setFormData(prev => ({
+    ...prev,
+    [field]: value
+  }));
+};
+
+const handleSignUp = () => {
+  if (!formData.email || !formData.password){
+    alert("이메일과 비밀번호를 입력해주세요.")
+    return
+  }
+
+  signUpMutation.mutate({
+    email: formData.email,
+    password: formData.password
+  })
+}
 
 const SignUpPage = () => {
   return (
