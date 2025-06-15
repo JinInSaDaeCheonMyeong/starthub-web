@@ -19,5 +19,11 @@ export const userApi = {
     StartHubAxios.post('/oauth/apple', data).then(res => res.data),
 
   userProfile: () =>
-    StartHubAxios.get('/user/profile').then(res => res.data)
+    StartHubAxios.get('/user/profile').then(res => res.data),
+
+  sendVerificationCode: (email: string) => 
+    StartHubAxios.post('/email/send-code', { email }).then(res => res.data),
+
+  verifyCode: (email: string, code: string) => 
+      StartHubAxios.post('/email/verify', { email, code }).then(res => res.data),
 }
