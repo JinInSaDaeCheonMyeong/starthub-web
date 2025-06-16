@@ -1,6 +1,12 @@
 import styled from "styled-components";
 import { StartHubFont, StartHubColors } from "@/shared/design";
 
+export const ErrorMessage = styled.p`
+  color: red;
+  font-size: 13px;
+  margin-top: 0px;
+`;
+
 export const InputLabel = styled.label`
   font: ${StartHubFont.Pretendard.Body2.Medium};
   color: ${StartHubColors.Black1};
