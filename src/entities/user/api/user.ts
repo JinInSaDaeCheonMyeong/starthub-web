@@ -7,7 +7,7 @@ export const userApi = {
     StartHubAxios.post('/user/sign-in', data).then(res => res.data),
 
   oauthGoogle: (data: GoogleOAuthRequest): Promise<OAuthResponse> =>
-    StartHubAxios.get('/oauth/google', { params: data }).then(res => res.data),
+    StartHubAxios.get('/oauth/google/web', { params: data }).then(res => res.data),
 
   oauthNaver: (data: NaverOAuthRequest): Promise<OAuthResponse> =>
     StartHubAxios.get('/oauth/naver', { params: data }).then(res => res.data),
