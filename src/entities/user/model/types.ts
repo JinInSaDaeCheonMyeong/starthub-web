@@ -5,10 +5,20 @@ export interface AuthRequest {
   password: string
 }
 
-export interface OAuthRequest {
-  provider: 'google' | 'apple' | 'naver'
-  code: string
-  redirectUri?: string
+export interface GoogleOAuthRequest {
+  state: string
+}
+
+export interface NaverOAuthRequest {
+  state: string
+}
+
+export interface AppleOAuthRequest {
+  state: string
+}
+
+export interface StateRequest {
+  params: null;
 }
 
 export interface AuthData {
@@ -25,3 +35,5 @@ export interface OAuthData {
 }
 
 export type OAuthResponse = BaseResponse<OAuthData>;
+
+export type OAuthStateResponse = BaseResponse<string>;
