@@ -1,10 +1,14 @@
 import styled from "styled-components";
 import { StartHubFont, StartHubColors } from "@/shared/design";
 
-export const ErrorMessage = styled.p`
-  color: red;
-  font-size: 13px;
-  margin-top: 0px;
+
+export const ErrorMessage = styled.p<{ $status?: "success" | "error" | "default" }>`
+  font-size: 12px;
+  margin-top: 4px;
+  color: ${({ $status }) =>
+    $status === "success"
+      ? StartHubColors.Primary
+      : StartHubColors.Error};
 `;
 
 export const InputLabel = styled.label`
