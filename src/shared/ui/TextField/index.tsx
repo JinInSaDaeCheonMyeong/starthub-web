@@ -69,11 +69,12 @@ const Input = styled.input.withConfig({
 `;
 
 const SupportingText = styled.span<{ isError?: boolean }>`
-  color: ${StartHubColors.Error};
+  color: ${({ isError }) => isError ? StartHubColors.Error : StartHubColors.Primary};
   ${StartHubFont.Pretendard.Body2.Regular}
   font-size: 13px;
   margin-bottom: 8px;
 `;
+
 
 export const StartHubTextField = ({
   type,
