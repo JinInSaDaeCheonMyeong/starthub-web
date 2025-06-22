@@ -23,7 +23,7 @@ export const LoginForm = styled.form`
   gap: 10px;
   display: flex;
   flex-direction: column;
-  background-color: ${StartHubColors.White1};
+  background-color: white;
   padding: 40px 80px;
   width: 100%;
 
