@@ -15,15 +15,15 @@ StartHubAxios.interceptors.request.use((config) => {
   return config;
 });
 
-StartHubAxios.interceptors.response.use(
-  (response) => response,
-  async (error) => {
-    if (error.response?.status === 401) {
-      Cookies.remove('access_token');
-      window.location.href = '/sign-in';
-    }
-    return Promise.reject(error);
-  }
-);
+// StartHubAxios.interceptors.response.use(
+//   (response) => response,
+//   async (error) => {
+//     if (error.response?.status === 401) {
+//       Cookies.remove('access_token');
+//       window.location.href = '/sign-in';
+//     }
+//     return Promise.reject(error);
+//   }
+// );
 
 export default StartHubAxios;
