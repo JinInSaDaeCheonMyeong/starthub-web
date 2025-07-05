@@ -4,20 +4,20 @@ import { AuthResponse, GoogleOAuthRequest, AuthRequest, OAuthResponse, OAuthStat
 
 export const userApi = {
   signIn: (data: AuthRequest): Promise<AuthResponse> =>
-    StartHubAxios.post('/user/sign-in', data).then(res => res.data),
+    StartHubAxios.post('/user/sign-in', data),
 
   oauthGoogle: (data: GoogleOAuthRequest): Promise<OAuthResponse> =>
-    StartHubAxios.get('/oauth/google/web', { params: data }).then(res => res.data),
+    StartHubAxios.get('/oauth/google/web', { params: data }),
 
   oauthNaver: (data: NaverOAuthRequest): Promise<OAuthResponse> =>
-    StartHubAxios.get('/oauth/naver', { params: data }).then(res => res.data),
+    StartHubAxios.get('/oauth/naver', { params: data }),
 
   oauthApple: (data: AppleOAuthRequest): Promise<OAuthResponse> =>
-    StartHubAxios.post('/oauth/apple', data).then(res => res.data),
+    StartHubAxios.post('/oauth/apple', data),
 
   oauthState: (data: StateRequest): Promise<OAuthStateResponse> =>
-    StartHubAxios.get('/oauth/state', { params: data }).then(res => res.data),
+    StartHubAxios.get('/oauth/state', { params: data }),
 
   userProfile: () =>
-    StartHubAxios.get('/user/profile').then(res => res.data)
+    StartHubAxios.get('/user/profile')
 }

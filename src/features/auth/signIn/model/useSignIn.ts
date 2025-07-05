@@ -15,9 +15,15 @@ export const useSignIn = () => {
   } = useMutation({
     mutationFn: userApi.signIn,
     onSuccess: (response) => {
-      cookieUtils.setAccessToken(response.data.access);
-      toast.success('로그인에 성공했습니다.');
-      navigate('/main');
+      if (response && response.data) {
+        cookieUtils.setAccessToken(response.data.access);
+        cookieUtils.setRefreshToken(response.data.refresh);
+        toast.success('로그인에 성공했습니다.');
+        navigate('/main');
+      } else {
+        console.error('응답 데이터가 없습니다:', response);
+        toast.error('로그인 응답에 문제가 있습니다.');
+      }
     },
     onError: (error) => {
       console.log(error.message)
