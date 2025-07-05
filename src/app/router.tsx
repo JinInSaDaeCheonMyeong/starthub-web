@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route} from "react-router-dom";
 import SignInPage from "@/pages/SignIn";
 import SignUpPage from "@/pages/SignUp";
+import MyPage from "@/pages/MyPage";
 
 const Router = () => {
   return(
@@ -8,6 +9,7 @@ const Router = () => {
       <Routes>
         <Route path="/sign-up" element={<SignUpPage/>}/>
         <Route path="/sign-in" element={<SignInPage/>}/>
+        <Route path="/my-page" element={<MyPage/>}/>
       </Routes>
     </BrowserRouter>
   )
