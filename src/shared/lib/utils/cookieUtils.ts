@@ -9,7 +9,7 @@ export const cookieUtils = {
     });
   },
 
-    setRefreshToken: (token: string) => {
+  setRefreshToken: (token: string) => {
     Cookies.set('refresh_token', token, {
       expires: 7,
       secure: true,
