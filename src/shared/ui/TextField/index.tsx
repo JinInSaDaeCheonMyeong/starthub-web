@@ -25,6 +25,7 @@ const Wrapper = styled.div<{ width?: number }>`
   display: flex;
   flex-direction: column;
   width: ${({ width }) => (width ? `${width}px` : "100%")};
+  position: relative;
 `;
 
 const Label = styled.label`
@@ -68,11 +69,21 @@ const Input = styled.input.withConfig({
   ${({ customStyle }) => customStyle || ""}
 `;
 
-const SupportingText = styled.span<{ isError?: boolean }>`
+const SupportingText = styled.span<{ isError?: boolean; placeholder?: string }>`
   color: ${StartHubColors.Error};
   ${StartHubFont.Pretendard.Body2.Regular}
   font-size: 13px;
-  margin-bottom: 8px;
+  bottom: -40px;
+  left: 0;
+  width: 100%;
+
+  ${props => props.isError && props.placeholder === "비밀번호를 입력해주세요" && `
+    bottom: -40px;
+  `}
+
+  ${props => props.isError && props.placeholder === "비밀번호를 다시 입력해주세요" && `
+    bottom: -40px;
+  `}
 `;
 
 export const StartHubTextField = ({
@@ -110,7 +121,7 @@ export const StartHubTextField = ({
         onKeyDown={onKeyDown}
         customStyle={customStyle}
       />
-      {isError && (
+      {supportingText && (
         <SupportingText isError={isError}>{supportingText}</SupportingText>
       )}
     </Wrapper>
