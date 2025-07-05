@@ -8,12 +8,28 @@ export const cookieUtils = {
       sameSite: 'strict',
     });
   },
+
+  setRefreshToken: (token: string) => {
+    Cookies.set('refresh_token', token, {
+      expires: 7,
+      secure: true,
+      sameSite: 'strict',
+    });
+  },
   
   getAccessToken: () => {
     return Cookies.get('access_token');
   },
   
+  getRefreshToken: () => {
+    return Cookies.get('refresh_token');
+  },
+  
   removeAccessToken: () => {
     Cookies.remove('access_token');
+  },
+  
+  removeRefreshToken: () => {
+    Cookies.remove('refresh_token');
   },
 };
