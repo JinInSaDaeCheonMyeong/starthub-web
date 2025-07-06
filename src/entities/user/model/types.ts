@@ -5,16 +5,8 @@ export interface AuthRequest {
   password: string
 }
 
-export interface GoogleOAuthRequest {
-  state: string
-}
-
-export interface NaverOAuthRequest {
-  state: string
-}
-
-export interface AppleOAuthRequest {
-  state: string
+export interface OAuthRequest {
+  state: string;
 }
 
 export interface StateRequest {
