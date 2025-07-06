@@ -1,0 +1,35 @@
+import { useMutation } from '@tanstack/react-query';
+import { userApi } from '@/entities/user/api/user';
+import { cookieUtils } from '@/shared/lib/utils/cookieUtils';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
+export const useSignIn = () => {
+  const navigate = useNavigate();
+
+  const {
+    mutate: signIn,
+    isPending: isLoading,
+    isError,
+    error,
+  } = useMutation({
+    mutationFn: userApi.signIn,
+    onSuccess: (response) => {
+      if (response && response.data) {
+        cookieUtils.setAccessToken(response.data.access);
+        cookieUtils.setRefreshToken(response.data.refresh);
+        toast.success('로그인에 성공했습니다.');
+        navigate('/main');
+      } else {
+        console.error('응답 데이터가 없습니다:', response);
+        toast.error('로그인 응답에 문제가 있습니다.');
+      }
+    },
+    onError: (error) => {
+      console.log(error.message)
+      toast.error('로그인에 실패하였습니다. 이메일과 비밀번호를 확인해주세요.');
+    },
+  });
+
+  return { signIn, isLoading, isError, error };
+};
