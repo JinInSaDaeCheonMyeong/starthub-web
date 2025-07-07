@@ -1,30 +1,67 @@
 import * as S from "./style";
-import { StartHubColors, StartHubFont } from "@/shared/design";
 import { StartHubButton } from "@/shared/ui";
-import { ReactComponent as LogoIcon } from "@/assets/logo/Vector.svg";
+import { useSignUpForm } from "@/shared/hooks/SignUp/useSignUpForm";
+import { StartHubColors, StartHubFont } from "@/shared/design";
 import SignUpBox from "@/features/auth/signUp/ui/SignUpForm";
 import AgreementSection from "@/features/auth/signUp/ui/SignUpForm/AgreementSection";
+import { StartHubLogo } from "@/assets/logo";
 
 const SignUpPage = () => {
+  const {
+    formData,
+    fieldErrors,
+    agreeCheckedItems,
+    isAllAgreed,
+    loadingStates,
+    codeSent,
+    isEmailVerified,
+    isLoading,
+  
+    handleFormChange,
+    handleAllCheck,
+    handleSingleCheck,
+    sendVerificationCode,
+    verifyCode,
+    handleSignUp
+  } = useSignUpForm();
+
   return (
     <S.LoginContainer>
-      <S.LoginForm>
+      <S.LoginForm onSubmit={(e) => e.preventDefault()}>
         <S.Logo>
-          <LogoIcon width={143} height={55} />
+          <StartHubLogo width={143} height={55} />
         </S.Logo>
+
         <h2>회원가입</h2>
-        <SignUpBox />
-        <AgreementSection />
+
+        <SignUpBox
+          formData={formData}
+          handleFormChange={handleFormChange}
+          handleSendVerificationCode={sendVerificationCode} 
+          handleVerifyCode={verifyCode}
+          codeSent={codeSent}
+          isEmailVerified={isEmailVerified}
+          loadingStates={loadingStates}
+          fieldErrors={fieldErrors}
+        />
+
+        <AgreementSection
+          checkedItems={agreeCheckedItems}
+          isAllChecked={isAllAgreed}
+          onAllCheck={handleAllCheck}
+          onSingleCheck={handleSingleCheck}
+        />
+
         <StartHubButton
           text="회원가입"
           width={320}
           height={50}
           backgroundColor={StartHubColors.Primary}
           typography={StartHubFont.Pretendard.Body1.Medium}
-          onClick={() => {}}
+          onClick={handleSignUp}
           textTheme={StartHubColors.White1}
           customStyle={{ marginTop: "20px" }}
-          hover="#235FE0"
+          disabled={isLoading}
         />
       </S.LoginForm>
     </S.LoginContainer>

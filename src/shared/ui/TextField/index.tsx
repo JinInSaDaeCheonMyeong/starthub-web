@@ -25,6 +25,7 @@ const Wrapper = styled.div<{ width?: number }>`
   display: flex;
   flex-direction: column;
   width: ${({ width }) => (width ? `${width}px` : "100%")};
+  position: relative;
 `;
 
 const Label = styled.label`
@@ -50,7 +51,7 @@ const Input = styled.input.withConfig({
   border-radius: 8px;
   outline: none;
   height: 50px;
-  margin-bottom: ${({ isError }) => (isError || " " ? "0" : "10px")};
+  margin-bottom: ${({ isError }) => (isError ? "0" : "10px")};
   &::placeholder {
     color: ${StartHubColors.Gray3};
   }
@@ -68,13 +69,13 @@ const Input = styled.input.withConfig({
   ${({ customStyle }) => customStyle || ""}
 `;
 
-const SupportingText = styled.span<{ isError?: boolean }>`
-  color: ${({ isError }) => isError ? StartHubColors.Error : StartHubColors.Primary};
+const SupportingText = styled.span<{ isError?: boolean; placeholder?: string }>`
+  color: ${StartHubColors.Error};
   ${StartHubFont.Pretendard.Body2.Regular}
   font-size: 13px;
-  margin-bottom: 8px;
+  left: 0;
+  width: 100%;
 `;
-
 
 export const StartHubTextField = ({
   type,
@@ -111,7 +112,7 @@ export const StartHubTextField = ({
         onKeyDown={onKeyDown}
         customStyle={customStyle}
       />
-      {isError && (
+      {supportingText && (
         <SupportingText isError={isError}>{supportingText}</SupportingText>
       )}
     </Wrapper>
