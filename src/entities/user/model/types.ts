@@ -6,9 +6,11 @@ export interface AuthRequest {
 }
 
 export interface OAuthRequest {
-  provider: 'google' | 'apple' | 'naver'
-  code: string
-  redirectUri?: string
+  state: string;
+}
+
+export interface StateRequest {
+  params: null;
 }
 
 export interface AuthData {
@@ -33,3 +35,5 @@ export interface SignUpResponse {
 }
 
 export type OAuthResponse = BaseResponse<OAuthData>;
+
+export type OAuthStateResponse = BaseResponse<string>;
