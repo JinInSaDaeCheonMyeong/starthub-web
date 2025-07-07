@@ -27,13 +27,6 @@ export interface OAuthData {
 }
 
 
-export interface SignUpResponse {
-  data: any;
-  status: string;
-  message: string;
-  statusCode: number;
-}
-
 export type OAuthResponse = BaseResponse<OAuthData>;
 
 export type OAuthStateResponse = BaseResponse<string>;
@@ -68,12 +61,6 @@ export interface FieldStatus {
 export interface SignUpRequest {
   email: string;
   password: string;
-}
-
-export interface SignUpResponse {
-  data: {
-    message: string;
-  };
 }
 
 export interface SignUpFormHandlers {
