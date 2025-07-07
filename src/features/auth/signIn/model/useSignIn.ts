@@ -3,9 +3,11 @@ import { userApi } from '@/entities/user/api/user';
 import { cookieUtils } from '@/shared/lib/utils/cookieUtils';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useAuthStore } from '@/app/model/stores/useAuthStore';
 
 export const useSignIn = () => {
   const navigate = useNavigate();
+  const setIsLoggedIn = useAuthStore((s) => s.setIsLoggedIn); 
 
   const {
     mutate: signIn,
@@ -16,8 +18,10 @@ export const useSignIn = () => {
     mutationFn: userApi.signIn,
     onSuccess: (response) => {
       if (response && response.data) {
-        cookieUtils.setAccessToken(response.data.access);
-        cookieUtils.setRefreshToken(response.data.refresh);
+        const { access, refresh } = response.data;
+        cookieUtils.setAccessToken(access);
+        cookieUtils.setRefreshToken(refresh);
+        setIsLoggedIn(true);
         toast.success('로그인에 성공했습니다.');
         navigate('/main');
       } else {
