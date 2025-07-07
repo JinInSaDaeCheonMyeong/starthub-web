@@ -1,7 +1,6 @@
 import { SignUpFormData, SignUpFieldErrors } from './types';
 import { ERROR_MESSAGES } from '../../../features/auth/signUp/constants/signup.constants';
 import { isValidEmail } from '@/shared/lib/validation/email';
-import { isValidPassword } from '@/shared/lib/validation/password';
 
 export const validateSignUpForm = (
   formData: SignUpFormData,
