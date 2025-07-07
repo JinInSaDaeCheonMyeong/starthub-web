@@ -1,3 +1,4 @@
+/* eslint-disable no-constant-condition */
 import { ChangeEventHandler, KeyboardEventHandler } from "react";
 import styled, { CSSObject } from "styled-components";
 import { StartHubFont } from "@/shared/design/text/StartHubFont";
@@ -73,17 +74,8 @@ const SupportingText = styled.span<{ isError?: boolean; placeholder?: string }>`
   color: ${StartHubColors.Error};
   ${StartHubFont.Pretendard.Body2.Regular}
   font-size: 13px;
-  bottom: -40px;
   left: 0;
   width: 100%;
-
-  ${props => props.isError && props.placeholder === "비밀번호를 입력해주세요" && `
-    bottom: -40px;
-  `}
-
-  ${props => props.isError && props.placeholder === "비밀번호를 다시 입력해주세요" && `
-    bottom: -40px;
-  `}
 `;
 
 export const StartHubTextField = ({
