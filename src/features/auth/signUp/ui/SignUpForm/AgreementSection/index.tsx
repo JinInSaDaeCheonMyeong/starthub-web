@@ -1,6 +1,5 @@
 import * as S from "./style";
 import { StartHubCheckBox } from "@/shared/ui";
-import React from "react";
 import { SIGNUP_AGREE_ITEMS } from "@/features/auth/signUp/constants/signup.constants";
 
 interface AgreementSectionProps {
