@@ -21,5 +21,11 @@ export const userApi = {
   userProfile: () =>
     StartHubAxios.get('/user/profile'),
 
-  signUp: (data: AuthRequest) => StartHubAxios.post('/api/auth/sign-up', data),
+  signUp: (data: AuthRequest) => StartHubAxios.post('/user/sign-up', data),
+
+  sendVerificationCode: (email: string) => 
+    StartHubAxios.post('/email/send-code', { email }),
+
+  verifyCode: (email: string, code: string) => 
+    StartHubAxios.post('/email/verify', { email, code }),
 }
