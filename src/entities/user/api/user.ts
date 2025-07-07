@@ -1,13 +1,10 @@
 import StartHubAxios from '../../../shared/api/customAxios/StartHubAxios'
-import { AuthResponse, OAuthRequest, AuthRequest, OAuthResponse } from '../model/types'
+import { AuthResponse, OAuthRequest, AuthRequest, OAuthResponse, OAuthStateResponse, StateRequest } from '../model/types'
 
 
 export const userApi = {
   signIn: (data: AuthRequest): Promise<AuthResponse> =>
     StartHubAxios.post('/user/sign-in', data),
-
-  signUp: (data: AuthRequest): Promise<SignUpResponse> =>
-    StartHubAxios.post('/user/sign-up', data).then(res => res.data),
 
   oauthGoogle: (data: OAuthRequest): Promise<OAuthResponse> =>
     StartHubAxios.get('/oauth/google/web', { params: data }),
@@ -22,5 +19,5 @@ export const userApi = {
     StartHubAxios.get('/oauth/state', { params: data }),
 
   userProfile: () =>
-    StartHubAxios.get('/user/profile').then(res => res.data)
+    StartHubAxios.get('/user/profile')
 }
