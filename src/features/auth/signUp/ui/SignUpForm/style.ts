@@ -68,7 +68,7 @@ export const VerifyButton = styled.button`
   justify-content: center;
   align-items: center;
   padding: 0 16px;
-  background-color: white;
+  background-color: ${StartHubColors.White1};
   color: ${StartHubColors.Primary};
   font: ${StartHubFont.Pretendard.Caption1.Medium};
   height: 50px;
