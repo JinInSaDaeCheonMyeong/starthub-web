@@ -63,7 +63,7 @@ const SignUpBox = ({
             width={200}
             isDisabled={isEmailVerified}
             supportingText={fieldErrors.email}
-            // customStyle={{marginRight:"20px"}}
+            
           />
           <S.VerifyButton
             onClick={handleSendVerificationCode}

@@ -1,4 +1,3 @@
-/* eslint-disable no-constant-condition */
 import { ChangeEventHandler, KeyboardEventHandler } from "react";
 import styled, { CSSObject } from "styled-components";
 import { StartHubFont } from "@/shared/design/text/StartHubFont";
@@ -52,7 +51,7 @@ const Input = styled.input.withConfig({
   border-radius: 8px;
   outline: none;
   height: 50px;
-  margin-bottom: ${({ isError }) => (isError || " " ? "0" : "10px")};
+  margin-bottom: ${({ isError }) => (isError ? "0" : "10px")};
   &::placeholder {
     color: ${StartHubColors.Gray3};
   }

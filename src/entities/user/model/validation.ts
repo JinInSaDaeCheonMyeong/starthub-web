@@ -54,7 +54,6 @@ export const clearFieldError = (
   [field]: ''
 });
 
-// 📁 features/auth/signUp/model/useEmailVerification.ts
 import { useState } from 'react';
 import { userApi } from '@/entities/user/api/user';
 import { toast } from 'react-toastify';
