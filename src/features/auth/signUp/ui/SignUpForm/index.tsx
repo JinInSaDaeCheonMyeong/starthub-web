@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 import { StartHubTextField } from "../../../../../shared/ui";
 import * as S from "./style";
+import { SignUpFormData } from "@/entities/user/model/types";
 
 
 interface SignUpBoxProps {
@@ -10,7 +11,7 @@ interface SignUpBoxProps {
     confirmPassword: string;
     verificationCode: string;
   };
-  handleFormChange: (field: string, value: string) => void;
+  handleFormChange: (field: keyof SignUpFormData, value: string) => void;
   handleSendVerificationCode: () => Promise<void>;
   handleVerifyCode: () => Promise<void>;
   codeSent: boolean;
@@ -53,6 +54,7 @@ const SignUpBox = ({
       <S.EmailContainer>
         <S.InputLabel>이메일</S.InputLabel>
         <S.VerificationCodeContainer $hasError={!!fieldErrors.email}>
+          <div style={{display : "flex", justifyContent:"space-between", width:"100%"}}>
           <StartHubTextField
             type="text"
             value={formData.email}
@@ -61,6 +63,7 @@ const SignUpBox = ({
             width={200}
             isDisabled={isEmailVerified}
             supportingText={fieldErrors.email}
+            // customStyle={{marginRight:"20px"}}
           />
           <S.VerifyButton
             onClick={handleSendVerificationCode}
@@ -74,6 +77,7 @@ const SignUpBox = ({
               ? "재전송"
               : "인증번호 전송"}
           </S.VerifyButton>
+          </div>
         </S.VerificationCodeContainer>
       </S.EmailContainer>
 
