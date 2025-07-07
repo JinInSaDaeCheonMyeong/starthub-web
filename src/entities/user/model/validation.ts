@@ -16,11 +16,6 @@ export const validateSignUpForm = (
     errors.email = '올바른 이메일 형식이 아닙니다';
   }
 
-  if (!formData.password.trim()) {
-    errors.password = ERROR_MESSAGES.REQUIRED_PASSWORD;
-  } else if (!isValidPassword(formData.password)) {
-    errors.password = '비밀번호는 8자 이상이며, 대소문자, 숫자, 특수문자를 포함해야 합니다';
-  }
 
   if (formData.password !== formData.confirmPassword) {
     errors.confirmPassword = ERROR_MESSAGES.PASSWORD_MISMATCH;
