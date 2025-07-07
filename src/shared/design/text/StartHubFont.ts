@@ -102,6 +102,12 @@ export const StartHubFont = Object.freeze({
         font-weight: 500;
         line-height: 120%;
       `,
+      SemiBold: css`
+        font-family: "Pretendard Variable";
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 120%;
+      `
     },
     Caption2: {
       Regular: css`
