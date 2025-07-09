@@ -23,7 +23,7 @@ export const useSignIn = () => {
         cookieUtils.setRefreshToken(refresh);
         setIsLoggedIn(true);
         toast.success('로그인에 성공했습니다.');
-        navigate('/main');
+        navigate('/');
       } else {
         console.error('응답 데이터가 없습니다:', response);
         toast.error('로그인 응답에 문제가 있습니다.');

@@ -28,7 +28,6 @@ export const VerificationCodeContainer = styled.div<{ $hasError?: boolean }>`
   width: 100%;
   max-width: 320px;
   position: relative;
-  // margin-bottom: ${({ $hasError }) => $hasError ? '24px' : '0'};
   margin-top: 10px;
   
   @media (max-width: 480px) {
@@ -42,7 +41,7 @@ export const InputButton = styled.button<{ $isActive: boolean }>`
   position: absolute;
   right: 5px;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-70%);
   padding: 0 10px;
   color: ${props => props.$isActive ? StartHubColors.Primary : StartHubColors.Gray3};
   font: ${StartHubFont.Pretendard.Caption1.Medium};
