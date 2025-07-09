@@ -57,6 +57,7 @@ const SignInBox = () => {
         placeholder="이메일을 입력해주세요"
         isError={isEmailError}
         supportingText={isEmailError ? "이메일을 입력해주세요" : ""}
+        customStyle={{ marginBottom: "10px" }}
       />
 
       <StartHubTextField
