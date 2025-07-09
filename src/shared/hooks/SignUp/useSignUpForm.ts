@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSignUp } from '@/features/auth/signUp/model/useSignUp';
 import { SIGNUP_AGREE_ITEMS } from '@/features/auth/signUp/constants/signup.constants';
-import { useEmailVerification } from '@/entities/user/model/validation';
+import { useEmailVerification } from '@/entities/user/model/useEmailVerification';
 import { validateSignUpForm, clearFieldError, resetFormData, resetFieldErrors } from '@/entities/user/model/validation';
 import { SignUpFormData, SignUpFieldErrors } from '@/entities/user/model/types';
 
