@@ -16,30 +16,29 @@ const SignInBox = () => {
   const [email, setEmail] = useState("");
   const [autoSignIn, setAutoSignIn] = useState(false);
   const { signIn, isLoading } = useSignIn();
-  const [isEmailError, setIsEmailError] = useState(false)
-  const [isPasswordError, setIsPasswordError] = useState(false)
-  console.log("isEmailError", isEmailError)
-  console.log("isPasswordError", isPasswordError)
+  const [isEmailError, setIsEmailError] = useState(false);
+  const [isPasswordError, setIsPasswordError] = useState(false);
+  console.log("isEmailError", isEmailError);
+  console.log("isPasswordError", isPasswordError);
 
   const AuthHandleSubmit = () => {
     let hasError = false;
-  
+
     if (!email) {
       setIsEmailError(true);
       hasError = true;
     }
-  
+
     if (!password) {
       setIsPasswordError(true);
       hasError = true;
     }
-  
+
     if (hasError) return;
-  
+
     signIn({ email, password });
   };
-  
-  
+
   return (
     <S.SignBoxContainer>
       <S.SignInLogoField>
@@ -49,33 +48,32 @@ const SignInBox = () => {
         </S.SignInNormalText>
       </S.SignInLogoField>
 
-<StartHubTextField
-  type="text"
-  value={email}
-  width={320}
-  onChange={(e) => {
-    setEmail(e.target.value);
-    setIsEmailError(false);
-  }}
-  placeholder="이메일을 입력해주세요"
-  isError={isEmailError}
-  supportingText={isEmailError ? "이메일을 입력해주세요" : ""}
-  customStyle={{ marginBottom: "10px" }}
-/>
+      <StartHubTextField
+        type="text"
+        value={email}
+        width={320}
+        onChange={(e) => {
+          setEmail(e.target.value);
+          setIsEmailError(false);
+        }}
+        placeholder="이메일을 입력해주세요"
+        isError={isEmailError}
+        supportingText={isEmailError ? "이메일을 입력해주세요" : ""}
+      />
 
-<StartHubTextField
-  type="password"
-  value={password}
-  width={320}
-  onChange={(e) => {
-    setPassword(e.target.value);
-    setIsPasswordError(false);
-  }}
-  placeholder="비밀번호를 입력해주세요"
-  isError={isPasswordError}
-  supportingText={isPasswordError ? "비밀번호를 입력해주세요" : ""}
-  customStyle={{ marginBottom: "10px" }}
-/>
+      <StartHubTextField
+        type="password"
+        value={password}
+        width={320}
+        onChange={(e) => {
+          setPassword(e.target.value);
+          setIsPasswordError(false);
+        }}
+        placeholder="비밀번호를 입력해주세요"
+        isError={isPasswordError}
+        supportingText={isPasswordError ? "비밀번호를 입력해주세요" : ""}
+        customStyle={{ marginBottom: "10px" }}
+      />
 
       <StartHubButton
         text="로그인"

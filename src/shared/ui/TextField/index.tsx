@@ -69,12 +69,15 @@ const Input = styled.input.withConfig({
   ${({ customStyle }) => customStyle || ""}
 `;
 
-const SupportingText = styled.span<{ isError?: boolean; placeholder?: string }>`
+const SupportingText = styled.span.withConfig({
+  shouldForwardProp: (prop) => prop !== "isError",
+})<{ isError?: boolean; placeholder?: string }>`
   color: ${StartHubColors.Error};
   ${StartHubFont.Pretendard.Body2.Regular}
   font-size: 13px;
   left: 0;
   width: 100%;
+  padding-bottom: 10px;
 `;
 
 export const StartHubTextField = ({
@@ -113,7 +116,7 @@ export const StartHubTextField = ({
         customStyle={customStyle}
       />
       {supportingText && (
-        <SupportingText isError={isError}>{supportingText}</SupportingText>
+        <SupportingText isError={true}>{supportingText}</SupportingText>
       )}
     </Wrapper>
   );
