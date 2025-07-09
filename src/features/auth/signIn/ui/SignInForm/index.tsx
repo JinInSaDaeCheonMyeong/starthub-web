@@ -18,8 +18,6 @@ const SignInBox = () => {
   const { signIn, isLoading } = useSignIn();
   const [isEmailError, setIsEmailError] = useState(false);
   const [isPasswordError, setIsPasswordError] = useState(false);
-  console.log("isEmailError", isEmailError);
-  console.log("isPasswordError", isPasswordError);
 
   const AuthHandleSubmit = () => {
     let hasError = false;
