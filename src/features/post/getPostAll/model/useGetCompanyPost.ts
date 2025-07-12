@@ -8,7 +8,7 @@ export const useGetCompanyPost = (
   options?: UseQueryOptions<postData[], AxiosError,postData[]>
 ) => {
   return useQuery({
-    queryKey: [POST_QUERY_KEYS.post.getCompanyPost],
+    queryKey: POST_QUERY_KEYS.post.getCompanyPost,
     queryFn: () => postApi.getPostApp(),
     staleTime: 1000 * 60 * 60, 
     gcTime: 1000 * 60 * 60, 

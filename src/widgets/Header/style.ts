@@ -19,7 +19,8 @@ export const HeaderContainer = styled.div`
 
 export const StyleLink = styled(Link)<StyleLinkProps>`
   ${StartHubFont.Pretendard.Caption1.Regular}
-  color: ${({ $active }) => ($active ? StartHubColors.Primary : StartHubColors.Gray2)};
+  color: ${({ $active }) =>
+    $active ? StartHubColors.Primary : StartHubColors.Gray2};
   margin-left: 40px;
   white-space: nowrap;
   cursor: pointer;
@@ -27,5 +28,19 @@ export const StyleLink = styled(Link)<StyleLinkProps>`
 
   &:hover {
     color: ${StartHubColors.Primary};
+  }
+`;
+
+export const WelcomeContainer = styled.div`
+  display: flex;
+  align-items: center;
+  p {
+    ${StartHubFont.Pretendard.Caption1.SemiBold}
+    margin-right: 10px;
+  }
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
   }
 `;

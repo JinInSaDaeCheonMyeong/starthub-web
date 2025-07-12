@@ -1,13 +1,15 @@
-import { useMutation } from '@tanstack/react-query';
-import { userApi } from '@/entities/user/api/user';
-import { cookieUtils } from '@/shared/lib/utils/cookieUtils';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { useAuthStore } from '@/app/model/stores/useAuthStore';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { userApi } from "@/entities/user/api/user";
+import { cookieUtils } from "@/shared/lib/utils/cookieUtils";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useAuthStore } from "@/app/model/stores/useAuthStore";
+import { USER_QUERY_KEYS } from "@/entities/user/queryKey";
 
 export const useSignIn = () => {
   const navigate = useNavigate();
-  const setIsLoggedIn = useAuthStore((s) => s.setIsLoggedIn); 
+  const setIsLoggedIn = useAuthStore((s) => s.setIsLoggedIn);
+  const queryClient = useQueryClient();
 
   const {
     mutate: signIn,
@@ -22,16 +24,16 @@ export const useSignIn = () => {
         cookieUtils.setAccessToken(access);
         cookieUtils.setRefreshToken(refresh);
         setIsLoggedIn(true);
-        toast.success('로그인에 성공했습니다.');
-        navigate('/');
-      } else {
-        console.error('응답 데이터가 없습니다:', response);
-        toast.error('로그인 응답에 문제가 있습니다.');
+        toast.success("로그인에 성공했습니다.");
+        navigate("/");
+        queryClient.invalidateQueries({queryKey: USER_QUERY_KEYS.user.getUserProfile}); 
+        console.error("응답 데이터가 없습니다:", response);
+        toast.error("로그인 응답에 문제가 있습니다.");
       }
     },
     onError: (error) => {
-      console.log(error.message)
-      toast.error('로그인에 실패하였습니다. 이메일과 비밀번호를 확인해주세요.');
+      console.log(error.message);
+      toast.error("로그인에 실패하였습니다. 이메일과 비밀번호를 확인해주세요.");
     },
   });
 
