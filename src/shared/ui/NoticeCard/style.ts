@@ -2,7 +2,7 @@ import { StartHubColors, StartHubFont } from "@/shared/design";
 import styled from "styled-components";
 
 type CategoryColorProps = {
-  txColor?: string;
+  $txColor?: string;
 };
 
 export const NoticeContainer = styled.div`
@@ -53,6 +53,6 @@ export const CategoryContainer = styled.div<CategoryColorProps>`
   span {
     ${StartHubFont.Pretendard.Caption1.Regular}
     font-size: 10px;
-    color: ${({ txColor }) => txColor};
+    color: ${({ $txColor }) => $txColor};
   }
 `;

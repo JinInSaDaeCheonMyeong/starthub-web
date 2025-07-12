@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { StartHubColors,StartHubFont } from "@/shared/design";
 
 type BoxButtonProps = {
-    bgColor ?: string;
-    hvColor ?: string;
+    $bgColor ?: string;
+    $hvColor ?: string;
 };
 
 export const BoxContainer = styled.div`
@@ -23,7 +23,7 @@ export const PinkBox = styled.div`
 `;
 
 export const BoxButton = styled.div<BoxButtonProps>`
-  background-color: ${({ bgColor }) => bgColor};
+  background-color: ${({ $bgColor }) => $bgColor};
   width: 100px;
   height: 40px;
   color: #fff;
@@ -35,7 +35,7 @@ export const BoxButton = styled.div<BoxButtonProps>`
   margin-top: 12px;
   cursor: pointer;
   &:hover{
-    background-color: ${({ hvColor }) => hvColor};
+    background-color: ${({ $hvColor }) => $hvColor};
   }
 `;
 
@@ -91,7 +91,7 @@ export const GrayBox = styled.div<BoxButtonProps>`
   justify-content: center;
   align-items: center;
   &:hover{
-    background-color: ${({ hvColor }) => hvColor};
+    background-color: ${({ $hvColor }) => $hvColor};
   }
   cursor: pointer;
 `;
