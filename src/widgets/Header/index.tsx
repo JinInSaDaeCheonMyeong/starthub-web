@@ -11,7 +11,6 @@ const Header = () => {
   const location = useLocation();
   const currentPath = location.pathname;
   const { data, isError, error } = useGetMyProfile();
-  console.log(data);
 
   const is401Error = isError && error?.response?.status === 401;
   const isAuthenticated = data && !is401Error;
