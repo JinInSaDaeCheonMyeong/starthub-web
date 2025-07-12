@@ -32,7 +32,7 @@ const Header = () => {
           BMC 설계
         </S.StyleLink>
         <S.StyleLink to="/my-business" $active={currentPath === "/my-business"}>
-          My비즈니스
+          My 비즈니스
         </S.StyleLink>
       </div>
       {data ? (
