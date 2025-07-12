@@ -35,14 +35,14 @@ export const TitleText = styled.div`
 
 export const Tag = styled.div`
   width: fit-content;
-  height: 16px;
+  height: 20px;
   background-color: ${StartHubColors.Gray4};
   display: flex;
   justify-content: center;
   align-items: center;
   margin-right: 4px;
   ${StartHubFont.Pretendard.Caption2.Regular}
-  padding: 4px;
+  padding: 6px;
   border-radius: 4px;
 `;
 
