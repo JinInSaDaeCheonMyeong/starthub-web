@@ -31,7 +31,7 @@ StartHubAxios.interceptors.request.use(
 
 // 응답 인터셉터
 StartHubAxios.interceptors.response.use(
-  (response) => response.data,
+  (response) => response,
   async (error: AxiosError) => {
     const originalRequest = error.config as CustomAxiosRequestConfig;
 
