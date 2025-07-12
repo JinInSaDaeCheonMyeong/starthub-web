@@ -42,7 +42,7 @@ export const WelcomeContainer = styled.div`
   display: flex;
   align-items: center;
   p {
-    ${StartHubFont.Pretendard.Caption1.SemiBold}
+    ${StartHubFont.Pretendard.Caption1.Regular}
     margin-right: 10px;
   }
   img {

@@ -32,7 +32,7 @@ export const Tag = styled.div`
   align-items: center;
   margin-right: 4px;
   ${StartHubFont.Pretendard.Caption2.Regular}
-  padding: 5px;
+  padding: 6px;
   border-radius: 4px;
 `;
 
