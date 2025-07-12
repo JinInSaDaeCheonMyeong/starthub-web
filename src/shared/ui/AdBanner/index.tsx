@@ -3,7 +3,7 @@ import { ReactComponent as Rocket } from "@/assets/images/rocket.svg";
 import { ReactComponent as Stars } from "@/assets/images/stars.svg";
 import { StartHubColors, StartHubFont } from "@/shared/design";
 
-const Footer = () => {
+const AdBanner = () => {
   return (
     <Backgound>
       <div
@@ -22,7 +22,7 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default AdBanner;
 
 const Backgound = styled.div`
   width: 100%;
