@@ -9,11 +9,9 @@ const NoticeCard = () => {
   return (
     <S.NoticeContainer>
       <S.CategoryContainer $txColor={categoryInfo.txColor}>
-        <img
-          src={categoryInfo.image}
-          alt={categoryInfo.text}
-          style={{ width: 16, height: 16, marginRight: 4 }}
-        />
+        <span style={{ width: 16, height: 16, marginRight: 4 }}>
+          {categoryInfo.image}
+        </span>
         <span>{categoryInfo.text}</span>
       </S.CategoryContainer>
       <S.TitleText>

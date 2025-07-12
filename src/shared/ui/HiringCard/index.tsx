@@ -5,29 +5,31 @@ import { ReactComponent as Building } from "@assets/tag/building.svg";
 import { ReactComponent as People } from "@assets/tag/people.svg";
 
 interface HiringCardProps {
-  companyName : string,
-  companyDescription : string
-  companyCategory : 
-  | "CONTENT_MEDIA"
-  | "FINTECH"
-  | "HEALTHCARE_BIO"
-  | "EDUCATION_EDUTECH"
-  | "IT_SOFTWARE"
-  | "ECOMMERCE"
-  | "ETC",
+  companyName: string;
+  companyDescription: string;
+  companyCategory:
+    | "CONTENT_MEDIA"
+    | "FINTECH"
+    | "HEALTHCARE_BIO"
+    | "EDUCATION_EDUTECH"
+    | "IT_SOFTWARE"
+    | "ECOMMERCE"
+    | "ETC";
 }
 
-const HiringCard = ({companyName, companyDescription, companyCategory}: HiringCardProps) => {
+const HiringCard = ({
+  companyName,
+  companyDescription,
+  companyCategory,
+}: HiringCardProps) => {
   const categoryInfo = getCategoryInfo(companyCategory);
 
   return (
     <S.CardContainer>
       <S.CategoryContainer $txColor={categoryInfo.txColor}>
-        <img
-          src={categoryInfo.image}
-          alt={categoryInfo.text}
-          style={{ width: 16, height: 16, marginRight: 4 }}
-        />
+        <span style={{ width: 16, height: 16, marginRight: 4 }}>
+          {categoryInfo.image}
+        </span>
         <span>{categoryInfo.text}</span>
       </S.CategoryContainer>
       <p>{companyDescription}</p>
