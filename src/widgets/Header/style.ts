@@ -11,10 +11,17 @@ export const HeaderContainer = styled.div`
   border-bottom: 1px solid ${StartHubColors.Gray3};
   height: 78px;
   background-color: ${StartHubColors.White1};
-  padding: 0 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+export const ContentWrapper = styled.div`
+  width: 100%;
+  padding: 0 175px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 100%;
 `;
 
 export const StyleLink = styled(Link)<StyleLinkProps>`
