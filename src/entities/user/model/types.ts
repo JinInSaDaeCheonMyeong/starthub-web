@@ -16,6 +16,7 @@ export interface StateRequest {
 export interface AuthData {
   access: string;
   refresh: string;
+  isFirstLogin: boolean;
 }
 
 export type AuthResponse = BaseResponse<AuthData>;
@@ -82,3 +83,54 @@ export interface SignUpFormState {
   isEmailVerified: boolean;
   isLoading: boolean;
 }
+
+export interface OnboardingFormData {
+  category: any;
+  birthYear: string;
+  birthMonth: string;
+  birthDay: string;
+  gender: string;
+  name: string;
+  interests: string[];
+}
+
+export interface CategoryItem {
+  id: string;
+  label: string;
+  icon: React.ComponentType<any>;
+}
+
+export interface ButtonProps {
+  $active: boolean;
+}
+
+export interface CategoryButtonProps {
+  $customColor?: string; 
+  $active?: boolean;
+}
+
+export interface CategoryItem {
+  id: string;
+  label: string;
+  icon: React.ComponentType<any>;
+  color: string;
+}
+
+export interface OnboardingRequest {
+  username: string;
+  introduction: string;
+  birth: string;
+  gender: string;
+  interests: string[];
+  profileImage: string;
+}
+
+export interface OnboardingData {
+  userId: string;
+  username: string;
+  birth: string;
+  gender: string;
+  interests: string[];
+}
+
+export type OnboardingResponse = BaseResponse<OnboardingData>;
