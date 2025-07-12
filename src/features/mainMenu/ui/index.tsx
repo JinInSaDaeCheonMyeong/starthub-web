@@ -4,6 +4,7 @@ import { ReactComponent as ChartIcon } from "@assets/icons/chart.svg";
 import { ReactComponent as RocketIcon } from "@assets/icons/rocketMenu.svg";
 import { ReactComponent as HumanIcon } from "@assets/icons/human.svg";
 import { ReactComponent as BuildingIcon } from "@assets/icons/building.svg";
+import { ReactComponent as Members} from "@assets/icons/members.svg";
 import { StartHubColors, StartHubFont } from "@/shared/design";
 
 const MainMenu = () => {
@@ -12,7 +13,8 @@ const MainMenu = () => {
     { icon: <ChartIcon />, label: "경쟁사 분석" },
     { icon: <RocketIcon />, label: "최신 공고 보러가기" },
     { icon: <HumanIcon />, label: "청년 맞춤 공고" },
-    { icon: <BuildingIcon />, label: "창업 멤버 모집하기" },
+    { icon: <Members/>, label: "창업 멤버 모집하기"},
+    { icon: <BuildingIcon />, label: "기업 등록하기"},
   ];
 
   return (
@@ -28,7 +30,6 @@ const MainMenu = () => {
 };
 
 export default MainMenu;
-
 
 const MenuContainer = styled.div`
   display: flex;
