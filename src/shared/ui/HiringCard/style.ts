@@ -31,7 +31,7 @@ export const Tag = styled.div`
   justify-content: center;
   align-items: center;
   margin-right: 4px;
-  ${StartHubFont.Pretendard.Caption2.Medium}
+  ${StartHubFont.Pretendard.Caption2.Regular}
   padding: 5px;
   border-radius: 4px;
 `;
