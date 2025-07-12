@@ -53,6 +53,11 @@ export const CategoryContainer = styled.div<CategoryColorProps>`
   span {
     ${StartHubFont.Pretendard.Caption1.Regular}
     font-size: 10px;
-    color: ${({ $txColor }) => $txColor};
+    color: ${StartHubColors.Primary};
+  }
+  svg{
+    width: 16px;
+    height: 16px;
+    margin-right: 4px;
   }
 `;
