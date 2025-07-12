@@ -45,4 +45,9 @@ export const CategoryContainer = styled.div<CategoryColorProps>`
     font-size: 10px;
     color: ${({ $txColor }) => $txColor};
   }
+  svg {
+    width: 16px;
+    height: auto;
+    margin-right: 4px;
+  }
 `;

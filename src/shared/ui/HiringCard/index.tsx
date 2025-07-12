@@ -27,9 +27,7 @@ const HiringCard = ({
   return (
     <S.CardContainer>
       <S.CategoryContainer $txColor={categoryInfo.txColor}>
-        <span style={{ width: 16, height: 16, marginRight: 4 }}>
           {categoryInfo.image}
-        </span>
         <span>{categoryInfo.text}</span>
       </S.CategoryContainer>
       <p>{companyDescription}</p>
