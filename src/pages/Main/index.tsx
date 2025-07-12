@@ -1,8 +1,9 @@
 import Header from "@/widgets/Header";
 import Banner from "@/shared/ui/Banner";
-import Footer from "@/shared/ui/Footer";
+import AdBanner from "@/shared/ui/AdBanner";
 import MainMenu from "@/features/mainMenu/ui";
 import MainContent from "./ui/MainContent";
+import Footer from "@/widgets/Footer";
 import * as S from "./style"
 
 const MainPage = () => {
@@ -16,7 +17,8 @@ const MainPage = () => {
       <S.CenteredBox>
         <MainContent />
       </S.CenteredBox>
-      <Footer />
+      <AdBanner />
+      <Footer/>
     </S.PageLayout>
   );
 };
