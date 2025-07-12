@@ -82,3 +82,13 @@ export interface SignUpFormState {
   isEmailVerified: boolean;
   isLoading: boolean;
 }
+
+export interface UserData {
+  email: string,
+  username: string,
+  birth: Date,
+  gender: "MALE" | "FEMALE",
+  profileImage: "string"
+}
+
+export type UserResponse = BaseResponse<UserData>;

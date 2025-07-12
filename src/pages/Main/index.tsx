@@ -1,4 +1,4 @@
-import Header from "@/shared/ui/Header";
+import Header from "@/widgets/Header";
 import Banner from "@/shared/ui/Banner";
 import Footer from "@/shared/ui/Footer";
 import MainMenu from "@/features/mainMenu/ui";

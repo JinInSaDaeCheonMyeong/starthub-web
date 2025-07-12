@@ -22,7 +22,7 @@ const HiringCard = ({companyName, companyDescription, companyCategory}: HiringCa
 
   return (
     <S.CardContainer>
-      <S.CategoryContainer txColor={categoryInfo.txColor}>
+      <S.CategoryContainer $txColor={categoryInfo.txColor}>
         <img
           src={categoryInfo.image}
           alt={categoryInfo.text}
