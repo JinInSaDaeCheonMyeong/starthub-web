@@ -3,9 +3,21 @@ import { getCategoryInfo } from "@/shared/utils/Category/jobCategory";
 import { ReactComponent as Electron } from "@assets/tag/electron.svg";
 import { ReactComponent as Building } from "@assets/tag/building.svg";
 import { ReactComponent as People } from "@assets/tag/people.svg";
-import { postData } from "@/entities/post/model/post.types";
 
-const HiringCard = ({id,companyName, companyDescription, companyCategory, logoImage}: postData) => {
+interface HiringCardProps {
+  companyName : string,
+  companyDescription : string
+  companyCategory : 
+  | "CONTENT_MEDIA"
+  | "FINTECH"
+  | "HEALTHCARE_BIO"
+  | "EDUCATION_EDUTECH"
+  | "IT_SOFTWARE"
+  | "ECOMMERCE"
+  | "ETC",
+}
+
+const HiringCard = ({companyName, companyDescription, companyCategory}: HiringCardProps) => {
   const categoryInfo = getCategoryInfo(companyCategory);
 
   return (

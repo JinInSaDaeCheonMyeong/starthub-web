@@ -18,11 +18,9 @@ const MainContent = () => {
           {data?.slice(0, 4).map((hiring) => (
             <HiringCard
               key={hiring.id}
-              id={hiring.id}
               companyName={hiring.companyName}
               companyDescription={hiring.companyDescription}
               companyCategory={hiring.companyCategory}
-              logoImage={hiring.logoImage}
             />
           ))}
         </S.BoxMenuContainer>
