@@ -10,7 +10,7 @@ const JOB_CATEGORY = [
   {
     text: "IT/소프트웨어",
     enum: "IT_SOFTWARE",
-    image: <Software/>,
+    image: <Software />,
     txColor: "#363FB5",
   },
   {
@@ -20,7 +20,7 @@ const JOB_CATEGORY = [
     txColor: "#6DABE5",
   },
   {
-    text: "헬스/바이오",
+    text: "헬스케어/바이오",
     enum: "HEALTHCARE_BIO",
     image: <Health />,
     txColor: "#76CB5D",
