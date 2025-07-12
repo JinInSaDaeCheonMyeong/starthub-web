@@ -10,10 +10,7 @@ const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const currentPath = location.pathname;
-  const { data, isError, error } = useGetMyProfile();
-
-  const is401Error = isError && error?.response?.status === 401;
-  const isAuthenticated = data && !is401Error;
+  const { data } = useGetMyProfile();
 
   return (
     <S.HeaderContainer>
@@ -38,7 +35,7 @@ const Header = () => {
           My비지니스
         </S.StyleLink>
       </div>
-      {isAuthenticated ? (
+      {data ? (
         <S.WelcomeContainer>
           <p>환영합니다. {data.username}님</p>
           {data.profileImage ? (
