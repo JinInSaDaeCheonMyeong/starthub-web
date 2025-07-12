@@ -5,14 +5,14 @@ export const MenuContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 44px;
+  gap: 30px;
   padding: 40px 0 50px;
 `;
 
 export const MenuButton = styled.div`
   width: fit-content;
   height: fit-content;
-  padding: 20px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,8 +27,8 @@ export const MenuButton = styled.div`
   }
 
   svg {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
   }
 
   p {

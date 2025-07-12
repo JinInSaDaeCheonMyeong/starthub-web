@@ -14,56 +14,61 @@ const Header = () => {
 
   return (
     <S.HeaderContainer>
-      <LogoIcon width={104} height={18} />
-      <div style={{ display: "flex", flexDirection: "row" }}>
-        <S.StyleLink to="/notices" $active={currentPath === "/notices"}>
-          공고
-        </S.StyleLink>
-        <S.StyleLink to="/competitor" $active={currentPath === "/competitor"}>
-          경쟁사 분석
-        </S.StyleLink>
-        <S.StyleLink
-          to="/team-building"
-          $active={currentPath === "/team-building"}
-        >
-          창업 멤버 모집
-        </S.StyleLink>
-        <S.StyleLink to="/bmc" $active={currentPath === "/bmc"}>
-          BMC 설계
-        </S.StyleLink>
-        <S.StyleLink to="/my-business" $active={currentPath === "/my-business"}>
-          My비지니스
-        </S.StyleLink>
-      </div>
-      {data ? (
-        <S.WelcomeContainer>
-          <p>환영합니다. {data.username}님</p>
-          {data.profileImage ? (
-            <img
-              src={data.profileImage}
-              onClick={() => navigate("/my-profile")}
-            />
-          ) : (
-            <DefaultProfile
-              width={40}
-              height={40}
-              onClick={() => navigate("/my-profile")}
-            />
-          )}
-        </S.WelcomeContainer>
-      ) : (
-        <StartHubButton
-          text="로그인"
-          backgroundColor={StartHubColors.Primary}
-          onClick={() => {
-            navigate("/sign-in");
-          }}
-          customStyle={{ width: "10%", whiteSpace: "nowrap" }}
-          height={36}
-          textTheme={StartHubColors.White1}
-          typography={StartHubFont.Pretendard.Caption1.SemiBold}
-        />
-      )}
+      <S.ContentWrapper>
+        <LogoIcon width={104} height={18} />
+        <div style={{ display: "flex", flexDirection: "row" }}>
+          <S.StyleLink to="/notices" $active={currentPath === "/notices"}>
+            공고
+          </S.StyleLink>
+          <S.StyleLink to="/competitor" $active={currentPath === "/competitor"}>
+            경쟁사 분석
+          </S.StyleLink>
+          <S.StyleLink
+            to="/team-building"
+            $active={currentPath === "/team-building"}
+          >
+            창업 멤버 모집
+          </S.StyleLink>
+          <S.StyleLink to="/bmc" $active={currentPath === "/bmc"}>
+            BMC 설계
+          </S.StyleLink>
+          <S.StyleLink
+            to="/my-business"
+            $active={currentPath === "/my-business"}
+          >
+            My 비즈니스
+          </S.StyleLink>
+        </div>
+        {data ? (
+          <S.WelcomeContainer>
+            <p>환영합니다. {data.username}님</p>
+            {data.profileImage ? (
+              <img
+                src={data.profileImage}
+                onClick={() => navigate("/my-profile")}
+              />
+            ) : (
+              <DefaultProfile
+                width={40}
+                height={40}
+                onClick={() => navigate("/my-profile")}
+              />
+            )}
+          </S.WelcomeContainer>
+        ) : (
+          <StartHubButton
+            text="로그인"
+            backgroundColor={StartHubColors.Primary}
+            onClick={() => {
+              navigate("/sign-in");
+            }}
+            customStyle={{ width: "10%", whiteSpace: "nowrap" }}
+            height={36}
+            textTheme={StartHubColors.White1}
+            typography={StartHubFont.Pretendard.Caption1.SemiBold}
+          />
+        )}
+      </S.ContentWrapper>
     </S.HeaderContainer>
   );
 };

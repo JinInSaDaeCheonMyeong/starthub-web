@@ -31,8 +31,8 @@ export const Tag = styled.div`
   justify-content: center;
   align-items: center;
   margin-right: 4px;
-  ${StartHubFont.Pretendard.Caption2.Medium}
-  padding: 5px;
+  ${StartHubFont.Pretendard.Caption2.Regular}
+  padding: 6px;
   border-radius: 4px;
 `;
 
@@ -44,5 +44,10 @@ export const CategoryContainer = styled.div<CategoryColorProps>`
     ${StartHubFont.Pretendard.Caption1.Medium}
     font-size: 10px;
     color: ${({ $txColor }) => $txColor};
+  }
+  svg {
+    width: 16px;
+    height: auto;
+    margin-right: 4px;
   }
 `;
