@@ -1,9 +1,10 @@
 import StartHubAxios from "@/shared/api/customAxios/StartHubAxios";
-import { postDataResponse,postData } from "../model/post.types";
+import {postData } from "../model/post.types";
+import { BaseResponse } from "@/shared/types/BaseResponse";
 
 export const postApi = {
-    getPostApp: async (): Promise<postData[]> => { 
-        const {data} = await StartHubAxios.get<postDataResponse>(`/company/all`);
-        return data.data;
+    getPostApp: async (): Promise<postData[]> => {
+      const res: BaseResponse<postData[]> = await StartHubAxios.get(`/company/all`);
+      return res.data;
     },
-};
+  };
