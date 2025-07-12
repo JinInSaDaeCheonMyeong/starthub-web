@@ -1,15 +1,13 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { userApi } from "@/entities/user/api/user";
 import { cookieUtils } from "@/shared/lib/utils/cookieUtils";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuthStore } from "@/app/model/stores/useAuthStore";
-import { USER_QUERY_KEYS } from "@/entities/user/queryKey";
 
 export const useSignIn = () => {
   const navigate = useNavigate();
   const setIsLoggedIn = useAuthStore((s) => s.setIsLoggedIn);
-  const queryClient = useQueryClient();
 
   const {
     mutate: signIn,
@@ -26,9 +24,9 @@ export const useSignIn = () => {
         setIsLoggedIn(true);
         toast.success("로그인에 성공했습니다.");
         navigate("/");
-        queryClient.invalidateQueries({queryKey: USER_QUERY_KEYS.user.getUserProfile}); 
-        console.error("응답 데이터가 없습니다:", response);
-        toast.error("로그인 응답에 문제가 있습니다.");
+      } else {
+        console.error('응답 데이터가 없습니다:', response);
+        toast.error('로그인 응답에 문제가 있습니다.');
       }
     },
     onError: (error) => {
