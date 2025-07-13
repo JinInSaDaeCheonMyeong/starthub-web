@@ -24,7 +24,7 @@ const LoadingSpinner = () => (
 );
 
 const Router = () => {
-  return(
+  return (
     <BrowserRouter>
       <Suspense fallback={<LoadingSpinner />}>
         <Routes>
@@ -42,7 +42,7 @@ const Router = () => {
         </Routes>
       </Suspense>
     </BrowserRouter>
-  )
+  );
 };
 
 export default Router;
