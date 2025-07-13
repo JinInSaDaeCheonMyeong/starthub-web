@@ -1,8 +1,7 @@
-import { BrowserRouter, Routes, Route} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignInPage from "@/pages/SignIn";
 import SignUpPage from "@/pages/SignUp";
 import MainPage from "@/pages/Main";
-import Onboarding from "@/pages/Onboarding";
 import NoticePage from "@/pages/Notice";
 import CallbackPage from "@/pages/Callback";
 import Onboarding from "@/pages/Onboarding";
@@ -15,7 +14,7 @@ import NoticeListUpPage from "@/pages/NoticeListUp";
 import EditMyProfile from "@/pages/EditProfile"
 
 const Router = () => {
-  return(
+  return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainPage/>}/>
@@ -43,7 +42,7 @@ const Router = () => {
         <Route path="/notices/:type" element={<NoticeListUpPage/>}/>
       </Routes>
     </BrowserRouter>
-  )
+  );
 };
 
 export default Router;
