@@ -10,6 +10,7 @@ import EarlyOnboarding from "@/pages/Onboarding/early"
 import PreOnboarding from "@/pages/Onboarding/pre"
 import NoticeListUpPage from "@/pages/NoticeListUp";
 import EditMyProfile from "@/pages/EditProfile"
+import CallbackPage from "@/pages/Callback";
 
 const Router = () => {
   return (
