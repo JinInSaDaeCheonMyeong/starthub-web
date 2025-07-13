@@ -4,6 +4,7 @@ import SignUpPage from "@/pages/SignUp";
 import MainPage from "@/pages/Main";
 import Onboarding from "@/pages/Onboarding";
 import MyProfile from "@/pages/MyProfile";
+import NoticePage from "@/pages/Notice";
 import CallbackPage from "@/pages/Callback";
 
 const Router = () => {
@@ -13,7 +14,7 @@ const Router = () => {
         <Route path="/" element={<MainPage/>}/>
         <Route path="/sign-up" element={<SignUpPage/>}/>
         <Route path="/sign-in" element={<SignInPage/>}/>
-        {/* <Route path="/notices" element={}/> */}
+        <Route path="/notices" element={<NoticePage/>}/>
         <Route path="/onboarding" element={<Onboarding/>}/>
         {/* <Route path="/competitor" element={}/> */}
         {/* <Route path="/team-building" element={}/> */}
