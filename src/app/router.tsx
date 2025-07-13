@@ -4,6 +4,7 @@ import SignUpPage from "@/pages/SignUp";
 import MainPage from "@/pages/Main";
 import Onboarding from "@/pages/Onboarding";
 import MyProfile from "@/pages/MyProfile";
+import CallbackPage from "@/pages/Callback";
 
 const Router = () => {
   return (
@@ -19,7 +20,7 @@ const Router = () => {
         {/* <Route path="/bmc" element={}/> */}
         <Route path="/my-profile" element={<MyProfile/>}/>
         {/* <Route path="/my-business" element={}/> */}
-        {/* <Route path="/oauth/callback" element={}/> */}
+        <Route path="/oauth/callback" element={<CallbackPage/>}/>
       </Routes>
     </BrowserRouter>
   );
