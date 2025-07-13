@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route} from "react-router-dom";
 import SignInPage from "@/pages/SignIn";
 import SignUpPage from "@/pages/SignUp";
 import MainPage from "@/pages/Main";
+import CallbackPage from "@/pages/Callback";
 
 const Router = () => {
   return(
@@ -16,7 +17,7 @@ const Router = () => {
         {/* <Route path="/bmc" element={}/> */}
         {/* <Route path="/my-profile" element={}/> */}
         {/* <Route path="/my-business" element={}/> */}
-        {/* <Route path="/oauth/callback" element={}/> */}
+        <Route path="/oauth/callback" element={<CallbackPage/>}/>
       </Routes>
     </BrowserRouter>
   )
