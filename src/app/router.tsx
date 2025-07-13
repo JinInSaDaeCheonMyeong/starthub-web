@@ -16,6 +16,7 @@ const Router = () => {
         {/* <Route path="/bmc" element={}/> */}
         {/* <Route path="/my-profile" element={}/> */}
         {/* <Route path="/my-business" element={}/> */}
+        {/* <Route path="/oauth/callback" element={}/> */}
       </Routes>
     </BrowserRouter>
   )
