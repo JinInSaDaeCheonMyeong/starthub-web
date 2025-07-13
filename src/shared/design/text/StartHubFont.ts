@@ -157,5 +157,11 @@ export const StartHubFont = Object.freeze({
       font-weight: 500;
       line-height: 120%;
     `,
+    Body3: css`
+      font-family: "Wanted Sans Variable";
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 120%;
+    `,
   },
 });
