@@ -3,6 +3,7 @@ import SignInPage from "@/pages/SignIn";
 import SignUpPage from "@/pages/SignUp";
 import MainPage from "@/pages/Main";
 import NoticePage from "@/pages/Notice";
+import Onboarding from "@/pages/Onboarding";
 
 const Router = () => {
   return(
@@ -12,6 +13,8 @@ const Router = () => {
         <Route path="/sign-up" element={<SignUpPage/>}/>
         <Route path="/sign-in" element={<SignInPage/>}/>
         <Route path="/notices" element={<NoticePage/>}/>
+        <Route path="/onboarding" element={<Onboarding/>}/>
+        {/* <Route path="/notices" element={}/> */}
         {/* <Route path="/competitor" element={}/> */}
         {/* <Route path="/team-building" element={}/> */}
         {/* <Route path="/bmc" element={}/> */}

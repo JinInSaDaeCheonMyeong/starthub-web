@@ -6,7 +6,7 @@ import { ReactComponent as Etc } from "@assets/category/etc.svg";
 import { ReactComponent as Coin } from "@assets/category/coin.svg";
 import { ReactComponent as Camera } from "@assets/category/camera.svg";
 
-const JOB_CATEGORY = [
+export const JOB_CATEGORY = [
   {
     text: "IT/소프트웨어",
     enum: "IT_SOFTWARE",
