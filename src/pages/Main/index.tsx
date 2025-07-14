@@ -1,27 +1,21 @@
-import Header from "@/widgets/Header";
-import Banner from "@/shared/ui/Banner";
-import AdBanner from "@/shared/ui/AdBanner";
+import Layout from "@/shared/ui/Layout";
 import MainMenu from "@/features/mainMenu/ui";
 import MainContent from "./ui/MainContent";
-import Footer from "@/widgets/Footer";
-import * as S from "./style"
+import * as S from "./style"; 
+import Banner from "@/shared/ui/Banner";
 
 const MainPage = () => {
   return (
-    <S.PageLayout>
-      <Header />
-      <Banner />
+    <Layout>
+      <Banner/>
       <S.CenteredBox>
         <MainMenu />
       </S.CenteredBox>
       <S.CenteredBox>
         <MainContent />
       </S.CenteredBox>
-      <AdBanner />
-      <Footer/>
-    </S.PageLayout>
+    </Layout>
   );
 };
 
 export default MainPage;
-
