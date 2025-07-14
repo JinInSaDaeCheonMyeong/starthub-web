@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
 import { toast } from 'react-toastify';
 import * as S from "./style";
 import { StartHubLogo } from "@/assets/logo";
@@ -23,8 +24,18 @@ const INITIAL_FORM_DATA: OnboardingFormData = {
 
 const Onboarding = () => {
   const navigate = useNavigate();
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState<OnboardingFormData>(INITIAL_FORM_DATA);
+
+  const onboardingMutation = useMutation({
+    mutationFn: (data: OnboardingRequest) => userApi.onboarding(data),
+    onSuccess: () => {
+      toast.success("회원가입이 완료되었습니다!");
+      navigate('/');
+    },
+    onError: () => {
+      toast.error("다시 시도해 주세요");
+    }
+  });
 
   const handleInputChange = (field: keyof OnboardingFormData, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -37,7 +48,7 @@ const Onboarding = () => {
   const isFormValid = () => {
     const { birthYear, birthMonth, birthDay, gender, name, category } = formData;
     return birthYear && birthMonth && birthDay && gender && name && category.length > 0;
-  }; 
+  };
 
   const formatBirthDate = () => {
     const { birthYear, birthMonth, birthDay } = formData;
@@ -58,25 +69,14 @@ const Onboarding = () => {
     profileImage: ""
   });
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     if (!isFormValid()) {
       toast.error("모든 필수 항목을 입력해주세요.");
       return;
     }
     
-    setIsSubmitting(true);
-    
-    try {
-      const serverData = createServerData();
-      await userApi.onboarding(serverData);
-      
-      toast.success("회원가입이 완료되었습니다!");
-      navigate('/');
-    } catch (error: unknown) {
-      toast.error("다시 시도해 주세요");
-    } finally {
-      setIsSubmitting(false);
-    }
+    const serverData = createServerData();
+    onboardingMutation.mutate(serverData);
   };
 
   return (
@@ -98,13 +98,13 @@ const Onboarding = () => {
           />
           
           <StartHubButton
-            text={isSubmitting ? "처리중..." : "시작하기"}
+            text={onboardingMutation.isPending ? "처리중..." : "시작하기"}
             onClick={handleSubmit}
             height={50}
             backgroundColor={StartHubColors.Primary}
             typography={StartHubFont.Pretendard.Body1.SemiBold}
             textTheme={StartHubColors.White1}
-            disabled={!isFormValid() || isSubmitting}
+            disabled={!isFormValid() || onboardingMutation.isPending}
             customStyle={{ width: "100%" }}
           />
         </S.SectionContainer>
