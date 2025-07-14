@@ -89,7 +89,7 @@ export interface SignUpFormState {
 }
 
 export interface OnboardingFormData {
-  category: string;
+  category: string[];
   birthYear: string;
   birthMonth: string;
   birthDay: string;

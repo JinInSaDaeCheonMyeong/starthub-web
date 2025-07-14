@@ -1,17 +1,18 @@
 import * as S from "./style";
 import { JOB_CATEGORY } from "@/shared/utils/Category/jobCategory";
-import { useState } from "react";
 
-const CategorySelector = () => {
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+interface CategorySelectorProps {
+  selectedCategories: string[];
+  onCategoryChange: (categories: string[]) => void;
+}
 
+const CategorySelector = ({ selectedCategories, onCategoryChange }: CategorySelectorProps) => {
   const handleCategoryClick = (categoryEnum: string) => {
-    setSelectedCategories((prevSelected) => {
-      if (prevSelected.includes(categoryEnum)) {
-        return prevSelected.filter((item) => item !== categoryEnum);
-      }
-      return [...prevSelected, categoryEnum];
-    });
+    const updatedCategories = selectedCategories.includes(categoryEnum)
+      ? selectedCategories.filter((item) => item !== categoryEnum)
+      : [...selectedCategories, categoryEnum];
+    
+    onCategoryChange(updatedCategories);
   };
 
   return (
