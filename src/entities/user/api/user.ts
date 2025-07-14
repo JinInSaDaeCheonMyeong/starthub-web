@@ -1,5 +1,5 @@
 import StartHubAxios from '../../../shared/api/customAxios/StartHubAxios'
-import { AuthResponse, OAuthRequest, AuthRequest, OAuthResponse, OAuthStateResponse, UserResponse, UserData } from '../model/types'
+import { AuthResponse, OAuthRequest, AuthRequest, OAuthResponse, OAuthStateResponse, UserResponse, UserData, OnboardingRequest, OnboardingResponse } from '../model/types'
 
 
 export const userApi = {
