@@ -16,6 +16,7 @@ export interface StateRequest {
 export interface AuthData {
   access: string;
   refresh: string;
+  isFirstLogin: boolean;
 }
 
 export type AuthResponse = BaseResponse<AuthData>;
@@ -26,10 +27,9 @@ export interface OAuthData {
   isFirstLogin: boolean;
 }
 
+export type OAuthStateResponse = BaseResponse<string>;
 
 export type OAuthResponse = BaseResponse<OAuthData>;
-
-export type OAuthStateResponse = BaseResponse<string>;
 
 export interface SignUpFormData {
   email: string;
@@ -63,6 +63,12 @@ export interface SignUpRequest {
   password: string;
 }
 
+export interface SignUpResponse {
+  data: {
+    message: string;
+  };
+}
+
 export interface SignUpFormHandlers {
   handleFormChange: (field: keyof SignUpFormData, value: string) => void;
   handleAllCheck: (checked: boolean) => void;
@@ -83,12 +89,53 @@ export interface SignUpFormState {
   isLoading: boolean;
 }
 
-export interface UserData {
-  email: string,
-  username: string,
-  birth: Date,
-  gender: "MALE" | "FEMALE",
-  profileImage: "string"
+export interface OnboardingFormData {
+  category: any;
+  birthYear: string;
+  birthMonth: string;
+  birthDay: string;
+  gender: string;
+  name: string;
+  interests: string[];
 }
 
-export type UserResponse = BaseResponse<UserData>;
+export interface CategoryItem {
+  id: string;
+  label: string;
+  icon: React.ComponentType<any>;
+}
+
+export interface ButtonProps {
+  $active: boolean;
+}
+
+export interface CategoryButtonProps {
+  $customColor?: string; 
+  $active?: boolean;
+}
+
+export interface CategoryItem {
+  id: string;
+  label: string;
+  icon: React.ComponentType<any>;
+  color: string;
+}
+
+export interface OnboardingRequest {
+  username: string;
+  introduction: string;
+  birth: string;
+  gender: string;
+  interests: string[];
+  profileImage: string;
+}
+
+export interface OnboardingData {
+  userId: string;
+  username: string;
+  birth: string;
+  gender: string;
+  interests: string[];
+}
+
+export type OnboardingResponse = BaseResponse<OnboardingData>;
