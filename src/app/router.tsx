@@ -13,7 +13,7 @@ import EditMyProfile from "@/pages/EditProfile"
 import CallbackPage from "@/pages/Callback";
 
 const Router = () => {
-  return(
+  return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainPage/>}/>
@@ -41,7 +41,7 @@ const Router = () => {
         <Route path="/notices/:type" element={<NoticeListUpPage/>}/>
       </Routes>
     </BrowserRouter>
-  )
+  );
 };
 
 export default Router;
