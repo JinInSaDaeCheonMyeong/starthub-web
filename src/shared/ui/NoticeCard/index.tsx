@@ -1,17 +1,20 @@
 import * as S from "./style";
+import { useNavigate } from "react-router-dom";
 import { ReactComponent as Map } from "@assets/category/map.svg";
 import { ReactComponent as Person } from "@assets/category/person.svg";
 import { getNoticeCategoryInfo } from "@/shared/utils/NoticeCategory/noticeCategory";
+
 const NoticeCard = () => {
   const categoryInfo = getNoticeCategoryInfo("FUNDS");
+  const navigate = useNavigate();
 
   return (
-    <S.NoticeContainer>
+    <S.NoticeContainer onClick={() => navigate("/notice/1")} style={{ cursor: "pointer" }}>
       <S.CategoryContainer>
         {categoryInfo.icon}
         <span>{categoryInfo.text}</span>
       </S.CategoryContainer>
-      <S.TitleText>AI 디지털 전환 혁신기업 해외실증 지원 사원</S.TitleText>
+      <S.TitleText>AI 디지털 전환 혁신기업 해외실증 지원 사업</S.TitleText>
       <p>모집 기간 2025.04.02.~2025.04.06.</p>
       <div style={{ display: "flex" }}>
         <S.Tag>
