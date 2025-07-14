@@ -11,17 +11,17 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/sign-up" element={<SignUpPage />} />
-        <Route path="/sign-in" element={<SignInPage />} />
-        <Route path="/onboarding" element={<Onboarding />} />
-        <Route path="/notices" element={<NoticePage />} />
+        <Route path="/" element={<MainPage/>}/>
+        <Route path="/sign-up" element={<SignUpPage/>}/>
+        <Route path="/sign-in" element={<SignInPage/>}/>
+        <Route path="/notices" element={<NoticePage/>}/>
+        <Route path="/onboarding" element={<Onboarding/>}/>
         {/* <Route path="/competitor" element={}/> */}
         {/* <Route path="/team-building" element={}/> */}
         {/* <Route path="/bmc" element={}/> */}
         <Route path="/my-profile" element={<MyProfile/>}/>
         {/* <Route path="/my-business" element={}/> */}
-        <Route path="/oauth/callback" element={<CallbackPage />} />
+        <Route path="/oauth/callback" element={<CallbackPage/>}/>
       </Routes>
     </BrowserRouter>
   );
