@@ -29,5 +29,8 @@ export const userApi = {
   userProfile: async (): Promise<UserData> => {
       const res: UserResponse = await StartHubAxios.get(`/user/me`);
       return res.data;
-  }
+  },
+
+  onboarding: (data: OnboardingRequest): Promise<OnboardingResponse> =>
+    StartHubAxios.patch('/user/profile', data),
 }
