@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route} from "react-router-dom";
 import SignInPage from "@/pages/SignIn";
 import SignUpPage from "@/pages/SignUp";
 import MainPage from "@/pages/Main";
+import Onboarding from "@/pages/Onboarding";
 import NoticePage from "@/pages/Notice";
 import CallbackPage from "@/pages/Callback";
 import Onboarding from "@/pages/Onboarding";
@@ -14,6 +15,7 @@ const Router = () => {
         <Route path="/" element={<MainPage/>}/>
         <Route path="/sign-up" element={<SignUpPage/>}/>
         <Route path="/sign-in" element={<SignInPage/>}/>
+        <Route path="/onboarding" element={<Onboarding/>}/>
         <Route path="/notices" element={<NoticePage/>}/>
         <Route path="/onboarding" element={<Onboarding/>}/>
         {/* <Route path="/notices" element={}/> */}
