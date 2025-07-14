@@ -14,7 +14,6 @@ const Router = () => {
         <Route path="/sign-up" element={<SignUpPage/>}/>
         <Route path="/sign-in" element={<SignInPage/>}/>
         <Route path="/onboarding" element={<Onboarding/>}/>
-        {/* <Route path="/notices" element={}/> */}
         {/* <Route path="/competitor" element={}/> */}
         {/* <Route path="/team-building" element={}/> */}
         {/* <Route path="/bmc" element={}/> */}
