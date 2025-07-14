@@ -17,7 +17,7 @@ export const HeaderContainer = styled.div`
 `;
 export const ContentWrapper = styled.div`
   width: 100%;
-  padding: 0 175px;
+  padding: 0 120px;
   display: flex;
   align-items: center;
   justify-content: space-between;
