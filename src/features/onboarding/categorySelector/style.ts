@@ -41,3 +41,17 @@ export const CategoryButton = styled.button<CategoryButtonProps>`
   cursor: pointer;
   transition: all 0.2s;
 `;
+
+export const CategoryIcon = styled.img`
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+`
+
+export const CategoryText = styled.span<{ $txColor: string }>`
+  font-size: 12px;
+  font-weight: 500;
+  color: ${(props) => props.$txColor};
+  text-align: center;
+  line-height: 1.2;
+`
