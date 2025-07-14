@@ -24,7 +24,6 @@ export type AuthResponse = BaseResponse<AuthData>;
 export interface OAuthData {
   access: string;
   refresh: string;
-  isFirstLogin: boolean;
 }
 
 export type OAuthStateResponse = BaseResponse<string>;
@@ -90,7 +89,7 @@ export interface SignUpFormState {
 }
 
 export interface OnboardingFormData {
-  category: any;
+  category: string;
   birthYear: string;
   birthMonth: string;
   birthDay: string;
@@ -102,7 +101,7 @@ export interface OnboardingFormData {
 export interface CategoryItem {
   id: string;
   label: string;
-  icon: React.ComponentType<any>;
+  icon: React.ComponentType<string>;
 }
 
 export interface ButtonProps {
@@ -117,7 +116,7 @@ export interface CategoryButtonProps {
 export interface CategoryItem {
   id: string;
   label: string;
-  icon: React.ComponentType<any>;
+  icon: React.ComponentType<string>;
   color: string;
 }
 
@@ -139,3 +138,19 @@ export interface OnboardingData {
 }
 
 export type OnboardingResponse = BaseResponse<OnboardingData>;
+
+export interface UserData {
+  id: string;
+  email: string;
+  username: string | null;
+  birth: string | null;
+  gender: string | null;
+  profileImage: string | null;
+}
+
+export interface UserResponse {
+  data: UserData;
+  status: string;
+  message: string;
+  statusCode: number;
+}
