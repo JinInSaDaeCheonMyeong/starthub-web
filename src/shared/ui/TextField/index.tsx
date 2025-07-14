@@ -25,6 +25,7 @@ const Wrapper = styled.div<{ width?: number }>`
   display: flex;
   flex-direction: column;
   width: ${({ width }) => (width ? `${width}px` : "100%")};
+  position: relative;
 `;
 
 const Label = styled.label`
@@ -50,7 +51,7 @@ const Input = styled.input.withConfig({
   border-radius: 8px;
   outline: none;
   height: 50px;
-  margin-bottom: ${({ isError }) => (isError || " " ? "0" : "10px")};
+  margin-bottom: ${({ isError }) => (isError ? "0" : "10px")};
   &::placeholder {
     color: ${StartHubColors.Gray3};
   }
@@ -68,13 +69,16 @@ const Input = styled.input.withConfig({
   ${({ customStyle }) => customStyle || ""}
 `;
 
-const SupportingText = styled.span<{ isError?: boolean }>`
-  color: ${({ isError }) => isError ? StartHubColors.Error : StartHubColors.Primary};
+const SupportingText = styled.span.withConfig({
+  shouldForwardProp: (prop) => prop !== "isError",
+})<{ isError?: boolean; placeholder?: string }>`
+  color: ${StartHubColors.Error};
   ${StartHubFont.Pretendard.Body2.Regular}
   font-size: 13px;
-  margin-bottom: 8px;
+  left: 0;
+  width: 100%;
+  padding-bottom: 10px;
 `;
-
 
 export const StartHubTextField = ({
   type,
@@ -111,8 +115,8 @@ export const StartHubTextField = ({
         onKeyDown={onKeyDown}
         customStyle={customStyle}
       />
-      {isError && (
-        <SupportingText isError={isError}>{supportingText}</SupportingText>
+      {supportingText && (
+        <SupportingText isError={true}>{supportingText}</SupportingText>
       )}
     </Wrapper>
   );

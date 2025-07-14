@@ -1,0 +1,44 @@
+import * as S from "./style";
+import { JOB_CATEGORY } from "@/shared/utils/Category/jobCategory";
+
+interface CategorySelectorProps {
+  selectedCategories: string[];
+  onCategoryChange: (categories: string[]) => void;
+}
+
+const CategorySelector = ({ selectedCategories, onCategoryChange }: CategorySelectorProps) => {
+  const handleCategoryClick = (categoryEnum: string) => {
+    const updatedCategories = selectedCategories.includes(categoryEnum)
+      ? selectedCategories.filter((item) => item !== categoryEnum)
+      : [...selectedCategories, categoryEnum];
+    
+    onCategoryChange(updatedCategories);
+  };
+
+  return (
+    <S.Section>
+      <S.SectionTitle>관심 분야(1개 이상)</S.SectionTitle>
+      <S.SectionDescription>
+        관심 분야를 알려주시면, 맞춤형 콘텐츠를 추천해드려요!
+      </S.SectionDescription>
+
+      <S.CategoryGrid>
+        {JOB_CATEGORY.map((category) => (
+          <S.CategoryButton
+            key={category.enum}
+            $customColor={category.txColor}
+            $active={selectedCategories.includes(category.enum)}
+            onClick={() => handleCategoryClick(category.enum)}
+          >
+            <S.CategoryContainer $txColor={category.txColor}>
+              {category.image}
+              <span>{category.text}</span>
+            </S.CategoryContainer>
+          </S.CategoryButton>
+        ))}
+      </S.CategoryGrid>
+    </S.Section>
+  );
+};
+
+export default CategorySelector;

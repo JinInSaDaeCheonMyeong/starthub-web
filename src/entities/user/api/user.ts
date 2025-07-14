@@ -1,20 +1,36 @@
 import StartHubAxios from '../../../shared/api/customAxios/StartHubAxios'
-import { AuthResponse, OAuthRequest, AuthRequest, OAuthResponse } from '../model/types'
+import { AuthResponse, OAuthRequest, AuthRequest, OAuthResponse, OAuthStateResponse, UserResponse, UserData, OnboardingRequest, OnboardingResponse } from '../model/types'
 
 
 export const userApi = {
   signIn: (data: AuthRequest): Promise<AuthResponse> =>
-    StartHubAxios.post('/user/sign-in', data).then(res => res.data),
+    StartHubAxios.post('/user/sign-in', data),
 
   oauthGoogle: (data: OAuthRequest): Promise<OAuthResponse> =>
-    StartHubAxios.get('/oauth/google', { params: data }).then(res => res.data),
+    StartHubAxios.get('/oauth/google/web', { params: data }),
 
   oauthNaver: (data: OAuthRequest): Promise<OAuthResponse> =>
-    StartHubAxios.get('/oauth/naver', { params: data }).then(res => res.data),
+    StartHubAxios.get('/oauth/naver', { params: data }),
 
   oauthApple: (data: OAuthRequest): Promise<OAuthResponse> =>
-    StartHubAxios.post('/oauth/apple', data).then(res => res.data),
+    StartHubAxios.post('/oauth/apple', data),
 
-  userProfile: () =>
-    StartHubAxios.get('/user/profile').then(res => res.data)
+  oauthState: (): Promise<OAuthStateResponse> =>
+    StartHubAxios.get('/oauth/state'),
+
+  signUp: (data: AuthRequest) => StartHubAxios.post('/user/sign-up', data),
+
+  sendVerificationCode: (email: string) => 
+    StartHubAxios.post('/email/send-code', { email }),
+
+  verifyCode: (email: string, code: string) => 
+    StartHubAxios.post('/email/verify', { email, code }),
+
+  userProfile: async (): Promise<UserData> => {
+      const res: UserResponse = await StartHubAxios.get(`/user/me`);
+      return res.data;
+  },
+
+  onboarding: (data: OnboardingRequest): Promise<OnboardingResponse> =>
+    StartHubAxios.patch('/user/profile', data),
 }

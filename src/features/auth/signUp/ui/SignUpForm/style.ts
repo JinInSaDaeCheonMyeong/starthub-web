@@ -1,19 +1,34 @@
 import styled from "styled-components";
 import { StartHubFont, StartHubColors } from "@/shared/design";
 
+
+export const ErrorMessage = styled.p<{ $status?: "success" | "error" | "default" }>`
+  font-size: 12px;
+  margin-top: 4px;
+  color: ${({ $status }) =>
+    $status === "success"
+      ? StartHubColors.Primary
+      : StartHubColors.Error};
+`;
+
+export const EmailContainer = styled.div`
+  position: relative;
+`;
+
 export const InputLabel = styled.label`
   font: ${StartHubFont.Pretendard.Body2.Medium};
   color: ${StartHubColors.Black1};
-  margin-top: 10px;
+  margin-top: 20px;
 `;
 
-export const VerificationCodeContainer = styled.div`
+export const VerificationCodeContainer = styled.div<{ $hasError?: boolean }>`
   display: flex;
   align-items: center;
   gap: 10px;
   width: 100%;
   max-width: 320px;
-  margin-bottom: 10px;
+  position: relative;
+  margin-top: 10px;
   
   @media (max-width: 480px) {
     flex-direction: column;
@@ -26,9 +41,8 @@ export const InputButton = styled.button<{ $isActive: boolean }>`
   position: absolute;
   right: 5px;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-70%);
   padding: 0 10px;
-  background-color: ${StartHubColors.White1};
   color: ${props => props.$isActive ? StartHubColors.Primary : StartHubColors.Gray3};
   font: ${StartHubFont.Pretendard.Caption1.Medium};
   border: none;
@@ -53,11 +67,11 @@ export const VerifyButton = styled.button`
   justify-content: center;
   align-items: center;
   padding: 0 16px;
-  background-color: white;
+  background-color: ${StartHubColors.White1};
   color: ${StartHubColors.Primary};
   font: ${StartHubFont.Pretendard.Caption1.Medium};
   height: 50px;
-  border: 1px solid #4169E1;
+  border: 1px solid ${StartHubColors.Primary};
   border-radius: 8px;
   cursor: pointer;
   white-space: nowrap;
@@ -66,10 +80,6 @@ export const VerifyButton = styled.button`
   max-width: 108px;
   min-width: 108px;
   flex-shrink: 0;
-
-  &:hover {
-    background-color: #f0f5ff;
-  }
   
   @media (max-width: 480px) {
     max-width: 100%;
@@ -78,11 +88,11 @@ export const VerifyButton = styled.button`
 `;
 
 
-export const PasswordInputContainer = styled.div`
+export const PasswordInputContainer = styled.div<{ $hasError?: boolean }>`
   position: relative;
   width: 100%;
   max-width: 320px;
-  margin-bottom: 10px;
+  margin-bottom: ${({ $hasError }) => $hasError ? '24px' : '0'};
   
   @media (max-width: 480px) {
     max-width: 100%;

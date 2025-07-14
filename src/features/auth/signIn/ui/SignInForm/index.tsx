@@ -4,16 +4,38 @@ import {
   StartHubCheckBox,
 } from "@/shared/ui";
 import { StartHubLogo } from "@assets/logo";
-import SocialButton from "./SocialButton";
+import SocialButton from "@/features/auth/social/ui/SocialButton";
 import { StartHubColors, StartHubFont } from "@/shared/design";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import * as S from "./style";
+import { useSignIn } from "../../model/useSignIn";
 
 const SignInBox = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [autoSignIn, setAutoSignIn] = useState(false);
+  const { signIn, isLoading } = useSignIn();
+  const [isEmailError, setIsEmailError] = useState(false);
+  const [isPasswordError, setIsPasswordError] = useState(false);
+
+  const AuthHandleSubmit = () => {
+    let hasError = false;
+
+    if (!email) {
+      setIsEmailError(true);
+      hasError = true;
+    }
+
+    if (!password) {
+      setIsPasswordError(true);
+      hasError = true;
+    }
+
+    if (hasError) return;
+
+    signIn({ email, password });
+  };
 
   return (
     <S.SignBoxContainer>
@@ -28,8 +50,13 @@ const SignInBox = () => {
         type="text"
         value={email}
         width={320}
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={(e) => {
+          setEmail(e.target.value);
+          setIsEmailError(false);
+        }}
         placeholder="이메일을 입력해주세요"
+        isError={isEmailError}
+        supportingText={isEmailError ? "이메일을 입력해주세요" : ""}
         customStyle={{ marginBottom: "10px" }}
       />
 
@@ -37,9 +64,14 @@ const SignInBox = () => {
         type="password"
         value={password}
         width={320}
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={(e) => {
+          setPassword(e.target.value);
+          setIsPasswordError(false);
+        }}
         placeholder="비밀번호를 입력해주세요"
-        customStyle={{ marginBottom: "20px" }}
+        isError={isPasswordError}
+        supportingText={isPasswordError ? "비밀번호를 입력해주세요" : ""}
+        customStyle={{ marginBottom: "10px" }}
       />
 
       <StartHubButton
@@ -49,7 +81,8 @@ const SignInBox = () => {
         typography={StartHubFont.Pretendard.Body1.Medium}
         backgroundColor={StartHubColors.Primary}
         textTheme={StartHubColors.White1}
-        onClick={() => {}}
+        onClick={AuthHandleSubmit}
+        disabled={isLoading}
         customStyle={{
           borderRadius: "10px",
           marginBottom: "20px",
