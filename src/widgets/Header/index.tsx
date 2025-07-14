@@ -15,7 +15,7 @@ const Header = () => {
   return (
     <S.HeaderContainer>
       <S.ContentWrapper>
-        <LogoIcon width={104} height={18} />
+        <LogoIcon width={104} height={18} onClick={()=>navigate("/")}/>
         <div style={{ display: "flex", flexDirection: "row" }}>
           <S.StyleLink to="/notices" $active={currentPath === "/notices"}>
             공고
