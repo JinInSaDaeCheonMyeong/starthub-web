@@ -21,17 +21,17 @@ export interface StartHubDropdownProps {
 
 const Wrapper = styled.div<{ width?: number }>`
   position: relative;
-  width: ${({ width }) => (width ? `${width}px` : "100%")};
+  display: inline-block;
+  width: ${({ width }) => (width ? `${width}px` : "fit-content")};
 `;
 
 const DropdownButton = styled.button.withConfig({
   shouldForwardProp: (prop) => !["customStyle", "$isOpen"].includes(prop),
 })<{ customStyle?: CSSObject; $isOpen: boolean }>`
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
-  padding: 10px;
+  padding: 10px 12px;
   height: 40px;
   ${StartHubFont.Pretendard.Caption1.Regular}
   border: 1px solid ${({ $isOpen }) =>
@@ -40,6 +40,9 @@ const DropdownButton = styled.button.withConfig({
   background: white;
   cursor: pointer;
   outline: none;
+  white-space: nowrap;
+  width: fit-content;
+  min-width: 120px;
 
   &:hover {
     border-color: ${StartHubColors.Primary};
@@ -59,9 +62,7 @@ const DropdownText = styled.span.withConfig({
 })<{ $isPlaceholder: boolean }>`
   color: ${({ $isPlaceholder }) =>
     $isPlaceholder ? StartHubColors.Gray3 : StartHubColors.Black1};
-  flex: 1;
-  text-align: left;
-  padding-right: 10px;
+  padding-right: 8px;
 `;
 
 const ChevronIcon = styled(ChevronDown).withConfig({

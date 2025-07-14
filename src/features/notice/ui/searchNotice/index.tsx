@@ -13,9 +13,16 @@ const SearchNotice = () => {
 
   const supportOptions = [
     { value: "사업화", label: "사업화" },
-    { value: "R&D", label: "R&D" },
-    { value: "인력양성", label: "인력양성" },
+    { value: "기술개발", label: "R&D" },
+    { value: "시설", label: "시설" },
     { value: "멘토링", label: "멘토링" },
+    { value: "글로벌", label: "글로벌" },
+    { value: "인력", label: "인력" },
+    { value: "융자", label: "융자" },
+    { value: "행사", label: "행사" },
+    { value: "창업교육", label: "창업교육" },
+    { value: "해외진출", label: "해외진출" },
+    { value: "정책자금", label: "정책자금" },
   ];
 
   const targetOptions = [
@@ -53,7 +60,7 @@ const SearchNotice = () => {
     { value: "만 20세 미만", label: "만 20세 미만" },
     {
       value: "만 20세 이상 ~ 만 39세 이하",
-      label: "만 20세 이상 ~ 만 39세 이하",
+      label: "만 20세 ~ 39세 이하",
     },
     { value: "만 40세 이상", label: "만 40세 이상" },
   ];
@@ -69,7 +76,6 @@ const SearchNotice = () => {
   const handleSearchChange = (event: any) => {
     setSearch(event.target.value);
   };
-
 
   return (
     <S.SearchNoticeContainer>
@@ -88,7 +94,6 @@ const SearchNotice = () => {
           value={selectedSupport}
           onChange={setSelectedSupport}
           placeholder="지원분야"
-          customStyle={{ width: "fit-content", minWidth: "120px" }}
         />
 
         <StartHubDropdown
@@ -96,7 +101,6 @@ const SearchNotice = () => {
           value={selectedTarget}
           onChange={setSelectedTarget}
           placeholder="대상"
-          customStyle={{ width: "fit-content", minWidth: "120px" }}
         />
 
         <StartHubDropdown
@@ -104,7 +108,6 @@ const SearchNotice = () => {
           value={selectedRegion}
           onChange={setSelectedRegion}
           placeholder="지역"
-          customStyle={{ width: "fit-content", minWidth: "120px" }}
         />
 
         <StartHubDropdown
@@ -112,7 +115,6 @@ const SearchNotice = () => {
           value={selectedAge}
           onChange={setSelectedAge}
           placeholder="연령"
-          customStyle={{ width: "fit-content", minWidth: "120px" }}
         />
 
         <StartHubDropdown
@@ -120,7 +122,6 @@ const SearchNotice = () => {
           value={selectedExperience}
           onChange={setSelectedExperience}
           placeholder="창업 업력"
-          customStyle={{ width: "fit-content", minWidth: "120px" }}
         />
       </S.DropdownContainer>
     </S.SearchNoticeContainer>
