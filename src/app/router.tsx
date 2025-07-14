@@ -2,8 +2,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignInPage from "@/pages/SignIn";
 import SignUpPage from "@/pages/SignUp";
 import MainPage from "@/pages/Main";
-import NoticePage from "@/pages/Notice";
-import CallbackPage from "@/pages/Callback";
 import Onboarding from "@/pages/Onboarding";
 import MyProfile from "@/pages/MyProfile";
 import BmcPage from "@/pages/Bmc/Create";
