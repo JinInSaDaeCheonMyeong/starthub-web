@@ -41,13 +41,12 @@ export const CategoryContainer = styled.div<CategoryColorProps>`
   align-items: center;
   margin: 4px 0;
   span {
-    ${StartHubFont.Pretendard.Caption1.Medium}
-    font-size: 10px;
+    ${StartHubFont.Pretendard.Caption2.Regular}
     color: ${({ $txColor }) => $txColor};
   }
   svg {
-    width: 16px;
-    height: auto;
+    width: 18px;
+    height: 18px;
     margin-right: 4px;
   }
 `;

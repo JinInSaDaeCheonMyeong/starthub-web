@@ -4,7 +4,7 @@ import {
   StartHubCheckBox,
 } from "@/shared/ui";
 import { StartHubLogo } from "@assets/logo";
-import SocialButton from "./SocialButton";
+import SocialButton from "@/features/auth/social/ui/SocialButton";
 import { StartHubColors, StartHubFont } from "@/shared/design";
 import { useState } from "react";
 import { Link } from "react-router-dom";

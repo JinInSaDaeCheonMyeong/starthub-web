@@ -51,13 +51,12 @@ export const CategoryContainer = styled.div<CategoryColorProps>`
   align-items: center;
   margin-bottom: 5px;
   span {
-    ${StartHubFont.Pretendard.Caption1.Regular}
-    font-size: 10px;
+    ${StartHubFont.Pretendard.Caption2.Regular}
     color: ${StartHubColors.Primary};
   }
-  svg{
-    width: 16px;
-    height: 16px;
+  svg {
+    width: 18px;
+    height: 18px;
     margin-right: 4px;
   }
 `;

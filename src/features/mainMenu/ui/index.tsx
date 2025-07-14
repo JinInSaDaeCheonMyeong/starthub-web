@@ -9,8 +9,8 @@ import * as S from "./style";
 
 const MainMenu = () => {
   const menuItems = [
-    { icon: <HumanIcon />, label: "청년 맞춤 공고", path: "/notice" },
-    { icon: <RocketIcon />, label: "최신 공고 보러가기", path: "/notice" },
+    { icon: <HumanIcon />, label: "청년 맞춤 공고", path: "/notices" },
+    { icon: <RocketIcon />, label: "최신 공고 보러가기", path: "/notices" },
     { icon: <BMCIcon />, label: "BMC 제작", path: "/bmc" },
     { icon: <Members />, label: "창업 멤버 모집하기", path: "team-building" },
     { icon: <ChartIcon />, label: "경쟁사 분석", path: "/competitor" },
