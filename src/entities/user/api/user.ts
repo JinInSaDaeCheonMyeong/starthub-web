@@ -1,5 +1,5 @@
 import StartHubAxios from '../../../shared/api/customAxios/StartHubAxios'
-import { AuthResponse, OAuthRequest, AuthRequest, OAuthResponse, OAuthStateResponse, StateRequest, UserResponse, UserData } from '../model/types'
+import { AuthResponse, OAuthRequest, AuthRequest, OAuthResponse, OAuthStateResponse, UserResponse, UserData } from '../model/types'
 
 
 export const userApi = {
@@ -15,8 +15,8 @@ export const userApi = {
   oauthApple: (data: OAuthRequest): Promise<OAuthResponse> =>
     StartHubAxios.post('/oauth/apple', data),
 
-  oauthState: (data: StateRequest): Promise<OAuthStateResponse> =>
-    StartHubAxios.get('/oauth/state', { params: data }),
+  oauthState: (): Promise<OAuthStateResponse> =>
+    StartHubAxios.get('/oauth/state'),
 
   signUp: (data: AuthRequest) => StartHubAxios.post('/user/sign-up', data),
 
