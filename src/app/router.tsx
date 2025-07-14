@@ -6,8 +6,8 @@ import Onboarding from "@/pages/Onboarding";
 import MyProfile from "@/pages/MyProfile";
 import BmcPage from "@/pages/Bmc/Create";
 import BlockedRoute from "@/shared/ui/BlockedRoute";
-import EarlyOnboarding from "@/pages/Onboarding/early"
-import PreOnboarding from "@/pages/Onboarding/pre"
+import EarlyOnboarding from "@/pages/Onboarding/early";
+import PreOnboarding from "@/pages/Onboarding/pre";
 import NoticeListUpPage from "@/pages/NoticeListUp";
 import EditMyProfile from "@/pages/EditProfile"
 import CallbackPage from "@/pages/Callback";
@@ -23,22 +23,22 @@ const Router = () => {
         <Route path="/notices" element={<NoticePage/>}/>
         <Route path="/onboarding" element={<Onboarding/>}/>
         {/* 차단된 경로들 */}
-        <Route 
-          path="/competitor" 
+        <Route
+          path="/competitor"
           element={
-            <BlockedRoute 
-              message="경쟁사 분석 기능은 현재 준비 중입니다. 곧 만나보실 수 있어요!" 
+            <BlockedRoute
+              message="경쟁사 분석 기능은 현재 준비 중입니다. 곧 만나보실 수 있어요!"
               redirectTo="/"
             />
           }
         />
-        <Route path="/bmc" element={<BmcPage/>}/>
-        <Route path="/my-profile" element={<MyProfile/>}/>
-        <Route path="/my-profile-edit" element={<EditMyProfile/>}/>
+        <Route path="/bmc" element={<BmcPage />} />
+        <Route path="/my-profile" element={<MyProfile />} />
+        <Route path="/my-profile-edit" element={<EditMyProfile />} />
         <Route path="/oauth/callback" element={<CallbackPage />} />
-        <Route path="/onboarding/early-startup" element={<EarlyOnboarding/>}/>
-        <Route path="/onboarding/pre-startup" element={<PreOnboarding/>}/>
-        <Route path="/notices/:type" element={<NoticeListUpPage/>}/>
+        <Route path="/onboarding/early-startup" element={<EarlyOnboarding />} />
+        <Route path="/onboarding/pre-startup" element={<PreOnboarding />} />
+        <Route path="/notices/:type" element={<NoticeListUpPage />} />
       </Routes>
     </BrowserRouter>
   );
