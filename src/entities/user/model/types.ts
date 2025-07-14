@@ -29,6 +29,8 @@ export interface OAuthData {
 
 export type OAuthStateResponse = BaseResponse<string>;
 
+export type OAuthResponse = BaseResponse<OAuthData>;
+
 export interface SignUpFormData {
   email: string;
   password: string;
