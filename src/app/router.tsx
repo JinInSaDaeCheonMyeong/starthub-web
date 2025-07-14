@@ -21,7 +21,7 @@ const Router = () => {
         {/* <Route path="/bmc" element={}/> */}
         <Route path="/my-profile" element={<MyProfile/>}/>
         {/* <Route path="/my-business" element={}/> */}
-        <Route path="/oauth/callback" element={<CallbackPage/>}/>
+        <Route path="/oauth/callback" element={<CallbackPage />} />
       </Routes>
     </BrowserRouter>
   )
