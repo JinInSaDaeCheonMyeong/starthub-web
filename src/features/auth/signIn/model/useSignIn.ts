@@ -17,13 +17,18 @@ export const useSignIn = () => {
   } = useMutation({
     mutationFn: userApi.signIn,
     onSuccess: (response) => {
+    const isFirstLogin = (response.data)?.isFirstLogin;
       if (response && response.data) {
         const { access, refresh } = response.data;
         cookieUtils.setAccessToken(access);
         cookieUtils.setRefreshToken(refresh);
         setIsLoggedIn(true);
         toast.success("로그인에 성공했습니다.");
-        navigate("/");
+        if (isFirstLogin === true) {
+          navigate("/onboarding");
+        } else {
+          navigate("/");
+        }
       } else {
         console.error('응답 데이터가 없습니다:', response);
         toast.error('로그인 응답에 문제가 있습니다.');
