@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { cookieUtils } from '@/shared/lib/utils/cookieUtils';
 
 interface AuthStore {
   isLoggedIn: boolean;
@@ -7,10 +8,12 @@ interface AuthStore {
 }
 
 export const useAuthStore = create<AuthStore>((set) => ({
-  isLoggedIn: false,
+  isLoggedIn: !!cookieUtils.getAccessToken(),
   setIsLoggedIn: (value) => set({ isLoggedIn: value }),
 
   logout: () => {
+    cookieUtils.removeAccessToken();
+    cookieUtils.removeRefreshToken();
     set({ isLoggedIn: false });
     window.location.href = '/sign-in';
   },

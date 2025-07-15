@@ -3,6 +3,8 @@ import { toast } from 'react-toastify';
 
 export const useGoogleSignIn = () => {
   const handleGoogleSignIn = async () => {
+    toast.error("개발 중인 기능입니다.")
+    return
     try {
       const stateResponse = await userApi.oauthState();
       const stateCode = stateResponse.data;
