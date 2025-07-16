@@ -154,3 +154,34 @@ export interface UserResponse {
   message: string;
   statusCode: number;
 }
+
+export interface ProfileFormData {
+  name: string;
+  email: string;
+  gender: "" | "남자" | "여자";
+  birthDate: string;
+  category: string;
+  profileImage: string;
+  description: string;
+  interests: string[];
+  introduction: string;
+}
+
+export interface ProfileUpdateRequest {
+  username: string;
+  introduction: string;
+  birth: string;
+  gender: "MALE" | "FEMALE" | "";
+  profileImage: string;
+}
+
+export interface ProfileUpdateData {
+  id: string;
+  username: string;
+  introduction: string;
+  birth: string;
+  gender: string;
+  profileImage: string;
+}
+
+export type ProfileUpdateResponse = BaseResponse<ProfileUpdateData>;
