@@ -68,8 +68,6 @@ const ProfileForm = () => {
   };
 
   const handleSave = () => {
-    console.log("저장된 데이터:", editFormData);
-    // TODO: 서버에 저장 API 호출
     setFormData(editFormData);
     setIsEditing(false);
   };

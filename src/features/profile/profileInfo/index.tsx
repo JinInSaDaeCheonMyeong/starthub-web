@@ -13,7 +13,7 @@ interface ProfileFormData {
 }
 
 interface ProfileInfoProps {
-  formData?: ProfileFormData; // 옵셔널로 변경
+  formData?: ProfileFormData;
   profileImage: string;
   isEditing: boolean;
   onEdit: () => void;

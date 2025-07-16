@@ -2,7 +2,7 @@ import * as S from "./style";
 import type { ProfileFormData } from "@/entities/user/model/types";
 
 interface ProfileViewModeProps {
-  formData?: ProfileFormData; // 옵셔널로 변경
+  formData?: ProfileFormData;
 }
 
 const ProfileViewMode = ({ formData }: ProfileViewModeProps) => {

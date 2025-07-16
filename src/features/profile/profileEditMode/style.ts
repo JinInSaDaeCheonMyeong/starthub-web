@@ -102,7 +102,6 @@ export const DisabledInput = styled(ProfileInput)`
   opacity: 0.5;
 `;
 
-// ViewMode용 스타일들 (기존에 있다면)
 export const InfoRow = styled.div`
   display: flex;
   justify-content: space-between;
