@@ -7,13 +7,9 @@ import { NoticeData } from "@/entities/notice/model/notice.type";
 
 interface SearchNoticeProps {
   onFilteredNoticesChange: (notices: NoticeData[], total: number) => void;
-  currentPage: number;
 }
 
-const SearchNotice = ({
-  onFilteredNoticesChange,
-  currentPage,
-}: SearchNoticeProps) => {
+const SearchNotice = ({ onFilteredNoticesChange }: SearchNoticeProps) => {
   const [search, setSearch] = useState("");
   const [selectedSupport, setSelectedSupport] = useState("");
   const [selectedTarget, setSelectedTarget] = useState("");
@@ -24,11 +20,9 @@ const SearchNotice = ({
   const [totalCount, setTotalCount] = useState(0);
 
   const fetchNotices = async () => {
-    const today = new Date().toISOString().split("T")[0];
-    
     const params = {
-      page: currentPage, 
-      perPage: 16, 
+      page: 1,
+      perPage: 100,
       ...(search && { "cond[biz_pbanc_nm::LIKE]": search }),
       ...(selectedSupport && { "cond[supt_biz_clsfc::LIKE]": selectedSupport }),
       ...(selectedTarget && { "cond[aply_trgt::LIKE]": selectedTarget }),
@@ -43,14 +37,12 @@ const SearchNotice = ({
         `${import.meta.env.VITE_NOTICE_API_URL}/v1/getAnnouncementInformation`,
         { params }
       );
-
-      const fetchedNotices = response.data.data ?? [];
-      const total = response.data.totalCount ?? 0;
-
-      setNotices(fetchedNotices);
-      setTotalCount(total);
-
-      onFilteredNoticesChange(fetchedNotices, total);
+      setNotices(response.data.data || []);
+      setTotalCount(response.data.totalCount || 0);
+      onFilteredNoticesChange(
+        response.data.data.data || [],
+        response.data.totalCount || 0
+      );
     } catch (error) {
       console.error("Failed to fetch notices", error);
     }
@@ -65,8 +57,11 @@ const SearchNotice = ({
     selectedRegion,
     selectedAge,
     selectedExperience,
-    currentPage,
   ]);
+
+  useEffect(() => {
+    onFilteredNoticesChange(notices, totalCount);
+  }, [notices, totalCount, onFilteredNoticesChange]);
 
   const supportOptions = [
     { value: "사업화", label: "사업화" },

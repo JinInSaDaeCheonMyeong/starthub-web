@@ -5,8 +5,8 @@ import { postData, PagedResponse } from "@/entities/post/model/post.types";
 import { AxiosError } from "axios";
 
 export const useGetCompanyPost = (
-  page = 0,
-  size = 10,
+  page = 1,
+  size = 4,
   options?: UseQueryOptions<PagedResponse<postData>, AxiosError, PagedResponse<postData>>
 ) => {
   return useQuery({

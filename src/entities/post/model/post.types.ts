@@ -33,6 +33,7 @@ export interface PagedResponse<T> {
   empty: boolean;
   pageable: Pageable;
   sort: Pageable["sort"];
+  numberOfElements: number;
 }
 
 export interface BaseResponse<T> {
