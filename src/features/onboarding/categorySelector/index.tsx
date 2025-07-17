@@ -3,16 +3,12 @@ import { JOB_CATEGORY } from "@/shared/utils/Category/jobCategory";
 
 interface CategorySelectorProps {
   selectedCategories: string[];
-  onCategoryChange: (categories: string[]) => void;
+  onCategoryToggle: (categoryId: string) => void;
 }
 
-const CategorySelector = ({ selectedCategories, onCategoryChange }: CategorySelectorProps) => {
+const CategorySelector = ({ selectedCategories, onCategoryToggle }: CategorySelectorProps) => {
   const handleCategoryClick = (categoryEnum: string) => {
-    const updatedCategories = selectedCategories.includes(categoryEnum)
-      ? selectedCategories.filter((item) => item !== categoryEnum)
-      : [...selectedCategories, categoryEnum];
-    
-    onCategoryChange(updatedCategories);
+    onCategoryToggle(categoryEnum);
   };
 
   return (
