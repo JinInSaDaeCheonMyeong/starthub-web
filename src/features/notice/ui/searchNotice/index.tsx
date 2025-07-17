@@ -1,15 +1,72 @@
 import * as S from "./style";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { StartHubSearchBar } from "@/shared/ui/SearchBar";
 import { StartHubDropdown } from "@/shared/ui/DropDown";
+import axios from "axios";
+import { NoticeData } from "@/entities/notice/model/notice.type";
 
-const SearchNotice = () => {
+interface SearchNoticeProps {
+  onFilteredNoticesChange: (notices: NoticeData[], total: number) => void;
+  currentPage: number;
+}
+
+const SearchNotice = ({
+  onFilteredNoticesChange,
+  currentPage,
+}: SearchNoticeProps) => {
   const [search, setSearch] = useState("");
   const [selectedSupport, setSelectedSupport] = useState("");
   const [selectedTarget, setSelectedTarget] = useState("");
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedAge, setSelectedAge] = useState("");
   const [selectedExperience, setSelectedExperience] = useState("");
+  const [notices, setNotices] = useState<NoticeData[]>([]);
+  const [totalCount, setTotalCount] = useState(0);
+
+  const fetchNotices = async () => {
+    const today = new Date().toISOString().split("T")[0];
+    
+    const params = {
+      page: currentPage, 
+      perPage: 16, 
+      ...(search && { "cond[biz_pbanc_nm::LIKE]": search }),
+      ...(selectedSupport && { "cond[supt_biz_clsfc::LIKE]": selectedSupport }),
+      ...(selectedTarget && { "cond[aply_trgt::LIKE]": selectedTarget }),
+      ...(selectedRegion && { "cond[supt_regin::LIKE]": selectedRegion }),
+      ...(selectedAge && { "cond[biz_trgt_age::LIKE]": selectedAge }),
+      ...(selectedExperience && { "cond[biz_enyy::LIKE]": selectedExperience }),
+      returnType: "json",
+    };
+
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_NOTICE_API_URL}/v1/getAnnouncementInformation`,
+        { params }
+      );
+
+      const fetchedNotices = response.data.data ?? [];
+      const total = response.data.totalCount ?? 0;
+
+      setNotices(fetchedNotices);
+      setTotalCount(total);
+
+      onFilteredNoticesChange(fetchedNotices, total);
+    } catch (error) {
+      console.error("Failed to fetch notices", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchNotices();
+  }, [
+    search,
+    selectedSupport,
+    selectedTarget,
+    selectedRegion,
+    selectedAge,
+    selectedExperience,
+    currentPage,
+  ]);
 
   const supportOptions = [
     { value: "사업화", label: "사업화" },
