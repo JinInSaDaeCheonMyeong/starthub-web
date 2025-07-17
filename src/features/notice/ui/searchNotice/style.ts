@@ -17,3 +17,9 @@ export const DropdownContainer = styled.div`
   margin-top: 20px;
   flex-wrap: nowrap;
 `
+
+export const NoticeContentContainer = styled.div`
+  margin-top: 50px;
+  width: 100%;
+  padding: 0 200px;
+`;

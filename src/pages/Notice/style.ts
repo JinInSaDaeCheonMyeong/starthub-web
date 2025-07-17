@@ -5,9 +5,3 @@ export const NoticeContentContainer = styled.div`
   width: 100%;
   padding: 0 200px;
 `;
-
-export const NoticeContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-bottom: 30px;
-`;
