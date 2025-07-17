@@ -1,18 +1,43 @@
-import { BaseResponse } from "@/shared/types/BaseResponse";
-
 export interface postData {
-  id: 0;
+  id: number;
+  title: string;
   companyName: string;
-  companyDescription: string;
-  companyCategory:
-    | "CONTENT_MEDIA"
-    | "FINTECH"
-    | "HEALTHCARE_BIO"
-    | "EDUCATION_EDUTECH"
-    | "IT_SOFTWARE"
-    | "ECOMMERCE"
-    | "ETC";
-  logoImage: string;
+  endDate: string;
+  viewCount: number;
+  isClosed: boolean;
+  createdAt: string;
 }
 
-export type postDataResponse= BaseResponse<postData[]>;
+// 페이징 응답을 위한 타입
+export interface Pageable {
+  pageNumber: number;
+  pageSize: number;
+  offset: number;
+  paged: boolean;
+  unpaged: boolean;
+  sort: {
+    sorted: boolean;
+    unsorted: boolean;
+    empty: boolean;
+  };
+}
+
+export interface PagedResponse<T> {
+  content: T[];
+  totalElements: number;
+  totalPages: number;
+  number: number;
+  size: number;
+  first: boolean;
+  last: boolean;
+  empty: boolean;
+  pageable: Pageable;
+  sort: Pageable["sort"];
+}
+
+export interface BaseResponse<T> {
+  data: T;
+  message: string;
+  status: string;
+  statusCode: number;
+}

@@ -9,8 +9,9 @@ import axios from "axios";
 import { NoticeData } from "@/entities/notice/model/notice.type";
 
 const MainContent = () => {
-  const { data: companyPosts, isLoading, isError } = useGetCompanyPost();
+  const { data, isLoading, isError } = useGetCompanyPost(1, 4);
   const [noticeData, setNoticeData] = useState<NoticeData[]>([]);
+  console.log(data?.content);
 
   const fetchFinanceNotices = async () => {
     try {
@@ -39,16 +40,18 @@ const MainContent = () => {
   if (isLoading) return <div>로딩중...</div>;
   if (isError) return <div>에러가 발생했어요</div>;
 
+  const companyPosts = data?.content || [];
+
   return (
     <S.ContentContainer>
       <SectionBlock title="요즘 뜨는 IT 분야 스타트업 채용">
         <S.BoxMenuContainer>
-          {companyPosts?.slice(0, 4).map((hiring) => (
+          {companyPosts.slice(0, 4).map((hiring) => (
             <HiringCard
               key={hiring.id}
               companyName={hiring.companyName}
-              companyDescription={hiring.companyDescription}
-              companyCategory={hiring.companyCategory}
+              companyDescription={"설명 없음"}
+              companyCategory={"IT_SOFTWARE"}
             />
           ))}
         </S.BoxMenuContainer>
