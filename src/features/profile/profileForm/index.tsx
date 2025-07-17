@@ -12,7 +12,6 @@ import DefaultProfileImg from "@/assets/images/defaultProfile.png";
 import { userApi } from "@/entities/user/api/user";
 
 const ProfileForm = () => {
-  const [activeTab, setActiveTab] = useState<"mypage" | "business">("mypage");
   const [isEditing, setIsEditing] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   
@@ -142,10 +141,7 @@ const ProfileForm = () => {
         />
 
         <S.DetailCard>
-          <ProfileHeader
-            activeTab={activeTab}
-            onTabChange={setActiveTab}
-          />
+          <ProfileHeader/>
 
           <ProfileInfo
             formData={isEditing ? editFormData : formData}
