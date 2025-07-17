@@ -1,7 +1,7 @@
 import Header from "@/widgets/Header"
 import ProfileForm from "@/features/profile/profileForm"
 
-const Onboarding = () => {
+const MyProfile = () => {
   return (
     <>
         <Header/>
@@ -10,4 +10,4 @@ const Onboarding = () => {
   )
 }
 
-export default Onboarding
+export default MyProfile
