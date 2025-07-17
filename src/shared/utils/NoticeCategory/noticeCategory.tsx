@@ -10,46 +10,65 @@ import { ReactComponent as Manpower } from "@assets/category/manpower.svg";
 const NOTICE_CATEGORY = [
   {
     text: "자금",
-    enum: "FUNDS",
+    enum: "자금",
+    icon: <Funds />,
+  },
+  {
+    text: "자금",
+    enum: "정책자금",
     icon: <Funds />,
   },
   {
     text: "시설",
-    enum: "FACILITY",
+    enum: "시설ㆍ공간ㆍ보육",
     icon: <Facility />,
   },
   {
     text: "교육",
-    enum: "SCHOOLING",
+    enum: "창업교육",
+    icon: <Schooling />,
+  },
+  {
+    text: "교육",
+    enum: "멘토링ㆍ컨설팅ㆍ교육",
     icon: <Schooling />,
   },
   {
     text: "R&D",
-    enum: "R&D",
+    enum: "기술개발(R&amp;D)",
     icon: <Light />,
   },
   {
     text: "행사",
-    enum: "EVENT",
+    enum: "행사ㆍ네트워크",
     icon: <Calender />,
   },
   {
     text: "글로벌",
-    enum: "GLOBAL",
+    enum: "글로벌",
     icon: <Global />,
   },
   {
     text: "사업화",
-    enum: "COMMERCIALIZATION",
+    enum: "사업화",
     icon: <Commercial />,
   },
   {
     text: "인력",
-    enum: "MANPOWER",
+    enum: "인력",
     icon: <Manpower />,
   },
+  {
+    text: "자금",
+    enum: "융자",
+    icon: <Funds />,
+  },
+  {
+    text: "판로ㆍ해외진출",
+    enum: "판로ㆍ해외진출",
+    icon: <Global />,
+  },
 ];
-//enum은 예시, 실제 서버 연동시 실제 tag Enum
 
 export const getNoticeCategoryInfo = (categoryEnum: string) => {
   return (
