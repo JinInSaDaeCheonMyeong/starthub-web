@@ -1,6 +1,6 @@
 import Layout from "@/shared/ui/Layout";
 import SearchNotice from "@/features/notice/ui/searchNotice";
-import { NoticeData } from "@/entities/notice/model/notice.type";
+import { NoticeData } from "@/entities/notice/model/notice.type.ts";
 import { useState, useCallback } from "react";
 import NoticeCard from "@/shared/ui/NoticeCard";
 import * as S from "./style";

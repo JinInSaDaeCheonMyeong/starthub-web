@@ -87,7 +87,7 @@ const Pagination: React.FC<PaginationProps> = ({
         return (
           <S.PageNumber
             key={idx}
-            isActive={Number(page) === currentPage}
+            $isActive={Number(page) === currentPage}
             onClick={() => onPageChange(Number(page))}
           >
             {page}
