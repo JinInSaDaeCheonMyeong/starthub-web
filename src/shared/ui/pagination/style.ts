@@ -20,12 +20,12 @@ export const pagination = styled.div`
     }
   }
 `;
-export const PageNumber = styled.p<{ isActive: boolean }>`
+export const PageNumber = styled.p<{ $isActive: boolean }>`
   cursor: pointer;
   padding-bottom: 4px;
   ${StartHubFont.Pretendard.Caption1.Regular}
-  color: ${({ isActive }) =>
-    isActive ? StartHubColors.Black1 : StartHubColors.Gray2};
+  color: ${({ $isActive }) =>
+    $isActive ? StartHubColors.Black1 : StartHubColors.Gray2};
   transition: all 0.2s ease;
 
   &:hover {

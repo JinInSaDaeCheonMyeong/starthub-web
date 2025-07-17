@@ -20,15 +20,15 @@ const SearchNotice = ({
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedAge, setSelectedAge] = useState("");
   const [selectedExperience, setSelectedExperience] = useState("");
+  /* eslint-disable @typescript-eslint/no-unused-vars */
   const [notices, setNotices] = useState<NoticeData[]>([]);
   const [totalCount, setTotalCount] = useState(0);
+  /* eslint-disable @typescript-eslint/no-unused-vars */
 
   const fetchNotices = async () => {
-    const today = new Date().toISOString().split("T")[0];
-    
     const params = {
-      page: currentPage, 
-      perPage: 16, 
+      page: currentPage,
+      perPage: 16,
       ...(search && { "cond[biz_pbanc_nm::LIKE]": search }),
       ...(selectedSupport && { "cond[supt_biz_clsfc::LIKE]": selectedSupport }),
       ...(selectedTarget && { "cond[aply_trgt::LIKE]": selectedTarget }),
