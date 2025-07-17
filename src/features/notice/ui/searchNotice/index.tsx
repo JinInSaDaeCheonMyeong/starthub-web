@@ -21,8 +21,8 @@ const SearchNotice = ({
   const [selectedAge, setSelectedAge] = useState("");
   const [selectedExperience, setSelectedExperience] = useState("");
   /* eslint-disable @typescript-eslint/no-unused-vars */
-  const [notices, setNotices] = useState<NoticeData[]>([]);
-  const [totalCount, setTotalCount] = useState(0);
+  const [, setNotices] = useState<NoticeData[]>([]);
+  const [, setTotalCount] = useState(0);
   /* eslint-disable @typescript-eslint/no-unused-vars */
 
   const fetchNotices = async () => {
