@@ -40,9 +40,9 @@ export const VerificationCodeContainer = styled.div<{ $hasError?: boolean }>`
 export const InputButton = styled.button<{ $isActive: boolean }>`
   position: absolute;
   right: 5px;
-  top: 50%;
-  transform: translateY(-70%);
+  top: 15px;
   padding: 0 10px;
+  height: 20px;
   color: ${props => props.$isActive ? StartHubColors.Primary : StartHubColors.Gray3};
   font: ${StartHubFont.Pretendard.Caption1.Medium};
   border: none;
@@ -60,7 +60,7 @@ export const InputButton = styled.button<{ $isActive: boolean }>`
     cursor: not-allowed;
     pointer-events: none;
   }
-`;
+`
 
 export const VerifyButton = styled.button`
   display: flex;  
@@ -115,15 +115,14 @@ export const IconWrapper = styled.div`
 `;
 
 export const VerificationWrapper = styled.div`
-  height: 50px;
   position: relative;
   display: flex;
   width: 100%;
   max-width: 320px;
-  align-items: center;
+  align-items: flex-start;
   gap: 5px;
   
   @media (max-width: 480px) {
     max-width: 100%;
   }
-`
+`;
