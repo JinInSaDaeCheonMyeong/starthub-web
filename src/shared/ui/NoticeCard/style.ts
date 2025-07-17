@@ -18,6 +18,7 @@ export const NoticeContainer = styled.div`
     margin: 5px 0 5px 0;
   }
   margin-right: 12px;
+  margin-bottom: 12px;
 `;
 
 export const TitleText = styled.div`
