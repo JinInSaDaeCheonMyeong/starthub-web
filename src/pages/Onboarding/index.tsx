@@ -41,8 +41,19 @@ const Onboarding = () => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleCategoryChange = (categories: string[]) => {
-    setFormData(prev => ({ ...prev, category: categories }));
+  // CategorySelector의 onCategoryToggle에 맞춰서 수정
+  const handleCategoryToggle = (categoryId: string) => {
+    setFormData(prev => {
+      const isSelected = prev.category.includes(categoryId);
+      const newCategory = isSelected
+        ? prev.category.filter(id => id !== categoryId)
+        : [...prev.category, categoryId];
+      
+      return {
+        ...prev,
+        category: newCategory
+      };
+    });
   };
 
   const isFormValid = () => {
@@ -94,7 +105,7 @@ const Onboarding = () => {
           />
           <CategorySelector
             selectedCategories={formData.category}
-            onCategoryChange={handleCategoryChange}
+            onCategoryToggle={handleCategoryToggle}
           />
           
           <StartHubButton
