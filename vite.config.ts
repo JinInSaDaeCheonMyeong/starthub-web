@@ -8,8 +8,8 @@ export default defineConfig({
     react(),
     svgr({
       svgrOptions: {
-        exportType: 'named', // named export 사용
-        namedExport: 'ReactComponent', // ReactComponent로 내보내기
+        exportType: 'named',
+        namedExport: 'ReactComponent',
         icon: true,
         titleProp: true,
       },
@@ -33,5 +33,18 @@ export default defineConfig({
       "@libs": path.resolve(__dirname, "./src/libs"),
       "@api": path.resolve(__dirname, "./src/api"),
     },
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'react-router-dom'],
+          ui: ['styled-components'],
+          utils: ['axios', '@tanstack/react-query', 'js-cookie', 'react-toastify'],
+          store: ['zustand'],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 1000,
   },
 });
