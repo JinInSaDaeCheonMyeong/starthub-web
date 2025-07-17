@@ -21,12 +21,14 @@ const SearchNotice = ({
   const [selectedAge, setSelectedAge] = useState("");
   const [selectedExperience, setSelectedExperience] = useState("");
   /* eslint-disable @typescript-eslint/no-unused-vars */
-  const [, setNotices] = useState<NoticeData[]>([]);
-  const [, setTotalCount] = useState(0);
+  const [notices, setNotices] = useState<NoticeData[]>([]);
+  const [totalCount, setTotalCount] = useState(0);
   /* eslint-disable @typescript-eslint/no-unused-vars */
 
   const fetchNotices = async () => {
     const params = {
+      page: currentPage,
+      perPage: 16,
       page: currentPage,
       perPage: 16,
       ...(search && { "cond[biz_pbanc_nm::LIKE]": search }),
