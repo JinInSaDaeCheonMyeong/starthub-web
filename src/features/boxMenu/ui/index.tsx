@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 const BoxMenu = () => {
   const navigate = useNavigate();
   
-  const handleNavigate = (path: string, message?: string) => {
+   const handleNavigate = (path: string) => { 
     if (path === "/competitor") {
       toast.error("경쟁사 분석 기능은 현재 준비 중입니다. 곧 만나보실 수 있어요!");
       return;
