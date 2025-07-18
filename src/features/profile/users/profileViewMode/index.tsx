@@ -8,7 +8,7 @@ interface ProfileViewModeProps {
 const ProfileViewMode = ({ formData }: ProfileViewModeProps) => {
 
   return (
-    <S.ProfileFields>
+    <div>
       <S.InfoRow>
         <S.InfoLabel>성별</S.InfoLabel>
         <S.InfoValue>{formData?.gender || '-'}</S.InfoValue>
@@ -23,7 +23,7 @@ const ProfileViewMode = ({ formData }: ProfileViewModeProps) => {
         <S.InfoLabel>이메일 주소</S.InfoLabel>
         <S.InfoValue>{formData?.email || '-'}</S.InfoValue>
       </S.InfoRow>
-    </S.ProfileFields>
+    </div>
   );
 };
 

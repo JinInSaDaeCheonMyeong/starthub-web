@@ -34,7 +34,6 @@ const ProfileForm = () => {
 
   const [editFormData, setEditFormData] = useState<ProfileFormData>(formData);
 
-  // 서버 데이터를 formData에 설정
   useEffect(() => {
     if (userProfile) {
       const profileData: ProfileFormData = {
