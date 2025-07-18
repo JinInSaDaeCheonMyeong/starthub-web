@@ -6,6 +6,7 @@ import HeartIcon from "@assets/icons/heart.png"
 import RivalIcon from "@assets/icons/rival.png"
 import { useNavigate } from "react-router-dom";
 import * as S from "./style";
+import { toast } from "react-toastify";
 
 const menuItems = [
   { icon: <img src={MapIcon} alt="지역 공고"/>, label: "대구 지역 공고", path: "/notices" },
@@ -19,6 +20,14 @@ const menuItems = [
 const MainMenu = () => {
   const navigate = useNavigate();
 
+  const handleMenuClick = (path: string, label: string) => {
+    if (path === "/competitor" || path === "/team-building") {
+      toast.error(`${label} 기능은 현재 준비 중입니다. 곧 만나보실 수 있어요!`);
+      return;
+    }
+    navigate(path);
+  };
+
   return (
     <S.MenuContainer>
       {menuItems.map((item, idx) => (
@@ -26,7 +35,7 @@ const MainMenu = () => {
           key={idx}
           role="button"
           aria-label={item.label}
-          onClick={() => navigate(item.path)}
+          onClick={() => handleMenuClick(item.path, item.label)}
         >
           <div>{item.icon}</div>
           <p>{item.label}</p>
@@ -36,4 +45,4 @@ const MainMenu = () => {
   );
 };
 
-export default MainMenu;
+export default MainMenu;  
