@@ -71,7 +71,7 @@ const BusinessEditMode: React.FC<BusinessEditModeProps> = ({
           </S.FormGroup>
 
           <S.FormGroup>
-            <S.Label>기업 전화번호</S.Label>
+            <S.Label>기업 전화번호<S.Required>*</S.Required></S.Label>
             <S.Input
               type="tel"
               value={formData.tel}
@@ -95,7 +95,7 @@ const BusinessEditMode: React.FC<BusinessEditModeProps> = ({
         </S.FormGroup>
 
         <S.FormGroup>
-          <S.Label>기업 사이트 주소</S.Label>
+          <S.Label>기업 사이트 주소<S.Required>*</S.Required></S.Label>
           <S.Input
             type="url"
             value={formData.pageUrl}
@@ -105,7 +105,7 @@ const BusinessEditMode: React.FC<BusinessEditModeProps> = ({
         </S.FormGroup>
 
         <S.FormGroup>
-          <S.Label>기업 위치</S.Label>
+          <S.Label>기업 위치<S.Required>*</S.Required></S.Label>
           <S.AddressInputGroup>
             <S.AddressInput
               value={formData.address}
