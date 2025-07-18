@@ -6,6 +6,7 @@ import NoticePage from "@/pages/Notice";
 import CallbackPage from "@/pages/Callback";
 import Onboarding from "@/pages/Onboarding";
 import MyProfile from "@/pages/MyProfile";
+import BmcPage from "@/pages/Bmc/Create";
 
 const Router = () => {
   return(
@@ -19,7 +20,7 @@ const Router = () => {
         {/* <Route path="/notices" element={}/> */}
         {/* <Route path="/competitor" element={}/> */}
         {/* <Route path="/team-building" element={}/> */}
-        {/* <Route path="/bmc" element={}/> */}
+        <Route path="/bmc" element={<BmcPage/>}/>
         <Route path="/my-profile" element={<MyProfile/>}/>
         {/* <Route path="/my-business" element={}/> */}
         <Route path="/oauth/callback" element={<CallbackPage />} />
