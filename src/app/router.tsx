@@ -7,6 +7,7 @@ import CallbackPage from "@/pages/Callback";
 import Onboarding from "@/pages/Onboarding";
 import MyProfile from "@/pages/MyProfile";
 import BmcPage from "@/pages/Bmc/Create";
+import TeamBuilding from "@/pages/TeamBuilding";
 
 const Router = () => {
   return(
@@ -19,7 +20,7 @@ const Router = () => {
         <Route path="/onboarding" element={<Onboarding/>}/>
         {/* <Route path="/notices" element={}/> */}
         {/* <Route path="/competitor" element={}/> */}
-        {/* <Route path="/team-building" element={}/> */}
+        <Route path="/team-building" element={<TeamBuilding/>}/>
         <Route path="/bmc" element={<BmcPage/>}/>
         <Route path="/my-profile" element={<MyProfile/>}/>
         {/* <Route path="/my-business" element={}/> */}
