@@ -61,3 +61,25 @@ export const GenderButton = styled.button<ButtonProps>`
     border-color: ${({ $active }) => $active ? StartHubColors.Primary : StartHubColors.Gray2};
   }
 `;
+
+export const StartUpButton = styled.button<ButtonProps>`
+  padding: 15px;
+  border: 1px solid
+    ${({ $active }) =>
+      $active ? StartHubColors.Primary : StartHubColors.Gray3};
+  border-radius: 10px;
+  background-color: ${({ $active }) =>
+    $active ? `${StartHubColors.Primary}10` : StartHubColors.White1};
+  color: ${({ $active }) =>
+    $active ? StartHubColors.Primary : StartHubColors.Gray3};
+  font: ${StartHubFont.Pretendard.Caption1.Regular};
+  cursor: pointer;
+  transition: all 0.2s;
+  width: 100%;
+  height: 50px;
+
+  &:hover {
+    border-color: ${({ $active }) =>
+      $active ? StartHubColors.Primary : StartHubColors.Gray2};
+  }
+`;

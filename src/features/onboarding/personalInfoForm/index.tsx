@@ -100,8 +100,26 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
           value={formData.name}
           placeholder="이름을 입력해주세요"
           onChange={(e) => onInputChange("name", e.target.value)}
-          customStyle={{ height: 50, width: '100%'}}
+          customStyle={{ height: 50, width: "100%" }}
         />
+      </S.Section>
+
+      <S.Section>
+        <S.SectionTitle>창업상태</S.SectionTitle>
+        <S.ButtonGrid>
+          <S.StartUpButton
+            $active={formData.startupStatus === "early"}
+            onClick={() => onInputChange("startupStatus", "early")}
+          >
+            초기 창업
+          </S.StartUpButton>
+          <S.StartUpButton
+            $active={formData.startupStatus === "pre"}
+            onClick={() => onInputChange("startupStatus", "pre")}
+          >
+            예비 창업
+          </S.StartUpButton>
+        </S.ButtonGrid>
       </S.Section>
     </>
   );
