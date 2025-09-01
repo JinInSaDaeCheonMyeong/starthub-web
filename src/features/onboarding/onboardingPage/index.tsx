@@ -14,6 +14,7 @@ const OnboardingPage = () => {
     name: "",
     category: [],
     interests: [],
+    startupStatus: "",
   });
 
   const onboardingMutation = useOnboarding();
@@ -83,7 +84,7 @@ const OnboardingPage = () => {
         type="submit" 
         disabled={onboardingMutation.isPending}
       >
-        {onboardingMutation.isPending ? '처리중...' : '시작하기'}
+        {onboardingMutation.isPending ? '처리중...' : '다음'}
       </S.SubmitButton>
     </form>
   );
