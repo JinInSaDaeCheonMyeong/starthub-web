@@ -96,6 +96,7 @@ export interface OnboardingFormData {
   gender: string;
   name: string;
   interests: string[];
+  startupStatus: "early" | "pre" | "";
 }
 
 export interface CategoryItem {
