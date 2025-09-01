@@ -6,11 +6,9 @@ import * as S from "./style";
 import { StartHubLogo } from "@/assets/logo";
 import { OnboardingFormData, OnboardingRequest } from "@/entities/user/model/types";
 import PersonalInfoForm from "@/features/onboarding/personalInfoForm";
-import CategorySelector from "@/features/onboarding/categorySelector";
 import { StartHubButton } from "@/shared/ui";
 import { StartHubColors, StartHubFont } from "@/shared/design";
 import { userApi } from "@/entities/user/api/user";
-import { JOB_CATEGORY } from "@/shared/utils/Category/jobCategory";
 
 const INITIAL_FORM_DATA: OnboardingFormData = {
   birthYear: "",
@@ -20,6 +18,7 @@ const INITIAL_FORM_DATA: OnboardingFormData = {
   name: "",
   category: [],
   interests: [],
+  startupStatus: "",
 };
 
 const Onboarding = () => {
@@ -41,24 +40,9 @@ const Onboarding = () => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  // CategorySelector의 onCategoryToggle에 맞춰서 수정
-  const handleCategoryToggle = (categoryId: string) => {
-    setFormData(prev => {
-      const isSelected = prev.category.includes(categoryId);
-      const newCategory = isSelected
-        ? prev.category.filter(id => id !== categoryId)
-        : [...prev.category, categoryId];
-      
-      return {
-        ...prev,
-        category: newCategory
-      };
-    });
-  };
-
   const isFormValid = () => {
-    const { birthYear, birthMonth, birthDay, gender, name, category } = formData;
-    return birthYear && birthMonth && birthDay && gender && name && category.length > 0;
+    const { birthYear, birthMonth, birthDay, gender, name, startupStatus } = formData;
+    return birthYear && birthMonth && birthDay && gender && name && startupStatus;
   };
 
   const formatBirthDate = () => {
@@ -66,17 +50,13 @@ const Onboarding = () => {
     return `${birthYear}-${birthMonth.padStart(2, '0')}-${birthDay.padStart(2, '0')}`;
   };
 
-  const convertToServerFormat = (categoryId: string): string => {
-    const category = JOB_CATEGORY.find(cat => cat.enum === categoryId);
-    return category?.enum || categoryId;
-  };
 
   const createServerData = (): OnboardingRequest => ({
     username: formData.name.trim(),
     introduction: "",
     birth: formatBirthDate(),
     gender: formData.gender.toUpperCase() as "MALE" | "FEMALE",
-    interests: formData.category.map(convertToServerFormat),
+    interests: [],
     profileImage: ""
   });
 
@@ -103,13 +83,9 @@ const Onboarding = () => {
             formData={formData}
             onInputChange={handleInputChange}
           />
-          <CategorySelector
-            selectedCategories={formData.category}
-            onCategoryToggle={handleCategoryToggle}
-          />
           
           <StartHubButton
-            text={onboardingMutation.isPending ? "처리중..." : "시작하기"}
+            text={onboardingMutation.isPending ? "처리중..." : "다음"}
             onClick={handleSubmit}
             height={50}
             backgroundColor={StartHubColors.Primary}
