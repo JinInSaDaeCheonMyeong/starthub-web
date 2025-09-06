@@ -9,12 +9,7 @@ export const Section = styled.div`
 export const SectionTitle = styled.h3`
   font: ${StartHubFont.Pretendard.Body2.Medium};
   color: ${StartHubColors.Black1};
-  margin-bottom: 10px;
-
-  span {
-    color: ${StartHubColors.Primary};
-    font-size: 14px;
-  }
+  margin-bottom: 8px;
 `;
 
 export const SectionDescription = styled.p`
