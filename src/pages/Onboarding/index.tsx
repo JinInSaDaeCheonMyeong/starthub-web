@@ -19,7 +19,7 @@ const INITIAL_FORM_DATA: OnboardingFormData = {
   birthDay: "",
   gender: "",
   name: "",
-  status: null,
+  category: [],
 };
 
 const Onboarding = () => {
