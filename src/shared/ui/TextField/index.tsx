@@ -3,7 +3,7 @@ import styled, { CSSObject } from "styled-components";
 import { StartHubFont } from "@/shared/design/text/StartHubFont";
 import { StartHubColors } from "@/shared/design/color/StartHubColors";
 
-type InputType = "text" | "password";
+type InputType = "text" | "password" | "number";
 
 export interface StartHubTextFieldProps {
   type: InputType;
