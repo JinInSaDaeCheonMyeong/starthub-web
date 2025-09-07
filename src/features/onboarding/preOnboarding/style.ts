@@ -6,10 +6,10 @@ export const Section = styled.div`
   margin-bottom: 32px;
 `;
 
-export const SectionTitle = styled.p`
+export const SectionTitle = styled.h3`
   font: ${StartHubFont.Pretendard.Body2.Medium};
   color: ${StartHubColors.Black1};
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 `;
 
 export const SectionDescription = styled.p`
@@ -23,6 +23,7 @@ export const SelectGrid = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
 `;
+
 export const Select = styled.select`
   width: 100%;
   height: 50px;
@@ -31,6 +32,7 @@ export const Select = styled.select`
   border-radius: 10px;
   font: ${StartHubFont.Pretendard.Caption1.Regular};
   background-color: ${StartHubColors.White1};
+
   &:focus {
     outline: none;
     border-color: ${StartHubColors.Primary};
