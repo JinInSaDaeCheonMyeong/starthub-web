@@ -94,7 +94,7 @@ export interface OnboardingFormData {
   birthDay: string;
   gender: string;
   name: string;
-  status: "예비" | "초기";
+  status: "예비" | "초기" | "";
 }
 
 export interface EarlyOnboardingRequest {
