@@ -1,22 +1,27 @@
 import styled from "styled-components";
 import { StartHubFont } from "@/shared/design";
 import { ReactComponent as Arrow } from "@assets/icons/arrow.svg";
+import { useNavigate } from "react-router-dom";
 
-const SectionBlock = ({
-  title,
-  children,
-}: {
-  title: string;
-  children: React.ReactNode;
-}) => (
-  <>
+interface SectionBlockProps{
+  title : string;
+  children : React.ReactNode;
+  path : string;
+}
+
+const SectionBlock = ({ title, children, path }: SectionBlockProps) => {
+  const navigate = useNavigate()
+
+  return(
+    <>
     <LabelSection>
       <p>{title}</p>
-      <Arrow />
+      <Arrow onClick={()=> navigate(path)}/>
     </LabelSection>
     {children}
   </>
-);
+  )
+};
 
 export default SectionBlock;
 
