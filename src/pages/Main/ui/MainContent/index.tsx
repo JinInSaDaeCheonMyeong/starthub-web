@@ -27,6 +27,7 @@ const MainContent = () => {
       <S.BoxMenuContainer>
         <BoxMenu />
       </S.BoxMenuContainer>
+
     </S.ContentContainer>
   );
 };

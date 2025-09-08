@@ -30,7 +30,7 @@ export const MenuButton = styled.div`
   }
 
   img {
-    width: 78px;
+    width: 70px;
     height: fit-content;
   }
 
