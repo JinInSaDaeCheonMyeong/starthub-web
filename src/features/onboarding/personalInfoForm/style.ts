@@ -45,7 +45,7 @@ export const ButtonGrid = styled.div`
   gap: 10px;
 `;
 
-export const GenderButton = styled.button<ButtonProps>`
+export const SelectButton = styled.button<ButtonProps>`
   padding: 15px;
   border: 1px solid ${({ $active }) => $active ? StartHubColors.Primary : StartHubColors.Gray3};
   border-radius: 10px;
