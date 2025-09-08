@@ -74,18 +74,18 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
         </S.SectionDescription>
 
         <S.ButtonGrid>
-          <S.GenderButton
+          <S.SelectButton
             $active={formData.gender === "male"}
             onClick={() => onInputChange("gender", "male")}
           >
             남자
-          </S.GenderButton>
-          <S.GenderButton
+          </S.SelectButton>
+          <S.SelectButton
             $active={formData.gender === "female"}
             onClick={() => onInputChange("gender", "female")}
           >
             여자
-          </S.GenderButton>
+          </S.SelectButton>
         </S.ButtonGrid>
       </S.Section>
 
@@ -100,8 +100,29 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
           value={formData.name}
           placeholder="이름을 입력해주세요"
           onChange={(e) => onInputChange("name", e.target.value)}
-          customStyle={{ height: 50, width: '100%'}}
+          customStyle={{ height: 50, width: "100%" }}
         />
+      </S.Section>
+      <S.Section>
+        <S.SectionTitle>창업 상태</S.SectionTitle>
+        <S.SectionDescription>
+          창업 상태를 알려주시면, 더 나은 콘텐츠를 추천해드릴 수 있어요!
+        </S.SectionDescription>
+
+        <S.ButtonGrid>
+          <S.SelectButton
+            $active={formData.status === "초기"}
+            onClick={() => onInputChange("status", "초기")}
+          >
+            초기 창업
+          </S.SelectButton>
+          <S.SelectButton
+            $active={formData.status === "예비"}
+            onClick={() => onInputChange("status", "예비")}
+          >
+            예비 창업
+          </S.SelectButton>
+        </S.ButtonGrid>
       </S.Section>
     </>
   );
