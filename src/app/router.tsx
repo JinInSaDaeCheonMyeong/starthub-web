@@ -9,6 +9,8 @@ import MyProfile from "@/pages/MyProfile";
 import BmcPage from "@/pages/Bmc/Create";
 import BlockedRoute from "@/shared/ui/BlockedRoute";
 import MyBusiness from "@/pages/MyBusiness";
+import EarlyOnboarding from "@/pages/Onboarding/early"
+import PreOnboarding from "@/pages/Onboarding/pre"
 
 const Router = () => {
   return(
@@ -43,6 +45,8 @@ const Router = () => {
         <Route path="/bmc" element={<BmcPage/>}/>
         <Route path="/my-profile" element={<MyProfile/>}/>
         <Route path="/oauth/callback" element={<CallbackPage />} />
+        <Route path="/onboarding/early-startup" element={<EarlyOnboarding/>}/>
+        <Route path="/onboarding/pre-startup" element={<PreOnboarding/>}/>
       </Routes>
     </BrowserRouter>
   )
