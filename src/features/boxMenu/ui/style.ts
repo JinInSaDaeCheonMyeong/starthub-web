@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { StartHubColors,StartHubFont } from "@/shared/design";
+import { StartHubColors, StartHubFont } from "@/shared/design";
 
 type BoxButtonProps = {
-    $bgColor ?: string;
-    $hvColor ?: string;
+  $bgColor?: string;
+  $hvColor?: string;
 };
 
 export const BoxContainer = styled.div`
@@ -34,7 +34,7 @@ export const BoxButton = styled.div<BoxButtonProps>`
   border-radius: 10px;
   margin-top: 12px;
   cursor: pointer;
-  &:hover{
+  &:hover {
     background-color: ${({ $hvColor }) => $hvColor};
   }
 `;
@@ -74,10 +74,10 @@ export const BlueBox = styled.div`
 
 export const PurpleBox = styled.div`
   width: 334px;
-  height: 190px;
+  height: 100%;
   background-color: #f6e8ff;
   color: #d290fb;
-  padding: 40px 30px;
+  padding: 80px 30px;
   border-radius: 20px;
 `;
 
@@ -90,7 +90,7 @@ export const GrayBox = styled.div<BoxButtonProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  &:hover{
+  &:hover {
     background-color: ${({ $hvColor }) => $hvColor};
   }
   cursor: pointer;
