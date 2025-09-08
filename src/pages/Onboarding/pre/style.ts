@@ -38,7 +38,7 @@ export const LogoSection = styled.div`
 `;
 
 export const Label = styled.div`
-  font: ${StartHubFont.Pretendard.Headlines2.SemiBold};
+  font: ${StartHubFont.Pretendard.Body1.SemiBold};
   text-align: center;
   color: ${StartHubColors.Black1};
   margin-top: 16px;
