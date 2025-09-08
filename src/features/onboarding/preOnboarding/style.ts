@@ -32,7 +32,7 @@ export const Select = styled.select`
   border-radius: 10px;
   font: ${StartHubFont.Pretendard.Caption1.Regular};
   background-color: ${StartHubColors.White1};
-  
+
   &:focus {
     outline: none;
     border-color: ${StartHubColors.Primary};
@@ -45,19 +45,24 @@ export const ButtonGrid = styled.div`
   gap: 10px;
 `;
 
-export const SelectButton = styled.button<ButtonProps>`
+export const GenderButton = styled.button<ButtonProps>`
   padding: 15px;
-  border: 1px solid ${({ $active }) => $active ? StartHubColors.Primary : StartHubColors.Gray3};
+  border: 1px solid
+    ${({ $active }) =>
+      $active ? StartHubColors.Primary : StartHubColors.Gray3};
   border-radius: 10px;
-  background-color: ${({ $active }) => $active ? `${StartHubColors.Primary}10` : StartHubColors.White1};
-  color: ${({ $active }) => $active ? StartHubColors.Primary : StartHubColors.Gray3};
+  background-color: ${({ $active }) =>
+    $active ? `${StartHubColors.Primary}10` : StartHubColors.White1};
+  color: ${({ $active }) =>
+    $active ? StartHubColors.Primary : StartHubColors.Gray3};
   font: ${StartHubFont.Pretendard.Caption1.Regular};
   cursor: pointer;
   transition: all 0.2s;
   width: 100%;
   height: 50px;
-  
+
   &:hover {
-    border-color: ${({ $active }) => $active ? StartHubColors.Primary : StartHubColors.Gray2};
+    border-color: ${({ $active }) =>
+      $active ? StartHubColors.Primary : StartHubColors.Gray2};
   }
 `;

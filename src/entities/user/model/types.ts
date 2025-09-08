@@ -89,13 +89,16 @@ export interface SignUpFormState {
 }
 
 export interface OnboardingFormData {
-  category: string[];
   birthYear: string;
   birthMonth: string;
   birthDay: string;
   gender: string;
   name: string;
-  interests: string[];
+  status: "예비" | "초기";
+}
+
+export interface EarlyOnboardingRequest {
+  category: string[];
 }
 
 export interface CategoryItem {

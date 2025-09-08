@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import * as S from "./style";
 import { StartHubLogo } from "@/assets/logo";
-import { OnboardingFormData, OnboardingRequest } from "@/entities/user/model/types";
+import {
+  OnboardingFormData,
+  OnboardingRequest,
+} from "@/entities/user/model/types";
 import PersonalInfoForm from "@/features/onboarding/personalInfoForm";
-import CategorySelector from "@/features/onboarding/categorySelector";
 import { StartHubButton } from "@/shared/ui";
 import { StartHubColors, StartHubFont } from "@/shared/design";
 import { userApi } from "@/entities/user/api/user";
-import { JOB_CATEGORY } from "@/shared/utils/Category/jobCategory";
 
 const INITIAL_FORM_DATA: OnboardingFormData = {
   birthYear: "",
@@ -18,66 +19,54 @@ const INITIAL_FORM_DATA: OnboardingFormData = {
   birthDay: "",
   gender: "",
   name: "",
-  category: [],
-  interests: [],
+  status: "예비",
 };
 
 const Onboarding = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState<OnboardingFormData>(INITIAL_FORM_DATA);
+  const [formData, setFormData] =
+    useState<OnboardingFormData>(INITIAL_FORM_DATA);
 
   const onboardingMutation = useMutation({
     mutationFn: (data: OnboardingRequest) => userApi.onboarding(data),
     onSuccess: () => {
       toast.success("설정이 완료되었습니다!");
-      navigate('/');
+      navigate("/");
     },
     onError: () => {
       toast.error("다시 시도해 주세요");
-    }
+    },
   });
 
-  const handleInputChange = (field: keyof OnboardingFormData, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+  const handleInputChange = (
+    field: keyof OnboardingFormData,
+    value: string
+  ) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  // CategorySelector의 onCategoryToggle에 맞춰서 수정
-  const handleCategoryToggle = (categoryId: string) => {
-    setFormData(prev => {
-      const isSelected = prev.category.includes(categoryId);
-      const newCategory = isSelected
-        ? prev.category.filter(id => id !== categoryId)
-        : [...prev.category, categoryId];
-      
-      return {
-        ...prev,
-        category: newCategory
-      };
-    });
-  };
 
   const isFormValid = () => {
-    const { birthYear, birthMonth, birthDay, gender, name, category } = formData;
-    return birthYear && birthMonth && birthDay && gender && name && category.length > 0;
+    const { birthYear, birthMonth, birthDay, gender, name } = formData;
+    return birthYear && birthMonth && birthDay && gender && name;
   };
 
   const formatBirthDate = () => {
     const { birthYear, birthMonth, birthDay } = formData;
-    return `${birthYear}-${birthMonth.padStart(2, '0')}-${birthDay.padStart(2, '0')}`;
+    return `${birthYear}-${birthMonth.padStart(2, "0")}-${birthDay.padStart(
+      2,
+      "0"
+    )}`;
   };
 
-  const convertToServerFormat = (categoryId: string): string => {
-    const category = JOB_CATEGORY.find(cat => cat.enum === categoryId);
-    return category?.enum || categoryId;
-  };
 
   const createServerData = (): OnboardingRequest => ({
     username: formData.name.trim(),
     introduction: "",
     birth: formatBirthDate(),
     gender: formData.gender.toUpperCase() as "MALE" | "FEMALE",
-    interests: formData.category.map(convertToServerFormat),
-    profileImage: ""
+    interests: [],
+    profileImage: "",
   });
 
   const handleSubmit = () => {
@@ -85,7 +74,7 @@ const Onboarding = () => {
       toast.error("모든 필수 항목을 입력해주세요.");
       return;
     }
-    
+
     const serverData = createServerData();
     onboardingMutation.mutate(serverData);
   };
@@ -103,11 +92,7 @@ const Onboarding = () => {
             formData={formData}
             onInputChange={handleInputChange}
           />
-          <CategorySelector
-            selectedCategories={formData.category}
-            onCategoryToggle={handleCategoryToggle}
-          />
-          
+
           <StartHubButton
             text={onboardingMutation.isPending ? "처리중..." : "시작하기"}
             onClick={handleSubmit}
