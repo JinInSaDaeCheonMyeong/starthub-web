@@ -6,10 +6,15 @@ export const Section = styled.div`
   margin-bottom: 32px;
 `;
 
-export const SectionTitle = styled.h3`
+export const SectionTitle = styled.p`
   font: ${StartHubFont.Pretendard.Body2.Medium};
   color: ${StartHubColors.Black1};
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+
+  span{
+    color: ${StartHubColors.Primary};
+    font-size: 14px;
+  }
 `;
 
 export const SectionDescription = styled.p`
@@ -75,8 +80,8 @@ export const CategoryContainer = styled.div<{ $txColor: string }>`
   gap: 8px;
   
   svg {
-    width: 24px;
-    height: 24px;
+    width: 18px;
+    height: 18px;
   }
   
   span {
