@@ -6,10 +6,10 @@ export const Section = styled.div`
   margin-bottom: 32px;
 `;
 
-export const SectionTitle = styled.h3`
+export const SectionTitle = styled.p`
   font: ${StartHubFont.Pretendard.Body2.Medium};
   color: ${StartHubColors.Black1};
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 `;
 
 export const SectionDescription = styled.p`
@@ -23,7 +23,6 @@ export const SelectGrid = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
 `;
-
 export const Select = styled.select`
   width: 100%;
   height: 50px;
@@ -32,7 +31,6 @@ export const Select = styled.select`
   border-radius: 10px;
   font: ${StartHubFont.Pretendard.Caption1.Regular};
   background-color: ${StartHubColors.White1};
-
   &:focus {
     outline: none;
     border-color: ${StartHubColors.Primary};
@@ -52,7 +50,7 @@ export const GenderButton = styled.button<ButtonProps>`
       $active ? StartHubColors.Primary : StartHubColors.Gray3};
   border-radius: 10px;
   background-color: ${({ $active }) =>
-    $active ? `${StartHubColors.Primary}10` : StartHubColors.White1};
+    $active ? `${StartHubColors.Primary}` : StartHubColors.White1};
   color: ${({ $active }) =>
     $active ? StartHubColors.Primary : StartHubColors.Gray3};
   font: ${StartHubFont.Pretendard.Caption1.Regular};

@@ -9,7 +9,7 @@ export const Section = styled.div`
 export const SectionTitle = styled.h3`
   font: ${StartHubFont.Pretendard.Body2.Medium};
   color: ${StartHubColors.Black1};
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 `;
 
 export const SectionDescription = styled.p`
@@ -52,7 +52,7 @@ export const GenderButton = styled.button<ButtonProps>`
       $active ? StartHubColors.Primary : StartHubColors.Gray3};
   border-radius: 10px;
   background-color: ${({ $active }) =>
-    $active ? `${StartHubColors.Primary}10` : StartHubColors.White1};
+    $active ? `${StartHubColors.Primary}` : StartHubColors.White1};
   color: ${({ $active }) =>
     $active ? StartHubColors.Primary : StartHubColors.Gray3};
   font: ${StartHubFont.Pretendard.Caption1.Regular};
@@ -65,4 +65,9 @@ export const GenderButton = styled.button<ButtonProps>`
     border-color: ${({ $active }) =>
       $active ? StartHubColors.Primary : StartHubColors.Gray2};
   }
+`;
+
+export const Required = styled.span`
+  color: ${StartHubColors.Primary};
+  font-size: 14px;
 `;
