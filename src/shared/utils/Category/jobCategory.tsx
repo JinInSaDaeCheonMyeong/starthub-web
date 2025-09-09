@@ -8,10 +8,22 @@ import { ReactComponent as Camera } from "@assets/category/camera.svg";
 
 export const JOB_CATEGORY = [
   {
-    text: "IT/소프트웨어",
-    enum: "IT_SOFTWARE",
-    image: <Software />,
-    txColor: "#363FB5",
+    text: "콘텐츠/미디어",
+    enum: "CONTENT_MEDIA",
+    image: <Camera />,
+    txColor: "#ED5555",
+  },
+  {
+    text: "핀테크",
+    enum: "FINTECH",
+    image: <Coin />,
+    txColor: "#FFC015",
+  },
+  {
+    text: "헬스케어/바이오",
+    enum: "HEALTHCARE_BIO",
+    image: <Health />,
+    txColor: "#76CB5D",
   },
   {
     text: "교육/에듀테크",
@@ -20,10 +32,10 @@ export const JOB_CATEGORY = [
     txColor: "#6DABE5",
   },
   {
-    text: "헬스케어/바이오",
-    enum: "HEALTHCARE_BIO",
-    image: <Health />,
-    txColor: "#76CB5D",
+    text: "IT/소프트웨어",
+    enum: "IT_SOFTWARE",
+    image: <Software />,
+    txColor: "#363FB5",
   },
   {
     text: "전자상거래",
@@ -36,18 +48,6 @@ export const JOB_CATEGORY = [
     enum: "ETC",
     image: <Etc />,
     txColor: "#9B9B9B",
-  },
-  {
-    text: "핀테크",
-    enum: "FINTECH",
-    image: <Coin />,
-    txColor: "#FFC015",
-  },
-  {
-    text: "콘텐츠/미디어",
-    enum: "CONTENT_MEDIA",
-    image: <Camera />,
-    txColor: "#ED5555",
   },
 ];
 
