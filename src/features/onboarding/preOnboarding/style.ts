@@ -50,7 +50,7 @@ export const GenderButton = styled.button<ButtonProps>`
       $active ? StartHubColors.Primary : StartHubColors.Gray3};
   border-radius: 10px;
   background-color: ${({ $active }) =>
-    $active ? `${StartHubColors.Primary}` : StartHubColors.White1};
+    $active ? `${StartHubColors.Primary}10` : StartHubColors.White1};
   color: ${({ $active }) =>
     $active ? StartHubColors.Primary : StartHubColors.Gray3};
   font: ${StartHubFont.Pretendard.Caption1.Regular};
