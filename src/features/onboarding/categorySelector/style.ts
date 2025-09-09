@@ -10,11 +10,6 @@ export const SectionTitle = styled.p`
   font: ${StartHubFont.Pretendard.Body2.Medium};
   color: ${StartHubColors.Black1};
   margin-bottom: 10px;
-
-  span{
-    color: ${StartHubColors.Primary};
-    font-size: 14px;
-  }
 `;
 
 export const SectionDescription = styled.p`
@@ -91,4 +86,9 @@ export const CategoryContainer = styled.div<{ $txColor: string }>`
     text-align: center;
     line-height: 1.2;
   }
+`;
+
+export const Required = styled.span`
+  color: ${StartHubColors.Primary};
+  font-size: 14px;
 `;
