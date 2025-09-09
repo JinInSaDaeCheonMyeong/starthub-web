@@ -10,6 +10,11 @@ export const SectionTitle = styled.h3`
   font: ${StartHubFont.Pretendard.Body2.Medium};
   color: ${StartHubColors.Black1};
   margin-bottom: 10px;
+
+  span {
+    color: ${StartHubColors.Primary};
+    font-size: 14px;
+  }
 `;
 
 export const SectionDescription = styled.p`
@@ -65,9 +70,4 @@ export const GenderButton = styled.button<ButtonProps>`
     border-color: ${({ $active }) =>
       $active ? StartHubColors.Primary : StartHubColors.Gray2};
   }
-`;
-
-export const Required = styled.span`
-  color: ${StartHubColors.Primary};
-  font-size: 14px;
 `;
