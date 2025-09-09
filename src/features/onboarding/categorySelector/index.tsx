@@ -13,7 +13,7 @@ const CategorySelector = ({ selectedCategories, onCategoryToggle }: CategorySele
 
   return (
     <S.Section>
-      <S.SectionTitle>관심 분야(1개 이상)</S.SectionTitle>
+      <S.SectionTitle>창업 분야(1개 이상) <S.Required>*</S.Required></S.SectionTitle>
       <S.SectionDescription>
         관심 분야를 알려주시면, 맞춤형 콘텐츠를 추천해드려요!
       </S.SectionDescription>

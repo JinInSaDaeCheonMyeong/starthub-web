@@ -14,7 +14,7 @@ const EarlyOnboarding = () => {
 
   return (
     <S.Section>
-      <S.SectionTitle>회사명</S.SectionTitle>
+      <S.SectionTitle>회사명 <S.Required>*</S.Required></S.SectionTitle>
       <StartHubTextField
         type="text"
         value={formData.companyName}
@@ -34,7 +34,7 @@ const EarlyOnboarding = () => {
         }
         customStyle={{ height: 50, width: "100%" }}
       />
-      <S.SectionTitle>기업 인원</S.SectionTitle>
+      <S.SectionTitle>기업 인원 <S.Required>*</S.Required></S.SectionTitle>
       <StartHubTextField
         type="number"
         value={
@@ -70,7 +70,7 @@ const EarlyOnboarding = () => {
         }
         customStyle={{ height: 50, width: "100%" }}
       />
-      <S.SectionTitle>연매출액</S.SectionTitle>
+      <S.SectionTitle>연매출액 <S.Required>*</S.Required></S.SectionTitle>
       <StartHubTextField
         type="number"
         value={
