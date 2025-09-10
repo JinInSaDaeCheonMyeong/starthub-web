@@ -12,13 +12,13 @@ const MainContent = () => {
         path="/notices/software"
       >
         <S.BoxMenuContainer>
-          <SoftWareNotice/>
+          <SoftWareNotice />
         </S.BoxMenuContainer>
       </SectionBlock>
 
       <SectionBlock title="AI 추천 공고" path="/notices/ai">
         <S.NoticeContainer>
-          <RecomandAINotice />
+          <RecommendedAINotice />
         </S.NoticeContainer>
       </SectionBlock>
 
@@ -29,7 +29,7 @@ const MainContent = () => {
   );
 };
 
-const RecomandAINotice = () => {
+const RecommendedAINotice = () => {
   const { data } = useGetNotice({
     page: 0,
     size: 4,
