@@ -7,4 +7,4 @@ export const postApi = {
       const res: BaseResponse<postData[]> = await StartHubAxios.get(`/company/all`);
       return res.data;
     },
-  };
+};
