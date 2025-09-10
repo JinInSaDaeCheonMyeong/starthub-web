@@ -4,6 +4,7 @@ import MainContent from "./ui/MainContent";
 import * as S from "./style"; 
 import Banner from "@/shared/ui/Banner";
 import AdBanner from "@/shared/ui/AdBanner";
+
 const MainPage = () => {
   return (
     <Layout>
