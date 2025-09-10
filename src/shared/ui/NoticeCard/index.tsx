@@ -8,21 +8,48 @@ interface NoticeCardProps {
   notice: NoticeType;
 }
 
-function NoticeCard({ notice }: NoticeCardProps) {
+const NoticeCard = ({ notice }: NoticeCardProps) =>{
 
   const categoryInfo = getNoticeCategoryInfo(notice.supportField);
 
-  const getApplyTargetDisplay = () => {
-    if (!notice.targetAge) return "";
+const getApplyTargetDisplay = () => {
+  if (!notice.targetAge) return "";
 
-    const targets = notice.targetAge
-      .split(",")
-      .map((target) => target.trim())
-      .filter((target) => target);
-    if (targets.length === 0) return "";
-    if (targets.length === 1) return targets[0];
-    return `${targets[0]} 등`;
+  const targets = notice.targetAge
+    .split(",")
+    .map((target) => target.trim())
+    .filter((target) => target);
+  if (targets.length === 0) return "";
+
+  const firstTarget = targets[0];
+
+  const getAgeGroup = (target: string) => {
+    const match = target.match(/만\s*(\d+)\s*세/);
+    if (!match) return target; 
+    const age = parseInt(match[1], 10);
+
+    if (target.includes("~")) {
+      if (age >= 20 && age < 30) return "20대";
+      if (age >= 30 && age < 40) return "30대";
+      if (age >= 40 && age < 50) return "40대";
+      if (age >= 50 && age < 60) return "50대";
+      return `${age}대`;
+    } else {
+      if (target.includes("이상")) {
+        return `${age}세 이상`;
+      }
+      if (target.includes("이하")) {
+        return `${age}세 이하`;
+      }
+      return `${age}세`;
+    }
   };
+
+  const display = getAgeGroup(firstTarget);
+
+  return targets.length > 1 ? `${display} 등` : display;
+};
+
 
   const applyTargetDisplay = getApplyTargetDisplay();
 
