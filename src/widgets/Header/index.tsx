@@ -15,19 +15,13 @@ const Header = () => {
   return (
     <S.HeaderContainer>
       <S.ContentWrapper>
-        <LogoIcon width={104} height={18} onClick={()=>navigate("/")}/>
+        <LogoIcon width={104} height={18} onClick={() => navigate("/")} />
         <div style={{ display: "flex", flexDirection: "row" }}>
           <S.StyleLink to="/notices" $active={currentPath === "/notices"}>
             공고
           </S.StyleLink>
           <S.StyleLink to="/competitor" $active={currentPath === "/competitor"}>
             경쟁사 분석
-          </S.StyleLink>
-          <S.StyleLink
-            to="/team-building"
-            $active={currentPath === "/team-building"}
-          >
-            창업 멤버 모집
           </S.StyleLink>
           <S.StyleLink to="/bmc" $active={currentPath === "/bmc"}>
             BMC 설계
