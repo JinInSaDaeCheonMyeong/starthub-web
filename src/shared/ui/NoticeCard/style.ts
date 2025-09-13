@@ -10,7 +10,7 @@ export const NoticeContainer = styled.div`
   height: 150px;
   background-color: ${StartHubColors.White1};
   border: 2px solid ${StartHubColors.Gray4};
-  padding: 30px 19px;
+  padding: 19px 20px;
   border-radius: 14px;
   p {
     ${StartHubFont.Pretendard.Caption2.Regular}
@@ -32,6 +32,9 @@ export const TitleText = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   word-break: break-word;
+
+  min-height: calc(1.4em * 2);
+  line-height: 1.4em;
 `;
 
 export const Tag = styled.div`

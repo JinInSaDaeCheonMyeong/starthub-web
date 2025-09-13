@@ -64,7 +64,7 @@ const NOTICE_CATEGORY = [
     icon: <Funds />,
   },
   {
-    text: "판로ㆍ해외진출",
+    text: "글로벌",
     enum: "판로ㆍ해외진출",
     icon: <Global />,
   },

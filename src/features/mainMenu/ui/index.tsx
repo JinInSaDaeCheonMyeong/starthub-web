@@ -8,12 +8,12 @@ import { useNavigate } from "react-router-dom";
 import * as S from "./style";
 
 const menuItems = [
-  { icon: <img src={MapIcon} />, label: "대구 지역 공고", path: "/notices" },
-  { icon: <img src={CardIcon} />, label: "자금 분야 공고", path: "/notices" },
-  { icon: <img src={BMCIcon} />, label: "BMC 제작", path: "/bmc" },
-  { icon: <img src={RivalIcon} />, label: "경쟁사 분석", path: "/team-building"},
-  { icon: <img src={AiIcon} />, label: "AI 추천 공고", path: "/competitor" },
-  { icon: <img src={HeartIcon} />, label: "내 관심 공고", path: "/my-business",},
+  { icon: <img src={MapIcon} alt="지역 공고"/>, label: "대구 지역 공고", path: "/notices" },
+  { icon: <img src={CardIcon} alt="자금 분야 공고"/>, label: "자금 분야 공고", path: "/notices" },
+  { icon: <img src={BMCIcon} alt="BMC 제작"/>, label: "BMC 제작", path: "/bmc" },
+  { icon: <img src={RivalIcon} alt="경쟁사 분석"/>, label: "경쟁사 분석", path: "/team-building"},
+  { icon: <img src={AiIcon} alt="AI 추천 공고"/>, label: "AI 추천 공고", path: "/competitor" },
+  { icon: <img src={HeartIcon} alt="내 관심 공고"/>, label: "내 관심 공고", path: "/my-business",},
 ];
 
 const MainMenu = () => {
