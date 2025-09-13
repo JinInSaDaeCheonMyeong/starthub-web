@@ -84,4 +84,4 @@ const SoftWareNotice = () => {
 };
 
 
-export default MainContent
+export default MainContent;
