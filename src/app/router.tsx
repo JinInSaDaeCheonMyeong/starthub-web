@@ -11,6 +11,7 @@ import BlockedRoute from "@/shared/ui/BlockedRoute";
 import MyBusiness from "@/pages/MyBusiness";
 import EarlyOnboarding from "@/pages/Onboarding/early"
 import PreOnboarding from "@/pages/Onboarding/pre"
+import NoticeListUpPage from "@/pages/NoticeListUp";
 
 const Router = () => {
   return(
@@ -47,6 +48,7 @@ const Router = () => {
         <Route path="/oauth/callback" element={<CallbackPage />} />
         <Route path="/onboarding/early-startup" element={<EarlyOnboarding/>}/>
         <Route path="/onboarding/pre-startup" element={<PreOnboarding/>}/>
+        <Route path="/notices/:type" element={<NoticeListUpPage/>}/>
       </Routes>
     </BrowserRouter>
   )
