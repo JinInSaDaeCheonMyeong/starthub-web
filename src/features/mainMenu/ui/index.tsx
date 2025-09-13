@@ -1,32 +1,23 @@
-import { ReactComponent as BMCIcon } from "@assets/icons/bag.svg";
-import { ReactComponent as ChartIcon } from "@assets/icons/chart.svg";
-import { ReactComponent as RocketIcon } from "@assets/icons/rocketMenu.svg";
-import { ReactComponent as HumanIcon } from "@assets/icons/human.svg";
-import { ReactComponent as BuildingIcon } from "@assets/icons/building.svg";
-import { ReactComponent as Members } from "@assets/icons/members.svg";
+import BMCIcon from "@assets/icons/bmc.png";
+import AiIcon from "@assets/icons/ai.png"
+import CardIcon from "@assets/icons/card.png"
+import MapIcon from "@assets/icons/image.png"
+import HeartIcon from "@assets/icons/heart.png"
+import RivalIcon from "@assets/icons/rival.png"
 import { useNavigate } from "react-router-dom";
 import * as S from "./style";
-import { toast } from "react-toastify";
+
+const menuItems = [
+  { icon: <img src={MapIcon} alt="지역 공고"/>, label: "대구 지역 공고", path: "/notices" },
+  { icon: <img src={CardIcon} alt="자금 분야 공고"/>, label: "자금 분야 공고", path: "/notices" },
+  { icon: <img src={BMCIcon} alt="BMC 제작"/>, label: "BMC 제작", path: "/bmc" },
+  { icon: <img src={RivalIcon} alt="경쟁사 분석"/>, label: "경쟁사 분석", path: "/team-building"},
+  { icon: <img src={AiIcon} alt="AI 추천 공고"/>, label: "AI 추천 공고", path: "/competitor" },
+  { icon: <img src={HeartIcon} alt="내 관심 공고"/>, label: "내 관심 공고", path: "/my-business",},
+];
 
 const MainMenu = () => {
   const navigate = useNavigate();
-
-  const handleMenuClick = (path: string, label: string) => {
-    if (path === "/competitor" || path === "/team-building") {
-      toast.error(`${label} 기능은 현재 준비 중입니다. 곧 만나보실 수 있어요!`);
-      return;
-    }
-    navigate(path);
-  };
-
-  const menuItems = [
-    { icon: <HumanIcon />, label: "청년 맞춤 공고", path: "/notices" },
-    { icon: <RocketIcon />, label: "최신 공고 보러가기", path: "/notices" },
-    { icon: <BMCIcon />, label: "BMC 제작", path: "/bmc" },
-    { icon: <Members />, label: "창업 멤버 모집하기", path: "/team-building" },
-    { icon: <ChartIcon />, label: "경쟁사 분석", path: "/competitor" },
-    { icon: <BuildingIcon />, label: "기업 등록하기", path: "/my-business" },
-  ];
 
   return (
     <S.MenuContainer>
@@ -35,9 +26,9 @@ const MainMenu = () => {
           key={idx}
           role="button"
           aria-label={item.label}
-          onClick={() => handleMenuClick(item.path, item.label)}
+          onClick={() => navigate(item.path)}
         >
-          {item.icon}
+          <div>{item.icon}</div>
           <p>{item.label}</p>
         </S.MenuButton>
       ))}
@@ -45,4 +36,4 @@ const MainMenu = () => {
   );
 };
 
-export default MainMenu;  
+export default MainMenu;

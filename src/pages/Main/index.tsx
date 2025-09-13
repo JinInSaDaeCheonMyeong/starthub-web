@@ -3,6 +3,7 @@ import MainMenu from "@/features/mainMenu/ui";
 import MainContent from "./ui/MainContent";
 import * as S from "./style"; 
 import Banner from "@/shared/ui/Banner";
+import AdBanner from "@/shared/ui/AdBanner";
 
 const MainPage = () => {
   return (
@@ -14,6 +15,7 @@ const MainPage = () => {
       <S.CenteredBox>
         <MainContent />
       </S.CenteredBox>
+      <AdBanner/>
     </Layout>
   );
 };

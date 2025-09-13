@@ -1,68 +1,26 @@
 import * as S from "./style";
 import BoxMenu from "@/features/boxMenu/ui";
-import HiringCard from "@/shared/ui/HiringCard";
-import NoticeCard from "@/shared/ui/NoticeCard";
-import { useGetCompanyPost } from "@/features/post/getPostAll/model/useGetCompanyPost";
 import SectionBlock from "@/shared/ui/SectionBlock";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { NoticeData } from "@/entities/notice/model/notice.type";
+import { useGetNotice } from "@/features/notice/getNotice/useGetNotice";
+import NoticeCard from "@/shared/ui/NoticeCard";
+import { NoticeSkeleton } from "@/shared/ui/NoticeSkeleton";
+
 
 const MainContent = () => {
-  const { data: companyPosts, isLoading, isError } = useGetCompanyPost();
-  const [noticeData, setNoticeData] = useState<NoticeData[]>([]);
-
-  const fetchFinanceNotices = async () => {
-    try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_NOTICE_API_URL}/v1/getAnnouncementInformation`,
-        {
-          params: {
-            page: 1,
-            perPage: 4,
-            "cond[supt_biz_clsfc::LIKE]": "자금",
-            sort: "rdt desc",
-            returnType: "json",
-          },
-        }
-      );
-      setNoticeData(response.data.data ?? []);
-    } catch (error) {
-      console.error("자금 분야 공고 가져오기 실패", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchFinanceNotices();
-  }, []);
-
-  if (isLoading) return <div>로딩중...</div>;
-  if (isError) return <div>에러가 발생했어요</div>;
-
   return (
     <S.ContentContainer>
-      <SectionBlock title="요즘 뜨는 IT 분야 스타트업 채용">
+      <SectionBlock
+        title="IT/소프트웨어 분야 최신 공고 보러가기"
+        path="/notices/software"
+      >
         <S.BoxMenuContainer>
-          {companyPosts?.slice(0, 4).map((hiring) => (
-            <HiringCard
-              key={hiring.id}
-              companyName={hiring.companyName}
-              companyDescription={hiring.companyDescription}
-              companyCategory={hiring.companyCategory}
-            />
-          ))}
+          <SoftWareNotice />
         </S.BoxMenuContainer>
       </SectionBlock>
 
-      <SectionBlock title="자금 분야 최신 공고 확인하기">
+      <SectionBlock title="AI 추천 공고" path="/notices/ai">
         <S.NoticeContainer>
-          {noticeData.length > 0 ? (
-            noticeData.map((notice, i) => (
-              <NoticeCard key={i} notice={notice} />
-            ))
-          ) : (
-            <div>자금 분야 공고가 없습니다.</div>
-          )}
+          <RecommendedAINotice />
         </S.NoticeContainer>
       </SectionBlock>
 
@@ -72,5 +30,58 @@ const MainContent = () => {
     </S.ContentContainer>
   );
 };
+
+const RecommendedAINotice = () => {
+  const { data, isLoading } = useGetNotice({
+    page: 0,
+    size: 4,
+    sort: [],
+  });
+
+  if (isLoading) {
+    return (
+      <>
+        {Array.from({ length: 4 }).map((_, idx) => (
+          <NoticeSkeleton key={idx} />
+        ))}
+      </>
+    );
+  }
+
+  return (
+    <>
+      {data?.content.map((item) => (
+        <NoticeCard key={item.url} notice={item} />
+      ))}
+    </>
+  );
+};
+
+const SoftWareNotice = () => {
+  const { data, isLoading } = useGetNotice({
+    page: 0,
+    size: 4,
+    sort: [],
+  });
+
+  if (isLoading) {
+    return (
+      <>
+        {Array.from({ length: 4 }).map((_, idx) => (
+          <NoticeSkeleton key={idx} />
+        ))}
+      </>
+    );
+  }
+
+  return (
+    <>
+      {data?.content.map((item) => (
+        <NoticeCard key={item.url} notice={item} />
+      ))}
+    </>
+  );
+};
+
 
 export default MainContent;
