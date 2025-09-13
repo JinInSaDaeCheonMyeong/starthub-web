@@ -3,6 +3,8 @@ import BoxMenu from "@/features/boxMenu/ui";
 import SectionBlock from "@/shared/ui/SectionBlock";
 import { useGetNotice } from "@/features/notice/getNotice/useGetNotice";
 import NoticeCard from "@/shared/ui/NoticeCard";
+import { NoticeSkeleton } from "@/shared/ui/NoticeSkeleton";
+
 
 const MainContent = () => {
   return (
@@ -30,11 +32,21 @@ const MainContent = () => {
 };
 
 const RecommendedAINotice = () => {
-  const { data } = useGetNotice({
+  const { data, isLoading } = useGetNotice({
     page: 0,
     size: 4,
     sort: [],
   });
+
+  if (isLoading) {
+    return (
+      <>
+        {Array.from({ length: 4 }).map((_, idx) => (
+          <NoticeSkeleton key={idx} />
+        ))}
+      </>
+    );
+  }
 
   return (
     <>
@@ -45,19 +57,31 @@ const RecommendedAINotice = () => {
   );
 };
 
-const SoftWareNotice = () =>{
-  const {data} = useGetNotice({
+const SoftWareNotice = () => {
+  const { data, isLoading } = useGetNotice({
     page: 0,
     size: 4,
-    sort : []
-  })
+    sort: [],
+  });
+
+  if (isLoading) {
+    return (
+      <>
+        {Array.from({ length: 4 }).map((_, idx) => (
+          <NoticeSkeleton key={idx} />
+        ))}
+      </>
+    );
+  }
 
   return (
     <>
-    {data?.content.map((item) => (
+      {data?.content.map((item) => (
         <NoticeCard key={item.url} notice={item} />
-    ))}
+      ))}
     </>
   );
-}
-export default MainContent;
+};
+
+
+export default MainContent
