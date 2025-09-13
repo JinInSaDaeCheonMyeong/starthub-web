@@ -25,7 +25,7 @@ export const MenuButton = styled.div`
 
   p {
     margin-top: 8px;
-    ${StartHubFont.Pretendard.Body2.Medium}
+    ${StartHubFont.Pretendard.Body2.Regular}
     color: ${StartHubColors.Gray2};
   }
 
