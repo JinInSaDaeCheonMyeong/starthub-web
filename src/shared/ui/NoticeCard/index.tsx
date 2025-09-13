@@ -8,7 +8,7 @@ interface NoticeCardProps {
   notice: NoticeType;
 }
 
-const NoticeCard = ({ notice }: NoticeCardProps) =>{
+const NoticeCard = ({ notice }: NoticeCardProps) => {
 
   const categoryInfo = getNoticeCategoryInfo(notice.supportField);
 
