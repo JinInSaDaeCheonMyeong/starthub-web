@@ -3,16 +3,19 @@ import Layout from "@/shared/ui/Layout";
 import { useParams } from "react-router-dom";
 import { useGetNotice } from "@/features/notice/getNotice/useGetNotice";
 import NoticeCard from "@/shared/ui/NoticeCard";
+import { NoticeSkeleton } from "@/shared/ui/NoticeSkeleton";
 import styled from "styled-components";
 
 const NoticeListUpPage = () => {
   const { type } = useParams();
 
-  const { data } = useGetNotice({
+  const { data, isLoading } = useGetNotice({
     page: 0,
     size: 20,
     sort: [],
   });
+
+  const skeletonCount = data?.content.length || 8;
 
   return (
     <Layout>
@@ -23,9 +26,13 @@ const NoticeListUpPage = () => {
       />
       <div style={{ marginBottom: "20px" }} />
       <NoticeListContainer>
-        {data?.content.map((item) => (
-          <NoticeCard key={item.url} notice={item} />
-        ))}
+        {isLoading
+          ? Array.from({ length: skeletonCount }).map((_, idx) => (
+              <NoticeSkeleton key={idx} />
+            ))
+          : data?.content.map((item) => (
+              <NoticeCard key={item.url} notice={item} />
+            ))}
       </NoticeListContainer>
     </Layout>
   );
