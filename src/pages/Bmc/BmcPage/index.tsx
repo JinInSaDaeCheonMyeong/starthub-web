@@ -1,8 +1,8 @@
 import BmcList from "@/shared/ui/BmcList";
 import BmcTemplateCard from "@/shared/ui/BmcTemplateCard";
 import Layout from '@/shared/ui/Layout';
-const BmcPage = () => {
 
+const BmcPage = () => {
   return (
     <Layout>
       <BmcTemplateCard/>
