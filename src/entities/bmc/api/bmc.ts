@@ -14,7 +14,7 @@ export const bmcApi = {
   modifyBmc: (data: ModifyBmcRequest): Promise<ModifyBmcResponse> =>
     StartHubAxios.post('/bmc/modify', data),
   
-  createBmc: (data: CreateBmcRequest): Promise<CreateBmcResponse> =>
+  generateBmc: (data: CreateBmcRequest): Promise<CreateBmcResponse> =>
     StartHubAxios.post('/bmc/generate', data),
 
   getSessionDetail: (sessionId: string): Promise<SessionDetailResponse> =>
