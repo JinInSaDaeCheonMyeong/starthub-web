@@ -2,13 +2,13 @@ import { BaseResponse } from "@/shared/types/BaseResponse"
 
 export interface Question {
   questionNumber: number;
-  answer: string;
+  answer: string | null;
 }
 
 export interface BmcResponseData {
   id: string
   sessionId: string
-  businessIdea: string
+  title: string
   isCompleted: boolean
   createdAt: string
   questions: Question[];
@@ -17,7 +17,7 @@ export interface BmcResponseData {
 export type BmcSessionResponse = BaseResponse<BmcResponseData[]>;
 
 export interface CreateSessionRequest {
-  businessIdea: string
+  title: string
 }
 
 export type CreateSessionResponse = BmcSessionResponse;
@@ -51,7 +51,6 @@ export type ModifyBmcResponse = BaseResponse<ModifyBmcData>;
 
 export interface CreateBmcRequest {
   sessionId: string
-  title: string
 }
 
 export interface BmcData {
