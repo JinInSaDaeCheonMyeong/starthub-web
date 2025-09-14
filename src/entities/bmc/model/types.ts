@@ -7,11 +7,11 @@ export interface Question {
 
 export interface BmcResponseData {
   id: string
-  sessionId: string
+  sessionId: number
   title: string
   isCompleted: boolean
-  createdAt: string
-  questions: Question[];
+  createdAt: Date
+  questions: Question[]
 }
 
 export type BmcSessionResponse = BaseResponse<BmcResponseData[]>;
@@ -23,7 +23,7 @@ export interface CreateSessionRequest {
 export type CreateSessionResponse = BmcSessionResponse;
 
 export interface CreateAnswerRequest {
-  sessionId: string
+  sessionId: number
   questionNumber: number
   answer: string
 }
@@ -31,30 +31,30 @@ export interface CreateAnswerRequest {
 export type CreateAnswerResponse = BaseResponse<BmcResponseData>;
 
 export interface ModifyBmcRequest {
-  bmcId: string
+  bmcId: number
   modificationRequest: string
   requestType: string
 }
 
 export interface ModifyBmcData {
-  id: string
-  bmcId: string
+  id: number
+  bmcId: number
   modificationRequest: string
   requestType: string
   isProcessed: boolean
   aiResponse: string
-  createdAt: string
+  createdAt: Date
   updatedBmc: BmcData
 }
 
 export type ModifyBmcResponse = BaseResponse<ModifyBmcData>;
 
 export interface CreateBmcRequest {
-  sessionId: string
+  sessionId: number
 }
 
 export interface BmcData {
-  id: string
+  id: number
   title: string
   keyPartners: string
   keyActivities: string
@@ -66,8 +66,8 @@ export interface BmcData {
   costStructure: string
   revenueStreams: string
   isCompleted: boolean
-  createdAt: string
-  updatedAt: string
+  createdAt: Date
+  updatedAt: Date
 }
 
 export type CreateBmcResponse = BaseResponse<BmcData>;
