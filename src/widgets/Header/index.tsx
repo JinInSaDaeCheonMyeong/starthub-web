@@ -27,8 +27,8 @@ const Header = () => {
             BMC 설계
           </S.StyleLink>
           <S.StyleLink
-            to="/my-business"
-            $active={currentPath === "/my-business"}
+            to="/my-profile"
+            $active={currentPath === "/my-profile"}
           >
             My 비즈니스
           </S.StyleLink>

@@ -1,8 +1,7 @@
-import React from 'react';
+import React from "react";
 import Header from "@/widgets/Header";
 import Footer from "@/widgets/Footer";
 import styled from "styled-components";
-
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -24,5 +23,5 @@ const PageLayout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 78px;
 `;
-
