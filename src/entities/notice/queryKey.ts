@@ -1,7 +1,8 @@
-import { NoticeParams } from "./model/notice.type";
+import { NoticeParams, NoticeSearchParams } from "./model/notice.type";
 
 export const NOTICE_QUERY_KEYS = {
   notice: {
     all: (params: NoticeParams) => ["notice", "all", params] as const,
+    search: (params : NoticeSearchParams) => ["notice", "search", params] as const,
   },
 };
