@@ -12,63 +12,42 @@ interface PaginationProps {
   siblingCount?: number;
 }
 
-const DOTS = "...";
-
 const range = (start: number, end: number): number[] => {
   const length = end - start + 1;
   return Array.from({ length }, (_, idx) => idx + start);
 };
 
-const Pagination: React.FC<PaginationProps> = ({
+const Pagination = ({
   currentPage,
   totalPages,
   onPageChange,
   siblingCount = 1,
-}) => {
+}: PaginationProps) => {
   const [isLeftHovered, setIsLeftHovered] = useState(false);
   const [isRightHovered, setIsRightHovered] = useState(false);
 
   const paginationRange = () => {
-    const totalPageNumbers = siblingCount * 2 + 5;
+    const maxVisiblePages = 5; 
 
-    if (totalPageNumbers >= totalPages) {
+    if (totalPages <= maxVisiblePages) {
       return range(1, totalPages);
     }
 
-    const leftSiblingIndex = Math.max(currentPage - siblingCount, 1);
-    const rightSiblingIndex = Math.min(currentPage + siblingCount, totalPages);
+    let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+    let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
 
-    const showLeftDots = leftSiblingIndex > 2;
-    const showRightDots = rightSiblingIndex < totalPages - 2;
-
-    const firstPageIndex = 1;
-    const lastPageIndex = totalPages;
-
-    if (!showLeftDots && showRightDots) {
-      const leftItemCount = 3 + 2 * siblingCount;
-      const leftRange = range(1, leftItemCount);
-      return [...leftRange, DOTS, totalPages];
+    if (endPage === totalPages) {
+      startPage = Math.max(1, totalPages - maxVisiblePages + 1);
     }
 
-    if (showLeftDots && !showRightDots) {
-      const rightItemCount = 3 + 2 * siblingCount;
-      const rightRange = range(totalPages - rightItemCount + 1, totalPages);
-      return [firstPageIndex, DOTS, ...rightRange];
-    }
-
-    if (showLeftDots && showRightDots) {
-      const middleRange = range(leftSiblingIndex, rightSiblingIndex);
-      return [firstPageIndex, DOTS, ...middleRange, DOTS, lastPageIndex];
-    }
-
-    return [];
+    return range(startPage, endPage);
   };
 
-  const safeTotalPages = Math.min(totalPages, 500);
   const pagination = paginationRange();
 
+
   return (
-    <S.pagination>
+    <S.Pagination>
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
@@ -80,14 +59,12 @@ const Pagination: React.FC<PaginationProps> = ({
       </button>
 
       {pagination?.map((page, idx) => {
-        if (page === DOTS) {
-          return <p key={idx}>···</p>;
-        }
+        const isActive = Number(page) === currentPage;
 
         return (
           <S.PageNumber
             key={idx}
-            $isActive={Number(page) === currentPage}
+            $isActive={isActive}
             onClick={() => onPageChange(Number(page))}
           >
             {page}
@@ -97,14 +74,14 @@ const Pagination: React.FC<PaginationProps> = ({
 
       <button
         onClick={() => onPageChange(currentPage + 1)}
-        disabled={currentPage === safeTotalPages}
+        disabled={currentPage === totalPages}
         style={{ border: "none", background: "transparent", cursor: "pointer" }}
         onMouseEnter={() => setIsRightHovered(true)}
         onMouseLeave={() => setIsRightHovered(false)}
       >
         {isRightHovered ? <RightHoverArrow /> : <RightArrow />}
       </button>
-    </S.pagination>
+    </S.Pagination>
   );
 };
 
