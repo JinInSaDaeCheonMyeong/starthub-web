@@ -4,7 +4,7 @@ import SimpleTemplate from '@assets/images/BMC template - simple.png';
 import * as S from './style';
 import { ReactComponent as Plus } from "@assets/icons/plus.svg";
 import { useState } from "react";
-import BusinessTemplateModal from "@/widgets/BusinessIdeaModal/ui/BusinessTemplateModal"; // 올바른 import
+import BusinessTemplateModal from "@/widgets/BusinessIdeaModal/ui";
 import Portal from "@/shared/ui/BmcTemplateCard/Portal/Portal";
 
 const BmcTemplateCard = () => {
@@ -21,7 +21,7 @@ const BmcTemplateCard = () => {
     setSelectedTemplate("");
   };
 
-  const handleCreateBmc = (projectName: string, templateType: string) => {
+  const handleCreateSession = (projectName: string, templateType: string) => {
     console.log(`프로젝트: ${projectName}, 템플릿: ${templateType}`);
     closeModal();
   };
@@ -75,7 +75,7 @@ const BmcTemplateCard = () => {
             isOpen={isModalOpen}
             templateType={selectedTemplate}
             onClose={closeModal}
-            onCreateBmc={handleCreateBmc}
+            onGenerateBmc={handleCreateSession}
           />
         </Portal>
       )}
