@@ -1,4 +1,3 @@
-// MyPage.tsx
 import React, { useState } from "react";
 import { useAuth } from "@/shared/hooks/LogOut/useLogOut"; // 경로 확인
 import * as S from "./style";

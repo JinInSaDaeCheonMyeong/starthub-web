@@ -1,14 +1,11 @@
-import Footer from "@/widgets/Footer";
 import EditProfileForm from "@/features/profile/users/editProfileForm";
-import Header from "@/widgets/Header";
+import Layout from "@/shared/ui/Layout";
 
 const EditMyProfile = () => {
   return (
-    <>
-      <Header />
+    <Layout>
       <EditProfileForm />
-      <Footer />
-    </>
+    </Layout>
   );
 };
 
