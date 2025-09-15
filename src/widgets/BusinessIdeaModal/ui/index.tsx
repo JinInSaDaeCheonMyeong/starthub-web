@@ -2,32 +2,34 @@ import { StartHubTextField } from "@/shared/ui";
 import { useState, useEffect } from "react";
 import { ReactComponent as Logo } from "@assets/logo/logo.svg";
 import * as S from './style';
+import { useCreateSessions } from "../model/useCreateSessions";
 
 interface BusinessTemplateModalProps {
   isOpen: boolean;
   templateType: string;
   onClose: () => void;
-  onCreateBmc: (projectName: string, templateType: string) => void;
+  onGenerateBmc: (projectName: string, templateType: string) => void;
 }
 
-const BusinessTemplateModal = ({ isOpen, templateType, onClose, onCreateBmc }: BusinessTemplateModalProps) => {
-  const [projectName, setProjectName] = useState("");
-
+const BusinessTemplateModal = ({ isOpen, templateType, onClose, onGenerateBmc }: BusinessTemplateModalProps) => {
+  const [title, setTitle] = useState("");
+  const { createSession } = useCreateSessions();
   const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === 'Enter' && projectName.trim()) {
-      handleCreate();
+    if (event.key === 'Enter' && title.trim()) {
+      handleGenerate();
     }
     if (event.key === 'Escape') {
       onClose();
     }
   };
 
-  const handleCreate = () => {
-    if (projectName.trim()) {
-      onCreateBmc(projectName, templateType);
-      setProjectName("");
+  const handleGenerate = () => {
+    if (title.trim()) {
+      onGenerateBmc(title, templateType);
+      setTitle("");
       onClose();
     }
+    createSession({ title })
   };
 
   useEffect(() => {
@@ -47,7 +49,6 @@ const BusinessTemplateModal = ({ isOpen, templateType, onClose, onCreateBmc }: B
   return (
     <S.Overlay onClick={onClose}>
       <S.ModalContainer onClick={(e) => e.stopPropagation()}>
-        <S.CloseButton onClick={onClose}>×</S.CloseButton>
         
         <S.TextContainer>
           <Logo style={{ width: '96px', height: '39px'}}/>
@@ -57,21 +58,20 @@ const BusinessTemplateModal = ({ isOpen, templateType, onClose, onCreateBmc }: B
         
         <StartHubTextField
           type="text"
-          value={projectName}
-          width={400}
+          value={title}
+          width={360}
           onChange={(e) => {
-            setProjectName(e.target.value);
+            setTitle(e.target.value);
           }}
           placeholder="20자 이내로 입력해주세요"
-          customStyle={{ maxlength:"20", height: "52px" }}
           onKeyDown={handleKeyDown}
         />
         
         <S.ButtonContainer>
           <S.CancelButton onClick={onClose}>취소</S.CancelButton>
           <S.CreateButton 
-            onClick={handleCreate}
-            disabled={!projectName.trim()}
+            onClick={handleGenerate}
+            disabled={!title.trim()}
           >
             생성하기
           </S.CreateButton>
