@@ -129,7 +129,7 @@ export const StartHubDropdown = ({
 
   const selectedOption = options.find((option) => option.value === value);
   const displayText = selectedOption ? selectedOption.label : placeholder;
-  const isPlaceholder = !selectedOption;
+  const isPlaceholder = !selectedOption || value === "";
 
   const handleToggle = () => {
     if (!isDisabled) {
@@ -167,7 +167,9 @@ export const StartHubDropdown = ({
         customStyle={customStyle}
         $isOpen={isOpen}
       >
-        <DropdownText $isPlaceholder={isPlaceholder}>{displayText}</DropdownText>
+        <DropdownText $isPlaceholder={isPlaceholder}>
+          {displayText}
+        </DropdownText>
         <ChevronIcon $isOpen={isOpen} />
       </DropdownButton>
 
