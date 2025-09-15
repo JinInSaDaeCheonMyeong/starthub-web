@@ -42,7 +42,6 @@ const MyPage: React.FC = () => {
   const safeValue = (value?: string | null) => value || "-";
 
 
-
   return (
     <S.Wrapper>
       <SideBar />
