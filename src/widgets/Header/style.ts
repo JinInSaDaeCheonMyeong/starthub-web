@@ -7,6 +7,7 @@ interface StyleLinkProps {
 }
 
 export const HeaderContainer = styled.div`
+  position: fixed;
   width: 100%;
   border-bottom: 1px solid ${StartHubColors.Gray3};
   height: 78px;
@@ -14,7 +15,12 @@ export const HeaderContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
 `;
+
 export const ContentWrapper = styled.div`
   width: 100%;
   padding: 0 200px;
