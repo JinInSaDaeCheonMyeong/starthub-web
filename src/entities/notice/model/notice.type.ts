@@ -1,9 +1,21 @@
 import { BaseResponse } from "@/shared/types/BaseResponse";
 
 export interface NoticeParams {
-  page: number;
-  size: number;
-  sort: string[];
+  page?: number;
+  size?: number;
+  sort?: string | string[];
+}
+
+export interface NoticeSearchParams {
+  title?: string;
+  supportField?: string;
+  targetRegion?: string;
+  targetGroup?: string;
+  targetAge?: string;
+  businessExperience?: string;
+  page?: number;
+  size?: number;
+  sort?: string | string[];
 }
 
 export interface NoticeType {
