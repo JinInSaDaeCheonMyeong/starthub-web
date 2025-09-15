@@ -1,183 +1,97 @@
-import { useState, useRef, useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import * as S from "./style";
-import ProfileSidebar from "../profileSideBar";
-import ProfileHeader from "../profileHeader";
-import ProfileInfo from "../profileInfo";
-import ProfileViewMode from "../profileViewMode";
-import ProfileEditMode from "../profileEditMode";
-import ProfileActionButtons from "../profileActionButton";
-import type { ProfileFormData } from "@/entities/user/model/types.ts";
-import DefaultProfileImg from "@/assets/images/defaultProfile.png";
-import { userApi } from "@/entities/user/api/user";
+import { StartHubButton } from "@/shared/ui";
+import { StartHubFont } from "@/shared/design/text/StartHubFont";
+import { StartHubColors } from "@/shared/design";
+import SideBar from "@/features/profile/users/sideBar";
+import { ProfileData } from "@/shared/types/ProfileTypes";
+import { profileApi } from "@/shared/api/profileApi";
+import { toast } from "react-toastify";
 
-const ProfileForm = () => {
-  const [isEditing, setIsEditing] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
-  
-  const { data: userProfile, isLoading, error, refetch } = useQuery({
-    queryKey: ['userProfile'],
-    queryFn: userApi.userProfile
-  });
-
-  const [formData, setFormData] = useState<ProfileFormData>({
-    name: "",
-    email: "",
-    gender: "",
-    birthDate: "",
-    category: "",
-    profileImage: "",
-    description: "",
-    interests: [],
-    introduction: ""
-  });
-
-  const [editFormData, setEditFormData] = useState<ProfileFormData>(formData);
+const MyPage: React.FC = () => {
+  const navigate = useNavigate();
+  const [profileData, setProfileData] = useState<ProfileData | null>(null);
 
   useEffect(() => {
-    if (userProfile) {
-      const profileData: ProfileFormData = {
-        name: userProfile.username || "",
-        email: userProfile.email || "",
-        gender: userProfile.gender === "MALE" ? "남자" : userProfile.gender === "FEMALE" ? "여자" : "",
-        birthDate: userProfile.birth || "",
-        category: "",
-        profileImage: userProfile.profileImage || "",
-        description: "",
-        interests: [],
-        introduction: ""
-      };
-      
-      setFormData(profileData);
-      setEditFormData(profileData);
-    }
-  }, [userProfile]);
+    fetchProfile();
+  }, []);
 
-  const profileImage = editFormData.profileImage || DefaultProfileImg;
-
-  const handleEdit = () => {
-    setIsEditing(true);
-    setEditFormData(formData);
-  };
-
-  const handleCancel = () => {
-    setIsEditing(false);
-    setEditFormData(formData);
-  };
-
-  const handleSave = () => {
-    setFormData(editFormData);
-    setIsEditing(false);
-  };
-
-  const handleInputChange = (field: keyof ProfileFormData, value: string) => {
-    setEditFormData(prev => ({ ...prev, [field]: value }));
-  };
-
-  const handleImageClick = () => {
-    if (isEditing) {
-      fileInputRef.current?.click();
+  const fetchProfile = async () => {
+    try {
+      const data = await profileApi.getUserProfile();
+      setProfileData(data);
+    } catch {
+      toast.error("프로필 로딩 실패");
     }
   };
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const result = e.target?.result as string;
-        setEditFormData(prev => ({
-          ...prev,
-          profileImage: result
-        }));
-      };
-      reader.readAsDataURL(file);
-    }
+  const handleEditClick = () => {
+    navigate("/my-profile-edit");
   };
 
-  const handleImageChange = (result: string) => {
-    setEditFormData(prev => ({
-      ...prev,
-      profileImage: result
-    }));
-  };
-
-  if (isLoading) {
-    return (
-      <S.ProfileLayout>
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "400px" }}>
-          로딩 중...
-        </div>
-      </S.ProfileLayout>
-    );
-  }
-
-  if (error) {
-    return (
-      <S.ProfileLayout>
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "400px" }}>
-          사용자 정보를 불러오는데 실패했습니다.
-          <button onClick={() => refetch()} style={{ marginLeft: "10px" }}>
-            다시 시도
-          </button>
-        </div>
-      </S.ProfileLayout>
-    );
-  }
+  const formatGender = (gender: string) =>
+    gender === "MALE" ? "남자" : "여자";
+  const formatCurrency = (amount: number) => `${amount.toLocaleString()}원`;
+  const formatEmployees = (count: number) => `${count}명`;
 
   return (
-    <>
-      <S.Banner>
-        <div style={{ height: "220px", display: "flex", alignItems: "center" }} />
-      </S.Banner>
-      
-      <S.ProfileLayout>
-        <ProfileSidebar
-          formData={formData}
-          profileImage={profileImage}
-          isEditing={isEditing}
-          onImageChange={handleImageChange}
-        />
+    <S.Wrapper>
+      <SideBar />
 
-        <S.DetailCard>
-          <ProfileHeader/>
+      <S.MainContent>
+        <>
+          <S.HeaderSection>
+            <S.Motto>“어제의 꿈은 오늘의 희망이며 내일의 현실이다.”</S.Motto>
+            <S.Greeting>
+              오늘도 잘 부탁드립니다,{" "}
+              <S.Username>{profileData?.username}</S.Username>님!
+            </S.Greeting>
+          </S.HeaderSection>
 
-          <ProfileInfo
-            formData={isEditing ? editFormData : formData}
-            profileImage={profileImage}
-            isEditing={isEditing}
-            onEdit={handleEdit}
-            onImageClick={handleImageClick}
+          <S.InfoTable>
+              {profileData &&
+                [
+                  { label: "성별", value: formatGender(profileData.gender) },
+                  { label: "생년월일", value: profileData.birth },
+                  { label: "회사명", value: profileData.companyName },
+                  { label: "기업 설명", value: profileData.companyDescription },
+                  { label: "창업 위치", value: profileData.startupLocation },
+                  {
+                    label: "연매출액",
+                    value: formatCurrency(profileData.annualRevenue),
+                  },
+                  {
+                    label: "기업 인원",
+                    value: formatEmployees(profileData.numberOfEmployees),
+                  },
+                  { label: "기업 사이트", value: profileData.companyWebsite },
+                ].map(({ label, value }) => (
+                  <S.InfoRow key={label}>
+                    <S.InfoLabel>{label}</S.InfoLabel>
+                    <S.InfoValue>{value}</S.InfoValue>
+                  </S.InfoRow>
+                ))}
+          </S.InfoTable>
+
+          <StartHubButton
+            text="수정"
+            width={77}
+            height={36}
+            typography={StartHubFont.Pretendard.Caption2.Medium}
+            backgroundColor={StartHubColors.Primary}
+            textTheme={StartHubColors.White1}
+            customStyle={{
+              borderRadius: "6px",
+              float: "right",
+              marginBottom: "100px",
+            }}
+            onClick={handleEditClick}
           />
-
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="image/*"
-            onChange={handleFileChange}
-            style={{ display: "none" }}
-          />
-
-          {isEditing ? (
-            <ProfileEditMode
-              formData={editFormData}
-              onInputChange={handleInputChange}
-            />
-          ) : (
-            <ProfileViewMode formData={formData} />
-          )}
-
-          <ProfileActionButtons
-            isEditing={isEditing}
-            onEdit={handleEdit}
-            onSave={handleSave}
-            onCancel={handleCancel}
-            loading={false}
-          />
-        </S.DetailCard>
-      </S.ProfileLayout>
-    </>
+        </>
+      </S.MainContent>
+    </S.Wrapper>
   );
 };
 
-export default ProfileForm;
+export default MyPage;

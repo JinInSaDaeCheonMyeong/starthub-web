@@ -8,10 +8,10 @@ import Onboarding from "@/pages/Onboarding";
 import MyProfile from "@/pages/MyProfile";
 import BmcPage from "@/pages/Bmc/Create";
 import BlockedRoute from "@/shared/ui/BlockedRoute";
-import MyBusiness from "@/pages/MyBusiness";
 import EarlyOnboarding from "@/pages/Onboarding/early"
 import PreOnboarding from "@/pages/Onboarding/pre"
 import NoticeListUpPage from "@/pages/NoticeListUp";
+import EditMyProfile from "@/pages/EditProfile"
 
 const Router = () => {
   return(
@@ -22,7 +22,6 @@ const Router = () => {
         <Route path="/sign-in" element={<SignInPage/>}/>
         <Route path="/notices" element={<NoticePage/>}/>
         <Route path="/onboarding" element={<Onboarding/>}/>
-        <Route path="/my-business" element={<MyBusiness/>}/>
         {/* 차단된 경로들 */}
         <Route 
           path="/competitor" 
@@ -33,18 +32,9 @@ const Router = () => {
             />
           }
         />
-        <Route 
-          path="/team-building" 
-          element={
-            <BlockedRoute 
-              message="창업 멤버 모집 기능은 현재 준비 중입니다. 곧 만나보실 수 있어요!" 
-              redirectTo="/"
-            />
-          }
-        />
-        
         <Route path="/bmc" element={<BmcPage/>}/>
         <Route path="/my-profile" element={<MyProfile/>}/>
+        <Route path="/my-profile-edit" element={<EditMyProfile/>}/>
         <Route path="/oauth/callback" element={<CallbackPage />} />
         <Route path="/onboarding/early-startup" element={<EarlyOnboarding/>}/>
         <Route path="/onboarding/pre-startup" element={<PreOnboarding/>}/>

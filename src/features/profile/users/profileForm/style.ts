@@ -1,39 +1,60 @@
-import styled from 'styled-components';
-import { StartHubColors } from '@/shared/design';
+import styled from "styled-components";
+import { StartHubColors, StartHubFont } from "@/shared/design";
 
-export const ProfileLayout = styled.div`
+export const Wrapper = styled.div`
   display: flex;
-  gap: 40px;
-  padding: 0 80px 40px 80px;
-  background-color: ${StartHubColors.White1};
-  margin-top: -136px;
-`;
-
-export const Header = styled.div`
-  background-color: ${StartHubColors.Primary};
   width: 100%;
-  height: 22px;
+  box-sizing: border-box;
+  padding: 0 160px 0 200px;
+  height: 100vh;
 `;
 
-export const Banner = styled.div`
-  width: 100%;
-  background: linear-gradient(135deg, ${StartHubColors.Primary} 0%, #4641DF 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  position: relative;
-  z-index: 1 ;
-`;
-
-export const DetailCard = styled.div`
+export const MainContent = styled.section`
   flex: 1;
-  background-color: ${StartHubColors.White1};
-  border-radius: 10px;
-  padding: 40px 48px;
-  border: 3px solid ${StartHubColors.Gray4};
-  height: fit-content;
-  position: relative;
-  z-index: 2;
-  margin-right: 40px;
+  padding: 0 40px 0 40px;
+`;
+
+export const HeaderSection = styled.div`
+  margin-bottom: 30px;
+  margin-top: 50px;
+`;
+
+export const Motto = styled.p`
+  font: ${StartHubFont.Pretendard.Headlines2.SemiBold};
+  color: ${StartHubColors.Black1};
+  margin-bottom: 8px;
+`;
+
+export const Greeting = styled.h2`
+  font: ${StartHubFont.Pretendard.Title2};
+  color: ${StartHubColors.Black1};
+`;
+
+export const Username = styled.span`
+  color: ${StartHubColors.Primary};
+`;
+
+export const InfoTable = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 30px;
+`;
+
+export const InfoRow = styled.tr`
+  border-bottom: 1px solid ${StartHubColors.Gray3};
+`;
+
+export const InfoLabel = styled.th`
+  text-align: left;
+  padding: 20px;
+  width: 150px;
+  font: ${StartHubFont.Pretendard.Body2.Medium};
+  color: ${StartHubColors.Black1};
+`;
+
+export const InfoValue = styled.td`
+  padding: 12px;
+  color: ${StartHubColors.Gray1};
+  font: ${StartHubFont.Pretendard.Body2.Regular};
+  text-align: right;
 `;

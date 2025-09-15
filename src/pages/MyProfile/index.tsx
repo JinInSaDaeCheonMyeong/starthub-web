@@ -1,13 +1,12 @@
-import Header from "@/widgets/Header"
-import ProfileForm from "@/features/profile/users/profileForm"
+import ProfileForm from "@/features/profile/users/profileForm";
+import Layout from "@/shared/ui/Layout";
 
 const MyProfile = () => {
   return (
-    <>
-        <Header/>
-        <ProfileForm/>
-    </>
-  )
+    <Layout>
+      <ProfileForm />
+    </Layout>
+  );
 }
 
 export default MyProfile
