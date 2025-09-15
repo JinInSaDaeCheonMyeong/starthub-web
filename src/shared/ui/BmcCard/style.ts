@@ -33,11 +33,9 @@ export const TextContainer = styled.div`
 export const Title = styled.p`
   color: ${StartHubColors.Black1};
   ${StartHubFont.Pretendard.Caption1.Regular};
-  margin: 0;
 `;
 
 export const Date = styled.p`
   color: ${StartHubColors.Gray1};
   ${StartHubFont.Pretendard.Caption2.Regular};
-  margin: 0;
 `;

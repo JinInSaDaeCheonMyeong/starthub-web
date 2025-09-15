@@ -21,7 +21,7 @@ export const BmcTemplateContainer = styled.div`
 
 export const ButtonContainer = styled.div`
   width: 242px;
-  height: 166.49px;
+  height: 170px;
   border: 1px solid ${StartHubColors.Gray3};
   border-radius: 10px;
   display: flex;
@@ -38,6 +38,7 @@ export const ButtonContainer = styled.div`
 export const Text = styled.p`
   font: ${StartHubFont.Pretendard.Body1.Medium};
   margin-bottom: 20px;
+  gap: 6px;
 `;
 
 export const Container = styled.div`
@@ -54,7 +55,7 @@ export const ImageWrapper = styled.div`
     height: 170px;
     border-radius: 10px;
     object-fit: cover;
-    margin-bottom: 2px; /* 이미지와 텍스트 사이 마진 */
+    margin-bottom: 2px;
   }
 `;
 
@@ -86,7 +87,7 @@ export const PlusIcon = styled.div`
     transition: fill 0.3s ease;
   }
   
-  $:hover & svg {
+  &:hover & svg {
     fill: ${StartHubColors.Primary};
   }
 `;
