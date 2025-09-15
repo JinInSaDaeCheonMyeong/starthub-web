@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { useAuth } from "@/shared/hooks/LogOut/useLogOut"; // 경로 확인
 import * as S from "./style";
 
 const MyPage: React.FC = () => {
   const [activeMenu, setActiveMenu] = useState<"프로필" | "좋아요">("프로필");
-  const { isLoggingOut, logout } = useAuth();
 
   return (
     <S.Sidebar>
@@ -24,10 +22,7 @@ const MyPage: React.FC = () => {
 
       <S.Divider />
 
-      <S.LogOut
-        onClick={logout}
-        disabled={isLoggingOut}
-      >
+      <S.LogOut>
         로그아웃
       </S.LogOut>
     </S.Sidebar>
