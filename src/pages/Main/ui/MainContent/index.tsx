@@ -4,14 +4,14 @@ import SectionBlock from "@/shared/ui/SectionBlock";
 import { useGetNotice } from "@/features/notice/getNotice/useGetNotice";
 import NoticeCard from "@/shared/ui/NoticeCard";
 import { NoticeSkeleton } from "@/shared/ui/NoticeSkeleton";
-
+import { useGetNoticeSearch } from "@/features/notice/getNoticeSearch/useGetNoticeSearch";
 
 const MainContent = () => {
   return (
     <S.ContentContainer>
       <SectionBlock
-        title="IT/소프트웨어 분야 최신 공고 보러가기"
-        path="/notices/software"
+        title="교육 분야 최신 공고 보러가기"
+        path="/notices/education"
       >
         <S.BoxMenuContainer>
           <SoftWareNotice />
@@ -35,7 +35,7 @@ const RecommendedAINotice = () => {
   const { data, isLoading } = useGetNotice({
     page: 0,
     size: 4,
-    sort: [],
+    sort: "",
   });
 
   if (isLoading) {
@@ -58,12 +58,12 @@ const RecommendedAINotice = () => {
 };
 
 const SoftWareNotice = () => {
-  const { data, isLoading } = useGetNotice({
+  const { data, isLoading } = useGetNoticeSearch({
+    supportField: "멘토링ㆍ컨설팅ㆍ교육",
     page: 0,
     size: 4,
-    sort: [],
+    sort: "createdAt,desc",
   });
-
   if (isLoading) {
     return (
       <>
@@ -82,6 +82,5 @@ const SoftWareNotice = () => {
     </>
   );
 };
-
 
 export default MainContent;
