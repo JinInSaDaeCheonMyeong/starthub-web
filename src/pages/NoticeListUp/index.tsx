@@ -5,24 +5,31 @@ import { useGetNotice } from "@/features/notice/getNotice/useGetNotice";
 import NoticeCard from "@/shared/ui/NoticeCard";
 import { NoticeSkeleton } from "@/shared/ui/NoticeSkeleton";
 import styled from "styled-components";
+import { useGetNoticeSearch } from "@/features/notice/getNoticeSearch/useGetNoticeSearch";
 
 const NoticeListUpPage = () => {
   const { type } = useParams();
 
-  const { data, isLoading } = useGetNotice({
-    page: 0,
-    size: 20,
-    sort: [],
-  });
+  const { data, isLoading } =
+    type === "education"
+      ? useGetNoticeSearch({
+          supportField: "멘토링ㆍ컨설팅ㆍ교육",
+          page: 0,
+          size: 20,
+          sort: "createdAt,desc",
+        })
+      : useGetNotice({
+          page: 0,
+          size: 20,
+          sort: "createdAt,desc",
+        });
 
   const skeletonCount = data?.content.length || 8;
 
   return (
     <Layout>
       <FoldArrow
-        title={
-          type === "software" ? "IT/소프트웨어 분야 최신 공고" : "AI 추천 공고"
-        }
+        title={type === "education" ? "교육 분야 최신 공고" : "AI 추천 공고"}
       />
       <div style={{ marginBottom: "20px" }} />
       <NoticeListContainer>
