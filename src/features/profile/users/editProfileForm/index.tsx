@@ -145,7 +145,6 @@ const MyPage: React.FC = () => {
         </S.HeaderSection>
 
         <S.InfoTable>
-          <tbody>
             <S.SectionTitle>
               이름 <span>*</span>
             </S.SectionTitle>
@@ -270,7 +269,6 @@ const MyPage: React.FC = () => {
               onChange={(e) => handleChange("companyWebsite", e.target.value)}
               customStyle={{ height: 50, width: "100%" }}
             />
-          </tbody>
         </S.InfoTable>
 
         <StartHubButton

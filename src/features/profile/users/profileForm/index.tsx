@@ -50,7 +50,6 @@ const MyPage: React.FC = () => {
           </S.HeaderSection>
 
           <S.InfoTable>
-            <tbody>
               {profileData &&
                 [
                   { label: "성별", value: formatGender(profileData.gender) },
@@ -73,7 +72,6 @@ const MyPage: React.FC = () => {
                     <S.InfoValue>{value}</S.InfoValue>
                   </S.InfoRow>
                 ))}
-            </tbody>
           </S.InfoTable>
 
           <StartHubButton
