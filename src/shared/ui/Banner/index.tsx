@@ -3,7 +3,7 @@ import BannerImg from "@assets/images/image.png";
 const Banner = () => {
   return (
     <>
-      <img src={BannerImg} style={{ width: "100%" }} />
+      <img src={BannerImg} style={{height: "274px" }} />
     </>
   );
 };

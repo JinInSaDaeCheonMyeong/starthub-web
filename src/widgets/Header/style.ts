@@ -27,7 +27,7 @@ export const ContentWrapper = styled.div`
 export const StyleLink = styled(Link)<StyleLinkProps>`
   ${StartHubFont.Pretendard.Caption1.Regular}
   color: ${({ $active }) =>
-    $active ? StartHubColors.Primary : StartHubColors.Gray2};
+    $active ? StartHubColors.Primary : StartHubColors.Gray1};
   margin-left: 40px;
   white-space: nowrap;
   cursor: pointer;
