@@ -1,17 +1,12 @@
-import { StartHubColors, StartHubFont } from "@/shared/design";
+import { StartHubFont, StartHubColors } from "@/shared/design";
 import styled from "styled-components";
 
-export const pagination = styled.div`
+export const Pagination = styled.div`
   display: flex;
   align-items: center;
   margin-top: 100px;
   margin-bottom: 30px;
   gap: 20px;
-  p {
-    ${StartHubFont.Pretendard.Caption1.Regular}
-    color: ${StartHubColors.Gray2};
-  }
-
   svg {
     width: 24px;
     height: 24px;
@@ -20,6 +15,7 @@ export const pagination = styled.div`
     }
   }
 `;
+
 export const PageNumber = styled.p<{ $isActive: boolean }>`
   cursor: pointer;
   padding-bottom: 4px;
@@ -27,8 +23,6 @@ export const PageNumber = styled.p<{ $isActive: boolean }>`
   color: ${({ $isActive }) =>
     $isActive ? StartHubColors.Black1 : StartHubColors.Gray2};
   transition: all 0.2s ease;
-
-  &:hover {
-    color: ${StartHubColors.Black1};
-  }
+  border-bottom: ${({ $isActive }) =>
+    $isActive ? `2px solid ${StartHubColors.Black1}` : "none"};
 `;

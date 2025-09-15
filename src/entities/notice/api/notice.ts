@@ -1,5 +1,5 @@
 import StartHubAxios from "@/shared/api/customAxios/StartHubAxios";
-import { NoticeResponse, NoticeParams, NoticePage } from "../model/notice.type";
+import { NoticeResponse, NoticeParams, NoticePage, NoticeSearchParams } from "../model/notice.type";
 
 export const NoticeApi = {
   getNoticeAll: async (params: NoticeParams): Promise<NoticePage> => {
@@ -8,5 +8,10 @@ export const NoticeApi = {
     });
     return res.data;
   },
+  getNoticeSearch: async(params : NoticeSearchParams): Promise<NoticePage> => {
+    const res = await StartHubAxios.get<NoticeResponse>("/announcements/search", {
+      params,
+    });
+    return res.data;
+  }
 };
-
