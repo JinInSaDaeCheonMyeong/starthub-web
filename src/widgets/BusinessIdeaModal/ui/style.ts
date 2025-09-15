@@ -22,33 +22,9 @@ export const ModalContainer = styled.div`
   padding: 51px 75px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
   position: relative;
   max-width: 90vw;
   max-height: 90vh;
-`;
-
-export const CloseButton = styled.button`
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  color: ${StartHubColors.Gray2};
-  padding: 4px;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
-  
-  &:hover {
-    color: ${StartHubColors.Black1};
-    background-color: ${StartHubColors.Gray4};
-  }
 `;
 
 export const TextContainer = styled.div`
@@ -63,13 +39,11 @@ export const TextContainer = styled.div`
 export const Text = styled.p`
   ${StartHubFont.Pretendard.Caption1.Medium};
   color: ${StartHubColors.Black1};
-  margin: 0;
 `;
 
 export const SubText = styled.p`
   ${StartHubFont.Pretendard.Caption2.Regular};
   color: ${StartHubColors.Gray1};
-  margin: 0;
 `;
 
 export const ButtonContainer = styled.div`
