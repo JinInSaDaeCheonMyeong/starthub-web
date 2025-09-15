@@ -7,6 +7,7 @@ import SideBar from "@/features/profile/users/sideBar";
 import { useNavigate } from "react-router-dom";
 import { ProfileData } from "@/shared/types/ProfileTypes";
 import { profileApi } from "@/shared/api/profileApi";
+import { toast } from "react-toastify";
 
 const MyPage: React.FC = () => {
   const navigate = useNavigate();
@@ -49,8 +50,8 @@ const MyPage: React.FC = () => {
     try {
       const profile = await profileApi.getUserProfile();
       setFormData(formatProfileToForm(profile));
-    } catch (error) {
-      console.error("프로필 로딩 실패:", error);
+    } catch {
+      toast.error("프로필 로딩 실패")
     }
   };
 
