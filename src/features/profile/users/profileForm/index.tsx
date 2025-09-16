@@ -59,37 +59,39 @@ const MyPage: React.FC = () => {
           </S.HeaderSection>
 
           <S.InfoTable>
-            {profileData &&
-              [
-                { label: "성별", value: formatGender(profileData.gender) },
-                { label: "생년월일", value: safeValue(profileData.birth) },
-                { label: "회사명", value: safeValue(profileData.companyName) },
-                {
-                  label: "기업 설명",
-                  value: safeValue(profileData.companyDescription),
-                },
-                {
-                  label: "창업 위치",
-                  value: safeValue(profileData.startupLocation),
-                },
-                {
-                  label: "연매출액",
-                  value: formatCurrency(profileData.annualRevenue),
-                },
-                {
-                  label: "기업 인원",
-                  value: formatEmployees(profileData.numberOfEmployees),
-                },
-                {
-                  label: "기업 사이트",
-                  value: safeValue(profileData.companyWebsite),
-                },
-              ].map(({ label, value }) => (
-                <S.InfoRow key={label}>
-                  <S.InfoLabel>{label}</S.InfoLabel>
-                  <S.InfoValue>{value}</S.InfoValue>
-                </S.InfoRow>
-              ))}
+            <tbody>
+              {profileData &&
+                [
+                  { label: "성별", value: formatGender(profileData.gender) },
+                  { label: "생년월일", value: safeValue(profileData.birth) },
+                  { label: "회사명", value: safeValue(profileData.companyName) },
+                  {
+                    label: "기업 설명",
+                    value: safeValue(profileData.companyDescription),
+                  },
+                  {
+                    label: "창업 위치",
+                    value: safeValue(profileData.startupLocation),
+                  },
+                  {
+                    label: "연매출액",
+                    value: formatCurrency(profileData.annualRevenue),
+                  },
+                  {
+                    label: "기업 인원",
+                    value: formatEmployees(profileData.numberOfEmployees),
+                  },
+                  {
+                    label: "기업 사이트",
+                    value: safeValue(profileData.companyWebsite),
+                  },
+                ].map(({ label, value }) => (
+                  <S.InfoRow key={label}>
+                    <S.InfoLabel>{label}</S.InfoLabel>
+                    <S.InfoValue>{value}</S.InfoValue>
+                  </S.InfoRow>
+                ))}
+            </tbody>
           </S.InfoTable>
 
           <StartHubButton
