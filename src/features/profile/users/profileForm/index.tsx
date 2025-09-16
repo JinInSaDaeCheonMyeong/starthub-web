@@ -30,13 +30,17 @@ const MyPage: React.FC = () => {
     navigate("/my-profile-edit");
   };
 
-  const formatGender = (gender: string) =>
-    gender === "MALE" ? "남자" : "여자";
-  const formatCurrency = (amount: number | null | undefined) =>
-    typeof amount === "number" ? `${amount.toLocaleString()}원` : "정보 없음";
+  const formatGender = (gender?: string | null) =>
+    gender === "MALE" ? "남자" : gender === "FEMALE" ? "여자" : "-";
 
-  const formatEmployees = (count: number | null | undefined) =>
-    typeof count === "number" ? `${count}명` : "정보 없음";
+  const formatCurrency = (amount?: number | null) =>
+    typeof amount === "number" ? `${amount.toLocaleString()}원` : "-";
+
+  const formatEmployees = (count?: number | null) =>
+    typeof count === "number" ? `${count}명` : "-";
+
+  const safeValue = (value?: string | null) => value || "-";
+
 
 
   return (
@@ -54,28 +58,37 @@ const MyPage: React.FC = () => {
           </S.HeaderSection>
 
           <S.InfoTable>
-              {profileData &&
-                [
-                  { label: "성별", value: formatGender(profileData.gender) },
-                  { label: "생년월일", value: profileData.birth },
-                  { label: "회사명", value: profileData.companyName },
-                  { label: "기업 설명", value: profileData.companyDescription },
-                  { label: "창업 위치", value: profileData.startupLocation },
-                  {
-                    label: "연매출액",
-                    value: formatCurrency(profileData.annualRevenue),
-                  },
-                  {
-                    label: "기업 인원",
-                    value: formatEmployees(profileData.numberOfEmployees),
-                  },
-                  { label: "기업 사이트", value: profileData.companyWebsite },
-                ].map(({ label, value }) => (
-                  <S.InfoRow key={label}>
-                    <S.InfoLabel>{label}</S.InfoLabel>
-                    <S.InfoValue>{value}</S.InfoValue>
-                  </S.InfoRow>
-                ))}
+            {profileData &&
+              [
+                { label: "성별", value: formatGender(profileData.gender) },
+                { label: "생년월일", value: safeValue(profileData.birth) },
+                { label: "회사명", value: safeValue(profileData.companyName) },
+                {
+                  label: "기업 설명",
+                  value: safeValue(profileData.companyDescription),
+                },
+                {
+                  label: "창업 위치",
+                  value: safeValue(profileData.startupLocation),
+                },
+                {
+                  label: "연매출액",
+                  value: formatCurrency(profileData.annualRevenue),
+                },
+                {
+                  label: "기업 인원",
+                  value: formatEmployees(profileData.numberOfEmployees),
+                },
+                {
+                  label: "기업 사이트",
+                  value: safeValue(profileData.companyWebsite),
+                },
+              ].map(({ label, value }) => (
+                <S.InfoRow key={label}>
+                  <S.InfoLabel>{label}</S.InfoLabel>
+                  <S.InfoValue>{value}</S.InfoValue>
+                </S.InfoRow>
+              ))}
           </S.InfoTable>
 
           <StartHubButton
