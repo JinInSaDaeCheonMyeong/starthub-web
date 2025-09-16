@@ -97,9 +97,6 @@ export interface OnboardingFormData {
   status: "예비" | "초기" | null;
 }
 
-export interface EarlyOnboardingRequest {
-  category: string[];
-}
 
 export interface CategoryItem {
   id: string;
@@ -123,13 +120,32 @@ export interface CategoryItem {
   color: string;
 }
 
+export interface PreOnboardingRequest {
+  startupLocation: string;
+}
+
+export interface EarlyOnboardingRequest {
+  companyName: string;
+  companyDescription: string;
+  employeeCount: number;
+  companyWebsite: string;
+  startupLocation: string;
+  annualRevenue: number;
+}
+
 export interface OnboardingRequest {
-  username: string;
-  introduction: string;
-  birth: string;
-  gender: string;
-  interests: string[];
-  profileImage: string;
+  username?: string;
+  introduction?: string;
+  birth?: string;
+  gender?: string;
+  interests?: string[];
+  profileImage?: string;
+  startupLocation?: string;
+  companyName?: string;
+  companyDescription?: string;
+  numberOfEmployees?: number;
+  companyWebsite?: string;
+  annualRevenue?: number;
 }
 
 export interface OnboardingData {
@@ -141,6 +157,7 @@ export interface OnboardingData {
 }
 
 export type OnboardingResponse = BaseResponse<OnboardingData>;
+
 
 export interface UserData {
   id: string;
