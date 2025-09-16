@@ -9,7 +9,6 @@ interface PaginationProps {
   currentPage: number;
   totalPages: number;
   onPageChange: (page: number) => void;
-  siblingCount?: number;
 }
 
 const range = (start: number, end: number): number[] => {
@@ -21,7 +20,6 @@ const Pagination = ({
   currentPage,
   totalPages,
   onPageChange,
-  siblingCount = 1,
 }: PaginationProps) => {
   const [isLeftHovered, setIsLeftHovered] = useState(false);
   const [isRightHovered, setIsRightHovered] = useState(false);
