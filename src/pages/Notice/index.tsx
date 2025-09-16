@@ -6,16 +6,15 @@ import * as S from "./style";
 import Pagination from "@/shared/ui/pagination";
 import { NoticeSearchParams } from "@/entities/notice/model/notice.type";
 import { useGetNoticeSearch } from "@/features/notice/getNoticeSearch/useGetNoticeSearch";
+import { NoticeSkeleton } from "@/shared/ui/NoticeSkeleton";
 
 const NoticePage = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [filters, setFilters] = useState<
-    Omit<NoticeSearchParams, "page" | "size">
-  >({});
+  const [filters, setFilters] = useState<Omit<NoticeSearchParams, "page" | "size">>({});
 
   const { data, isLoading, isError } = useGetNoticeSearch({
     ...filters,
-    page: currentPage - 1, // API가 0-based라면 이렇게
+    page: currentPage - 1, 
     size: 16,
     sort: "createdAt,desc",
   });
@@ -24,7 +23,7 @@ const NoticePage = () => {
     newFilters: Omit<NoticeSearchParams, "page" | "size">
   ) => {
     setFilters(newFilters);
-    setCurrentPage(1); // 필터 바뀌면 첫 페이지로 초기화
+    setCurrentPage(1); 
   };
 
   return (
@@ -33,7 +32,11 @@ const NoticePage = () => {
 
       <S.NoticeContentContainer>
         {isLoading ? (
-          <p>로딩 중...</p>
+          <div style={{ display: "flex", flexWrap: "wrap" }}>
+            {Array.from({ length: 16 }).map((_, index) => (
+              <NoticeSkeleton key={`skeleton-${index}`} />
+            ))}
+          </div>
         ) : isError ? (
           <p>데이터를 불러오는 중 오류가 발생했습니다.</p>
         ) : !data || data.content.length === 0 ? (
