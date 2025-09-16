@@ -1,16 +1,33 @@
 import { StartHubTextField } from "@/shared/ui";
 import * as S from "./style";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const EarlyOnboarding = () => {
-  const [formData, setFormData] = useState({
+interface EarlyOnboardingData {
+  companyName: string;
+  companyDescription: string;
+  numberOfEmployees: number;
+  companyWebsite: string;
+  startupLocation: string;
+  annualRevenue: number;
+}
+
+interface EarlyOnboardingProps {
+  onSubmit?: (data: EarlyOnboardingData) => void;
+}
+
+const EarlyOnboarding = ({ onSubmit }: EarlyOnboardingProps) => {
+  const [formData, setFormData] = useState<EarlyOnboardingData>({
     companyName: "",
     companyDescription: "",
-    employeeCount: 0,
+    numberOfEmployees: 0,
     companyWebsite: "",
     startupLocation: "",
     annualRevenue: 0,
   });
+
+  useEffect(() => {
+    onSubmit?.(formData);
+  }, [formData, onSubmit]);
 
   return (
     <S.Section>
@@ -38,13 +55,13 @@ const EarlyOnboarding = () => {
       <StartHubTextField
         type="number"
         value={
-          formData.employeeCount === 0 ? "" : String(formData.employeeCount)
+          formData.numberOfEmployees === 0 ? "" : String(formData.numberOfEmployees)
         }
         placeholder="기업 인원을 입력해주세요"
         onChange={(e) =>
           setFormData({
             ...formData,
-            employeeCount: e.target.value === "" ? 0 : Number(e.target.value),
+            numberOfEmployees: e.target.value === "" ? 0 : Number(e.target.value),
           })
         }
         customStyle={{ height: 50, width: "100%" }}
@@ -89,4 +106,4 @@ const EarlyOnboarding = () => {
   );
 };
 
-export default EarlyOnboarding;
+export { EarlyOnboarding as default, type EarlyOnboardingProps };
