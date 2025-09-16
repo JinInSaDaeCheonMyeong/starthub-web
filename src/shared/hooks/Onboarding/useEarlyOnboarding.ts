@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { userApi } from '@/entities/user/api/user';
 import { OnboardingRequest } from '@/entities/user/model/types';
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 export const useEarlyOnboarding = () => {
   return useMutation({
