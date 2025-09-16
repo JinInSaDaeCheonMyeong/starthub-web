@@ -32,8 +32,12 @@ const MyPage: React.FC = () => {
 
   const formatGender = (gender: string) =>
     gender === "MALE" ? "남자" : "여자";
-  const formatCurrency = (amount: number) => `${amount.toLocaleString()}원`;
-  const formatEmployees = (count: number) => `${count}명`;
+  const formatCurrency = (amount: number | null | undefined) =>
+    typeof amount === "number" ? `${amount.toLocaleString()}원` : "정보 없음";
+
+  const formatEmployees = (count: number | null | undefined) =>
+    typeof count === "number" ? `${count}명` : "정보 없음";
+
 
   return (
     <S.Wrapper>
