@@ -7,7 +7,7 @@ export const useEarlyOnboarding = () => {
   return useMutation({
     mutationFn: (data: OnboardingRequest) => userApi.onboarding(data),
     onSuccess: () => {
-      toast.success("초기창업 온보딩 성공")
+      toast.success("초기창업 온보딩 성공");
     },
     onError: () => {
       toast.error("다시 시도해 주세요")
