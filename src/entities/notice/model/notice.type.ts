@@ -1,5 +1,3 @@
-import { BaseResponse } from "@/shared/types/BaseResponse";
-
 export interface NoticeParams {
   page?: number;
   size?: number;
@@ -43,4 +41,3 @@ export interface NoticePage {
   isLast: boolean;
 }
 
-export interface NoticeResponse extends BaseResponse<NoticePage> {}
