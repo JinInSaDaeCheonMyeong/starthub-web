@@ -181,4 +181,4 @@ export const HeartButton = styled.button`
   background: none;
   cursor: pointer;
   border: none;
-`
+`;

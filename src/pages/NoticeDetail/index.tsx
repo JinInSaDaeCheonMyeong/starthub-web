@@ -13,7 +13,7 @@ const NoticeDetailPage = () => {
   return (
     <Layout>
       {isLoading ? <DetailSkeleton/> : 
-      data ? <DetailContent item={data} /> : ""}
+      data ? <DetailContent item={data} /> : <></>}
     </Layout>
   );
 };
