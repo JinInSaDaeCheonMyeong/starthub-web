@@ -15,6 +15,7 @@ import EditMyProfile from "@/pages/EditProfile"
 import NoticeDetailPage from "@/pages/NoticeDetail";
 import LikeList from "@/pages/LikeList";
 import NoticeDetailPage from "@/pages/NoticeDetail";
+import LikeList from "@/pages/LikeList";
 
 const Router = () => {
   return(
@@ -45,6 +46,7 @@ const Router = () => {
         <Route path="/notice/:id" element={<NoticeDetailPage/>}/>
         <Route path="/like-list" element={<LikeList/>}/>
         <Route path="/notice/:id" element={<NoticeDetailPage/>}/>
+        <Route path="/like-list" element={<LikeList/>}/>
       </Routes>
     </BrowserRouter>
   )
