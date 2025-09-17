@@ -6,7 +6,7 @@ export const Wrapper = styled.div`
   width: 100%;
   box-sizing: border-box;
   padding: 0 160px 0 200px;
-  height: 100vh;
+  height: 100%;
 `;
 
 export const MainContent = styled.section`
