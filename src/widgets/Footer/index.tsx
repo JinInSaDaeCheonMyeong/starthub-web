@@ -22,27 +22,8 @@ const Footer = () => {
 
           <S.LinksSection>
             <S.LinkColumn>
-              <S.ColumnTitle>서비스</S.ColumnTitle>
-              <S.LinkItem>창업 가이드</S.LinkItem>
-              <S.LinkItem>투자 매칭</S.LinkItem>
-              <S.LinkItem>멘토링</S.LinkItem>
-              <S.LinkItem>커뮤니티</S.LinkItem>
-            </S.LinkColumn>
-
-            <S.LinkColumn>
               <S.ColumnTitle>고객지원</S.ColumnTitle>
-              <S.LinkItem>FAQ</S.LinkItem>
-              <S.LinkItem>1:1 문의</S.LinkItem>
-              <S.LinkItem>공지사항</S.LinkItem>
-              <S.LinkItem>이용가이드</S.LinkItem>
-            </S.LinkColumn>
-
-            <S.LinkColumn>
-              <S.ColumnTitle>회사</S.ColumnTitle>
-              <S.LinkItem>회사소개</S.LinkItem>
-              <S.LinkItem>채용정보</S.LinkItem>
-              <S.LinkItem>보도자료</S.LinkItem>
-              <S.LinkItem>파트너십</S.LinkItem>
+              <S.LinkItem href="https://forms.gle/7anaKGTEqfzadCQx9">1:1 문의</S.LinkItem>
             </S.LinkColumn>
           </S.LinksSection>
 
@@ -64,13 +45,6 @@ const Footer = () => {
         </S.FooterTop>
 
         <S.FooterBottom>
-          <S.LegalLinks>
-            <S.LegalItem>이용약관</S.LegalItem>
-            <S.LegalItem>개인정보처리방침</S.LegalItem>
-            <S.LegalItem>청소년보호정책</S.LegalItem>
-            <S.LegalItem>사업자정보확인</S.LegalItem>
-          </S.LegalLinks>
-
           <S.CopyrightSection>
             <S.BusinessInfo>(주)스타트허브</S.BusinessInfo>
             <S.Copyright>
