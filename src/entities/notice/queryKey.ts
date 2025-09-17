@@ -7,8 +7,5 @@ export const NOTICE_QUERY_KEYS = {
     getNoticeDetail: (id: number) => ["notice", "detail", id] as const,
     recommend: () => ["notice", "recommend"] as const,
     likes: (params: NoticeParams) => ["notice", "likes", params] as const,
-    getNoticeDetail: (id: number) => ["notice", "detail", id] as const,
-    recommend: () => ["notice", "recommend"] as const,
-    likes: (params: NoticeParams) => ["notice", "likes", params] as const,
   },
 };
