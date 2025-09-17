@@ -3,6 +3,7 @@ import {
   NoticeParams,
   NoticePage,
   NoticeSearchParams,
+  NoticeDetailParams,
   NoticeType,
   NoticeLikeResponse,
 } from "../model/notice.type";
