@@ -15,6 +15,7 @@ import EditMyProfile from "@/pages/EditProfile"
 import LikeList from "@/pages/LikeList";
 import NoticeDetailPage from "@/pages/NoticeDetail";
 import LikeList from "@/pages/LikeList";
+import NoticeDetailPage from "@/pages/NoticeDetail";
 
 const Router = () => {
   return(
