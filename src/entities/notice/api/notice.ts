@@ -39,4 +39,10 @@ export const NoticeApi = {
     const res = await StartHubAxios.delete(`/announcements/${announcementId}/likes`);
     return res.data;
   },
+  getLikedAnnouncements: async (params: NoticeParams): Promise<NoticePage> => {
+    const res = await StartHubAxios.get("/announcements/likes", {
+      params,
+    });
+    return res.data;
+  },
 };
