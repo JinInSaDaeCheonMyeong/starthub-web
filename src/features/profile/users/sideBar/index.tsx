@@ -1,17 +1,19 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import * as S from "./style";
 
 const MyPage: React.FC = () => {
-  const [activeMenu, setActiveMenu] = useState<"프로필" | "좋아요">("프로필");
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const isProfileActive = location.pathname === "/my-profile" || location.pathname === "/my-profile-edit";
+  const isLikeActive = location.pathname === "/like-list";
 
   return (
     <S.Sidebar>
       <S.SidebarItem
-        className={activeMenu === "프로필" ? "active" : ""}
+        className={isProfileActive ? "active" : ""}
         onClick={() => {
-          setActiveMenu("프로필");
           navigate("/my-profile");
         }}
       >
@@ -19,9 +21,8 @@ const MyPage: React.FC = () => {
       </S.SidebarItem>
 
       <S.SidebarItem
-        className={activeMenu === "좋아요" ? "active" : ""}
+        className={isLikeActive ? "active" : ""}
         onClick={() => {
-          setActiveMenu("좋아요");
           navigate("/like-list");
         }}
       >
