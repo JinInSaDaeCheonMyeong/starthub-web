@@ -4,6 +4,11 @@ export interface NoticeParams {
   sort?: string | string[];
 }
 
+export interface NoticeDetailParams {
+  id: number;
+  includeLikeStatus: boolean;
+}
+
 export interface NoticeSearchParams {
   title?: string;
   supportField?: string;
@@ -17,10 +22,12 @@ export interface NoticeSearchParams {
 }
 
 export interface NoticeType {
+  id: number;
   title: string;
   url: string;
   organization: string;
   receptionPeriod: string;
+  status: "ACTIVE" | "INACTIVE";
   likeCount: number;
   supportField: string;
   targetAge: string;
@@ -30,6 +37,7 @@ export interface NoticeType {
   startupHistory: string;
   departmentInCharge: string;
   content: string;
+  isLiked: boolean;
 }
 
 export interface NoticePage {
@@ -41,3 +49,9 @@ export interface NoticePage {
   isLast: boolean;
 }
 
+
+export interface NoticeLikeResponse {
+  status: "LIKE" | "UNLIKE";
+  message: string;
+  likeCount: number;
+}
