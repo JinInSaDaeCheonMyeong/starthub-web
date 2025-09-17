@@ -45,10 +45,4 @@ export const NoticeApi = {
     });
     return res.data;
   },
-  getLikedAnnouncements: async (params: NoticeParams): Promise<NoticePage> => {
-    const res = await StartHubAxios.get("/announcements/likes", {
-      params,
-    });
-    return res.data;
-  },
 };
