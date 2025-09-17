@@ -13,6 +13,7 @@ import PreOnboarding from "@/pages/Onboarding/pre"
 import NoticeListUpPage from "@/pages/NoticeListUp";
 import EditMyProfile from "@/pages/EditProfile"
 import LikeList from "@/pages/LikeList";
+import NoticeDetailPage from "@/pages/NoticeDetail";
 
 const Router = () => {
   return(
@@ -41,6 +42,7 @@ const Router = () => {
         <Route path="/onboarding/pre-startup" element={<PreOnboarding/>}/>
         <Route path="/notices/:type" element={<NoticeListUpPage/>}/>
         <Route path="/like-list" element={<LikeList/>}/>
+        <Route path="/notice/:id" element={<NoticeDetailPage/>}/>
       </Routes>
     </BrowserRouter>
   )
