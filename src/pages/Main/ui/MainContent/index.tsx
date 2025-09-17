@@ -1,12 +1,16 @@
 import * as S from "./style";
 import BoxMenu from "@/features/boxMenu/ui";
 import SectionBlock from "@/shared/ui/SectionBlock";
-import { useGetNotice } from "@/features/notice/getNotice/useGetNotice";
 import NoticeCard from "@/shared/ui/NoticeCard";
 import { NoticeSkeleton } from "@/shared/ui/NoticeSkeleton";
 import { useGetNoticeSearch } from "@/features/notice/getNoticeSearch/useGetNoticeSearch";
+import { useGetNoticeRecommend } from "@/features/notice/getNoticeRecommend/useGetNoticeRecommend";
+import { NoticeType } from "@/entities/notice/model/notice.type";
+import AiNotice from "@assets/images/aiNotice.png";
 
 const MainContent = () => {
+  const { isError } = useGetNoticeRecommend();
+
   return (
     <S.ContentContainer>
       <SectionBlock
@@ -18,7 +22,14 @@ const MainContent = () => {
         </S.BoxMenuContainer>
       </SectionBlock>
 
-      <SectionBlock title="AI 추천 공고" path="/notices/ai">
+      <SectionBlock
+        title={
+          isError
+            ? "로그인 후 AI 맞춤형 공고를 추천받을 수 있어요!"
+            : "AI 추천 공고"
+        }
+        path="/sign-in"
+      >
         <S.NoticeContainer>
           <RecommendedAINotice />
         </S.NoticeContainer>
@@ -32,11 +43,7 @@ const MainContent = () => {
 };
 
 const RecommendedAINotice = () => {
-  const { data, isLoading } = useGetNotice({
-    page: 0,
-    size: 4,
-    sort: "",
-  });
+  const { data, isLoading, isError } = useGetNoticeRecommend();
 
   if (isLoading) {
     return (
@@ -48,9 +55,21 @@ const RecommendedAINotice = () => {
     );
   }
 
+  if (isError) {
+    return (
+      <>
+        <img
+          src={AiNotice}
+          alt="AI 공고 로그인 유도 배너"
+          style={{ width: "1040px", height: "auto" }}
+        />
+      </>
+    );
+  }
+
   return (
     <>
-      {data?.content.map((item) => (
+      {data?.slice(0, 4).map((item: NoticeType) => (
         <NoticeCard key={item.url} notice={item} />
       ))}
     </>
@@ -64,6 +83,7 @@ const SoftWareNotice = () => {
     size: 4,
     sort: "createdAt,desc",
   });
+
   if (isLoading) {
     return (
       <>
@@ -76,7 +96,7 @@ const SoftWareNotice = () => {
 
   return (
     <>
-      {data?.content.map((item) => (
+      {data?.content?.map((item: NoticeType) => (
         <NoticeCard key={item.url} notice={item} />
       ))}
     </>

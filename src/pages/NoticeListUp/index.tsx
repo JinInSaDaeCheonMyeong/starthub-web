@@ -1,11 +1,12 @@
 import FoldArrow from "@/shared/ui/FoldArrow";
 import Layout from "@/shared/ui/Layout";
 import { useParams } from "react-router-dom";
-import { useGetNotice } from "@/features/notice/getNotice/useGetNotice";
 import NoticeCard from "@/shared/ui/NoticeCard";
 import { NoticeSkeleton } from "@/shared/ui/NoticeSkeleton";
 import styled from "styled-components";
 import { useGetNoticeSearch } from "@/features/notice/getNoticeSearch/useGetNoticeSearch";
+import { useGetNoticeRecommend } from "@/features/notice/getNoticeRecommend/useGetNoticeRecommend";
+import { NoticeType } from "@/entities/notice/model/notice.type";
 
 const NoticeListUpPage = () => {
   const { type } = useParams();
@@ -18,13 +19,11 @@ const NoticeListUpPage = () => {
           size: 20,
           sort: "createdAt,desc",
         })
-      : useGetNotice({
-          page: 0,
-          size: 20,
-          sort: "createdAt,desc",
-        });
+      : useGetNoticeRecommend();
 
-  const skeletonCount = data?.content.length || 8;
+  const notices = type === "education" ? (data as any)?.content : (data as NoticeType[]);
+
+  const skeletonCount = notices?.length || 8;
 
   return (
     <Layout>
@@ -37,7 +36,7 @@ const NoticeListUpPage = () => {
           ? Array.from({ length: skeletonCount }).map((_, idx) => (
               <NoticeSkeleton key={idx} />
             ))
-          : data?.content.map((item) => (
+          : notices?.map((item: NoticeType) => (
               <NoticeCard key={item.url} notice={item} />
             ))}
       </NoticeListContainer>
