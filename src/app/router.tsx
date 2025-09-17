@@ -47,6 +47,7 @@ const Router = () => {
         <Route path="/notice/:id" element={<NoticeDetailPage/>}/>
         <Route path="/like-list" element={<LikeList/>}/>
         <Route path="/notice/:id" element={<NoticeDetailPage/>}/>
+        <Route path="/like-list" element={<LikeList/>}/>
       </Routes>
     </BrowserRouter>
   )
