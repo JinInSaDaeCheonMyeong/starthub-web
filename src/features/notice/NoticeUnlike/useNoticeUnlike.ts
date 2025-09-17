@@ -31,7 +31,7 @@ export const useNoticeUnlike = () => {
         queryKey: ["notice", "all"],
       });
       queryClient.invalidateQueries({
-        queryKey: NOTICE_QUERY_KEYS.notice.recommend(),
+        queryKey: NOTICE_QUERY_KEYS.notice.likes({}),
       });
     },
   });
