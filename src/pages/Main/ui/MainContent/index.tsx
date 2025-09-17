@@ -9,7 +9,7 @@ import { NoticeType } from "@/entities/notice/model/notice.type";
 import AiNotice from "@assets/images/aiNotice.png";
 
 const MainContent = () => {
-  const { isError } = useGetNoticeRecommend();
+  const { data } = useGetNoticeRecommend();
 
   return (
     <S.ContentContainer>
@@ -18,17 +18,17 @@ const MainContent = () => {
         path="/notices/education"
       >
         <S.BoxMenuContainer>
-          <SoftWareNotice />
+          <EducationNotice />
         </S.BoxMenuContainer>
       </SectionBlock>
 
       <SectionBlock
         title={
-          isError
+          !data
             ? "로그인 후 AI 맞춤형 공고를 추천받을 수 있어요!"
             : "AI 추천 공고"
         }
-        path={isError ? "/sign-in" : "/notices/ai"}
+        path={!data ? "/sign-in" : "/notices/ai"}
       >
         <S.NoticeContainer>
           <RecommendedAINotice />
@@ -43,7 +43,7 @@ const MainContent = () => {
 };
 
 const RecommendedAINotice = () => {
-  const { data, isLoading, isError } = useGetNoticeRecommend();
+  const { data, isLoading } = useGetNoticeRecommend();
 
   if (isLoading) {
     return (
@@ -55,7 +55,7 @@ const RecommendedAINotice = () => {
     );
   }
 
-  if (isError) {
+  if (!data) {
     return (
       <>
         <img
@@ -76,7 +76,7 @@ const RecommendedAINotice = () => {
   );
 };
 
-const SoftWareNotice = () => {
+const EducationNotice = () => {
   const { data, isLoading } = useGetNoticeSearch({
     supportField: "멘토링ㆍ컨설팅ㆍ교육",
     page: 0,
