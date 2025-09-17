@@ -4,7 +4,7 @@ import { StartHubColors, StartHubFont } from "@/shared/design";
 export const Sidebar = styled.aside`
   position: sticky;
   top: 60px;
-  width: 180px;
+  width: 200px;
   border-left: 1px solid ${StartHubColors.Gray3};
   border-right: 1px solid ${StartHubColors.Gray3};
   display: flex;
@@ -37,7 +37,7 @@ export const Divider = styled.hr`
   border: none;
   border-top: 1px solid ${StartHubColors.Gray3};
   margin: 20px 0 20px 45px;
-  width: calc(100% - 75px);
+  width: calc(100% - 85px);
 `;
 
 export const LogOut = styled.button`
