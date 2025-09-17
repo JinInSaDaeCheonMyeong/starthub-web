@@ -74,12 +74,12 @@ export type CreateBmcResponse = BaseResponse<BmcData>;
 
 export type SessionDetailResponse = BaseResponse<BmcResponseData>;
 
-export type QuestionListData = [
-  string, string, string, string, string,
-  string, string, string, string, string
-];
+export type QuestionListData = {
+  questionNumber: number
+  quesion: string
+};
 
-export type QuestionListResponse = BaseResponse<QuestionListData>;
+export type QuestionListResponse = BaseResponse<QuestionListData[]>;
 
 export type CanvasesResponse = BaseResponse<BmcData[]>;
 
