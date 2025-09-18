@@ -61,9 +61,8 @@ const Onboarding = () => {
     }
   };
 
-  const isValid = earlyData?.companyName?.trim() && 
-                  earlyData?.numberOfEmployees > 0 && 
-                  earlyData?.annualRevenue > 0 && 
+  const isValid = earlyData?.companyName?.trim() &&
+                  earlyData?.numberOfEmployees > 0 &&
                   categories.length > 0;
 
   return (
