@@ -87,7 +87,7 @@ const EarlyOnboarding = ({ onSubmit }: EarlyOnboardingProps) => {
         }
         customStyle={{ height: 50, width: "100%" }}
       />
-      <S.SectionTitle>연매출액 <span>*</span></S.SectionTitle>
+      <S.SectionTitle>연매출액</S.SectionTitle>
       <StartHubTextField
         type="number"
         value={
