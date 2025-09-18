@@ -104,12 +104,12 @@ const SearchNotice = ({ onFilterChange }: SearchNoticeProps) => {
             { value: "세종", label: "세종" },
             { value: "경기", label: "경기" },
             { value: "강원", label: "강원" },
-            { value: "충북", label: "충북" },
-            { value: "충남", label: "충남" },
-            { value: "전북", label: "전북" },
-            { value: "전남", label: "전남" },
-            { value: "경북", label: "경북" },
-            { value: "경남", label: "경남" },
+            { value: "충청북도", label: "충북" },
+            { value: "충청남도", label: "충남" },
+            { value: "전라북도", label: "전북" },
+            { value: "전라남도", label: "전남" },
+            { value: "경상북도", label: "경북" },
+            { value: "경상남도", label: "경남" },
             { value: "제주", label: "제주" },
           ]}
           value={selectedRegion}
