@@ -35,7 +35,7 @@ const NOTICE_CATEGORY = [
   },
   {
     text: "R&D",
-    enum: "기술개발(R&amp;D)",
+    enum: "기술개발(R&D)",
     icon: <Light />,
   },
   {
