@@ -158,23 +158,17 @@ export const TableOfContents = styled.ul`
   border-left: 2px solid ${StartHubColors.Black1};
 `;
 
-export const TOCItem = styled.li<{ level: number; isActive: boolean }>`
+export const TOCItem = styled.li<{ level: number; $isActive: boolean }>`
   ${StartHubFont.Pretendard.Body1.Regular}
   padding: 8px 16px;
   margin-bottom: 4px;
   border-radius: 6px;
   cursor: pointer;
-  transition: all 0.2s ease;
-
   padding-left: ${({ level }) => 16 + (level - 1) * 20}px;
 
-  color: ${({ isActive }) =>
-    isActive ? StartHubColors.Black1 : StartHubColors.Gray2};
-  font-weight: ${({ isActive }) => (isActive ? "600" : "500")};
-
-  &:hover {
-    color: ${StartHubColors.Black1};
-  }
+  color: ${({ $isActive }) =>
+    $isActive ? StartHubColors.Black1 : StartHubColors.Gray2};
+  font-weight: ${({ $isActive }) => ($isActive ? "600" : "500")};
 `;
 
 export const HeartButton = styled.button`
