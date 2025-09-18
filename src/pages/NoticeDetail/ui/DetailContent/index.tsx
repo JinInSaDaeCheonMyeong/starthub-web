@@ -157,7 +157,7 @@ const NoticeDetail = ({ item }: NoticeDetailProps) => {
             <S.TOCItem
               key={item.id}
               level={item.level}
-              isActive={activeId === item.id}
+              $isActive={activeId === item.id}
               onClick={() => scrollToHeading(item.id)}
             >
               {item.text}
