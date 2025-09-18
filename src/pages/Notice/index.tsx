@@ -10,11 +10,13 @@ import { NoticeSkeleton } from "@/shared/ui/NoticeSkeleton";
 
 const NoticePage = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [filters, setFilters] = useState<Omit<NoticeSearchParams, "page" | "size">>({});
+  const [filters, setFilters] = useState<
+    Omit<NoticeSearchParams, "page" | "size">
+  >({});
 
   const { data, isLoading, isError } = useGetNoticeSearch({
     ...filters,
-    page: currentPage - 1, 
+    page: currentPage - 1,
     size: 16,
     sort: "createdAt,desc",
   });
@@ -23,7 +25,7 @@ const NoticePage = () => {
     newFilters: Omit<NoticeSearchParams, "page" | "size">
   ) => {
     setFilters(newFilters);
-    setCurrentPage(1); 
+    setCurrentPage(1);
   };
 
   return (
@@ -32,21 +34,25 @@ const NoticePage = () => {
 
       <S.NoticeContentContainer>
         {isLoading ? (
-          <div style={{ display: "flex", flexWrap: "wrap" }}>
+          <S.CardWrap>
             {Array.from({ length: 16 }).map((_, index) => (
               <NoticeSkeleton key={`skeleton-${index}`} />
             ))}
-          </div>
+          </S.CardWrap>
         ) : isError ? (
-          <p>데이터를 불러오는 중 오류가 발생했습니다.</p>
+          <S.ExceptionMessage>
+            데이터를 불러오는 중 오류가 발생했습니다.
+          </S.ExceptionMessage>
         ) : !data || data.content.length === 0 ? (
-          <p>검색 조건에 맞는 공고가 없습니다.</p>
+          <S.ExceptionMessage>
+            검색 조건에 맞는 공고가 없습니다.
+          </S.ExceptionMessage>
         ) : (
-          <div style={{ display: "flex", flexWrap: "wrap" }}>
+          <S.CardWrap>
             {data.content.map((notice, index) => (
               <NoticeCard key={`notice-${index}`} notice={notice} />
             ))}
-          </div>
+          </S.CardWrap>
         )}
       </S.NoticeContentContainer>
 
