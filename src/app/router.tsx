@@ -41,7 +41,6 @@ const Router = () => {
         <Route path="/onboarding/early-startup" element={<EarlyOnboarding/>}/>
         <Route path="/onboarding/pre-startup" element={<PreOnboarding/>}/>
         <Route path="/notices/:type" element={<NoticeListUpPage/>}/>
-        <Route path="/notice/:id" element={<NoticeDetailPage/>}/>
         <Route path="/like-list" element={<LikeList/>}/>
         <Route path="/notice/:id" element={<NoticeDetailPage/>}/>
         <Route path="/like-list" element={<LikeList/>}/>
