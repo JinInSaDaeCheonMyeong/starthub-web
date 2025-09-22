@@ -58,12 +58,13 @@ const EarlyOnboarding = ({ onSubmit }: EarlyOnboardingProps) => {
           formData.numberOfEmployees === 0 ? "" : String(formData.numberOfEmployees)
         }
         placeholder="기업 인원을 입력해주세요"
-        onChange={(e) =>
+        onChange={(e) => {
+          const value = e.target.value === "" ? 0 : Number(e.target.value);
           setFormData({
             ...formData,
-            numberOfEmployees: e.target.value === "" ? 0 : Number(e.target.value),
-          })
-        }
+            numberOfEmployees: value < 0 ? 0 : value,
+          });
+        }}
         customStyle={{ height: 50, width: "100%" }}
       />
 
@@ -94,12 +95,13 @@ const EarlyOnboarding = ({ onSubmit }: EarlyOnboardingProps) => {
           formData.annualRevenue === 0 ? "" : String(formData.annualRevenue)
         }
         placeholder="연매출액을 입력해주세요"
-        onChange={(e) =>
+        onChange={(e) => {
+          const value = e.target.value === "" ? 0 : Number(e.target.value);
           setFormData({
             ...formData,
-            annualRevenue: e.target.value === "" ? 0 : Number(e.target.value),
-          })
-        }
+            annualRevenue: value < 0 ? 0 : value,
+          });
+        }}
         customStyle={{ height: 50, width: "100%" }}
       />
     </S.Section>
