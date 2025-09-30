@@ -31,7 +31,7 @@ const menuItems = [
   {
     icon: <img src={AiIcon} alt="AI 추천 공고" />,
     label: "AI 추천 공고",
-    path: "/notices/ai",
+    path: "/notices/recommend",
   },
   {
     icon: <img src={HeartIcon} alt="내 관심 공고" />,
