@@ -14,9 +14,9 @@ const SectionBlock = ({ title, children, path }: SectionBlockProps) => {
 
   return (
     <>
-      <LabelSection>
+      <LabelSection onClick={() => navigate(path)}>
         <p>{title}</p>
-        <Arrow onClick={() => navigate(path)} />
+        <Arrow />
       </LabelSection>
       {children}
     </>
