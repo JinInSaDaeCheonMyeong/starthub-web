@@ -14,10 +14,12 @@ import NoticeListUpPage from "@/pages/NoticeListUp";
 import EditMyProfile from "@/pages/EditProfile"
 import LikeList from "@/pages/LikeList";
 import NoticeDetailPage from "@/pages/NoticeDetail";
+import ScrollToTop from "@/shared/utils/ScrollToTop/scrollToTop";
 
 const Router = () => {
   return(
     <BrowserRouter>
+    <ScrollToTop/>
       <Routes>
         <Route path="/" element={<MainPage/>}/>
         <Route path="/sign-up" element={<SignUpPage/>}/>
