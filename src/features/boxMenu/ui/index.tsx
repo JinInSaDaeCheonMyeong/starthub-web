@@ -52,7 +52,7 @@ const BoxMenu = () => {
             $bgColor="#D290FB"
             $hvColor="#b875df"
             onClick={() => {
-              navigate("/my-profile");
+              navigate("/notices");
             }}
           >
             바로가기
