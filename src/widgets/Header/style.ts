@@ -11,11 +11,11 @@ export const HeaderContainer = styled.div`
   width: 100%;
   border-bottom: 1px solid ${StartHubColors.Gray3};
   height: 78px;
-  background-color: ${StartHubColors.White1};
+  background: rgb(255, 255, 255, 50%);
+  backdrop-filter: blur(20px); 
   display: flex;
   align-items: center;
   justify-content: center;
-  position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
