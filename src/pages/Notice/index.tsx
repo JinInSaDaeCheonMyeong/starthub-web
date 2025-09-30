@@ -1,6 +1,6 @@
 import Layout from "@/shared/ui/Layout";
 import SearchNotice from "@/features/notice/ui/searchNotice";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import NoticeCard from "@/shared/ui/NoticeCard";
 import * as S from "./style";
 import Pagination from "@/shared/ui/pagination";
@@ -10,9 +10,7 @@ import { NoticeSkeleton } from "@/shared/ui/NoticeSkeleton";
 
 const NoticePage = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [filters, setFilters] = useState<
-    Omit<NoticeSearchParams, "page" | "size">
-  >({});
+  const [filters, setFilters] = useState<Omit<NoticeSearchParams, "page" | "size">>({});
 
   const { data, isLoading, isError } = useGetNoticeSearch({
     ...filters,
@@ -20,6 +18,10 @@ const NoticePage = () => {
     size: 16,
     sort: "createdAt,desc",
   });
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentPage]);
 
   const handleFilterChange = (
     newFilters: Omit<NoticeSearchParams, "page" | "size">
