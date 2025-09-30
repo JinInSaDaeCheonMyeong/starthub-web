@@ -54,7 +54,7 @@ const NoticeListUpPage = () => {
   return (
     <Layout>
       <FoldArrow title={config.title} />
-      <div style={{ height: "100vh" }}>
+      <div style={{ height: "100%", minHeight:"100vh" }}>
         <NoticeListContainer>
           {isLoading
             ? Array.from({ length: 8 }).map((_, idx) => (

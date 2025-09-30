@@ -28,7 +28,7 @@ const MainContent = () => {
             ? "로그인 후 AI 맞춤형 공고를 추천받을 수 있어요!"
             : "AI 추천 공고"
         }
-        path={!data ? "/sign-in" : "/notices/ai"}
+        path={!data ? "/sign-in" : "/notices/recommend"}
       >
         <S.NoticeContainer>
           <RecommendedAINotice />
