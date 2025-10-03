@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   display: flex;
   width: 100%;
   box-sizing: border-box;
-  padding: 0 160px 0 200px;
+  padding: 0 200px;
   height: 100%;
 `;
 
