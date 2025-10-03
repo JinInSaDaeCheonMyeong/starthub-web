@@ -2,16 +2,11 @@ import styled from "styled-components";
 import { StartHubColors, StartHubFont } from "@/shared/design";
 
 export const Sidebar = styled.aside`
-  position: sticky;
-  top: 60px;
-  width: 200px;
-  border-left: 1px solid ${StartHubColors.Gray3};
-  border-right: 1px solid ${StartHubColors.Gray3};
   display: flex;
   flex-direction: column;
   height: calc(100vh - 60px);
   background-color: ${StartHubColors.White1};
-  padding-top: 40px;
+  padding-top: 30px;
 `;
 
 export const SidebarItem = styled.button`
@@ -19,8 +14,8 @@ export const SidebarItem = styled.button`
   border: none;
   text-align: left;
   margin: 0;
-  padding: 10px 45px;
-  font: ${StartHubFont.Pretendard.Body2.Medium};
+  padding-bottom: 20px;
+  font: ${StartHubFont.Pretendard.Body2.Regular};
   cursor: pointer;
   color: ${StartHubColors.Gray2};
   font-weight: normal;
@@ -29,15 +24,12 @@ export const SidebarItem = styled.button`
 
   &.active {
     color: ${StartHubColors.Black1};
-    font-weight: bold;
   }
 `;
 
 export const Divider = styled.hr`
-  border: none;
   border-top: 1px solid ${StartHubColors.Gray3};
-  margin: 20px 0 20px 45px;
-  width: calc(100% - 85px);
+  width: 224px;
 `;
 
 export const LogOut = styled.button`
@@ -45,11 +37,10 @@ export const LogOut = styled.button`
   border: none;
   text-align: left;
   margin: 0;
-  padding: 10px 45px;
-  font: ${StartHubFont.Pretendard.Body2.Medium};
+  padding-top: 20px;
+  font: ${StartHubFont.Pretendard.Body2.Regular};
   cursor: pointer;
-  color: ${StartHubColors.Gray3};
+  color: ${StartHubColors.Error};
   font-weight: normal;
-  width: 100%;
   box-sizing: border-box;
 `;
