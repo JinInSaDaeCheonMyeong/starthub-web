@@ -6,11 +6,16 @@ import {
   NoticeParams,
 } from "@/entities/notice/model/notice.type";
 import { NOTICE_QUERY_KEYS } from "@/entities/notice/queryKey";
+import { useAuthStore } from "@/app/model/stores/useAuthStore";
+
 
 export const useGetLikedAnnouncements = (
   params: NoticeParams,
   options?: UseQueryOptions<NoticePage, AxiosError, NoticePage>
 ) => {
+
+  const {isLoggedIn} = useAuthStore()
+
   return useQuery({
     queryKey: NOTICE_QUERY_KEYS.notice.likes(params),
     queryFn: () => NoticeApi.getLikedAnnouncements(params),
@@ -18,6 +23,7 @@ export const useGetLikedAnnouncements = (
     gcTime: 1000 * 60 * 5,
     retry: 2,
     retryDelay: attemptIndex => Math.min(1000 * 2 ** attemptIndex, 30000),
+    enabled: isLoggedIn,
     ...options,
   });
 };
