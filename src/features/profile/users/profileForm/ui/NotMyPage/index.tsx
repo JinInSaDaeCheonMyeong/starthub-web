@@ -1,14 +1,13 @@
 import styled from "styled-components";
-import Image from "@assets/images/not_found_user.png";
-
+import { ReactComponent as NoUser } from "@assets/images/noUser.svg";
+import { StartHubFont } from "@/shared/design";
 const NotMyPage = () => {
   return (
     <WrapNotMyPage>
       <WrapContent>
-        <img
-          src={Image}
-          style={{ width: "100%", height: "auto", marginTop: "15px" }}
-        />
+        <NoUser />
+        <p>로그인 후 더 많은 서비스를 이용하실 수 있어요</p>
+        USER NOT FOUND
       </WrapContent>
     </WrapNotMyPage>
   );
@@ -26,4 +25,15 @@ const WrapContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  ${StartHubFont.Pretendard.Title2}
+  font-weight: 500;
+  gap: 6px;
+  p {
+    ${StartHubFont.Pretendard.Body2.Medium}
+  }
+  svg {
+    width: 198px;
+    height: 72px;
+  }
 `;
