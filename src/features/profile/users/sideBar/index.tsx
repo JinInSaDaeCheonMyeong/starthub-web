@@ -19,20 +19,22 @@ const MyPage: React.FC = () => {
       await StartHubAxios.post("/user/sign-out");
       Cookies.remove("access_token");
       toast.success("로그아웃에 성공했습니다");
-      window.location.reload();
+      navigate("/");
     } catch (error) {
       toast.error("로그아웃에 실패했습니다");
     }
   };
 
-  const choiceLogout = () =>{
-    const choice = confirm('로그아웃 하시겠습니까?')
-    if(choice){
-      tryLogout()
+  const choiceLogout = () => {
+    const choice = confirm("로그아웃 하시겠습니까?");
+    if (choice) {
+      tryLogout();
     }
-  }
-  const TERMS_URL = "https://various-bougon-d76.notion.site/27f507c40eaf80acbf4afba41b9964b7";
-  const PRIVACY_URL = "https://various-bougon-d76.notion.site/27f507c40eaf80bbb86dfc3db0b06e04";
+  };
+  const TERMS_URL =
+    "https://various-bougon-d76.notion.site/27f507c40eaf80acbf4afba41b9964b7";
+  const PRIVACY_URL =
+    "https://various-bougon-d76.notion.site/27f507c40eaf80bbb86dfc3db0b06e04";
 
   return (
     <S.Sidebar>
