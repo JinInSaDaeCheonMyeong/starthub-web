@@ -6,6 +6,7 @@ export interface Question {
 }
 
 export interface BmcResponseData {
+  title: string;
   id: string
   sessionId: string
   businessIdea: string
@@ -66,6 +67,7 @@ export interface BmcData {
   customerSegments: string
   costStructure: string
   revenueStreams: string
+  imageUrl?: string
   isCompleted: boolean
   createdAt: string
   updatedAt: string
