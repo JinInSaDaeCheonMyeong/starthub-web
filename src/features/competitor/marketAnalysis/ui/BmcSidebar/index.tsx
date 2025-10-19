@@ -1,5 +1,5 @@
 import React from "react";
-import * as S from "../../style";
+import * as S from "./style";
 import { UserBmc } from "../../types";
 import { bmcApi } from "@/entities/bmc/api/bmc";
 import { formatBmcContent } from "../../utils/textFormatter";
