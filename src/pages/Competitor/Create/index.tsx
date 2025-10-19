@@ -4,6 +4,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import MarketAnalysis from "@/features/competitor/marketAnalysis/ui/MarketAnalysis/index";
 import { MarketAnalysisSkeleton } from "@/features/competitor/marketAnalysis/ui/MarketAnalysisSkeleton";
 import Layout from "@/shared/ui/Layout";
+import LoadingModal from "@/shared/ui/LoadingModal";
 import { competitorApi } from "@/entities/competitor/api/competitor";
 import { MarketAnalysisResponse } from "@/features/competitor/marketAnalysis/types";
 import { COMPETITOR_QUERY_KEYS } from "@/entities/competitor/queryKey";
@@ -84,6 +85,10 @@ const CompetitorCreate = () => {
   if (loading) {
     return (
       <Layout>
+        <LoadingModal
+          isOpen={loading}
+          message="경쟁사 분석을 진행 중입니다.&#10;약 1분 정도 소요됩니다."
+        />
         <MarketAnalysisSkeleton />
       </Layout>
     );
