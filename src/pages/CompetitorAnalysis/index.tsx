@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useSearchParams } from "react-router-dom";
-import MarketAnalysis from "@/features/competitor/marketAnalysis/ui/MarketAnalysis";
+import MarketAnalysis from "@/features/competitor/marketAnalysis/ui/MarketAnalysis/index";
 import { MarketAnalysisSkeleton } from "@/features/competitor/marketAnalysis/ui/MarketAnalysisSkeleton";
 import Layout from "@/shared/ui/Layout";
 import { MarketAnalysisResponse } from "@/features/competitor/marketAnalysis/types";
@@ -11,7 +11,9 @@ const CompetitorAnalysis = () => {
   const passedData = location.state?.analysisData;
   const bmcId = searchParams.get("bmcId");
 
-  const [data, setData] = useState<MarketAnalysisResponse | null>(passedData || null);
+  const [data, setData] = useState<MarketAnalysisResponse | null>(
+    passedData || null
+  );
   const [loading, setLoading] = useState(!passedData);
   const [error, setError] = useState<string | null>(null);
 
@@ -44,7 +46,9 @@ const CompetitorAnalysis = () => {
 
   return (
     <Layout>
-      {data && <MarketAnalysis data={data} bmcId={bmcId ? Number(bmcId) : undefined} />}
+      {data && (
+        <MarketAnalysis data={data} bmcId={bmcId ? Number(bmcId) : undefined} />
+      )}
     </Layout>
   );
 };
