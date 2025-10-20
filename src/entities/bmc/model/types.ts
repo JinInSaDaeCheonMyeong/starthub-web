@@ -7,6 +7,7 @@ export interface Question {
   answer: string | null;
 }
 
+// BMC 세션 응답 데이터
 export interface BmcResponseData {
   id: string;
   sessionId: number;
@@ -14,6 +15,17 @@ export interface BmcResponseData {
   isCompleted: boolean;
   imageUrl: string;
   createdAt: Date;
+  questions: Question[];
+}
+
+// 경쟁사 분석용 BMC 세션 데이터
+export interface CompetitorBmcSessionData {
+  title: string;
+  id: string;
+  sessionId: string;
+  businessIdea: string;
+  isCompleted: boolean;
+  createdAt: string;
   questions: Question[];
 }
 
@@ -67,6 +79,7 @@ export interface CreateBmcRequest {
   sessionId: number;
 }
 
+// BMC 캔버스 데이터
 export interface BmcData {
   id: number;
   title: string;
@@ -84,6 +97,25 @@ export interface BmcData {
   imageUrl: string;
   createdAt: Date;
   updatedAt: Date;
+}
+
+// 경쟁사 분석용 BMC 데이터
+export interface CompetitorBmcData {
+  id: string;
+  title: string;
+  keyPartners: string;
+  keyActivities: string;
+  keyResources: string;
+  valueProposition: string;
+  customerRelationships: string;
+  channels: string;
+  customerSegments: string;
+  costStructure: string;
+  revenueStreams: string;
+  imageUrl?: string;
+  isCompleted: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export type CreateBmcResponse = BaseResponse<BmcData>;
