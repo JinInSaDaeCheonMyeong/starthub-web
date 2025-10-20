@@ -104,7 +104,6 @@ const BmcStepNavigate = () => {
                 <IconComponent />
               </S.StepIcon>
             </S.StepIconWrapper>
-
             {isCurrent && step.description ? (
               <S.StepContent>
                 <div>{step.label}</div>

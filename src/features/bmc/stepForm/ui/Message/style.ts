@@ -5,12 +5,12 @@ export const UserMessageContainer = styled.div`
   gap: 10px;
   display: flex;
   justify-content: end;
-  
 `;
 
 export const StartHubMessageContainer = styled.div`
   gap: 10px;
   display: flex;
+  margin-bottom: 20px;
 `;
 
 export const UserMessageBubbleWrapper = styled.div`
@@ -22,7 +22,25 @@ export const UserMessageBubbleWrapper = styled.div`
 
 export const StartHubMessageBubbleWrapper = styled.div`
   max-width: 410px;
-  background-color: #E9F0FE;
+  background-color: ${StartHubColors.White1};
   padding: 16px 20px;
   border-radius: 10px;
+  position: relative;
+`;
+
+export const TypingCursor = styled.span`
+  display: inline-block;
+  margin-left: 2px;
+  animation: blink 0.7s infinite;
+
+  @keyframes blink {
+    0%,
+    50% {
+      opacity: 1;
+    }
+    51%,
+    100% {
+      opacity: 0;
+    }
+  }
 `;
