@@ -1,23 +1,27 @@
 import { BaseResponse } from "@/shared/types/BaseResponse"
 
+export type BmcTemplateType = 'STARTHUB' | 'STARTHUB_DARK' | 'SIMPLE' | 'COLOR';
+
 export interface Question {
   questionNumber: number;
   answer: string | null;
 }
 
 export interface BmcResponseData {
-  id: string
-  sessionId: number
-  title: string
-  isCompleted: boolean
-  createdAt: Date
-  questions: Question[]
+  id: string;
+  sessionId: number;
+  title: string;
+  isCompleted: boolean;
+  imageUrl: string;
+  createdAt: Date;
+  questions: Question[];
 }
 
 export type BmcSessionResponse = BaseResponse<BmcResponseData[]>;
 
 export interface CreateSessionRequest {
-  title: string
+  title: string;
+  templateType: BmcTemplateType;
 }
 
 export type CreateSessionResponse = BmcSessionResponse;
@@ -31,9 +35,19 @@ export interface CreateAnswerRequest {
 export type CreateAnswerResponse = BaseResponse<BmcResponseData>;
 
 export interface ModifyBmcRequest {
-  bmcId: number
-  modificationRequest: string
-  requestType: string
+  bmcId: number;
+  title: string;
+  customerSegments: string;
+  valueProposition: string;
+  channels: string;
+  customerRelationships: string;
+  revenueStreams: string;
+  keyResources: string;
+  keyActivities: string;
+  keyPartners: string;
+  costStructure: string;
+  templateType: BmcTemplateType;
+  imageUrl?: string;
 }
 
 export interface ModifyBmcData {
@@ -50,33 +64,37 @@ export interface ModifyBmcData {
 export type ModifyBmcResponse = BaseResponse<ModifyBmcData>;
 
 export interface CreateBmcRequest {
-  sessionId: number
+  sessionId: number;
 }
 
 export interface BmcData {
-  id: number
-  title: string
-  keyPartners: string
-  keyActivities: string
-  keyResources: string
-  valueProposition: string
-  customerRelationships: string
-  channels: string
-  customerSegments: string
-  costStructure: string
-  revenueStreams: string
-  isCompleted: boolean
-  createdAt: Date
-  updatedAt: Date
+  id: number;
+  title: string;
+  templateType: BmcTemplateType;
+  keyPartners: string;
+  keyActivities: string;
+  keyResources: string;
+  valueProposition: string;
+  customerRelationships: string;
+  channels: string;
+  customerSegments: string;
+  costStructure: string;
+  revenueStreams: string;
+  isCompleted: boolean;
+  imageUrl: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export type CreateBmcResponse = BaseResponse<BmcData>;
+
+export type UploadImageResponse = BaseResponse<BmcData>;
 
 export type SessionDetailResponse = BaseResponse<BmcResponseData>;
 
 export type QuestionListData = {
   questionNumber: number
-  quesion: string
+  question: string
 };
 
 export type QuestionListResponse = BaseResponse<QuestionListData[]>;
