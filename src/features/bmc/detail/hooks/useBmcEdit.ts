@@ -70,7 +70,7 @@ export const useBmcEdit = (
         revenueStreams: editedData.revenueStreams,
       });
 
-      setBmcData({ ...bmcData, ...response.data });
+      setBmcData(response.data.updatedBmc);
       setIsEditing(false);
       setEditedData(null);
       setHasChanges(false);
