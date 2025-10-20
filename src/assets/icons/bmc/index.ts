@@ -1,0 +1,10 @@
+export { ReactComponent as BusinessIdea } from "./business-idea.svg";
+export { ReactComponent as CustomerSegments } from "./customer-segments.svg";
+export { ReactComponent as ValueProposition } from "./value-proposition.svg";
+export { ReactComponent as Channels } from "./channels.svg";
+export { ReactComponent as CustomerRelationships } from "./customer-relationships.svg";
+export { ReactComponent as KeyResources } from "./key-resources.svg"
+export { ReactComponent as KeyActivities } from "./key-activities.svg";
+export { ReactComponent as KeyPartnerships } from "./key-partnerships.svg";
+export { ReactComponent as CostStructure } from "./cost-structure.svg";
+export { ReactComponent as RevenueStreams } from "./revenue-streams.svg";

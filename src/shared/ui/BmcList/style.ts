@@ -2,10 +2,11 @@ import { StartHubColors, StartHubFont } from "@/shared/design";
 import styled from "styled-components";
 
 export const BmcTemplateContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 1024px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
   margin-bottom: 40px;
+  max-width: 1024px;
 
   img {
     width: 242px;
@@ -21,12 +22,12 @@ export const BmcTemplateContainer = styled.div`
 `;
 
 export const Container = styled.div`
-  justify-content: space-between;
   width: 1024px;
+  justify-content: flex-start;
   margin-top: 40px;
-`
+`;
 
 export const Text = styled.p`
-  font: ${StartHubFont.Pretendard.Body1.Medium};
+  ${StartHubFont.Pretendard.Headlines2.SemiBold};
   margin-bottom: 20px;
 `;

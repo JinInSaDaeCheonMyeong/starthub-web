@@ -19,6 +19,9 @@ export const HeaderContainer = styled.div`
   top: 0;
   left: 0;
   z-index: 1000;
+  
+  /* 모달 열릴 때 스크롤바 너비만큼 자동 보정 */
+  padding-right: var(--scrollbar-width, 0px);
 `;
 
 export const ContentWrapper = styled.div`
