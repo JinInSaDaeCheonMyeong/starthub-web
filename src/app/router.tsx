@@ -7,51 +7,51 @@ import CallbackPage from "@/pages/Callback";
 import Onboarding from "@/pages/Onboarding";
 import MyProfile from "@/pages/MyProfile";
 import BmcPage from "@/pages/Bmc/BmcPage";
-import BlockedRoute from "@/shared/ui/BlockedRoute";
-import EarlyOnboarding from "@/pages/Onboarding/early"
-import PreOnboarding from "@/pages/Onboarding/pre"
+import EarlyOnboarding from "@/pages/Onboarding/early";
+import PreOnboarding from "@/pages/Onboarding/pre";
 import NoticeListUpPage from "@/pages/NoticeListUp";
-import EditMyProfile from "@/pages/EditProfile"
+import EditMyProfile from "@/pages/EditProfile";
 import LikeList from "@/pages/LikeList";
 import NoticeDetailPage from "@/pages/NoticeDetail";
 import ScrollToTop from "@/shared/utils/ScrollToTop/scrollToTop";
 import BmcGeneratePage from "@/pages/Bmc/BmcGeneratePage";
 import BmcDetailPage from "@/pages/Bmc/BmcDetailPage";
+import CompetitorList from "@/pages/Competitor/List";
+import CompetitorCreate from "@/pages/Competitor/Create";
+import CompetitorBmcSection from "@/pages/Competitor/BmcSelection";
+import CompetitorAnalysis from "@/pages/CompetitorAnalysis";
 
 const Router = () => {
-  return(
+  return (
     <BrowserRouter>
-    <ScrollToTop/>
+      <ScrollToTop />
       <Routes>
-        <Route path="/" element={<MainPage/>}/>
-        <Route path="/sign-up" element={<SignUpPage/>}/>
-        <Route path="/sign-in" element={<SignInPage/>}/>
-        <Route path="/notices" element={<NoticePage/>}/>
-        <Route path="/onboarding" element={<Onboarding/>}/>
-        {/* 차단된 경로들 */}
-        <Route 
-          path="/competitor" 
-          element={
-            <BlockedRoute 
-              message="경쟁사 분석 기능은 현재 준비 중입니다. 곧 만나보실 수 있어요!" 
-              redirectTo="/"
-            />
-          }
-        />
-        <Route path="/bmc" element={<BmcPage />}/>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/sign-up" element={<SignUpPage />} />
+        <Route path="/sign-in" element={<SignInPage />} />
+        <Route path="/notices" element={<NoticePage />} />
+        <Route path="/onboarding" element={<Onboarding />} />
+        <Route path="/bmc" element={<BmcPage />} />
         <Route path="/bmc/generate" element={<BmcGeneratePage />} />
         <Route path="/bmc/detail/:id" element={<BmcDetailPage />} />
-        <Route path="/my-profile" element={<MyProfile/>}/>
-        <Route path="/my-profile-edit" element={<EditMyProfile/>}/>
+        <Route path="/my-profile" element={<MyProfile />} />
+        <Route path="/my-profile-edit" element={<EditMyProfile />} />
         <Route path="/oauth/callback" element={<CallbackPage />} />
-        <Route path="/onboarding/early-startup" element={<EarlyOnboarding/>}/>
-        <Route path="/onboarding/pre-startup" element={<PreOnboarding/>}/>
-        <Route path="/notices/:type" element={<NoticeListUpPage/>}/>
-        <Route path="/like-list" element={<LikeList/>}/>
-        <Route path="/notice/:id" element={<NoticeDetailPage/>}/>
+        <Route path="/onboarding/early-startup" element={<EarlyOnboarding />} />
+        <Route path="/onboarding/pre-startup" element={<PreOnboarding />} />
+        <Route path="/notices/:type" element={<NoticeListUpPage />} />
+        <Route path="/like-list" element={<LikeList />} />
+        <Route path="/notice/:id" element={<NoticeDetailPage />} />
+        <Route path="/competitor/create" element={<CompetitorCreate />} />
+        <Route path="/competitor/analysis" element={<CompetitorAnalysis />} />
+        <Route path="/competitor" element={<CompetitorList />} />
+        <Route
+          path="/competitor/bmc-selection"
+          element={<CompetitorBmcSection />}
+        />
       </Routes>
     </BrowserRouter>
-  )
+  );
 };
 
 export default Router;
