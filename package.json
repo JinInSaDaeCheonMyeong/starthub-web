@@ -12,6 +12,7 @@
   "dependencies": {
     "@tanstack/react-query": "^5.80.7",
     "axios": "^1.9.0",
+    "html2canvas": "^1.4.1",
     "js-cookie": "^3.0.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

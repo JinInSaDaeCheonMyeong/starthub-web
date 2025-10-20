@@ -14,7 +14,7 @@ export const useGetNoticeRecommend = (
     queryKey: NOTICE_QUERY_KEYS.notice.recommend(),
     queryFn: () => NoticeApi.getNoticeRecommend(),
     staleTime: 1000 * 60 * 5,
-    gcTime: 1000 * 60 * 10, 
+    gcTime: 1000 * 60 * 10,
     retry: false,
     enabled: isLoggedIn,
     ...options,
