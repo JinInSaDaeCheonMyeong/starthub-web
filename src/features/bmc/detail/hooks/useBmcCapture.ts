@@ -66,7 +66,7 @@ export const useBmcCapture = () => {
       document.body.removeChild(wrapper);
 
       const blob = await new Promise<Blob>((resolve) => {
-        canvas.toBlob((blob) => {
+        canvas.toBlob((blob: Blob | null) => {
           if (blob) resolve(blob);
         }, 'image/jpeg', 0.95);
       });

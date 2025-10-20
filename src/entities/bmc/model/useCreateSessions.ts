@@ -18,7 +18,7 @@ export const useCreateSessions = () => {
       const { sessionId, createdAt } = response.data;
 
       toast.success("세션이 생성되었습니다.");
-      setSessionId(sessionId, data.title, createdAt, data.templateType);
+      setSessionId(sessionId, data.title, new Date(createdAt), data.templateType);
       navigate("/bmc/generate");
 
     } catch (error) {
