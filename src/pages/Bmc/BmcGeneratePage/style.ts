@@ -21,3 +21,12 @@ export const Wrapper = styled.div`
   height: calc(100vh - 78px);
   overflow: auto;
 `;
+
+export const FullWidthWrapper = styled.div`
+  margin-top: 78px;
+  display: flex;
+  background-color: ${StartHubColors.White2};
+  width: 100%;
+  height: calc(100vh - 78px);
+  overflow: auto;
+`;
