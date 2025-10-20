@@ -22,7 +22,7 @@ export const UserMessageBubbleWrapper = styled.div`
 
 export const StartHubMessageBubbleWrapper = styled.div`
   max-width: 410px;
-  background-color: ${StartHubColors.White1};
+  background-color: #e9f0fe;
   padding: 16px 20px;
   border-radius: 10px;
   position: relative;
