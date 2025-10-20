@@ -26,7 +26,7 @@ const menuItems = [
   {
     icon: <img src={RivalIcon} alt="경쟁사 분석" />,
     label: "경쟁사 분석",
-    path: "/team-building",
+    path: "/competitor",
   },
   {
     icon: <img src={AiIcon} alt="AI 추천 공고" />,
