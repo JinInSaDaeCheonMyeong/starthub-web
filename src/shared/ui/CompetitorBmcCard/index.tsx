@@ -19,7 +19,7 @@ const BmcCard = ({ bmcId, title, date }: BmcCardProps) => {
   return (
     <S.BmcImageContainer onClick={handleClick}>
       <S.ImageWrapper>
-        <img src={BmcTemplate} />
+        <img src={BmcTemplate} alt={title} />
         <S.Title>{title}</S.Title>
         <S.Date>{date}</S.Date>
       </S.ImageWrapper>
