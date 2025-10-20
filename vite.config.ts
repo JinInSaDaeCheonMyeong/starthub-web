@@ -4,16 +4,17 @@ import path from "path";
 import svgr from "vite-plugin-svgr";
 
 export default defineConfig({
+  base: "/",
   plugins: [
     react(),
     svgr({
       svgrOptions: {
-        exportType: 'named',
-        namedExport: 'ReactComponent',
+        exportType: "named",
+        namedExport: "ReactComponent",
         icon: true,
         titleProp: true,
       },
-      include: '**/*.svg',
+      include: "**/*.svg",
     }),
   ],
   resolve: {
@@ -38,10 +39,15 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom'],
-          ui: ['styled-components'],
-          utils: ['axios', '@tanstack/react-query', 'js-cookie', 'react-toastify'],
-          store: ['zustand'],
+          vendor: ["react", "react-dom", "react-router-dom"],
+          ui: ["styled-components"],
+          utils: [
+            "axios",
+            "@tanstack/react-query",
+            "js-cookie",
+            "react-toastify",
+          ],
+          store: ["zustand"],
         },
       },
     },
