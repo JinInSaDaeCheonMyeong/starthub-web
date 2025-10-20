@@ -12,7 +12,7 @@ export const HeaderContainer = styled.div`
   border-bottom: 1px solid ${StartHubColors.Gray3};
   height: 78px;
   background: rgb(255, 255, 255, 50%);
-  backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px); 
   display: flex;
   align-items: center;
   justify-content: center;
