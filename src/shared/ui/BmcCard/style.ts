@@ -11,8 +11,8 @@ export const BmcImageContainer = styled.div`
   transition: all 0.3s ease;
 
   &:hover {
-  opacity: 0.5;
-  cursor: pointer;
+    opacity: 0.5;
+    cursor: pointer;
   }
 `;
 
@@ -20,13 +20,32 @@ export const ImageWrapper = styled.div`
   height: 100%;
   background-color: ${StartHubColors.White1};
   width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  img {
+    width: 100%;
+    height: 170px;
+    border-radius: 10px;
+  }
+`;
+
+export const IconPlaceholder = styled.div`
+  border-radius: 10px;
+  width: 242px;
+  height: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 1px solid ${StartHubColors.Gray3};
 `;
 
 export const TextContainer = styled.div`
-  padding: 20px;
   display: flex;
+  padding-top: 4px;
   flex-direction: column;
-  gap: 6px;
+  gap: 2px;
   background-color: ${StartHubColors.White1};
 `;
 
