@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SignInPage from "@/pages/SignIn";
 import SignUpPage from "@/pages/SignUp";
 import MainPage from "@/pages/Main";
@@ -6,7 +6,7 @@ import NoticePage from "@/pages/Notice";
 import CallbackPage from "@/pages/Callback";
 import Onboarding from "@/pages/Onboarding";
 import MyProfile from "@/pages/MyProfile";
-import BmcPage from "@/pages/Bmc/Create";
+import BmcPage from "@/pages/Bmc/BmcPage";
 import BlockedRoute from "@/shared/ui/BlockedRoute";
 import EarlyOnboarding from "@/pages/Onboarding/early"
 import PreOnboarding from "@/pages/Onboarding/pre"
@@ -15,6 +15,8 @@ import EditMyProfile from "@/pages/EditProfile"
 import LikeList from "@/pages/LikeList";
 import NoticeDetailPage from "@/pages/NoticeDetail";
 import ScrollToTop from "@/shared/utils/ScrollToTop/scrollToTop";
+import BmcGeneratePage from "@/pages/Bmc/BmcGeneratePage";
+import BmcDetailPage from "@/pages/Bmc/BmcDetailPage";
 
 const Router = () => {
   return(
@@ -36,7 +38,9 @@ const Router = () => {
             />
           }
         />
-        <Route path="/bmc" element={<BmcPage/>}/>
+        <Route path="/bmc" element={<BmcPage />}/>
+        <Route path="/bmc/generate" element={<BmcGeneratePage />} />
+        <Route path="/bmc/detail/:id" element={<BmcDetailPage />} />
         <Route path="/my-profile" element={<MyProfile/>}/>
         <Route path="/my-profile-edit" element={<EditMyProfile/>}/>
         <Route path="/oauth/callback" element={<CallbackPage />} />
