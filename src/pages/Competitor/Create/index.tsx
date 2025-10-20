@@ -62,11 +62,20 @@ const CompetitorCreate = () => {
           (item) => item.bmcId === Number(bmcId)
         );
 
-        const data = hasExisting
+        const response = hasExisting
           ? await competitorApi.regenerateCompetitorAnalysis(Number(bmcId))
           : await competitorApi.createCompetitorAnalysis(Number(bmcId));
 
-        setServerData(data);
+        const firstItem = response.data[0];
+        if (firstItem) {
+          const transformedData: MarketAnalysisResponse = {
+            data: firstItem,
+            status: response.status,
+            message: response.message,
+            statusCode: response.statusCode,
+          };
+          setServerData(transformedData);
+        }
 
         await queryClient.resetQueries({
           queryKey: COMPETITOR_QUERY_KEYS.competitor.getAnalyses,

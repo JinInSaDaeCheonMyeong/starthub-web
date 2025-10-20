@@ -1,7 +1,7 @@
 import * as S from "./style";
 import { Competitor } from "../../types";
 import { formatTextWithBold } from "../../utils/textFormatter";
-import defaultLogo from "../../../assets/images/default=business.svg";
+import defaultLogo from "@assets/images/default=business.svg?url";
 
 interface CompetitorCardProps {
   competitor: Competitor;
