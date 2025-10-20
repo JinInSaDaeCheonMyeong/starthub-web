@@ -87,7 +87,7 @@ const CompetitorCreate = () => {
       <Layout>
         <LoadingModal
           isOpen={loading}
-          message="경쟁사 분석을 진행 중입니다.&#10;약 1분 정도 소요됩니다."
+          message={"경쟁사 분석을 진행 중입니다.\n약 1분 정도 소요됩니다."}
         />
         <MarketAnalysisSkeleton />
       </Layout>
