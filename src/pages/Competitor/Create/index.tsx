@@ -66,15 +66,19 @@ const CompetitorCreate = () => {
           ? await competitorApi.regenerateCompetitorAnalysis(Number(bmcId))
           : await competitorApi.createCompetitorAnalysis(Number(bmcId));
 
-        const firstItem = response.data[0];
-        if (firstItem) {
+        // response.data가 배열인지 단일 객체인지 확인
+        const analysisData = Array.isArray(response.data) ? response.data[0] : response.data;
+
+        if (analysisData) {
           const transformedData: MarketAnalysisResponse = {
-            data: firstItem,
+            data: analysisData,
             status: response.status,
             message: response.message,
             statusCode: response.statusCode,
           };
           setServerData(transformedData);
+        } else {
+          setError("분석 데이터를 받지 못했습니다.");
         }
 
         await queryClient.resetQueries({
@@ -116,11 +120,13 @@ const CompetitorCreate = () => {
 
   return (
     <Layout>
-      {serverData && (
+      {serverData ? (
         <MarketAnalysis
           data={serverData}
           bmcId={bmcId ? Number(bmcId) : undefined}
         />
+      ) : (
+        <div>데이터가 없습니다.</div>
       )}
     </Layout>
   );
