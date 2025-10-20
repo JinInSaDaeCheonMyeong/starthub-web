@@ -14,8 +14,25 @@ export const HeaderContainer = styled.div`
   border-bottom: 1px solid ${StartHubColors.Gray3};
   display: flex;
   align-items: center;
-  padding-left: 160px;
+  padding-left: 65px;
   gap: 20px;
+
+  @media (min-width: 1920px) {
+    height: 98px;
+    padding-left: 260px;
+  }
+
+  @media (max-width: 1440px) {
+    padding-left: 50px;
+  }
+
+  @media (max-width: 1024px) {
+    padding-left: 30px;
+  }
+
+  @media print {
+    padding-left: 40px !important;
+  }
 `;
 
 export const BmcTitle = styled.p`

@@ -1,6 +1,6 @@
 import * as S from "./style";
 import { ReactComponent as LogoIcon } from "@/assets/logo/logoIcon.svg";
-import useSessionStore from "@/shared/store/useSessionStore";
+import useSessionStore from "@/entities/bmc/model/useSessionStore";
 import { useNavigate } from "react-router-dom";
 
 const BmcHeader = () => {

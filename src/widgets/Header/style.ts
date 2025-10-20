@@ -12,13 +12,16 @@ export const HeaderContainer = styled.div`
   border-bottom: 1px solid ${StartHubColors.Gray3};
   height: 78px;
   background: rgb(255, 255, 255, 50%);
-  backdrop-filter: blur(20px); 
+  backdrop-filter: blur(20px);
   display: flex;
   align-items: center;
   justify-content: center;
   top: 0;
   left: 0;
   z-index: 1000;
+  
+  /* 모달 열릴 때 스크롤바 너비만큼 자동 보정 */
+  padding-right: var(--scrollbar-width, 0px);
 `;
 
 export const ContentWrapper = styled.div`
