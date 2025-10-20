@@ -1,10 +1,13 @@
 import { BaseResponse } from "@/shared/types/BaseResponse"
 
+export type BmcTemplateType = 'STARTHUB' | 'STARTHUB_DARK' | 'SIMPLE' | 'COLOR';
+
 export interface Question {
   questionNumber: number;
-  answer: string;
+  answer: string | null;
 }
 
+// BMC 세션 응답 데이터 (메인 브랜치 버전)
 export interface BmcResponseData {
   title: string;
   id: string
@@ -18,13 +21,14 @@ export interface BmcResponseData {
 export type BmcSessionResponse = BaseResponse<BmcResponseData[]>;
 
 export interface CreateSessionRequest {
-  businessIdea: string
+  title: string;
+  templateType: BmcTemplateType;
 }
 
 export type CreateSessionResponse = BmcSessionResponse;
 
 export interface CreateAnswerRequest {
-  sessionId: string
+  sessionId: number
   questionNumber: number
   answer: string
 }
@@ -32,29 +36,39 @@ export interface CreateAnswerRequest {
 export type CreateAnswerResponse = BaseResponse<BmcResponseData>;
 
 export interface ModifyBmcRequest {
-  bmcId: string
-  modificationRequest: string
-  requestType: string
+  bmcId: number;
+  title: string;
+  customerSegments: string;
+  valueProposition: string;
+  channels: string;
+  customerRelationships: string;
+  revenueStreams: string;
+  keyResources: string;
+  keyActivities: string;
+  keyPartners: string;
+  costStructure: string;
+  templateType: BmcTemplateType;
+  imageUrl?: string;
 }
 
 export interface ModifyBmcData {
-  id: string
-  bmcId: string
+  id: number
+  bmcId: number
   modificationRequest: string
   requestType: string
   isProcessed: boolean
   aiResponse: string
-  createdAt: string
+  createdAt: Date
   updatedBmc: BmcData
 }
 
 export type ModifyBmcResponse = BaseResponse<ModifyBmcData>;
 
 export interface CreateBmcRequest {
-  sessionId: string
-  title: string
+  sessionId: number;
 }
 
+// BMC 캔버스 데이터 (메인 브랜치 버전)
 export interface BmcData {
   id: string
   title: string
@@ -75,14 +89,16 @@ export interface BmcData {
 
 export type CreateBmcResponse = BaseResponse<BmcData>;
 
+export type UploadImageResponse = BaseResponse<BmcData>;
+
 export type SessionDetailResponse = BaseResponse<BmcResponseData>;
 
-export type QuestionListData = [
-  string, string, string, string, string,
-  string, string, string, string, string
-];
+export type QuestionListData = {
+  questionNumber: number
+  question: string
+};
 
-export type QuestionListResponse = BaseResponse<QuestionListData>;
+export type QuestionListResponse = BaseResponse<QuestionListData[]>;
 
 export type CanvasesResponse = BaseResponse<BmcData[]>;
 
