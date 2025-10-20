@@ -36,8 +36,8 @@ const MarketAnalysis = ({ data, bmcId }: MarketAnalysisProps) => {
       try {
         const response = await bmcApi.getCanvasesDetail(String(bmcId));
         setBmcImageUrl(response.data.imageUrl ?? null);
-      } catch (error) {
-        console.error("Failed to load BMC image:", error);
+      } catch {
+        setBmcImageUrl(null);
       }
     };
     fetchBmcImage();
