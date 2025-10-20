@@ -48,7 +48,7 @@ export const ImageWrapper = styled.div`
     transition: opacity 0.3s ease;
 
     &:hover {
-      opacity: 0.5 ${StartHubColors.Black1};
+      opacity: 0.5;
     }
   }
 `;
