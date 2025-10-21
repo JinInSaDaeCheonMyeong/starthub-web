@@ -22,7 +22,6 @@ const BmcTemplateCard = () => {
   };
 
   const handleCreateSession = (projectName: string, templateType: BmcTemplateType) => {
-    console.log(`프로젝트: ${projectName}, 템플릿: ${templateType}`);
     closeModal();
   };
 

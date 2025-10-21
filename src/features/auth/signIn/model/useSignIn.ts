@@ -35,7 +35,6 @@ export const useSignIn = () => {
       }
     },
     onError: (error) => {
-      console.log(error.message);
       toast.error("로그인에 실패하였습니다. 이메일과 비밀번호를 확인해주세요.");
     },
   });
