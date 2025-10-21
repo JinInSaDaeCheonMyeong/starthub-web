@@ -4,10 +4,15 @@ import * as S from "./style";
 import { toast } from "react-toastify";
 import StartHubAxios from "@/shared/api/customAxios/StartHubAxios";
 import Cookies from "js-cookie";
+import { useQueryClient } from "@tanstack/react-query";
+import { USER_QUERY_KEYS } from "@/entities/user/queryKey";
+import { useAuthStore } from "@/app/model/stores/useAuthStore";
 
 const MyPage: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const queryClient = useQueryClient();
+  const setIsLoggedIn = useAuthStore((s) => s.setIsLoggedIn);
 
   const isProfileActive =
     location.pathname === "/my-profile" ||
@@ -18,8 +23,12 @@ const MyPage: React.FC = () => {
     try {
       await StartHubAxios.post("/user/sign-out");
       Cookies.remove("access_token");
+      setIsLoggedIn(false);
+      queryClient.removeQueries({
+        queryKey: USER_QUERY_KEYS.user.getUserProfile,
+      });
       toast.success("로그아웃에 성공했습니다");
-      navigate("/");
+      navigate("/"); 
     } catch (error) {
       toast.error("로그아웃에 실패했습니다");
     }
@@ -31,6 +40,7 @@ const MyPage: React.FC = () => {
       tryLogout();
     }
   };
+
   const TERMS_URL =
     "https://various-bougon-d76.notion.site/27f507c40eaf80acbf4afba41b9964b7";
   const PRIVACY_URL =
@@ -40,18 +50,14 @@ const MyPage: React.FC = () => {
     <S.Sidebar>
       <S.SidebarItem
         className={isProfileActive ? "active" : ""}
-        onClick={() => {
-          navigate("/my-profile");
-        }}
+        onClick={() => navigate("/my-profile")}
       >
         프로필
       </S.SidebarItem>
 
       <S.SidebarItem
         className={isLikeActive ? "active" : ""}
-        onClick={() => {
-          navigate("/like-list");
-        }}
+        onClick={() => navigate("/like-list")}
       >
         좋아요
       </S.SidebarItem>
@@ -63,9 +69,10 @@ const MyPage: React.FC = () => {
       <S.SidebarItem onClick={() => window.open(PRIVACY_URL, "_blank")}>
         개인정보처리방침
       </S.SidebarItem>
+
       <S.Divider />
 
-      <S.LogOut onClick={() => choiceLogout()}>로그아웃</S.LogOut>
+      <S.LogOut onClick={choiceLogout}>로그아웃</S.LogOut>
     </S.Sidebar>
   );
 };

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import * as S from "./style";
 import { StartHubLogo } from "@/assets/logo";
 import CategorySelector from "@/features/onboarding/categorySelector";
@@ -32,23 +33,41 @@ const Onboarding = () => {
   };
 
   const handleFinalSubmit = () => {
-    if (preData && categories.length > 0) {
-      const basicInfoStr = sessionStorage.getItem("onboardingBasicInfo");
-      const basicInfo = basicInfoStr ? JSON.parse(basicInfoStr) : {};
-
-      const onboardingData: OnboardingRequest = {
-        ...basicInfo,
-        interests: categories,
-        startupLocation: preData.startupLocation,
-      };
-      
-      preOnboardingMutation.mutate(onboardingData, {
-        onSuccess: () => {
-          sessionStorage.removeItem("onboardingBasicInfo");
-          navigate("/");
-        }
-      });
+    if (!preData) {
+      toast.error("창업 위치 정보가 없습니다.");
+      return;
     }
+
+    if (categories.length === 0) {
+      toast.error("최소 1개 이상의 관심 분야를 선택해주세요.");
+      return;
+    }
+
+    const basicInfoStr = sessionStorage.getItem("onboardingBasicInfo");
+    if (!basicInfoStr) {
+      toast.error("기본 정보를 찾을 수 없습니다. 처음부터 다시 시작해주세요.");
+      navigate("/onboarding");
+      return;
+    }
+
+    const basicInfo = JSON.parse(basicInfoStr);
+
+    const onboardingData: OnboardingRequest = {
+      ...basicInfo,
+      startupFields: categories.map(category => ({
+        businessType: category,
+      })),
+      startupStatus: "PRE_STARTUP",
+      startupHistory: 0,
+      startupLocation: preData.startupLocation,
+    };
+
+    preOnboardingMutation.mutate(onboardingData, {
+      onSuccess: () => {
+        sessionStorage.removeItem("onboardingBasicInfo");
+        navigate("/");
+      }
+    });
   };
 
   const isValid = preData?.startupLocation?.trim() && categories.length > 0;

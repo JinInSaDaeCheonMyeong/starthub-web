@@ -28,7 +28,17 @@ const NoticeDetail = ({ item }: NoticeDetailProps) => {
     []
   );
   const [activeId, setActiveId] = useState<string>("");
+  const [safeContent, setSafeContent] = useState(item.content);
   const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!item.content) return;
+    const fixed = item.content.replace(
+      /href="javascript:fn_open_window\('([^']+)'\);?"/g,
+      'href="$1" target="_blank" rel="noopener noreferrer"'
+    );
+    setSafeContent(fixed);
+  }, [item.content]);
 
   useEffect(() => {
     if (!contentRef.current) return;
@@ -76,7 +86,6 @@ const NoticeDetail = ({ item }: NoticeDetailProps) => {
 
       if (!currentActiveId && headingsArray.length > 0) {
         const isNearBottom = scrollTop + viewportHeight >= documentHeight - 100;
-
         if (isNearBottom) {
           currentActiveId = headingsArray[headingsArray.length - 1].id;
         }
@@ -86,8 +95,8 @@ const NoticeDetail = ({ item }: NoticeDetailProps) => {
         setActiveId(currentActiveId);
       }
     };
-    handleScroll();
 
+    handleScroll();
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
@@ -136,7 +145,7 @@ const NoticeDetail = ({ item }: NoticeDetailProps) => {
         <S.ContentWrapper ref={contentRef}>
           <div
             className="dot_list-wrap"
-            dangerouslySetInnerHTML={{ __html: item.content }}
+            dangerouslySetInnerHTML={{ __html: safeContent }}
           />
         </S.ContentWrapper>
       </S.MainContent>

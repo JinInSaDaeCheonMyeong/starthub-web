@@ -25,6 +25,7 @@ export const Container = styled.div`
   width: 1024px;
   justify-content: flex-start;
   margin-top: 40px;
+  min-height: 50vh;
 `;
 
 export const Text = styled.p`

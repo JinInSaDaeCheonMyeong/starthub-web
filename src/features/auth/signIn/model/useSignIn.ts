@@ -13,7 +13,6 @@ export const useSignIn = () => {
     mutate: signIn,
     isPending: isLoading,
     isError,
-    error,
   } = useMutation({
     mutationFn: userApi.signIn,
     onSuccess: (response) => {
@@ -34,11 +33,10 @@ export const useSignIn = () => {
         toast.error('로그인 응답에 문제가 있습니다.');
       }
     },
-    onError: (error) => {
-      console.log(error.message);
+    onError: () => {
       toast.error("로그인에 실패하였습니다. 이메일과 비밀번호를 확인해주세요.");
     },
   });
 
-  return { signIn, isLoading, isError, error };
+  return { signIn, isLoading, isError };
 };

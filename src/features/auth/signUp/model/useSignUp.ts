@@ -10,7 +10,6 @@ export const useSignUp = () => {
     mutate: signUp,
     isPending: isLoading,
     isError,
-    error,
   } = useMutation({
     mutationFn: userApi.signUp,
     onSuccess: (response) => {
@@ -22,11 +21,10 @@ export const useSignUp = () => {
         toast.error('회원가입 응답에 문제가 있습니다.')
       }
     },
-    onError: (error) => {
-      console.log(error.message)
+    onError: () => {
       toast.error("회원가입에 실패했습니다.")
     }
   })
 
-  return {signUp, isLoading, isError, error}
+  return {signUp, isLoading, isError}
 };
