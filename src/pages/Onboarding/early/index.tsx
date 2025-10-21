@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import * as S from "./style";
 import { StartHubLogo } from "@/assets/logo";
 import CategorySelector from "@/features/onboarding/categorySelector";
@@ -37,28 +38,46 @@ const Onboarding = () => {
   };
 
   const handleFinalSubmit = () => {
-    if (earlyData && categories.length > 0) {
-      const basicInfoStr = sessionStorage.getItem("onboardingBasicInfo");
-      const basicInfo = basicInfoStr ? JSON.parse(basicInfoStr) : {};
-
-      const onboardingData: OnboardingRequest = {
-        ...basicInfo,
-        interests: categories,
-        companyName: earlyData.companyName,
-        companyDescription: earlyData.companyDescription,
-        numberOfEmployees: earlyData.numberOfEmployees,
-        companyWebsite: earlyData.companyWebsite,
-        startupLocation: earlyData.startupLocation,
-        annualRevenue: earlyData.annualRevenue,
-      };
-      
-      earlyOnboardingMutation.mutate(onboardingData, {
-        onSuccess: () => {
-          sessionStorage.removeItem("onboardingBasicInfo");
-          navigate("/");
-        }
-      });
+    if (!earlyData) {
+      toast.error("회사 정보가 없습니다.");
+      return;
     }
+
+    if (categories.length === 0) {
+      toast.error("최소 1개 이상의 관심 분야를 선택해주세요.");
+      return;
+    }
+
+    const basicInfoStr = sessionStorage.getItem("onboardingBasicInfo");
+    if (!basicInfoStr) {
+      toast.error("기본 정보를 찾을 수 없습니다. 처음부터 다시 시작해주세요.");
+      navigate("/onboarding");
+      return;
+    }
+
+    const basicInfo = JSON.parse(basicInfoStr);
+
+    const onboardingData: OnboardingRequest = {
+      ...basicInfo,
+      startupFields: categories.map(category => ({
+        businessType: category,
+      })),
+      startupStatus: "EARLY_STAGE",
+      startupHistory: 0,
+      companyName: earlyData.companyName,
+      companyDescription: earlyData.companyDescription,
+      numberOfEmployees: earlyData.numberOfEmployees,
+      companyWebsite: earlyData.companyWebsite,
+      startupLocation: earlyData.startupLocation,
+      annualRevenue: earlyData.annualRevenue,
+    };
+
+    earlyOnboardingMutation.mutate(onboardingData, {
+      onSuccess: () => {
+        sessionStorage.removeItem("onboardingBasicInfo");
+        navigate("/");
+      }
+    });
   };
 
   const isValid = earlyData?.companyName?.trim() &&
