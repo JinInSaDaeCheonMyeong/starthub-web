@@ -21,7 +21,7 @@ const BmcTemplateCard = () => {
     setIsModalOpen(false);
   };
 
-  const handleCreateSession = (projectName: string, templateType: BmcTemplateType) => {
+  const handleCreateSession = () => {
     closeModal();
   };
 
