@@ -7,8 +7,10 @@ import { useGetNoticeSearch } from "@/features/notice/getNoticeSearch/useGetNoti
 import { useGetNoticeRecommend } from "@/features/notice/getNoticeRecommend/useGetNoticeRecommend";
 import { NoticeType } from "@/entities/notice/model/notice.type";
 import AiNotice from "@assets/images/aiNotice.png";
+import { useAuthStore } from "@/app/model/stores/useAuthStore";
 
 const MainContent = () => {
+  const {isLoggedIn} = useAuthStore()
   const { data } = useGetNoticeRecommend();
 
   return (
@@ -24,7 +26,7 @@ const MainContent = () => {
 
       <SectionBlock
         title={
-          !data
+          !isLoggedIn
             ? "로그인 후 AI 맞춤형 공고를 추천받을 수 있어요!"
             : "AI 추천 공고"
         }

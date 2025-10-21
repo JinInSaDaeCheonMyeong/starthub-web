@@ -23,7 +23,6 @@ export const useSignUp = () => {
       }
     },
     onError: (error) => {
-      console.log(error.message)
       toast.error("회원가입에 실패했습니다.")
     }
   })

@@ -7,6 +7,7 @@ export const Container = styled.div`
   margin-top: 40px;
   margin-right: 40px;
   margin-bottom: 80px;
+  min-height: 50vh;
 `;
 
 export const MainContent = styled.div`
