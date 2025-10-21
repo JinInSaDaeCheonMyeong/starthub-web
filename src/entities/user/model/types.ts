@@ -139,6 +139,9 @@ export interface OnboardingRequest {
   birth?: string;
   gender?: string;
   interests?: string[];
+  startupFields?: StartupField[];
+  startupStatus?: string;
+  startupHistory?: number;
   profileImage?: string;
   startupLocation?: string;
   companyName?: string;
@@ -159,6 +162,11 @@ export interface OnboardingData {
 export type OnboardingResponse = BaseResponse<OnboardingData>;
 
 
+export interface StartupField {
+  businessType: string;
+  customField?: string;
+}
+
 export interface UserData {
   id: string;
   email: string;
@@ -166,6 +174,18 @@ export interface UserData {
   birth: string | null;
   gender: string | null;
   profileImage: string | null;
+  provider?: string;
+  interests?: string[];
+  startupFields?: StartupField[];
+  startupStatus?: string | null;
+  startupHistory?: string | null;
+  introduction?: string;
+  startupLocation?: string;
+  companyName?: string;
+  companyDescription?: string;
+  numberOfEmployees?: number;
+  companyWebsite?: string;
+  annualRevenue?: number;
 }
 
 export interface UserResponse {
