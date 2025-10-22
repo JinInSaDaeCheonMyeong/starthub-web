@@ -1,4 +1,3 @@
-
 import { StartHubColors, StartHubFont } from "@/shared/design";
 import styled from "styled-components";
 
@@ -8,7 +7,7 @@ export const Overlay = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: ${StartHubColors.Black1};
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -61,7 +60,7 @@ export const CancelButton = styled.button`
   border-radius: 8px;
   cursor: pointer;
   ${StartHubFont.Pretendard.Body2.Medium};
-  
+
   &:hover {
     background-color: ${StartHubColors.Gray4};
   }
@@ -70,13 +69,15 @@ export const CancelButton = styled.button`
 export const CreateButton = styled.button<{ disabled: boolean }>`
   padding: 12px 24px;
   border: none;
-  background-color: ${({ disabled }) => disabled ? StartHubColors.Gray3 : StartHubColors.Primary};
+  background-color: ${({ disabled }) =>
+    disabled ? StartHubColors.Gray3 : StartHubColors.Primary};
   color: ${StartHubColors.White1};
   border-radius: 8px;
-  cursor: ${({ disabled }) => disabled ? 'not-allowed' : 'pointer'};
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
   ${StartHubFont.Pretendard.Body2.Medium};
-  
+
   &:hover {
-    background-color: ${({ disabled }) => disabled ? StartHubColors.Gray3 : StartHubColors.Primary};
+    background-color: ${({ disabled }) =>
+      disabled ? StartHubColors.Gray3 : StartHubColors.Primary};
   }
 `;
