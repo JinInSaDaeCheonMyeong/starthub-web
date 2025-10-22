@@ -30,6 +30,7 @@ export const LabelSection = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  cursor: pointer;
   p {
     margin-right: 10px;
   }

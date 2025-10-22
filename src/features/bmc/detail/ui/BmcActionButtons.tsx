@@ -9,6 +9,7 @@ interface BmcActionButtonsProps {
   onCancelEdit: () => void;
   onSaveEdit: () => void;
   onDownload: () => void;
+  onBackToList: () => void;
 }
 
 export const BmcActionButtons = ({
@@ -18,6 +19,7 @@ export const BmcActionButtons = ({
   onCancelEdit,
   onSaveEdit,
   onDownload,
+  onBackToList,
 }: BmcActionButtonsProps) => {
   return (
     <S.ActionButtons>
@@ -50,6 +52,17 @@ export const BmcActionButtons = ({
         </>
       ) : (
         <>
+          <StartHubButton
+            text="목록으로 돌아가기"
+            width={200}
+            onClick={onBackToList}
+            backgroundColor={StartHubColors.White1}
+            typography={StartHubFont.Pretendard.Caption1.Medium}
+            customStyle={{
+              border: `1px solid ${StartHubColors.Gray2}`,
+              color: `${StartHubColors.Gray1}`,
+            }}
+          />
           <StartHubButton
             text="BMC 다운로드"
             width={200}
