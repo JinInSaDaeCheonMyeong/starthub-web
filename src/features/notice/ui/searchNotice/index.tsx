@@ -4,11 +4,12 @@ import { StartHubSearchBar } from "@/shared/ui/SearchBar";
 import { StartHubDropdown } from "@/shared/ui/DropDown";
 import { NoticeSearchParams } from "@/entities/notice/model/notice.type";
 
-interface SearchNoticeProps {
+export interface SearchNoticeProps {
   onFilterChange: (filters: Omit<NoticeSearchParams, "page" | "size">) => void;
+  hideFilters?: boolean;
 }
 
-const SearchNotice = ({ onFilterChange }: SearchNoticeProps) => {
+const SearchNotice = ({ onFilterChange, hideFilters = false }: SearchNoticeProps) => {
   const [search, setSearch] = useState("");
   const [selectedSupport, setSelectedSupport] = useState("");
   const [selectedTarget, setSelectedTarget] = useState("");
@@ -16,31 +17,33 @@ const SearchNotice = ({ onFilterChange }: SearchNoticeProps) => {
   const [selectedAge, setSelectedAge] = useState("");
   const [selectedExperience, setSelectedExperience] = useState("");
 
-  const updateFilters = () => {
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(event.target.value);
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      onFilterChange({
+        title: search || undefined,
+        supportField: selectedSupport || undefined,
+        targetGroup: selectedTarget || undefined,
+        targetRegion: selectedRegion || undefined,
+        targetAge: selectedAge || undefined,
+        businessExperience: selectedExperience || undefined,
+      });
+    }
+  };
+
+  useEffect(() => {
     onFilterChange({
-      title: search || undefined,
+      title: undefined,
       supportField: selectedSupport || undefined,
       targetGroup: selectedTarget || undefined,
       targetRegion: selectedRegion || undefined,
       targetAge: selectedAge || undefined,
       businessExperience: selectedExperience || undefined,
     });
-  };
-
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(event.target.value);
-  };
-
-  useEffect(() => {
-    updateFilters();
-  }, [
-    search,
-    selectedSupport,
-    selectedTarget,
-    selectedRegion,
-    selectedAge,
-    selectedExperience,
-  ]);
+  }, [selectedSupport, selectedTarget, selectedRegion, selectedAge, selectedExperience, onFilterChange]);
 
   return (
     <S.SearchNoticeContainer>
@@ -49,11 +52,13 @@ const SearchNotice = ({ onFilterChange }: SearchNoticeProps) => {
       <StartHubSearchBar
         value={search}
         onChange={handleSearchChange}
+        onKeyDown={handleKeyDown}
         customStyle={{ width: "552px" }}
-        placeholder="찾을 공고를 입력해주세요!"
+        placeholder="제목이나 자연어로 공고를 검색해보세요!"
       />
 
-      <S.DropdownContainer>
+      {!hideFilters && (
+        <S.DropdownContainer>
         <StartHubDropdown
           options={[
             { value: "", label: "지원분야" }, 
@@ -147,7 +152,8 @@ const SearchNotice = ({ onFilterChange }: SearchNoticeProps) => {
           onChange={setSelectedExperience}
           placeholder="창업 업력"
         />
-      </S.DropdownContainer>
+        </S.DropdownContainer>
+      )}
     </S.SearchNoticeContainer>
   );
 };

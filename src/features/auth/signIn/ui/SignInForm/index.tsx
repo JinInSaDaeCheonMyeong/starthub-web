@@ -37,6 +37,12 @@ const SignInBox = () => {
     signIn({ email, password });
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter") {
+      AuthHandleSubmit();
+    }
+  };
+
   return (
     <S.SignBoxContainer>
       <S.SignInLogoField>
@@ -54,6 +60,7 @@ const SignInBox = () => {
           setEmail(e.target.value);
           setIsEmailError(false);
         }}
+        onKeyDown={handleKeyDown}
         placeholder="이메일을 입력해주세요"
         isError={isEmailError}
         supportingText={isEmailError ? "이메일을 입력해주세요" : ""}
@@ -68,6 +75,7 @@ const SignInBox = () => {
           setPassword(e.target.value);
           setIsPasswordError(false);
         }}
+        onKeyDown={handleKeyDown}
         placeholder="비밀번호를 입력해주세요"
         isError={isPasswordError}
         supportingText={isPasswordError ? "비밀번호를 입력해주세요" : ""}

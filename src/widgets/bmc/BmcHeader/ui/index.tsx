@@ -9,7 +9,7 @@ const BmcHeader = () => {
 
   return (
     <S.HeaderContainer>
-      <LogoIcon width={104} height={18} onClick={() => navigate("/")} />
+      <LogoIcon width={104} height={18} onClick={() => navigate("/")} style={{ cursor: "pointer" }} />
       <S.BmcTitle>{title}</S.BmcTitle>
       <S.BmcDate>
         {createdAt && new Date(createdAt).toLocaleDateString('ko-KR')}

@@ -38,6 +38,7 @@ export interface NoticeType {
   departmentInCharge: string;
   content: string;
   isLiked: boolean;
+  isNatural?: boolean;
 }
 
 export interface NoticePage {
