@@ -17,31 +17,33 @@ const SearchNotice = ({ onFilterChange, hideFilters = false }: SearchNoticeProps
   const [selectedAge, setSelectedAge] = useState("");
   const [selectedExperience, setSelectedExperience] = useState("");
 
-  const updateFilters = () => {
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(event.target.value);
+  };
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      onFilterChange({
+        title: search || undefined,
+        supportField: selectedSupport || undefined,
+        targetGroup: selectedTarget || undefined,
+        targetRegion: selectedRegion || undefined,
+        targetAge: selectedAge || undefined,
+        businessExperience: selectedExperience || undefined,
+      });
+    }
+  };
+
+  useEffect(() => {
     onFilterChange({
-      title: search || undefined,
+      title: undefined,
       supportField: selectedSupport || undefined,
       targetGroup: selectedTarget || undefined,
       targetRegion: selectedRegion || undefined,
       targetAge: selectedAge || undefined,
       businessExperience: selectedExperience || undefined,
     });
-  };
-
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(event.target.value);
-  };
-
-  useEffect(() => {
-    updateFilters();
-  }, [
-    search,
-    selectedSupport,
-    selectedTarget,
-    selectedRegion,
-    selectedAge,
-    selectedExperience,
-  ]);
+  }, [selectedSupport, selectedTarget, selectedRegion, selectedAge, selectedExperience, onFilterChange]);
 
   return (
     <S.SearchNoticeContainer>
@@ -50,8 +52,9 @@ const SearchNotice = ({ onFilterChange, hideFilters = false }: SearchNoticeProps
       <StartHubSearchBar
         value={search}
         onChange={handleSearchChange}
+        onKeyDown={handleKeyDown}
         customStyle={{ width: "552px" }}
-        placeholder="찾을 공고를 입력해주세요!"
+        placeholder="제목이나 자연어로 공고를 검색해보세요!"
       />
 
       {!hideFilters && (
