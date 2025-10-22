@@ -30,9 +30,11 @@ const NoticePage = () => {
     setCurrentPage(1);
   };
 
+  const shouldHideFilters = data?.content?.[0]?.isNatural === true;
+
   return (
     <Layout>
-      <SearchNotice onFilterChange={handleFilterChange} />
+      <SearchNotice onFilterChange={handleFilterChange} hideFilters={shouldHideFilters} />
 
       <S.NoticeContentContainer>
         {isLoading ? (
@@ -43,7 +45,7 @@ const NoticePage = () => {
           </S.CardWrap>
         ) : isError ? (
           <S.ExceptionMessage>
-            데이터를 불러오는 중 오류가 발생했습니다.
+            검색 결과가 없습니다.
           </S.ExceptionMessage>
         ) : !data || data.content.length === 0 ? (
           <S.ExceptionMessage>

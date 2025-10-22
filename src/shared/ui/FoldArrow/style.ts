@@ -13,5 +13,6 @@ export const FoldArrowContainer = styled.div`
   }
   svg {
     width: 15px;
+    cursor: pointer;
   }
 `;
