@@ -1,6 +1,6 @@
 import Layout from "@/shared/ui/Layout";
 import SearchNotice from "@/features/notice/ui/searchNotice";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import NoticeCard from "@/shared/ui/NoticeCard";
 import * as S from "./style";
 import Pagination from "@/shared/ui/pagination";
@@ -23,12 +23,12 @@ const NoticePage = () => {
     window.scrollTo(0, 0);
   }, [currentPage]);
 
-  const handleFilterChange = (
+  const handleFilterChange = useCallback((
     newFilters: Omit<NoticeSearchParams, "page" | "size">
   ) => {
     setFilters(newFilters);
     setCurrentPage(1);
-  };
+  }, []);
 
   const shouldHideFilters = data?.content?.[0]?.isNatural === true;
 
