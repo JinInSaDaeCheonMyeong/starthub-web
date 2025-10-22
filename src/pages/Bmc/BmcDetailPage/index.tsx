@@ -1,10 +1,12 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { BmcCanvas } from "@/widgets/bmc/BmcCanvas";
 import { BmcHeader } from "@/widgets/bmc";
 import * as S from "@/widgets/bmc/BmcCanvas/style";
 import { useBmcData, useBmcCapture, useBmcEdit, BmcLoadingState, BmcActionButtons } from "@/features/bmc/detail";
 
 const BmcDetailPage = () => {
+  const navigate = useNavigate();
   const { bmcData, setBmcData, isLoading } = useBmcData();
   const { canvasRef, hasAutoCaptureRef, captureBmcAndUpload, handleDownloadPDF } = useBmcCapture();
   const {
@@ -49,6 +51,7 @@ const BmcDetailPage = () => {
         onCancelEdit={handleCancelEdit}
         onSaveEdit={handleSaveEdit}
         onDownload={() => handleDownloadPDF(bmcData!)}
+        onBackToList={() => navigate("/bmc")}
       />
     </S.Container>
   );

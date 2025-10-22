@@ -58,5 +58,10 @@ export const WelcomeContainer = styled.div`
     width: 40px;
     height: 40px;
     border-radius: 50px;
+    cursor: pointer;
+  }
+
+  svg {
+    cursor: pointer;
   }
 `;
