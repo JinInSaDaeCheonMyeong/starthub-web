@@ -1,139 +1,71 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import * as S from "./style";
 import { StartHubButton, StartHubTextField } from "@/shared/ui";
 import { StartHubFont } from "@/shared/design/text/StartHubFont";
 import { StartHubColors } from "@/shared/design";
 import SideBar from "@/features/profile/users/sideBar";
 import { useNavigate } from "react-router-dom";
-import { ProfileData } from "@/shared/types/ProfileTypes";
-import { profileApi } from "@/shared/api/profileApi";
-import { toast } from "react-toastify";
+import { useProfile, useUpdateProfile } from "@/shared/hooks/Profile";
+import {
+  INITIAL_FORM_DATA,
+  formatProfileToForm,
+  formatFormToProfile,
+  validateRequiredFields,
+  generateYears,
+  generateMonths,
+  generateDays,
+  type ProfileFormData,
+} from "../utils/profileFormHelpers";
 
-const MyPage: React.FC = () => {
+const EditProfileForm: React.FC = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    username: "",
-    gender: "" as "MALE" | "FEMALE" | "",
-    birthYear: "",
-    birthMonth: "",
-    birthDay: "",
-    companyName: "",
-    companyDescription: "",
-    startupLocation: "",
-    annualRevenue: "",
-    numberOfEmployees: "",
-    companyWebsite: "",
-  });
+  const { data: profileData, isLoading } = useProfile();
+  const { mutate: updateProfile, isPending } = useUpdateProfile();
 
+  const [formData, setFormData] = useState<ProfileFormData>(INITIAL_FORM_DATA);
+
+  // 프로필 데이터가 로드되면 폼에 채우기
   useEffect(() => {
-    fetchProfile();
-  }, []);
-
-  const formatProfileToForm = (profile: ProfileData) => {
-    const birthDate = new Date(profile.birth);
-    return {
-      username: profile.username,
-      gender: profile.gender,
-      birthYear: birthDate.getFullYear().toString(),
-      birthMonth: (birthDate.getMonth() + 1).toString(),
-      birthDay: birthDate.getDate().toString(),
-      companyName: profile.companyName,
-      companyDescription: profile.companyDescription,
-      startupLocation: profile.startupLocation,
-      annualRevenue: profile.annualRevenue.toString(),
-      numberOfEmployees: profile.numberOfEmployees.toString(),
-      companyWebsite: profile.companyWebsite,
-    };
-  };
-
-  const fetchProfile = async () => {
-    try {
-      const profile = await profileApi.getUserProfile();
-      setFormData(formatProfileToForm(profile));
-    } catch {
-      toast.error("프로필 로딩 실패")
+    if (profileData) {
+      setFormData(formatProfileToForm(profileData));
     }
+  }, [profileData]);
+
+  // 날짜 선택 옵션 메모이제이션
+  const years = useMemo(() => generateYears(), []);
+  const months = useMemo(() => generateMonths(), []);
+  const days = useMemo(() => generateDays(), []);
+
+  const handleChange = (field: keyof ProfileFormData, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const generateYears = () => {
-    const currentYear = new Date().getFullYear();
-    return Array.from(
-      { length: currentYear - 1949 },
-      (_, i) => currentYear - i
-    );
-  };
-
-  const generateMonths = () => Array.from({ length: 12 }, (_, i) => i + 1);
-  const generateDays = () => Array.from({ length: 31 }, (_, i) => i + 1);
-
-  const years = generateYears();
-  const months = generateMonths();
-  const days = generateDays();
-
-  const handleChange = (field: keyof typeof formData, value: string) => {
-    setFormData({ ...formData, [field]: value });
-  };
-
-  const validateRequiredFields = (): boolean => {
-    const requiredFields = {
-      username: '이름',
-      gender: '성별',
-      birthYear: '생년월일',
-      birthMonth: '생년월일',
-      birthDay: '생년월일',
-      companyName: '회사명'
-    };
-
-    const emptyFields: string[] = [];
-    
-    if (!formData.username.trim()) emptyFields.push(requiredFields.username);
-    if (!formData.gender) emptyFields.push(requiredFields.gender);
-    if (!formData.birthYear || !formData.birthMonth || !formData.birthDay) {
-      emptyFields.push(requiredFields.birthYear);
-    }
-    if (!formData.companyName.trim()) emptyFields.push(requiredFields.companyName);
-
-    if (emptyFields.length > 0) {
-      alert("필수 항목을 입력해주세요");
-      return false;
-    }
-    
-    return true;
-  };
-
-  const formatFormToProfile = (): Partial<ProfileData> => {
-    const birthDate = `${formData.birthYear}-${formData.birthMonth.padStart(
-      2,
-      "0"
-    )}-${formData.birthDay.padStart(2, "0")}`;
-
-    return {
-      username: formData.username,
-      gender: formData.gender as "MALE" | "FEMALE",
-      birth: birthDate,
-      companyName: formData.companyName,
-      companyDescription: formData.companyDescription,
-      startupLocation: formData.startupLocation,
-      annualRevenue: parseInt(formData.annualRevenue) || 0,
-      numberOfEmployees: parseInt(formData.numberOfEmployees) || 0,
-      companyWebsite: formData.companyWebsite,
-    };
-  };
-
-  const handleComplete = async () => {
-    if (!validateRequiredFields()) {
+  const handleComplete = () => {
+    if (!validateRequiredFields(formData)) {
       return;
     }
 
-    try {
-      const profileData = formatFormToProfile();
-      await profileApi.updateProfile(profileData);
-      navigate("/my-profile");
-    } catch (error) {
-      console.error("프로필 업데이트 실패:", error);
-      alert('프로필 업데이트에 실패했습니다. 다시 시도해주세요.');
-    }
+    const profileUpdateData = formatFormToProfile(formData);
+    updateProfile(profileUpdateData, {
+      onSuccess: () => {
+        navigate("/my-profile");
+      },
+    });
   };
+
+  // 로딩 중이면 로딩 UI 표시
+  if (isLoading) {
+    return (
+      <S.Wrapper>
+        <SideBar />
+        <S.MainContent>
+          <div style={{ textAlign: 'center', marginTop: '100px', fontSize: '16px' }}>
+            프로필 정보를 불러오는 중...
+          </div>
+        </S.MainContent>
+      </S.Wrapper>
+    );
+  }
 
   return (
     <S.Wrapper>
@@ -272,7 +204,7 @@ const MyPage: React.FC = () => {
         </S.InfoTable>
 
         <StartHubButton
-          text="완료"
+          text={isPending ? "저장 중..." : "완료"}
           width={77}
           height={36}
           typography={StartHubFont.Pretendard.Caption2.Medium}
@@ -280,10 +212,11 @@ const MyPage: React.FC = () => {
           textTheme={StartHubColors.White1}
           customStyle={{ borderRadius: "6px", float: "right", marginBottom: "300px"}}
           onClick={handleComplete}
+          disabled={isPending}
         />
       </S.MainContent>
     </S.Wrapper>
   );
 };
 
-export default MyPage;
+export default EditProfileForm;
