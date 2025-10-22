@@ -1,4 +1,5 @@
 import { ProfileData } from "@/shared/types/ProfileTypes";
+import { toast } from "react-toastify";
 
 export interface ProfileFormData {
   username: string;
@@ -65,7 +66,7 @@ export const validateRequiredFields = (formData: ProfileFormData): boolean => {
   const { username, gender, birthYear, birthMonth, birthDay, companyName } = formData;
 
   if (!username.trim() || !gender || !birthYear || !birthMonth || !birthDay || !companyName.trim()) {
-    alert("필수 항목을 입력해주세요");
+    toast.error("필수 항목을 입력해주세요");
     return false;
   }
 
