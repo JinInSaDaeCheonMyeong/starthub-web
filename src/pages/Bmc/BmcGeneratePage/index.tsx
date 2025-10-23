@@ -1,10 +1,10 @@
 import { BmcStepNavigate } from "@/features/bmc/stepNavigate/index";
 import { BmcContent } from "@/widgets/bmc/BmcContent";
-import { BmcHeader } from "@/widgets/bmc/BmcHeader";
-import * as S from './style';
+import * as S from "./style";
 import { useBmcQuestions } from "@/entities/bmc/model/useBmcQuestions";
 import useQuestionStore from "@/entities/bmc/model/useQuestionStore";
 import { useEffect } from "react";
+import Header from "@/widgets/Header";
 
 const BmcGeneratePage = () => {
   const { bmcQuestions } = useBmcQuestions();
@@ -16,7 +16,7 @@ const BmcGeneratePage = () => {
 
   return (
     <S.Container>
-      <BmcHeader/>
+      <Header />
       {isGeneratingBmc ? (
         <S.FullWidthWrapper>
           <BmcContent />
@@ -29,7 +29,6 @@ const BmcGeneratePage = () => {
       )}
     </S.Container>
   );
-
 };
 
 export default BmcGeneratePage;

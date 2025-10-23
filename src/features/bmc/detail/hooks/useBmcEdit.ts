@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import { toast } from 'react-toastify';
-import { bmcApi } from '@/entities/bmc/api/bmc';
-import { BmcData } from '@/entities/bmc/model/types';
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { bmcApi } from "@/entities/bmc/api/bmc";
+import { BmcData } from "@/entities/bmc/model/types";
 
 export const useBmcEdit = (
-  bmcData: BmcData | null, 
+  bmcData: BmcData | null,
   setBmcData: (data: BmcData) => void,
   captureBmcAndUpload?: (bmcId: number) => Promise<void>
 ) => {
@@ -12,7 +12,10 @@ export const useBmcEdit = (
   const [editedData, setEditedData] = useState<BmcData | null>(null);
   const [hasChanges, setHasChanges] = useState(false);
 
-  const checkForChanges = (originalData: BmcData, editedData: BmcData): boolean => {
+  const checkForChanges = (
+    originalData: BmcData,
+    editedData: BmcData
+  ): boolean => {
     return (
       originalData.title !== editedData.title ||
       originalData.keyPartners !== editedData.keyPartners ||
@@ -29,12 +32,12 @@ export const useBmcEdit = (
 
   const handleSectionChange = (sectionKey: keyof BmcData, value: string) => {
     if (!editedData || !bmcData) return;
-    
+
     const updatedData = {
       ...editedData,
-      [sectionKey]: value
+      [sectionKey]: value,
     };
-    
+
     setEditedData(updatedData);
     setHasChanges(checkForChanges(bmcData, updatedData));
   };
@@ -55,7 +58,7 @@ export const useBmcEdit = (
     if (!editedData || !bmcData) return;
 
     try {
-      const response = await bmcApi.modifyBmc({
+      await bmcApi.modifyBmc({
         bmcId: bmcData.id,
         templateType: bmcData.templateType,
         title: editedData.title,
@@ -70,19 +73,21 @@ export const useBmcEdit = (
         revenueStreams: editedData.revenueStreams,
       });
 
-      setBmcData(response.data.updatedBmc);
+      const updatedResponse = await bmcApi.getCanvasesDetail(String(bmcData.id));
+      setBmcData(updatedResponse.data);
+      
       setIsEditing(false);
       setEditedData(null);
       setHasChanges(false);
-      toast.success('BMC가 성공적으로 수정되었습니다!');
+      toast.success("BMC가 성공적으로 수정되었습니다!");
 
       if (captureBmcAndUpload) {
-        await new Promise(resolve => setTimeout(resolve, 500)); // DOM 업데이트 대기
+        await new Promise((resolve) => setTimeout(resolve, 500)); // DOM 업데이트 대기
         await captureBmcAndUpload(bmcData.id);
       }
     } catch (error) {
-      console.error('BMC 수정 실패:', error);
-      toast.error('BMC 수정에 실패했습니다.');
+      console.error("BMC 수정 실패:", error);
+      toast.error("BMC 수정에 실패했습니다.");
     }
   };
 

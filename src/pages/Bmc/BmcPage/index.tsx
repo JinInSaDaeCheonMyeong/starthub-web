@@ -28,4 +28,4 @@ const NotMyPageWrap = styled.div`
   min-height: 60vh;
   display: flex;
   justify-content: center;
-`
+`;
