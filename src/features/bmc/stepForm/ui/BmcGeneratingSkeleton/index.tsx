@@ -3,11 +3,6 @@ import * as S from "./style";
 const BmcGeneratingSkeleton = () => {
   return (
     <S.Container>
-      <S.Header>
-        <S.SkeletonTitle />
-        <S.SkeletonSubtitle />
-      </S.Header>
-
       <S.BmcGrid>
         {Array.from({ length: 9 }, (_, index) => (
           <S.BmcSection key={index}>

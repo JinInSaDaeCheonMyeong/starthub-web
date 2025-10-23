@@ -18,6 +18,8 @@ export const UserMessageBubbleWrapper = styled.div`
   background-color: ${StartHubColors.White2};
   padding: 16px 20px;
   border-radius: 10px;
+  user-select: text;
+  cursor: text;
 `;
 
 export const StartHubMessageBubbleWrapper = styled.div`
@@ -26,6 +28,8 @@ export const StartHubMessageBubbleWrapper = styled.div`
   padding: 16px 20px;
   border-radius: 10px;
   position: relative;
+  user-select: text;
+  cursor: text;
 `;
 
 export const TypingCursor = styled.span`

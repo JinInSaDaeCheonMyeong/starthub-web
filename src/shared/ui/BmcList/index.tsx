@@ -13,7 +13,12 @@ const BmcList = () => {
       try {
         setIsLoading(true);
         const response = await bmcApi.getCanvases();
-        setBmcList(response.data);
+        const sortedList = response.data.sort((a, b) => {
+          const dateA = new Date(a.createdAt).getTime();
+          const dateB = new Date(b.createdAt).getTime();
+          return dateB - dateA;
+        });
+        setBmcList(sortedList);
       } catch (error) {
         console.error('BMC 리스트 조회 실패:', error);
         setBmcList([]);
