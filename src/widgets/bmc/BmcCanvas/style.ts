@@ -15,6 +15,7 @@ export const PrintStyles = createGlobalStyle`
       margin: 0;
       padding: 0;
       background: white;
+      user-select: auto;
     }
     
     * {
@@ -240,6 +241,8 @@ export const SectionContent = styled.div`
   white-space: pre-wrap;
   word-break: break-word;
   ${StartHubFont.Pretendard.Body2.Regular}
+  user-select: text;
+  cursor: text;
   
   &:empty::before {
     content: '내용이 없습니다.';

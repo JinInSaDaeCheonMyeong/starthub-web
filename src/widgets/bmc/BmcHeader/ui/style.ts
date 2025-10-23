@@ -16,6 +16,7 @@ export const HeaderContainer = styled.div`
   align-items: center;
   padding-left: 65px;
   gap: 20px;
+  user-select: auto !important;
 
   @media (min-width: 1920px) {
     height: 98px;
