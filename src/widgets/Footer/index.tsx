@@ -23,7 +23,7 @@ const Footer = () => {
           <S.LinksSection>
             <S.LinkColumn>
               <S.ColumnTitle>고객지원</S.ColumnTitle>
-              <S.LinkItem href="https://forms.gle/CWkE5rztb6G5woDa9" target="_blank">1:1 문의</S.LinkItem>
+              <S.LinkItem href="https://forms.gle/CWkE5rztb6G5woDa9" target="_blank" rel="noopener noreferrer">1:1 문의</S.LinkItem>
             </S.LinkColumn>
           </S.LinksSection>
 
