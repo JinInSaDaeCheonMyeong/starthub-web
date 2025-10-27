@@ -13,57 +13,64 @@ const Header = () => {
   const { data } = useGetMyProfile();
 
   return (
-    <S.HeaderContainer>
-      <S.ContentWrapper>
-        <LogoIcon width={104} height={18} onClick={() => navigate("/")} style={{ cursor: "pointer" }} />
-        <div style={{ display: "flex", flexDirection: "row" }}>
-          <S.StyleLink to="/notices" $active={currentPath === "/notices"}>
-            공고
-          </S.StyleLink>
-          <S.StyleLink to="/competitor" $active={currentPath === "/competitor"}>
-            경쟁사 분석
-          </S.StyleLink>
-          <S.StyleLink to="/bmc" $active={currentPath === "/bmc"}>
-            BMC 설계
-          </S.StyleLink>
-          <S.StyleLink
-            to="/my-profile"
-            $active={currentPath === "/my-profile"}
-          >
-            My 비즈니스
-          </S.StyleLink>
-        </div>
-        {data ? (
-          <S.WelcomeContainer>
-            <p>환영합니다. {data.username}님</p>
-            {data.profileImage ? (
-              <img
-                src={data.profileImage}
-                onClick={() => navigate("/my-profile")}
-              />
-            ) : (
-              <DefaultProfile
-                width={40}
-                height={40}
-                onClick={() => navigate("/my-profile")}
-              />
-            )}
-          </S.WelcomeContainer>
-        ) : (
-          <StartHubButton
-            text="로그인"
-            backgroundColor={StartHubColors.Primary}
-            onClick={() => {
-              navigate("/sign-in");
-            }}
-            customStyle={{ width: "10%", whiteSpace: "nowrap" }}
-            height={36}
-            textTheme={StartHubColors.White1}
-            typography={StartHubFont.Pretendard.Caption1.SemiBold}
-          />
-        )}
-      </S.ContentWrapper>
-    </S.HeaderContainer>
+    <S.HeadersContainer>
+      <S.FeedbackFormHeaderContainer>
+        <S.FeedbackFormWrapper>
+          더 나은 StartHub를 위해 피드백을 남겨주세요! <S.FeedbackFormLink href="https://forms.gle/CWkE5rztb6G5woDa9" target="_blank">피드백 남기기</S.FeedbackFormLink>
+        </S.FeedbackFormWrapper>
+      </S.FeedbackFormHeaderContainer>
+      <S.HeaderContainer>
+        <S.ContentWrapper>
+          <LogoIcon width={104} height={18} onClick={() => navigate("/")} style={{ cursor: "pointer" }} />
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <S.StyleLink to="/notices" $active={currentPath === "/notices"}>
+              공고
+            </S.StyleLink>
+            <S.StyleLink to="/competitor" $active={currentPath === "/competitor"}>
+              경쟁사 분석
+            </S.StyleLink>
+            <S.StyleLink to="/bmc" $active={currentPath === "/bmc"}>
+              BMC 설계
+            </S.StyleLink>
+            <S.StyleLink
+              to="/my-profile"
+              $active={currentPath === "/my-profile"}
+            >
+              My 비즈니스
+            </S.StyleLink>
+          </div>
+          {data ? (
+            <S.WelcomeContainer>
+              <p>환영합니다. {data.username}님</p>
+              {data.profileImage ? (
+                <img
+                  src={data.profileImage}
+                  onClick={() => navigate("/my-profile")}
+                />
+              ) : (
+                <DefaultProfile
+                  width={40}
+                  height={40}
+                  onClick={() => navigate("/my-profile")}
+                />
+              )}
+            </S.WelcomeContainer>
+          ) : (
+            <StartHubButton
+              text="로그인"
+              backgroundColor={StartHubColors.Primary}
+              onClick={() => {
+                navigate("/sign-in");
+              }}
+              customStyle={{ width: "10%", whiteSpace: "nowrap" }}
+              height={36}
+              textTheme={StartHubColors.White1}
+              typography={StartHubFont.Pretendard.Caption1.SemiBold}
+            />
+          )}
+        </S.ContentWrapper>
+      </S.HeaderContainer>
+    </S.HeadersContainer>
   );
 };
 
