@@ -5,6 +5,7 @@ export const FooterContainer = styled.div`
   width: 100%;
   background-color: ${StartHubColors.White2};
   border-top: 1px solid #e5e5e5;
+  user-select: text;
 `;
 
 export const FooterContent = styled.div`

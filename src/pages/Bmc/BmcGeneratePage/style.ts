@@ -11,7 +11,7 @@ export const Container = styled.div`
 
 export const Wrapper = styled.div`
   margin: 0 auto;
-  margin-top: 78px;
+  margin-top: 110.8px;
   display: flex;
   background-color: ${StartHubColors.White2};
   gap: 55px;
@@ -23,10 +23,10 @@ export const Wrapper = styled.div`
 `;
 
 export const FullWidthWrapper = styled.div`
-  margin-top: 78px;
+  margin-top: 110.8px;
   display: flex;
   background-color: ${StartHubColors.White2};
   width: 100%;
-  height: calc(100vh - 78px);
+  height: calc(100vh - 110.8px);
   overflow: auto;
 `;

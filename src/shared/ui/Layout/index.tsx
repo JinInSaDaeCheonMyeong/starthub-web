@@ -23,5 +23,5 @@ const PageLayout = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 78px;
+  padding-top: 110.8px;
 `;
