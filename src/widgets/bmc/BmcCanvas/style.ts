@@ -28,7 +28,7 @@ export const PrintStyles = createGlobalStyle`
 
 export const Container = styled.div`
   min-height: 100vh;
-  padding-top: 105px;
+  padding-top: 140.8px;
   padding-bottom: 150px;
   padding-left: 65px;
   padding-right: 65px;
