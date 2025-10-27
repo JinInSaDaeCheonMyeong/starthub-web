@@ -79,7 +79,6 @@ export const FeedbackFormWrapper = styled.p`
   background-color: ${StartHubColors.Primary};
   color: ${StartHubColors.White1};
   text-align: center;
-  align-items: center;
   padding: 8px 0 8px 0;
 `;
 
