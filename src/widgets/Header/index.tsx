@@ -16,7 +16,7 @@ const Header = () => {
     <S.HeadersContainer>
       <S.FeedbackFormHeaderContainer>
         <S.FeedbackFormWrapper>
-          더 나은 StartHub를 위해 피드백을 남겨주세요! <S.FeedbackFormLink href="https://forms.gle/CWkE5rztb6G5woDa9" target="_blank" rel="noopener noreferrer">피드백 남기기</S.FeedbackFormLink>
+          더 나은 스타트허브를 위해 피드백을 남겨주세요! <S.FeedbackFormLink href="https://forms.gle/CWkE5rztb6G5woDa9" target="_blank" rel="noopener noreferrer">피드백 남기기</S.FeedbackFormLink>
         </S.FeedbackFormWrapper>
       </S.FeedbackFormHeaderContainer>
       <S.HeaderContainer>
