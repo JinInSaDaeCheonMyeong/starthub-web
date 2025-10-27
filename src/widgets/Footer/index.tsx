@@ -23,7 +23,7 @@ const Footer = () => {
           <S.LinksSection>
             <S.LinkColumn>
               <S.ColumnTitle>고객지원</S.ColumnTitle>
-              <S.LinkItem href="https://forms.gle/7anaKGTEqfzadCQx9">1:1 문의</S.LinkItem>
+              <S.LinkItem href="https://forms.gle/CWkE5rztb6G5woDa9" target="_blank">1:1 문의</S.LinkItem>
             </S.LinkColumn>
           </S.LinksSection>
 
@@ -31,7 +31,7 @@ const Footer = () => {
             <S.ColumnTitle>연락처</S.ColumnTitle>
             <S.ContactInfo>
               <S.ContactItem>
-                <Email /> starthub.noreply@gmail.com
+                <Email /> support@start-hub.kr
               </S.ContactItem>
               <S.ContactItem>
                 <Call /> 02-1234-5678
