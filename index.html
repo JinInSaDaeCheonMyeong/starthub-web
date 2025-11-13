@@ -65,11 +65,27 @@
         const isMobile = isAndroid || isIOS;
     
         if (isMobile && !isApp) {
-          if (isAndroid) {
-            window.location.replace("https://m.onestore.co.kr/v2/ko-kr/app/0001002708");
-          } else if (isIOS) {
-            window.location.replace("https://apps.apple.com/app/id6753943076");
-          }
+          const redirectUrl = isAndroid
+            ? "https://m.onestore.co.kr/v2/ko-kr/app/0001002708"
+            : "https://apps.apple.com/app/id6753943076";
+    
+          window.location.replace(redirectUrl);
+          
+          document.documentElement.innerHTML = `
+            <style>
+              body {
+                background-color: #fff;
+                color: #000;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                font-family: sans-serif;
+                font-size: 1.2rem;
+              }
+            </style>
+            <body>모바일 브라우저에서는 접속할 수 없습니다.</body>
+          `;
         }
       });
     </script>
