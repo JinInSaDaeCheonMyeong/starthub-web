@@ -1,56 +1,22 @@
+ <img width="992" height="718" alt="Group 524" src="https://github.com/user-attachments/assets/e59dc453-1cd6-4561-b8c2-e59342f54c00" />
 
-# startHub-web
-# React + TypeScript + Vite
+# StartHub 🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+스타트업의 시작부터 성장까지, 한 곳에서 도와주는 플랫폼입니다.  
+BMC(Business Model Canvas), 경쟁사 분석, 그리고 정부 부처에서 제공하는 다양한 사업 공고 정보를 제공합니다.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 주요 기능
 
-## Expanding the ESLint configuration
+- **BMC 작성 지원**: 스타트업 아이디어를 체계적으로 정리할 수 있는 Business Model Canvas 제공  
+- **경쟁사 분석**: 경쟁사 정보를 한눈에 확인하고 비교 가능  
+- **정부 지원사업 공고**: 최신 정부 지원사업 정보를 조회하고 활용 가능  
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## 기술 스택
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+- **Frontend**: React + TypeScript  
+- **상태 관리**: Zustand  
+- **데이터 Fetch**: React Query
