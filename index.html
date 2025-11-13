@@ -56,5 +56,22 @@
     <script type="module" src="/src/main.tsx"></script>
     <script src="https://unpkg.com/hangul-js"></script>
     <script src="https://unpkg.com/type-hangul@latest/dist/type-hangul.min.js"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        const ua = navigator.userAgent || navigator.vendor || window.opera;
+        const isAndroid = /android/i.test(ua);
+        const isIOS = /iPad|iPhone|iPod/.test(ua) && !window.MSStream;
+        const isApp = ua.toLowerCase().includes("starthubapp"); 
+        const isMobile = isAndroid || isIOS;
+    
+        if (isMobile && !isApp) {
+          if (isAndroid) {
+            window.location.replace("https://m.onestore.co.kr/v2/ko-kr/app/0001002708");
+          } else if (isIOS) {
+            window.location.replace("https://apps.apple.com/app/id6753943076");
+          }
+        }
+      });
+    </script>
   </body>
 </html>
