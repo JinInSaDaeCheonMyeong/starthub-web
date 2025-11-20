@@ -11,7 +11,7 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <PageLayout>
       <Header />
-      {children}
+      <Content>{children}</Content>
       <Footer />
     </PageLayout>
   );
@@ -22,6 +22,14 @@ export default Layout;
 const PageLayout = styled.div`
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
+`;
+
+const Content = styled.main`
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  padding-top: 110.8px;
+  padding-top: 110.16px;
 `;
