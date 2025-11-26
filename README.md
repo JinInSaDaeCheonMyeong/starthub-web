@@ -20,6 +20,9 @@ BMC(Business Model Canvas), 경쟁사 분석, 그리고 정부 부처에서 제�
 - **데이터 Fetch**: React Query
 
 
+---
+
+
 <img width="1440" height="810" alt="image" src="https://github.com/user-attachments/assets/9290eaff-985c-4f08-8d31-a3db084fbc02" />
 <img width="1439" height="809" alt="image" src="https://github.com/user-attachments/assets/2ce04c9f-5eb4-4c8a-b73e-6f8e9f094c19" />
 <img width="1920" height="1080" alt="Slide 16_9 - 10" src="https://github.com/user-attachments/assets/660d4ca8-3b3c-4290-9231-ec52b790a0c0" />
