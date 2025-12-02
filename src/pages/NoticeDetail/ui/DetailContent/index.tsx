@@ -35,7 +35,7 @@ const NoticeDetail = ({ item }: NoticeDetailProps) => {
     if (!item.content) return;
     const fixed = item.content.replace(
       /href="javascript:fn_open_window\('([^']+)'\);?"/g,
-      (match, p1) => {
+      (_, p1) => {
         const url = p1.startsWith("http") ? p1 : `https://${p1}`;
         return `href="${url}" target="_blank" rel="noopener noreferrer"`;
       }
