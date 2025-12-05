@@ -6,11 +6,47 @@ import { NOTICE_QUERY_KEYS } from "@/entities/notice/queryKey";
 export const useNoticeLike = () => {
   const queryClient = useQueryClient();
 
-  return useMutation<NoticeLikeResponse, Error, number>({
+  return useMutation<
+    NoticeLikeResponse,
+    Error,
+    number,
+    { previousNotice: NoticeType | undefined }
+  >({
     mutationFn: (announcementId: number) =>
       NoticeApi.postNoticeLike(announcementId),
-    onSuccess: (data, announcementId) => {
+    onMutate: async (announcementId) => {
+      await queryClient.cancelQueries({
+        queryKey: NOTICE_QUERY_KEYS.notice.getNoticeDetail(announcementId),
+      });
 
+      const previousNotice = queryClient.getQueryData<NoticeType>(
+        NOTICE_QUERY_KEYS.notice.getNoticeDetail(announcementId)
+      );
+
+      queryClient.setQueryData<NoticeType>(
+        NOTICE_QUERY_KEYS.notice.getNoticeDetail(announcementId),
+        (oldData) => {
+          if (oldData) {
+            return {
+              ...oldData,
+              isLiked: true,
+            };
+          }
+          return oldData;
+        }
+      );
+
+      return { previousNotice };
+    },
+    onError: (_error, announcementId, context) => {
+      if (context?.previousNotice) {
+        queryClient.setQueryData(
+          NOTICE_QUERY_KEYS.notice.getNoticeDetail(announcementId),
+          context.previousNotice
+        );
+      }
+    },
+    onSuccess: (data, announcementId) => {
       queryClient.setQueryData<NoticeType>(
         NOTICE_QUERY_KEYS.notice.getNoticeDetail(announcementId),
         (oldData) => {
