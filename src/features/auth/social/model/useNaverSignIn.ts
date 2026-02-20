@@ -1,8 +1,8 @@
-import { toast } from "react-toastify";
-
 export const useNaverSignIn = () => {
   const handleNaverSignIn = () => {
-  toast.error('개발 중인 기능입니다.')
-  }
-  return { handleNaverSignIn }
+    const baseUrl = import.meta.env.VITE_API_BASE_URL;
+    window.location.href = `${baseUrl}/oauth2/authorization/naver`;
+  };
+
+  return { handleNaverSignIn };
 };

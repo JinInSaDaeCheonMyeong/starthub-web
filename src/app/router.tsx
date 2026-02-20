@@ -4,6 +4,7 @@ import SignUpPage from "@/pages/SignUp";
 import MainPage from "@/pages/Main";
 import NoticePage from "@/pages/Notice";
 import CallbackPage from "@/pages/Callback";
+import OAuthFail from "@/pages/Callback/OAuthFail";
 import Onboarding from "@/pages/Onboarding";
 import MyProfile from "@/pages/MyProfile";
 import BmcPage from "@/pages/Bmc/BmcPage";
@@ -37,6 +38,7 @@ const Router = () => {
         <Route path="/my-profile" element={<MyProfile />} />
         <Route path="/my-profile-edit" element={<EditMyProfile />} />
         <Route path="/oauth/callback" element={<CallbackPage />} />
+        <Route path="/oauth/fail" element={<OAuthFail />} />
         <Route path="/onboarding/early-startup" element={<EarlyOnboarding />} />
         <Route path="/onboarding/pre-startup" element={<PreOnboarding />} />
         <Route path="/notices/:type" element={<NoticeListUpPage />} />
