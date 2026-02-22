@@ -1,14 +1,12 @@
 import { StartHubColors, StartHubFont } from "@/shared/design";
 import { Google, Naver, Apple } from "@/assets/icons";
 import { StartHubButton } from "@/shared/ui";
-import { useGoogleSignIn } from "@/features/auth/social/model/useGoogleSignIn";
-import { useNaverSignIn } from "../../model/useNaverSignIn";
-import { useAppleSignIn } from "../../model/useAppleSignIn";
+import { useSocialSignIn } from "../../model/useSocialSignIn";
 
 const SocialButton = () => {
-  const { handleGoogleSignIn } = useGoogleSignIn();
-  const { handleNaverSignIn } = useNaverSignIn();
-  const { handleAppleSignIn } = useAppleSignIn();
+  const { handleSocialSignIn: handleGoogleSignIn } = useSocialSignIn("google");
+  const { handleSocialSignIn: handleNaverSignIn } = useSocialSignIn("naver");
+  const { handleSocialSignIn: handleAppleSignIn } = useSocialSignIn("apple");
 
   return (
     <>
