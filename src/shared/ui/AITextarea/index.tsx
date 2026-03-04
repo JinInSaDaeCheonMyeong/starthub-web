@@ -2,7 +2,7 @@ import React from "react";
 import * as S from "./style";
 import { ReactComponent as PlusIcon } from "@/assets/icons/chatbot-plus.svg";
 import { ReactComponent as ArrowIcon } from "@/assets/icons/chatbot-up.svg";
-import useAITextarea from "@/shared/hooks/AITextarea/useAITextarea";
+import { useAITextarea } from "@/shared/hooks/AITextarea/useAITextarea";
 
 export interface AITextareaProps {
   value?: string;
@@ -15,7 +15,7 @@ export interface AITextareaProps {
   className?: string;
 }
 
-const AITextarea = ({
+const StartHubAITextarea = ({
   value,
   onChange,
   onSubmit,
@@ -57,7 +57,7 @@ const AITextarea = ({
       {files.length > 0 ? (
         <S.FileRow>
           {files.map((f, i) => (
-            <S.FileChip key={i}>
+            <S.FileChip key={`${f.name}-${(f as File).lastModified}-${i}`}>
               <span title={f.name}>{f.name}</span>
               <S.FileRemove onClick={() => removeFile(i)}>×</S.FileRemove>
             </S.FileChip>
@@ -122,4 +122,4 @@ const AITextarea = ({
   );
 };
 
-export default AITextarea;
+export default StartHubAITextarea;
