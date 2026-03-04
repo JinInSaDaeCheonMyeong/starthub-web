@@ -7,12 +7,12 @@ export interface UseAITextareaParams {
   maxLines?: number;
 }
 
-export default function useAITextarea({
+export const useAITextarea = ({
   value,
   onChange,
   onSubmit,
   maxLines = 4,
-}: UseAITextareaParams) {
+}: UseAITextareaParams) => {
   const [internalValue, setInternalValue] = useState("");
   const taRef = useRef<HTMLTextAreaElement | null>(null);
   const composing = useRef(false);
@@ -65,14 +65,12 @@ export default function useAITextarea({
   const handleSubmit = useCallback(() => {
     const text = (currentValue || "").trim();
     if (!text && files.length === 0) return;
-    if (onSubmit) onSubmit(text, files.length ? files : undefined);
-    if (value === undefined) {
-      setInternalValue("");
-      if (taRef.current) taRef.current.style.height = "auto";
-    }
+    if (onSubmit) onSubmit(text, files);
+    setValue("");
+    if (taRef.current) taRef.current.style.height = "auto";
     setFiles([]);
     setExpanded(false);
-  }, [currentValue, files, onSubmit, value]);
+  }, [currentValue, files, onSubmit, setValue, value]);
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLTextAreaElement>) => {

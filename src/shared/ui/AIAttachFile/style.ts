@@ -4,10 +4,10 @@ import { StartHubFont } from "@/shared/design";
 export const Container = styled.div`
   display: flex;
   background-color: #d7e4ff;
-  padding: 14px;
-  width: 158px;
+  padding: 14px 10px;
+  width: 200px;
   height: 60px;
-  border-radius: 20px;
+  border-radius: 10px;
   text-decoration: none;
   color: inherit;
   cursor: pointer;
@@ -44,6 +44,7 @@ export const IconWrapper = styled.div`
 
     p {
       ${StartHubFont.Pretendard.Caption1.Regular}
+      font-size:10px;
       margin: 0;
       color: inherit;
     }
