@@ -7,7 +7,7 @@ export interface AIAttachFileProps {
   link: string;
 }
 
-const AIAttachFile = ({ title, date, link }: AIAttachFileProps) => {
+const StartHubAIAttachFile = ({ title, date, link }: AIAttachFileProps) => {
   return (
     <S.Container as="a" href={link} target="_blank" rel="noopener noreferrer">
       <S.IconWrapper>
@@ -21,4 +21,4 @@ const AIAttachFile = ({ title, date, link }: AIAttachFileProps) => {
   );
 };
 
-export default AIAttachFile;
+export default StartHubAIAttachFile;

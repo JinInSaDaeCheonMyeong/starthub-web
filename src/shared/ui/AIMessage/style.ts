@@ -9,7 +9,7 @@ export const Container = styled.div`
   border-radius: 10px;
   display: flex;
   align-items: center;
-  span{
+  span {
     ${StartHubFont.Pretendard.Body2.Regular}
     color: ${StartHubColors.Black1};
   }
