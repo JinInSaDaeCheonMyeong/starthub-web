@@ -22,7 +22,7 @@ export const Container = styled.div`
 export const Spinner = styled.div`
   width: 50px;
   height: 50px;
-  border: 4px solid #f3f3f3;
+  border: 4px solid ${StartHubColors.Gray4};
   border-top: 4px solid ${StartHubColors.Primary};
   border-radius: 50%;
   animation: ${spin} 1s linear infinite;
