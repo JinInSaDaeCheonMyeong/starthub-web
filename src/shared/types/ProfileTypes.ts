@@ -1,4 +1,5 @@
 export interface ProfileData {
+  email: string;
   username: string;
   profileImage: string;
   companyIds: number[];

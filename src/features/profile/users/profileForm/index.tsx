@@ -36,6 +36,7 @@ const ProfileForm: React.FC = () => {
     if (!profileData) return [];
 
     return [
+      { label: "이메일", value: safeValue(profileData.email)},
       { label: "성별", value: formatGender(profileData.gender) },
       { label: "생년월일", value: safeValue(profileData.birth) },
       { label: "회사명", value: safeValue(profileData.companyName) },
