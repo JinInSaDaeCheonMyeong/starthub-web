@@ -7,7 +7,7 @@ import { useAITextarea } from "@/shared/hooks/AITextarea/useAITextarea";
 export interface AITextareaProps {
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  onSubmit?: (text: string) => void;
+  onSubmit?: (text: string, files?: File[]) => void;
   placeholder?: string;
   rows?: number;
   disabled?: boolean;
@@ -70,6 +70,7 @@ const StartHubAITextarea = ({
           ref={fileInputRef}
           type="file"
           multiple
+          accept=".pdf,.docx,image/png,image/jpeg,image/gif,image/webp"
           onChange={handleFileInput}
           style={{ display: "none" }}
         />
