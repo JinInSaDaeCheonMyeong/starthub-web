@@ -7,14 +7,19 @@ import { parseAnnotations } from "@/features/chatAI/utils/parseAnnotations";
 interface UseStreamMessageReturn {
   streaming: boolean;
   streamingText: string;
+  error: string | null;
+  clearError: () => void;
   send: (sessionId: number, message: string, files?: File[]) => Promise<string>;
 }
 
 export const useStreamMessage = (): UseStreamMessageReturn => {
   const [streaming, setStreaming] = useState(false);
   const [streamingText, setStreamingText] = useState("");
+  const [error, setError] = useState<string | null>(null);
   const queryClient = useQueryClient();
   const abortRef = useRef<AbortController | null>(null);
+
+  const clearError = useCallback(() => setError(null), []);
 
   const send = useCallback(
     async (
@@ -28,6 +33,7 @@ export const useStreamMessage = (): UseStreamMessageReturn => {
       setStreaming(true);
       setStreamingText("");
 
+      setError(null);
       let accumulated = "";
 
       try {
@@ -37,29 +43,31 @@ export const useStreamMessage = (): UseStreamMessageReturn => {
         });
         const reader = stream.getReader();
         const decoder = new TextDecoder();
+        let buffer = "";
 
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
 
-          const chunk = decoder.decode(value, { stream: true });
+          buffer += decoder.decode(value, { stream: true });
 
-          chunk
-            .split("\n")
-            .filter((line) => line.startsWith("data:"))
-            .forEach((line) => {
-              try {
-                const json = JSON.parse(line.replace(/^data:\s*/, ""));
-                if (
-                  json.type === "CONTENT_DELTA" &&
-                  typeof json.text === "string"
-                ) {
-                  accumulated += json.text;
-                  setStreamingText(parseAnnotations(accumulated));
-                }
-              } catch {
+          const lines = buffer.split("\n");
+          buffer = lines.pop() ?? "";
+
+          for (const line of lines) {
+            if (!line.startsWith("data:")) continue;
+            try {
+              const json = JSON.parse(line.replace(/^data:\s*/, ""));
+              if (
+                json.type === "CONTENT_DELTA" &&
+                typeof json.text === "string"
+              ) {
+                accumulated += json.text;
+                // 스트리밍 중에도 완성된 어노테이션만 변환하여 즉시 반영
+                setStreamingText(parseAnnotations(accumulated));
               }
-            });
+            } catch {}
+          }
         }
 
         queryClient.invalidateQueries({
@@ -67,6 +75,13 @@ export const useStreamMessage = (): UseStreamMessageReturn => {
         });
 
         return parseAnnotations(accumulated);
+      } catch (err) {
+        const msg =
+          err instanceof Error
+            ? err.message
+            : "오류가 발생했습니다. 다시 시도해 주세요.";
+        setError(msg);
+        return "";
       } finally {
         setStreaming(false);
       }
@@ -74,5 +89,5 @@ export const useStreamMessage = (): UseStreamMessageReturn => {
     [queryClient],
   );
 
-  return { streaming, streamingText, send };
+  return { streaming, streamingText, error, clearError, send };
 };
