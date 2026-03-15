@@ -13,6 +13,7 @@ export interface AITextareaProps {
   disabled?: boolean;
   maxWidth?: string;
   className?: string;
+  compact?: boolean;
 }
 
 const StartHubAITextarea = ({
@@ -24,6 +25,7 @@ const StartHubAITextarea = ({
   disabled = false,
   maxWidth = "100%",
   className,
+  compact = false,
 }: AITextareaProps) => {
   const {
     taRef,
@@ -57,7 +59,10 @@ const StartHubAITextarea = ({
       {files.length > 0 ? (
         <S.FileRow>
           {files.map((f, i) => (
-            <S.FileChip key={`${f.name}-${(f as File).lastModified}-${i}`}>
+            <S.FileChip
+              $compact={compact}
+              key={`${f.name}-${(f as File).lastModified}-${i}`}
+            >
               <span title={f.name}>{f.name}</span>
               <S.FileRemove onClick={() => removeFile(i)}>×</S.FileRemove>
             </S.FileChip>
