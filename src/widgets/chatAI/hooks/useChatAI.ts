@@ -20,14 +20,15 @@ export const useChatAI = () => {
   const { streaming, streamingText, error, clearError, send } =
     useStreamMessage();
   const createdUrlsRef = useRef<string[]>([]);
+  const messageIdRef = useRef<number>(-1);
+  const getNextMessageId = () => messageIdRef.current--;
 
   useEffect(() => {
     return () => {
       createdUrlsRef.current.forEach((u) => {
         try {
           URL.revokeObjectURL(u);
-        } catch (e) {
-        }
+        } catch (e) {}
       });
     };
   }, []);
@@ -77,7 +78,7 @@ export const useChatAI = () => {
     });
 
     const userMsg: ChatMessage = {
-      id: Date.now(),
+      id: getNextMessageId(),
       role: "USER",
       content: text.trim(),
       createdAt: new Date().toISOString(),
@@ -90,7 +91,7 @@ export const useChatAI = () => {
       setMessages((prev) => [
         ...prev,
         {
-          id: Date.now(),
+          id: getNextMessageId(),
           role: "ASSISTANT",
           content: result,
           createdAt: new Date().toISOString(),
@@ -103,17 +104,13 @@ export const useChatAI = () => {
     if (!lastInput || !sessionId || streaming) return;
     clearError();
 
-    const result = await send({
-      sessionId,
-      text: lastInput.text,
-      files: lastInput.files,
-    });
+    const result = await send(sessionId, lastInput.text, lastInput.files);
 
     if (result) {
       setMessages((prev) => [
         ...prev,
         {
-          id: Date.now(),
+          id: getNextMessageId(),
           role: "ASSISTANT",
           content: result,
           createdAt: new Date().toISOString(),
