@@ -99,10 +99,27 @@ export const useChatAI = () => {
     }
   };
 
-  const handleRetry = () => {
+  const handleRetry = async () => {
     if (!lastInput || !sessionId || streaming) return;
     clearError();
-    handleSubmit(lastInput.text, lastInput.files);
+
+    const result = await send({
+      sessionId,
+      text: lastInput.text,
+      files: lastInput.files,
+    });
+
+    if (result) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: Date.now(),
+          role: "ASSISTANT",
+          content: result,
+          createdAt: new Date().toISOString(),
+        },
+      ]);
+    }
   };
 
   return {
