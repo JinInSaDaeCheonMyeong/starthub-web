@@ -9,8 +9,11 @@ export const NoticeContentContainer = styled.div`
 `;
 
 export const CardWrap = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 250px);
+  justify-content: space-between;
+  row-gap: 20px;
+  width: 100%;
 `;
 
 export const ExceptionMessage = styled.p`
