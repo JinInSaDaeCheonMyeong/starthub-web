@@ -1,6 +1,8 @@
 import * as S from "./style";
 import { ReactComponent as Map } from "@assets/category/map.svg";
 import { ReactComponent as Person } from "@assets/category/person.svg";
+import { ReactComponent as KStartupIcon } from "@assets/category/k.svg";
+import { ReactComponent as BuildingIcon } from "@assets/category/building.svg";
 import { getNoticeCategoryInfo } from "@/shared/utils/NoticeCategory/noticeCategory";
 import { NoticeType } from "@/entities/notice/model/notice.type";
 import { useNavigate } from "react-router-dom";
@@ -53,6 +55,29 @@ const NoticeCard = ({ notice }: NoticeCardProps) => {
 
   const applyTargetDisplay = getApplyTargetDisplay();
 
+  const getSimplifiedRegion = (region: string) => {
+    if (!region) return "";
+
+    const provinceMap: { [key: string]: string } = {
+      경기도: "경기",
+      강원도: "강원",
+      충청북도: "충북",
+      충청남도: "충남",
+      전라북도: "전북",
+      전라남도: "전남",
+      경상북도: "경북",
+      경상남도: "경남",
+      제주특별자치도: "제주",
+      세종특별자치시: "세종",
+    };
+
+    if (provinceMap[region]) {
+      return provinceMap[region];
+    }
+
+    return region.replace("특별시", "").replace("광역시", "").trim();
+  };
+
   return (
     <S.NoticeContainer
       onClick={() => {
@@ -69,12 +94,24 @@ const NoticeCard = ({ notice }: NoticeCardProps) => {
       <div style={{ display: "flex", gap: "4px" }}>
         <S.Tag>
           <Map style={{ marginRight: "2px" }} />
-          {notice!.region}
+          {getSimplifiedRegion(notice!.region)}
         </S.Tag>
         {applyTargetDisplay && (
           <S.Tag>
             <Person />
             {applyTargetDisplay}
+          </S.Tag>
+        )}
+        {notice.source === "BIZINFO" && (
+          <S.Tag>
+            <BuildingIcon />
+            기업마당
+          </S.Tag>
+        )}
+        {notice.source === "K_STARTUP" && (
+          <S.Tag>
+            <KStartupIcon />
+            K-Startup
           </S.Tag>
         )}
       </div>
