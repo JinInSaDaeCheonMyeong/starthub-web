@@ -61,7 +61,8 @@ const ChatAIWidget = () => {
                           key={a.url}
                           className="file-chip"
                           href={a.url}
-                          download={a.name}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           title={a.name}
                         >
                           {a.name}
