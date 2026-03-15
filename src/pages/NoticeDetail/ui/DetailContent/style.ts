@@ -21,7 +21,6 @@ export const MainContent = styled.div`
 export const NoticeTitle = styled.div`
   border-bottom: 1px solid #dadada;
   padding-bottom: 24px;
-  margin-bottom: 32px;
 
   .title {
     ${StartHubFont.Pretendard.Headlines1.Bold}
@@ -34,37 +33,68 @@ export const NoticeTitle = styled.div`
   }
 `;
 
+export const FileLinksSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 16px;
+`;
+
+export const FileLink = styled.a`
+  ${StartHubFont.Pretendard.Caption1.Regular}
+  color: ${StartHubColors.Primary};
+  text-decoration: none;
+`;
+
 export const CategoryContainer = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 8px;
+  gap: 4px;
 
-  span {
+  p {
     ${StartHubFont.Pretendard.Headlines2.SemiBold};
     color: ${StartHubColors.Primary};
+    margin-right: 4px;
   }
 
   svg {
     width: 20px;
     height: 20px;
-    margin-right: 6px;
-    color: ${StartHubColors.Primary};
   }
+`;
+
+export const SourceTag = styled.span<{ $source: string }>`
+  ${StartHubFont.Pretendard.Body2.SemiBold}
+  padding: 4px 12px;
+  border-radius: 5px;
+  background-color: ${({ $source }) =>
+    $source === "BIZINFO"
+      ? "#FFF3E8"
+      : $source === "K_STARTUP"
+        ? "#FFE8E8"
+        : StartHubColors.Gray4};
+  color: ${({ $source }) =>
+    $source === "BIZINFO"
+      ? "#E3A15E"
+      : $source === "K_STARTUP"
+        ? "#E35E5E"
+        : StartHubColors.Gray2};
 `;
 
 export const ContentWrapper = styled.div`
   line-height: 1.6;
+  width: 100%;
+  overflow-x: auto;
 
   .dot_list-wrap p.title {
     ${StartHubFont.Pretendard.Headlines1.SemiBold}
-    margin: 48px 0 24px 0;
     padding-top: 20px;
     scroll-margin-top: 100px;
   }
 
   .dot_list-wrap h1 {
     ${StartHubFont.Pretendard.Headlines1.Bold}
-    margin: 48px 0 24px 0;
     padding-top: 20px;
     scroll-margin-top: 100px;
   }
@@ -138,10 +168,12 @@ export const ContentWrapper = styled.div`
 
 export const Sidebar = styled.aside`
   flex-shrink: 0;
+  width: 250px;
   position: sticky;
   top: 170px;
   height: fit-content;
-  padding: 24px;
+  padding-left: 24px;
+
   svg {
     width: 32px;
     height: 33px;
@@ -175,4 +207,16 @@ export const HeartButton = styled.button`
   background: none;
   cursor: pointer;
   border: none;
+`;
+
+export const PDFSection = styled.div`
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid ${StartHubColors.Gray4};
+
+  p {
+    ${StartHubFont.Pretendard.Headlines2.Bold}
+    margin-bottom: 20px;
+    color: ${StartHubColors.Black1};
+  }
 `;

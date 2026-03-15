@@ -7,6 +7,7 @@ import { useNoticeUnlike } from "@/features/notice/NoticeUnlike/useNoticeUnlike"
 import { ReactComponent as Heart } from "@assets/icons/heart.svg";
 import { ReactComponent as Share } from "@assets/icons/share.svg";
 import { ReactComponent as FillHeart } from "@assets/icons/fill_heart.svg";
+import PDFViewer from "@/shared/ui/PDFViewer";
 
 interface NoticeDetailProps {
   item: NoticeType;
@@ -25,7 +26,7 @@ const NoticeDetail = ({ item }: NoticeDetailProps) => {
   const unlikeMutation = useNoticeUnlike();
 
   const [tableOfContents, setTableOfContents] = useState<TableOfContentsItem[]>(
-    []
+    [],
   );
   const [activeId, setActiveId] = useState<string>("");
   const [safeContent, setSafeContent] = useState(item.content);
@@ -38,7 +39,7 @@ const NoticeDetail = ({ item }: NoticeDetailProps) => {
       (_, p1) => {
         const url = p1.startsWith("http") ? p1 : `https://${p1}`;
         return `href="${url}" target="_blank" rel="noopener noreferrer"`;
-      }
+      },
     );
     setSafeContent(fixed);
   }, [item.content]);
@@ -47,7 +48,7 @@ const NoticeDetail = ({ item }: NoticeDetailProps) => {
     if (!contentRef.current) return;
 
     const headings = contentRef.current.querySelectorAll(
-      "h1, h2, h3, h4, p.title"
+      "h1, h2, h3, h4, p.title",
     );
     const tocItems: TableOfContentsItem[] = [];
 
@@ -135,13 +136,50 @@ const NoticeDetail = ({ item }: NoticeDetailProps) => {
         <S.NoticeTitle>
           <S.CategoryContainer>
             {categoryInfo.icon}
-            <span>{categoryInfo.text}</span>
+            <p>{categoryInfo.text}</p>
+            {item.source && (
+              <S.SourceTag $source={item.source}>
+                {item.source === "BIZINFO"
+                  ? "기업마당"
+                  : item.source === "K_STARTUP"
+                    ? "K-Startup"
+                    : item.source}
+              </S.SourceTag>
+            )}
           </S.CategoryContainer>
 
           <h1 className="title">{item.title}</h1>
 
           {item.receptionPeriod && (
             <p className="reception-period">모집 기간 {item.receptionPeriod}</p>
+          )}
+
+          {item.originalFiles && item.originalFiles.length > 0 && (
+            <S.FileLinksSection>
+              {item.originalFiles.map((file, index) => {
+                const isPDF = file.name.toLowerCase().endsWith(".pdf");
+                return isPDF ? (
+                  <S.FileLink
+                    key={index}
+                    href={file.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {file.name}
+                  </S.FileLink>
+                ) : (
+                  <S.FileLink
+                    key={index}
+                    href={file.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    download
+                  >
+                    {file.name}
+                  </S.FileLink>
+                );
+              })}
+            </S.FileLinksSection>
           )}
         </S.NoticeTitle>
 
@@ -151,6 +189,19 @@ const NoticeDetail = ({ item }: NoticeDetailProps) => {
             dangerouslySetInnerHTML={{ __html: safeContent }}
           />
         </S.ContentWrapper>
+
+        {item.pdfFiles && item.pdfFiles.length > 0 && (
+          <S.PDFSection>
+            <p>첨부 문서</p>
+            {item.pdfFiles.map((pdf, index) => (
+              <PDFViewer
+                key={`pdf-${index}`}
+                pdfUrl={pdf.url}
+                name={pdf.name}
+              />
+            ))}
+          </S.PDFSection>
+        )}
       </S.MainContent>
 
       <S.Sidebar>
