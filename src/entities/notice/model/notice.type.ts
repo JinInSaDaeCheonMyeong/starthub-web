@@ -39,6 +39,9 @@ export interface NoticeType {
   content: string;
   isLiked: boolean;
   isNatural?: boolean;
+  source: "K_STARTUP" | "BIZINFO";
+  originalFiles: { url: string; name: string }[];
+  pdfFiles: { url: string; name: string }[];
 }
 
 export interface NoticePage {
