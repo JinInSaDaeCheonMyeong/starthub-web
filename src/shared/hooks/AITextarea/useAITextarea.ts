@@ -33,22 +33,34 @@ export const useAITextarea = ({
   const syncAutoSize = useCallback(
     (el: HTMLTextAreaElement | null): boolean => {
       if (!el) return false;
+
+      const COLLAPSED_PADDING = 56 * 2; 
+
+      const container = el.closest("div") as HTMLElement | null;
+      const containerWidth = container ? container.offsetWidth : el.offsetWidth;
+      const measuringWidth = Math.max(containerWidth - COLLAPSED_PADDING, 0);
+
+      el.style.width = `${measuringWidth}px`;
       el.style.height = "auto";
+
       const style = window.getComputedStyle(el);
       const padding =
         parseFloat(style.paddingTop) + parseFloat(style.paddingBottom);
       const lineHeight = parseFloat(style.lineHeight) || 20;
       const singleLineHeight = lineHeight + padding;
       const maxHeight = lineHeight * maxLines + padding;
-      const newHeight = Math.min(el.scrollHeight, maxHeight);
+
+      const scrollH = el.scrollHeight;
+      const newHeight = Math.min(scrollH, maxHeight);
       el.style.height = `${newHeight}px`;
-      if (el.scrollHeight > maxHeight) {
-        el.style.overflowY = "auto";
-        el.scrollTop = el.scrollHeight;
-      } else {
-        el.style.overflowY = "hidden";
-      }
-      const isMultiline = el.scrollHeight > singleLineHeight + 1;
+      el.style.overflowY = scrollH > maxHeight ? "auto" : "hidden";
+
+      const isMultiline = scrollH > singleLineHeight + 1;
+
+      requestAnimationFrame(() => {
+        el.style.width = "";
+      });
+
       return isMultiline;
     },
     [maxLines],
@@ -56,10 +68,9 @@ export const useAITextarea = ({
 
   useEffect(() => {
     const el = taRef.current;
-    if (el) {
-      const isMulti = syncAutoSize(el);
-      setExpanded(isMulti);
-    }
+    if (!el) return;
+    const isMulti = syncAutoSize(el);
+    setExpanded((prev) => (prev === isMulti ? prev : isMulti));
   }, [currentValue, syncAutoSize]);
 
   const handleSubmit = useCallback(() => {
@@ -79,17 +90,8 @@ export const useAITextarea = ({
         e.preventDefault();
         handleSubmit();
       }
-      if (e.key === "Enter" && e.shiftKey) {
-        setTimeout(() => {
-          const el = taRef.current;
-          if (el) {
-            const isMulti = syncAutoSize(el);
-            setExpanded(isMulti);
-          }
-        }, 0);
-      }
     },
-    [handleSubmit, syncAutoSize],
+    [handleSubmit],
   );
 
   const openFilePicker = useCallback(() => {
@@ -127,4 +129,6 @@ export const useAITextarea = ({
     files,
     removeFile,
   };
-}
+};
+
+export default useAITextarea;

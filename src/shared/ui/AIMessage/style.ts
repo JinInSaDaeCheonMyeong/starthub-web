@@ -13,6 +13,28 @@ export const Container = styled.div<{ $type: "small" | "big" }>`
     color: ${StartHubColors.Black1};
     word-break: break-word;
   }
+  .attachments {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+  }
+  .attachments img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid ${StartHubColors.Gray3};
+  }
+  .attachments .file-link {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: ${StartHubColors.White1};
+    border: 1px solid ${StartHubColors.Gray3};
+    color: ${StartHubColors.Gray2};
+    ${StartHubFont.Pretendard.Body2.Regular}
+  }
   ${({ $type }) =>
     $type === "small" &&
     `

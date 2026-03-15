@@ -63,7 +63,6 @@ export const useStreamMessage = (): UseStreamMessageReturn => {
                 typeof json.text === "string"
               ) {
                 accumulated += json.text;
-                // 스트리밍 중에도 완성된 어노테이션만 변환하여 즉시 반영
                 setStreamingText(parseAnnotations(accumulated));
               }
             } catch {}

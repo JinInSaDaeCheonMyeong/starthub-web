@@ -142,17 +142,18 @@ export const FileRow = styled.div`
   }
 `;
 
-export const FileChip = styled.div`
+export const FileChip = styled.div<{ $compact?: boolean }>`
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 12px;
-  border-radius: 12px;
+  gap: ${(p) => (p.$compact ? "6px" : "10px")};
+  padding: ${(p) => (p.$compact ? "6px 8px" : "8px 12px")};
+  border-radius: ${(p) => (p.$compact ? "10px" : "12px")};
   color: ${StartHubColors.Gray2};
   border: 1px solid ${StartHubColors.Gray3};
   backdrop-filter: blur(20px);
   ${StartHubFont.Pretendard.Body2.Regular}
-  max-width: 230px;
+  font-size: ${(p) => (p.$compact ? "13px" : "inherit")};
+  max-width: ${(p) => (p.$compact ? "160px" : "230px")};
   flex: 0 0 auto;
   span {
     overflow: hidden;

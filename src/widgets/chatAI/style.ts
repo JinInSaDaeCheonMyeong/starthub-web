@@ -72,8 +72,46 @@ export const MessageList = styled.div`
   }
 `;
 
+export const AttachmentRow = styled.div<{ $alignRight?: boolean }>`
+  width: 100%;
+  display: flex;
+  gap: 8px;
+  justify-content: ${(p) => (p.$alignRight ? "flex-end" : "flex-start")};
+  padding: 6px 8px 0; 
+  box-sizing: border-box;
+  align-items: center;
+  .thumb {
+    width: 56px;
+    height: 56px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 1px solid ${StartHubColors.Gray3};
+    flex: 0 0 56px;
+  }
+  .file-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: ${StartHubColors.White1};
+    border: 1px solid ${StartHubColors.Gray3};
+    color: ${StartHubColors.Gray2};
+    ${StartHubFont.Pretendard.Body2.Regular}
+    font-size: 13px;
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-decoration: none;
+  }
+  .file-chip:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  }
+`;
+
 export const TextareaArea = styled.div`
-  padding: 10px 8px;
+  padding: 0px 10px 8px;
   flex-shrink: 0;
 `;
 
@@ -84,13 +122,119 @@ export const UserMessageWrapper = styled.div`
 `;
 
 export const AIChatMessage = styled.div`
-  max-width: 90%;
-  background: #E9F0FE;
+  max-width: 100%;
   ${StartHubFont.Pretendard.Body2.Regular}
   font-size:11px;
   padding: 12px 8px;
   border-radius: 10px;
   word-break: break-word;
+  p {
+    margin: 0 0 6px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 700;
+    margin: 10px 0 4px;
+    line-height: 1.4;
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+  h1 {
+    font-size: 15px;
+  }
+  h2 {
+    font-size: 14px;
+  }
+  h3 {
+    font-size: 13px;
+  }
+  h4 {
+    font-size: 12px;
+  }
+
+  strong {
+    font-weight: 700;
+  }
+  em {
+    font-style: italic;
+  }
+
+  ul,
+  ol {
+    margin: 4px 0;
+    padding-left: 18px;
+  }
+  li {
+    margin: 2px 0;
+  }
+
+  code {
+    background: rgba(36, 102, 244, 0.12);
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-family: "Fira Code", monospace;
+  }
+
+  pre {
+    background: rgba(36, 102, 244, 0.08);
+    border-radius: 8px;
+    padding: 10px 12px;
+    overflow-x: auto;
+    margin: 6px 0;
+    code {
+      background: none;
+      padding: 0;
+    }
+  }
+
+  blockquote {
+    border-left: 3px solid ${StartHubColors.Primary};
+    margin: 6px 0;
+    padding-left: 10px;
+    color: ${StartHubColors.Gray2};
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid ${StartHubColors.Gray3};
+    margin: 8px 0;
+  }
+
+  a {
+    color: ${StartHubColors.Primary};
+    text-decoration: underline;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0;
+    font-size: 11px;
+  }
+  th,
+  td {
+    border: 1px solid ${StartHubColors.Gray3};
+    padding: 6px 8px;
+    text-align: left;
+    vertical-align: top;
+    word-break: break-word;
+  }
+  th {
+    background: rgba(36, 102, 244, 0.08);
+    font-weight: 700;
+    color: ${StartHubColors.Black2};
+  }
+  tr:nth-child(even) td {
+    background: rgba(0, 0, 0, 0.02);
+  }
 `;
 
 export const ToggleButton = styled.button<{ $open: boolean }>`
