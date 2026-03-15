@@ -31,7 +31,6 @@ export const NoticeTitle = styled.div`
     ${StartHubFont.Pretendard.Body1.Medium}
     margin: 0;
   }
-
 `;
 
 export const FileLinksSection = styled.div`
@@ -45,7 +44,6 @@ export const FileLink = styled.a`
   ${StartHubFont.Pretendard.Caption1.Regular}
   color: ${StartHubColors.Primary};
   text-decoration: none;
-  
 `;
 
 export const CategoryContainer = styled.div`
@@ -216,9 +214,9 @@ export const PDFSection = styled.div`
   padding-top: 32px;
   border-top: 1px solid ${StartHubColors.Gray4};
 
-  h2 {
-    ${StartHubFont.Pretendard.Headlines1.Bold}
-    margin-bottom: 24px;
+  p {
+    ${StartHubFont.Pretendard.Headlines2.Bold}
+    margin-bottom: 20px;
     color: ${StartHubColors.Black1};
   }
 `;
