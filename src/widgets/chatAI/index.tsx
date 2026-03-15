@@ -50,12 +50,15 @@ const ChatAIWidget = () => {
                   <S.AttachmentRow $alignRight={msg.role === "USER"}>
                     {msg.attachments.map((a) =>
                       a.isImage ? (
-                        <img
+                        <a
                           key={a.url}
-                          className="thumb"
-                          src={a.url}
-                          alt={a.name}
-                        />
+                          href={a.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          title={a.name}
+                        >
+                          <img className="thumb" src={a.url} alt={a.name} />
+                        </a>
                       ) : (
                         <a
                           key={a.url}
