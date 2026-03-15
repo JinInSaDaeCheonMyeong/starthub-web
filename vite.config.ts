@@ -38,6 +38,15 @@ export default defineConfig(({ mode }) => {
       "@api": path.resolve(__dirname, "./src/api"),
     },
   },
+  server: {
+    proxy: {
+      "/chatbot": {
+        target: "https://api.start-hub.kr",
+        changeOrigin: true,
+        secure: true,
+      },
+    },
+  },
   build: {
     rollupOptions: {
       output: {

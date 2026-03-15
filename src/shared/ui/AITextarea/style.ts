@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 import { StartHubColors, StartHubFont } from "@/shared/design";
 
 interface IconBadgeProps {
-  left?: boolean;
-  right?: boolean;
+  $left?: boolean;
+  $right?: boolean;
   $expanded?: boolean;
 }
 
@@ -29,12 +29,12 @@ export const sharedInputStyles = css`
 
 export const sharedIconStyles = css<{
   $expanded?: boolean;
-  left?: boolean;
-  right?: boolean;
+  $left?: boolean;
+  $right?: boolean;
 }>`
   position: absolute;
-  left: ${(p) => (p.left ? "12px" : "auto")};
-  right: ${(p) => (p.right ? "12px" : "auto")};
+  left: ${(p) => (p.$left ? "12px" : "auto")};
+  right: ${(p) => (p.$right ? "12px" : "auto")};
   top: ${(p) => (p.$expanded ? "auto" : "50%")};
   bottom: ${(p) => (p.$expanded ? "18px" : "auto")};
   transform: ${(p) => (p.$expanded ? "none" : "translateY(-50%)")};
@@ -92,11 +92,8 @@ export const InputWrapper = styled.div<{ $expanded?: boolean }>`
   }
 `;
 
-export const IconBadge = styled(motion.div).attrs<{
-  left?: boolean;
-  right?: boolean;
-}>((p) => ({
-  className: p.left ? "left-icon" : undefined,
+export const IconBadge = styled(motion.div).attrs<IconBadgeProps>((p) => ({
+  className: p.$left ? "left-icon" : undefined,
 }))<IconBadgeProps>`
   all: unset;
   &:focus {
