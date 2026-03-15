@@ -18,6 +18,12 @@ export interface ChatMessage {
   role: MessageRole;
   content: string;
   createdAt: string;
+  attachments?: {
+    name: string;
+    url: string;
+    fileType?: string;
+    isImage?: boolean;
+  }[];
 }
 
 export interface ChatDocument {
@@ -45,7 +51,6 @@ export interface CreateSessionRequest {
 export interface UpdateSessionTitleRequest {
   title: string;
 }
-
 
 export type GetSessionsResponse = BaseResponse<ChatSession[]>;
 
