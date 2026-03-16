@@ -11,7 +11,7 @@ const ScheduleChatCard = ({ announcementId }: ScheduleChatCardProps) => {
   const [date, setDate] = useState("");
 
   useEffect(() => {
-    NoticeApi.getNoticeDetail({ id: announcementId })
+    NoticeApi.getNoticeDetail({ id: announcementId, includeLikeStatus: false })
       .then((data: any) => {
         setTitle(data.title ?? "공고");
         setDate(data.receptionPeriod ?? "");
