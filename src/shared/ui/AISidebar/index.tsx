@@ -12,17 +12,17 @@ import { useGetMyProfile } from "@/features/auth/getProfile/model/useGetMyProfil
 import { useDeleteSession } from "@/features/chatAI/hooks/useDeleteSession";
 import { useUpdateSessionTitle } from "@/features/chatAI/hooks/useUpdateSessionTitle";
 
-interface ChatSidebarProps {
+interface AISidebarProps {
   activeMenu?: string;
   onChatClick?: (id: number) => void;
   onNewChat?: () => void;
 }
 
-const ChatSidebar = ({
+const AISidebar = ({
   activeMenu,
   onChatClick,
   onNewChat,
-}: ChatSidebarProps) => {
+}: AISidebarProps) => {
   const { data: chatSessions = [] } = useGetSessions();
   const { data: profile } = useGetMyProfile();
   const { mutate: deleteSession } = useDeleteSession();
@@ -196,4 +196,4 @@ const ChatSidebar = ({
   );
 };
 
-export default ChatSidebar;
+export default AISidebar;
