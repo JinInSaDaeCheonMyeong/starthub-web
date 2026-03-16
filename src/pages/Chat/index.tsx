@@ -24,7 +24,7 @@ const ChatPage = () => {
   const activeSessionId = sessionIdParam ? Number(sessionIdParam) : null;
 
   const setActiveSessionId = (id: number | null) => {
-    if (id) {
+    if (id !== null) {
       setSearchParams({ sessionId: String(id) });
     } else {
       setSearchParams({});
