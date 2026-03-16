@@ -72,7 +72,7 @@ export const NavButton = styled.button<{
   cursor: pointer;
   color: ${({ $active }) =>
     $active ? StartHubColors.Primary : StartHubColors.Black1};
-  font-size: 13rpx;
+  font-size: 13px;
   font-weight: 500;
   white-space: nowrap;
 
