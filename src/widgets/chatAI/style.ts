@@ -132,7 +132,6 @@ export const AIChatMessage = styled.div`
     margin: 0 0 6px;
     &:last-child {
       margin-bottom: 0;
-    }
   }
 
   h1,
@@ -238,8 +237,6 @@ export const AIChatMessage = styled.div`
 `;
 
 export const ToggleButton = styled.button<{ $open: boolean }>`
-  all: unset;
-  width: 52px;
   height: 52px;
   border-radius: 50%;
   background: ${({ $open }) =>
