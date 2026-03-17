@@ -83,7 +83,7 @@ const StartHubAITextarea = ({
         <S.IconBadge
           as="button"
           type="button"
-          left
+          $left
           $expanded={expanded}
           aria-hidden
           onClick={() => openFilePicker()}
@@ -101,8 +101,7 @@ const StartHubAITextarea = ({
             const el = e.target as HTMLTextAreaElement;
             setValue(el.value);
             if (onChange) onChange(e);
-            const isMulti = syncAutoSize(el);
-            el && (isMulti ? null : null);
+            syncAutoSize(el);
           }}
           onKeyDown={handleKeyDown}
           onCompositionStart={() => (composing.current = true)}

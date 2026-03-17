@@ -67,7 +67,7 @@ export const ChatAIApi = {
     formData.append("message", message);
     if (files) files.forEach((f) => formData.append("files", f));
 
-    const baseUrl = import.meta.env.VITE_API_BASE_URL.replace(/\/+$/, ""); 
+    const baseUrl = import.meta.env.VITE_API_BASE_URL.replace(/\/+$/, "");
 
     const token = cookieUtils.getAccessToken();
 

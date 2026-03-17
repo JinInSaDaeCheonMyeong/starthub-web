@@ -38,6 +38,15 @@ export default defineConfig(({ mode }) => {
       "@api": path.resolve(__dirname, "./src/api"),
     },
   },
+  server: {
+    proxy: {
+      "/api": {
+        target: env.VITE_API_BASE_URL,
+        changeOrigin: true,
+        secure: true,
+      },
+    },
+  },
   build: {
     rollupOptions: {
       output: {
@@ -55,15 +64,6 @@ export default defineConfig(({ mode }) => {
       },
     },
     chunkSizeWarningLimit: 1000,
-  },
-  server: {
-    proxy: {
-      "/api": {
-        target: env.VITE_API_BASE_URL,
-        changeOrigin: true,
-        secure: true,
-      },
-    },
   },
   };
 });
