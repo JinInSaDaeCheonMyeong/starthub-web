@@ -35,17 +35,35 @@ const defaultLabel = (type: string): string => {
   }
 };
 
-// [[TYPE:ID]] 또는 [[TYPE:ID:LABEL]] 또는 [[TYPE:ID:LABEL:URL]] 형태 모두 지원
-// 모든 타입을 마크다운 링크로 변환
 export const parseAnnotations = (text: string): string =>
   text.replace(
-    /\[\[([A-Z]+):(\d+)(?::([^:\]]+))?(?::([^\]]*))?\]\]/g,
-    (_, type, id, label, url) => {
+    /\[\[([A-Z]+):(\d+)(?::([\s\S]+?))?\]\]/g,
+    (_, type, id, rest) => {
+      let label = rest ?? "";
+      let url: string | undefined = undefined;
+
+      if (label) {
+        const m = label.match(/(https?:\/\/[^\s\]]+|www\.[^\s\]]+)/i);
+        if (m) {
+          url = m[0];
+          label = (
+            label.slice(0, m.index) + label.slice((m.index || 0) + m[0].length)
+          ).trim();
+        }
+      }
+
+      label = label.replace(/^[\s:\[]+|[\s:\]]+$/g, "").trim();
+
+      if (url && url.startsWith("www.")) url = `https://${url}`;
+
       const resolvedUrl = resolveUrl(
         type as AnnotationType,
         id,
         url || undefined,
       );
-      return `[${label || defaultLabel(type)}](${resolvedUrl})`;
+      const finalLabel = label || defaultLabel(type);
+
+      const safeLabel = finalLabel.replace(/\[|\]/g, "");
+      return `[${safeLabel}](${resolvedUrl})`;
     },
   );
