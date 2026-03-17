@@ -13,14 +13,14 @@ import {
 } from "../model/types";
 
 export const ChatAIApi = {
-  /** GET /chatbot/sessions — 세션 목록 조회 */
   getSessions: async (): Promise<ChatSession[]> => {
     const res =
       await StartHubAxios.get<GetSessionsResponse>("/chatbot/sessions");
-    return res.data.data;
+    const body: any = res;
+    if (body && body.data !== undefined) return body.data as ChatSession[];
+    return body as ChatSession[];
   },
 
-  /** POST /chatbot/sessions — 세션 생성 */
   createSession: async (
     body: CreateSessionRequest,
   ): Promise<CreateSessionResponse> => {
@@ -28,26 +28,26 @@ export const ChatAIApi = {
       "/chatbot/sessions",
       body,
     );
-    return res.data;
+    const respBody: any = res;
+    return respBody && respBody.data !== undefined ? respBody.data : respBody;
   },
 
-  /** GET /chatbot/sessions/{sessionId} — 세션 상세 조회 */
   getSessionDetail: async (sessionId: number): Promise<ChatSessionDetail> => {
     const res = await StartHubAxios.get<ChatSessionDetail>(
       `/chatbot/sessions/${sessionId}`,
     );
-    return res.data;
+    const respBody: any = res;
+    return respBody && respBody.data !== undefined ? respBody.data : respBody;
   },
 
-  /** DELETE /chatbot/sessions/{sessionId} — 세션 삭제 */
   deleteSession: async (sessionId: number): Promise<DeleteSessionResponse> => {
     const res = await StartHubAxios.delete<DeleteSessionResponse>(
       `/chatbot/sessions/${sessionId}`,
     );
-    return res.data;
+    const respBody: any = res;
+    return respBody && respBody.data !== undefined ? respBody.data : respBody;
   },
 
-  /** PATCH /chatbot/sessions/{sessionId} — 세션 제목 수정 */
   updateSessionTitle: async (
     sessionId: number,
     body: UpdateSessionTitleRequest,
@@ -56,7 +56,8 @@ export const ChatAIApi = {
       `/chatbot/sessions/${sessionId}`,
       body,
     );
-    return res.data;
+    const respBody: any = res;
+    return respBody && respBody.data !== undefined ? respBody.data : respBody;
   },
 
   streamMessage: async (
