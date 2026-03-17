@@ -77,7 +77,7 @@ export const AttachmentRow = styled.div<{ $alignRight?: boolean }>`
   display: flex;
   gap: 8px;
   justify-content: ${(p) => (p.$alignRight ? "flex-end" : "flex-start")};
-  padding: 6px 8px 0; 
+  padding: 6px 8px 0;
   box-sizing: border-box;
   align-items: center;
   .thumb {
@@ -132,111 +132,113 @@ export const AIChatMessage = styled.div`
     margin: 0 0 6px;
     &:last-child {
       margin-bottom: 0;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4 {
-    font-weight: 700;
-    margin: 10px 0 4px;
-    line-height: 1.4;
-    &:first-child {
-      margin-top: 0;
     }
-  }
-  h1 {
-    font-size: 15px;
-  }
-  h2 {
-    font-size: 14px;
-  }
-  h3 {
-    font-size: 13px;
-  }
-  h4 {
-    font-size: 12px;
-  }
 
-  strong {
-    font-weight: 700;
-  }
-  em {
-    font-style: italic;
-  }
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-weight: 700;
+      margin: 10px 0 4px;
+      line-height: 1.4;
+      &:first-child {
+        margin-top: 0;
+      }
+    }
+    h1 {
+      font-size: 15px;
+    }
+    h2 {
+      font-size: 14px;
+    }
+    h3 {
+      font-size: 13px;
+    }
+    h4 {
+      font-size: 12px;
+    }
 
-  ul,
-  ol {
-    margin: 4px 0;
-    padding-left: 18px;
-  }
-  li {
-    margin: 2px 0;
-  }
+    strong {
+      font-weight: 700;
+    }
+    em {
+      font-style: italic;
+    }
 
-  code {
-    background: rgba(36, 102, 244, 0.12);
-    padding: 1px 5px;
-    border-radius: 4px;
-    font-size: 11px;
-    font-family: "Fira Code", monospace;
-  }
+    ul,
+    ol {
+      margin: 4px 0;
+      padding-left: 18px;
+    }
+    li {
+      margin: 2px 0;
+    }
 
-  pre {
-    background: rgba(36, 102, 244, 0.08);
-    border-radius: 8px;
-    padding: 10px 12px;
-    overflow-x: auto;
-    margin: 6px 0;
     code {
-      background: none;
-      padding: 0;
+      background: rgba(36, 102, 244, 0.12);
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-family: "Fira Code", monospace;
     }
-  }
 
-  blockquote {
-    border-left: 3px solid ${StartHubColors.Primary};
-    margin: 6px 0;
-    padding-left: 10px;
-    color: ${StartHubColors.Gray2};
-  }
+    pre {
+      background: rgba(36, 102, 244, 0.08);
+      border-radius: 8px;
+      padding: 10px 12px;
+      overflow-x: auto;
+      margin: 6px 0;
+      code {
+        background: none;
+        padding: 0;
+      }
+    }
 
-  hr {
-    border: none;
-    border-top: 1px solid ${StartHubColors.Gray3};
-    margin: 8px 0;
-  }
+    blockquote {
+      border-left: 3px solid ${StartHubColors.Primary};
+      margin: 6px 0;
+      padding-left: 10px;
+      color: ${StartHubColors.Gray2};
+    }
 
-  a {
-    color: ${StartHubColors.Primary};
-    text-decoration: underline;
-  }
+    hr {
+      border: none;
+      border-top: 1px solid ${StartHubColors.Gray3};
+      margin: 8px 0;
+    }
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 8px 0;
-    font-size: 11px;
-  }
-  th,
-  td {
-    border: 1px solid ${StartHubColors.Gray3};
-    padding: 6px 8px;
-    text-align: left;
-    vertical-align: top;
-    word-break: break-word;
-  }
-  th {
-    background: rgba(36, 102, 244, 0.08);
-    font-weight: 700;
-    color: ${StartHubColors.Black2};
-  }
-  tr:nth-child(even) td {
-    background: rgba(0, 0, 0, 0.02);
+    a {
+      color: ${StartHubColors.Primary};
+      text-decoration: underline;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8px 0;
+      font-size: 11px;
+    }
+    th,
+    td {
+      border: 1px solid ${StartHubColors.Gray3};
+      padding: 6px 8px;
+      text-align: left;
+      vertical-align: top;
+      word-break: break-word;
+    }
+    th {
+      background: rgba(36, 102, 244, 0.08);
+      font-weight: 700;
+      color: ${StartHubColors.Black2};
+    }
+    tr:nth-child(even) td {
+      background: rgba(0, 0, 0, 0.02);
+    }
   }
 `;
 
-export const ToggleButton = styled.button<{ $open: boolean }>`
+export const ToggleButton = styled.div<{ $open: boolean }>`
+  width: 52px;
   height: 52px;
   border-radius: 50%;
   background: ${({ $open }) =>
