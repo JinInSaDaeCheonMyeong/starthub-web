@@ -16,21 +16,39 @@ const Header = () => {
     <S.HeadersContainer>
       <S.FeedbackFormHeaderContainer>
         <S.FeedbackFormWrapper>
-          더 나은 스타트허브를 위해 피드백을 남겨주세요! <S.FeedbackFormLink href="https://forms.gle/CWkE5rztb6G5woDa9" target="_blank" rel="noopener noreferrer">피드백 남기기</S.FeedbackFormLink>
+          더 나은 스타트허브를 위해 피드백을 남겨주세요!{" "}
+          <S.FeedbackFormLink
+            href="https://forms.gle/CWkE5rztb6G5woDa9"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            피드백 남기기
+          </S.FeedbackFormLink>
         </S.FeedbackFormWrapper>
       </S.FeedbackFormHeaderContainer>
       <S.HeaderContainer>
         <S.ContentWrapper>
-          <LogoIcon width={104} height={18} onClick={() => navigate("/")} style={{ cursor: "pointer" }} />
+          <LogoIcon
+            width={104}
+            height={18}
+            onClick={() => navigate("/")}
+            style={{ cursor: "pointer" }}
+          />
           <div style={{ display: "flex", flexDirection: "row" }}>
             <S.StyleLink to="/notices" $active={currentPath === "/notices"}>
               공고
             </S.StyleLink>
-            <S.StyleLink to="/competitor" $active={currentPath === "/competitor"}>
+            <S.StyleLink
+              to="/competitor"
+              $active={currentPath === "/competitor"}
+            >
               경쟁사 분석
             </S.StyleLink>
             <S.StyleLink to="/bmc" $active={currentPath === "/bmc"}>
               BMC 설계
+            </S.StyleLink>
+            <S.StyleLink to="/chat" $active={currentPath === "/chat"}>
+              Hub AI
             </S.StyleLink>
             <S.StyleLink
               to="/my-profile"
