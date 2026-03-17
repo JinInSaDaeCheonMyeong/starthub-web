@@ -16,18 +16,22 @@ interface AISidebarProps {
   activeMenu?: string;
   onChatClick?: (id: number) => void;
   onNewChat?: () => void;
+  defaultExpanded?: boolean;
+  creatingSession?: boolean;
 }
 
 const AISidebar = ({
   activeMenu,
   onChatClick,
   onNewChat,
+  defaultExpanded,
+  creatingSession,
 }: AISidebarProps) => {
   const { data: chatSessions = [] } = useGetSessions();
   const { data: profile } = useGetMyProfile();
   const { mutate: deleteSession } = useDeleteSession();
   const { mutate: updateTitle } = useUpdateSessionTitle();
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState<boolean>(!!defaultExpanded);
   const [menuOpenId, setMenuOpenId] = useState<number | null>(null);
   const [editingId, setEditingId] = useState<number | null>(null);
   const [editValue, setEditValue] = useState("");
@@ -35,7 +39,6 @@ const AISidebar = ({
   const editInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
-  // 메뉴 외부 클릭 시 닫기
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
@@ -48,7 +51,6 @@ const AISidebar = ({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [menuOpenId]);
 
-  // 편집 모드 시 input focus
   useEffect(() => {
     if (editingId !== null && editInputRef.current) {
       editInputRef.current.focus();
@@ -81,7 +83,10 @@ const AISidebar = ({
 
   return (
     <S.SidebarContainer $expanded={expanded}>
-      <S.LogoWrapper $expanded={expanded} onClick={() => setExpanded((v) => !v)}>
+      <S.LogoWrapper
+        $expanded={expanded}
+        onClick={() => setExpanded((v) => !v)}
+      >
         <S.LogoButton>
           <IconAI width={32} height={32} />
         </S.LogoButton>
@@ -94,7 +99,9 @@ const AISidebar = ({
         <S.NavButton
           $active={activeMenu === "edit"}
           $expanded={expanded}
-          onClick={handleNewChat}
+          onClick={() => {
+            if (!creatingSession) handleNewChat();
+          }}
         >
           <SquareAndPencilIcon width={18} height={18} />
           {expanded && "새 채팅"}
@@ -152,7 +159,9 @@ const AISidebar = ({
                     <S.MoreButton
                       onClick={(e) => {
                         e.stopPropagation();
-                        setMenuOpenId(menuOpenId === session.id ? null : session.id);
+                        setMenuOpenId(
+                          menuOpenId === session.id ? null : session.id,
+                        );
                       }}
                     >
                       ···
@@ -165,13 +174,13 @@ const AISidebar = ({
                     <S.ContextMenuItem
                       onClick={() => handleRename(session.id, session.title)}
                     >
-                      <span>✏️</span> 이름 바꾸기
+                      이름 바꾸기
                     </S.ContextMenuItem>
                     <S.ContextMenuItem
                       $danger
                       onClick={() => handleDelete(session.id)}
                     >
-                      <span>🗑️</span> 삭제
+                      삭제
                     </S.ContextMenuItem>
                   </S.ContextMenu>
                 )}

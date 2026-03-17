@@ -38,11 +38,10 @@ const ChatPage = () => {
   const { data: profile } = useGetMyProfile();
   const { streaming, streamingText, send } = useStreamMessage();
   const { data: sessionDetail } = useGetSessionDetail(activeSessionId);
-  const { mutate: createSession } = useCreateSession();
+  const createSessionMutation = useCreateSession();
+  const createSession = createSessionMutation.mutate;
+  const creatingSession = (createSessionMutation as any).isLoading ?? false;
 
-  // 세션 상세 데이터가 로드되면 메시지 동기화
-  // 서버 메시지가 로컬보다 많을 때만 업데이트 (refetch로 새 메시지 반영)
-  // 스트리밍 중/직후에는 로컬이 서버보다 같거나 많으므로 덮어쓰지 않음
   useEffect(() => {
     if (!sessionDetail || streaming || pendingMessageRef.current) return;
     setMessages((prev) => {
@@ -111,7 +110,7 @@ const ChatPage = () => {
           onSuccess: (session) => {
             setActiveSessionId(session.id);
           },
-        }
+        },
       );
       return;
     }
@@ -125,6 +124,8 @@ const ChatPage = () => {
   return (
     <S.PageWrapper>
       <ChatSidebar
+        defaultExpanded={true}
+        creatingSession={creatingSession}
         onChatClick={(id) => {
           setActiveSessionId(id);
           setMessages([]);
@@ -139,9 +140,12 @@ const ChatPage = () => {
         {!hasMessages ? (
           <S.WelcomeWrapper>
             <S.WelcomeTitle>
-              <span>Hub</span><span> AI</span>
+              <span>Hub</span>
+              <span> AI</span>
             </S.WelcomeTitle>
-            <S.WelcomeGreeting>{userName}님! 무엇을 도와드릴까요?</S.WelcomeGreeting>
+            <S.WelcomeGreeting>
+              {userName}님! 무엇을 도와드릴까요?
+            </S.WelcomeGreeting>
             <S.WelcomeInput>
               <StartHubAITextarea
                 onSubmit={handleSend}
@@ -164,7 +168,7 @@ const ChatPage = () => {
                     {msg.text}
                   </ReactMarkdown>
                 </S.AIMessageWrapper>
-              )
+              ),
             )}
             {streaming && streamingText && (
               <S.AIMessageWrapper>
