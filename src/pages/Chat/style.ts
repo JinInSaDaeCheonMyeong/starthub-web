@@ -24,7 +24,7 @@ export const WelcomeWrapper = styled.div`
   align-items: center;
   justify-content: center;
   gap: 16px;
-  padding: 0 24px;
+  padding: 24px;
 `;
 
 export const WelcomeInput = styled.div`
@@ -84,7 +84,7 @@ export const Chip = styled.button`
 export const MessageList = styled.div`
   flex: 1;
   overflow-y: auto;
-  padding: 0 24px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -227,7 +227,7 @@ export const AIMessageWrapper = styled.div`
 /* ── Input ── */
 
 export const InputArea = styled.div`
-  padding: 16px 24px;
+  padding: 0px 16px 24px;
   flex-shrink: 0;
   display: flex;
   justify-content: center;
