@@ -21,7 +21,6 @@ import CompetitorList from "@/pages/Competitor/List";
 import CompetitorCreate from "@/pages/Competitor/Create";
 import CompetitorBmcSection from "@/pages/Competitor/BmcSelection";
 import CompetitorAnalysis from "@/pages/CompetitorAnalysis";
-import ChatSidebar from "@/shared/ui/AISidebar";
 import ChatPage from "@/pages/Chat";
 
 const Router = () => {
@@ -54,10 +53,6 @@ const Router = () => {
           element={<CompetitorBmcSection />}
         />
         <Route path="/chat" element={<ChatPage />} />
-        <Route
-          path="/dev/chat-sidebar"
-          element={<div style={{ height: "100vh" }}><ChatSidebar /></div>}
-        />
       </Routes>
     </BrowserRouter>
   );
