@@ -49,11 +49,11 @@ const RecommendedAINotice = () => {
 
   if (isLoading) {
     return (
-      <>
+      <div style={{ display: "flex", flexDirection: "row" }}>
         {Array.from({ length: 4 }).map((_, idx) => (
           <NoticeSkeleton key={idx} />
         ))}
-      </>
+      </div>
     );
   }
 
@@ -70,11 +70,11 @@ const RecommendedAINotice = () => {
   }
 
   return (
-    <>
-      {data?.slice(0, 4).map((item: NoticeType) => (
-        <NoticeCard key={item.url} notice={item} />
-      ))}
-    </>
+      <div style={{ display: "flex", gap: "10px" }}>
+        {data?.slice(0, 4).map((item: NoticeType) => (
+          <NoticeCard key={item.url} notice={item} />
+        ))}
+      </div>
   );
 };
 
@@ -86,22 +86,23 @@ const EducationNotice = () => {
     sort: "createdAt,desc",
   });
 
+
   if (isLoading) {
     return (
-      <>
+      <div style={{ display: "flex", flexDirection:"row" }}>
         {Array.from({ length: 4 }).map((_, idx) => (
           <NoticeSkeleton key={idx} />
         ))}
-      </>
+      </div>
     );
   }
 
   return (
-    <>
+    <div style={{ display: "flex", gap: "10px" }}>
       {data?.content?.map((item: NoticeType) => (
         <NoticeCard key={item.url} notice={item} />
       ))}
-    </>
+    </div>
   );
 };
 
