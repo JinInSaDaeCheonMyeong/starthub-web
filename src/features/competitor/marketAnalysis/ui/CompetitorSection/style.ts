@@ -33,6 +33,7 @@ export const CompetitorCard = styled.div`
   border: 1px solid ${StartHubColors.Gray3};
   border-radius: 8px;
   box-sizing: border-box;
+  user-select: text;
 `;
 
 export const CompetitorHeader = styled.div`
@@ -88,4 +89,5 @@ export const DetailSection = styled.div`
 
 export const DetailText = styled.p`
   font: ${StartHubFont.Pretendard.Caption1.Medium};
+  user-select: text;
 `;

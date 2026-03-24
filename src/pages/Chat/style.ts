@@ -92,6 +92,7 @@ export const MessageList = styled.div`
   width: 100%;
   max-width: 900px;
   margin: 0 auto;
+  user-select: text;
 
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -109,11 +110,13 @@ export const UserBubble = styled.div`
   font-size: 16px;
   color: #000;
   word-break: break-word;
+  user-select: text;
 `;
 
 export const AIMessageWrapper = styled.div`
   align-self: flex-start;
   max-width: 100%;
+  user-select: text;
 
   p {
     margin: 0 0 6px;

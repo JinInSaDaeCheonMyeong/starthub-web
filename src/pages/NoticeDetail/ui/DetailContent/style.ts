@@ -16,11 +16,13 @@ export const Container = styled.div`
 export const MainContent = styled.div`
   flex: 1;
   min-width: 0;
+  user-select: text;
 `;
 
 export const NoticeTitle = styled.div`
   border-bottom: 1px solid #dadada;
   padding-bottom: 24px;
+  user-select: text;
 
   .title {
     ${StartHubFont.Pretendard.Headlines1.Bold}
@@ -86,6 +88,7 @@ export const ContentWrapper = styled.div`
   line-height: 1.6;
   width: 100%;
   overflow-x: auto;
+  user-select: text;
 
   .dot_list-wrap p.title {
     ${StartHubFont.Pretendard.Headlines1.SemiBold}

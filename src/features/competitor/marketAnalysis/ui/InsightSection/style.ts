@@ -26,6 +26,7 @@ export const InsightCard = styled.div<{ type: "opportunity" | "threat" }>`
     props.type === "opportunity" ? "#eefdf4" : "#fff6ef"};
   border: 1px solid
     ${(props) => (props.type === "opportunity" ? "#d6fae2" : "#ffe8d2")};
+  user-select: text;
 `;
 
 export const InsightTitle = styled.h3<{ type: "opportunity" | "threat" }>`
@@ -51,4 +52,5 @@ export const InsightItem = styled.div<{ type: "opportunity" | "threat" }>`
 export const InsightText = styled.p<{ type: "opportunity" | "threat" }>`
   font: ${StartHubFont.Pretendard.Caption1.Regular};
   color: ${(props) => (props.type === "opportunity" ? "#14532d" : "#7c2d12")};
+  user-select: text;
 `;
