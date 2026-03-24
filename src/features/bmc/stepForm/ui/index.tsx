@@ -56,7 +56,14 @@ const BmcStepForm = ({ stepId, placeholder }: StepFormProps) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const el = e.target;
-    setCurrentInput(el.value);
+    const value = el.value;
+
+    if (value.length > 1000) {
+      toast.error("최대 1000자까지 입력 가능합니다.");
+      return;
+    }
+
+    setCurrentInput(value);
 
     if (isSubmitting) return;
 
@@ -90,7 +97,19 @@ const BmcStepForm = ({ stepId, placeholder }: StepFormProps) => {
   };
 
   const handleSubmit = async () => {
-    if (!currentInput.trim() || !currentQuestion) return;
+    const trimmedInput = currentInput.trim();
+
+    if (trimmedInput.length < 5) {
+      toast.error("최소 5자 이상 입력해주세요.");
+      return;
+    }
+
+    if (trimmedInput.length > 1000) {
+      toast.error("최대 1000자까지 입력 가능합니다.");
+      return;
+    }
+
+    if (!trimmedInput || !currentQuestion) return;
 
     const sessionData = getSessionId();
 
@@ -103,7 +122,7 @@ const BmcStepForm = ({ stepId, placeholder }: StepFormProps) => {
     setIsSubmitting(true);
 
     try {
-      await submitAnswer(currentQuestion.questionNumber, currentInput.trim());
+      await submitAnswer(currentQuestion.questionNumber, trimmedInput);
 
       setTimeout(() => {
         scrollToBottom();
