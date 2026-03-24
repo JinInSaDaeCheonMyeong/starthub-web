@@ -62,6 +62,7 @@ export const MessageList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  user-select: text;
 
   &::-webkit-scrollbar {
     width: 4px;
@@ -128,6 +129,7 @@ export const AIChatMessage = styled.div`
   padding: 12px 8px;
   border-radius: 10px;
   word-break: break-word;
+  user-select: text;
   p {
     margin: 0 0 6px;
     &:last-child {

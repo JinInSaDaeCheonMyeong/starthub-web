@@ -22,6 +22,7 @@ export const ViewerWrapper = styled.div`
   border-radius: 8px;
   overflow: hidden;
   background-color: #525659;
+  user-select: text;
 
   iframe {
     width: 100%;

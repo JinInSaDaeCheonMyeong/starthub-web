@@ -24,12 +24,14 @@ export const MainContent = styled.div`
   flex: 1;
   min-width: 0;
   text-align: left;
+  user-select: text;
 `;
 
 export const Section = styled.section`
   max-width: 700px;
   padding-bottom: 20px;
   text-align: left;
+  user-select: text;
 `;
 
 export const TitleWrapper = styled.div`
