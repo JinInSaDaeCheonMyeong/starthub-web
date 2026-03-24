@@ -10,19 +10,39 @@ export const SidebarContainer = styled.nav<{ $expanded?: boolean }>`
   width: ${({ $expanded }) => ($expanded ? "240px" : "48px")};
   height: 100%;
   transition: width 0.2s ease;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
 `;
 
 export const LogoWrapper = styled.div<{ $expanded?: boolean }>`
   display: flex;
   align-items: center;
+  justify-content: ${({ $expanded }) =>
+    $expanded ? "space-between" : "center"};
   gap: 8px;
   padding: 8px;
   margin-bottom: ${({ $expanded }) => ($expanded ? "12px" : "26px")};
-  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+  overflow: visible;
+
+  ${({ $expanded }) =>
+    !$expanded &&
+    `
+    &:hover ${LogoButton} {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    &:hover button {
+      opacity: 1 !important;
+      visibility: visible !important;
+      pointer-events: auto !important;
+    }
+  `}
 `;
 
-export const LogoButton = styled.div`
+export const LogoButton = styled.div<{ $expanded?: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -31,17 +51,90 @@ export const LogoButton = styled.div`
   border-radius: 10px;
   background: ${StartHubColors.Primary};
   flex-shrink: 0;
+  transition: all 0.2s ease;
+
+  ${({ $expanded }) =>
+    $expanded &&
+    `
+    opacity: 1;
+    visibility: visible;
+    cursor: pointer;
+    
+    &:hover {
+      opacity: 0.9;
+    }
+  `}
+
+  ${({ $expanded }) =>
+    !$expanded &&
+    `
+    opacity: 1;
+    visibility: visible;
+    cursor: default;
+  `}
+`;
+
+export const LogoContent = styled.div<{ $expanded?: boolean }>`
+  display: ${({ $expanded }) => ($expanded ? "flex" : "none")};
+  align-items: center;
+  gap: 8px;
+  flex: ${({ $expanded }) => ($expanded ? 1 : 0)};
+  opacity: ${({ $expanded }) => ($expanded ? 1 : 0)};
+  visibility: ${({ $expanded }) => ($expanded ? "visible" : "hidden")};
+  transition: all 0.2s ease;
+`;
+
+export const ToggleButton = styled.button<{ $expanded?: boolean }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  color: #666;
+  z-index: 10;
+
+  ${({ $expanded }) =>
+    !$expanded &&
+    `
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  `}
+
+  ${({ $expanded }) =>
+    $expanded &&
+    `
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  `}
+
+  &:hover {
+    background: rgba(36, 102, 244, 0.1);
+    color: #333;
+  }
 `;
 
 export const LogoTitle = styled.span`
-  font : ${StartHubFont.Pretendard.Body2.Medium};
+  font: ${StartHubFont.Pretendard.Body2.Medium};
   color: ${StartHubColors.Black1};
   white-space: nowrap;
 `;
 
 export const SectionLabel = styled.div`
   padding: 4px 16px;
-  font : ${StartHubFont.Pretendard.Caption2.Regular};
+  font: ${StartHubFont.Pretendard.Caption2.Regular};
   color: ${StartHubColors.Gray2};
   white-space: nowrap;
 `;
@@ -78,8 +171,7 @@ export const NavButton = styled.button<{
 
   &:hover {
     color: ${StartHubColors.Primary};
-    ${({ $expanded }) =>
-      $expanded && "background: rgba(36, 102, 244, 0.08);"}
+    ${({ $expanded }) => $expanded && "background: rgba(36, 102, 244, 0.08);"}
   }
 
   svg {
