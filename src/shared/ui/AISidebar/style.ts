@@ -144,7 +144,8 @@ export const NavSection = styled.div<{ $expanded?: boolean }>`
   flex-direction: column;
   align-items: ${({ $expanded }) => ($expanded ? "stretch" : "center")};
   padding: ${({ $expanded }) => ($expanded ? "0 8px" : "0 8px")};
-  gap: ${({ $expanded }) => ($expanded ? "8px" : "18px")};
+  gap: 8px;
+  padding-top: ${({ $expanded }) => ($expanded ? "0" : "10px")};
 `;
 
 export const NavButton = styled.button<{
