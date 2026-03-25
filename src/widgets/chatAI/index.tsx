@@ -9,6 +9,7 @@ import AITypingIndicator from "@/shared/ui/AITypingIndicator";
 import { ReactComponent as Logo } from "@/assets/logo/leaf.svg";
 import useChatAI from "./hooks/useChatAI";
 import { markdownComponents } from "@/features/chatAI/utils/markdownComponents";
+import { convertEnumToKorean } from "@/features/chatAI/utils/convertEnumToKorean";
 
 const ChatAIWidget = () => {
   const {
@@ -41,7 +42,7 @@ const ChatAIWidget = () => {
                       remarkPlugins={[remarkGfm]}
                       components={markdownComponents}
                     >
-                      {msg.content}
+                      {convertEnumToKorean(msg.content)}
                     </ReactMarkdown>
                   </S.AIChatMessage>
                 )}
@@ -83,7 +84,7 @@ const ChatAIWidget = () => {
                   remarkPlugins={[remarkGfm]}
                   components={markdownComponents}
                 >
-                  {streamingText}
+                  {convertEnumToKorean(streamingText)}
                 </ReactMarkdown>
               </S.AIChatMessage>
             )}

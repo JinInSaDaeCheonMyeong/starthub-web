@@ -11,6 +11,7 @@ import { useGetSessions } from "@/features/chatAI/hooks/useGetSessions";
 import { useGetMyProfile } from "@/features/auth/getProfile/model/useGetMyProfile";
 import { useDeleteSession } from "@/features/chatAI/hooks/useDeleteSession";
 import { useUpdateSessionTitle } from "@/features/chatAI/hooks/useUpdateSessionTitle";
+import { ReactComponent as SidebarIcon } from "@assets/icons/ai-sidebar.svg";
 
 interface AISidebarProps {
   activeMenu?: string;
@@ -83,14 +84,23 @@ const AISidebar = ({
 
   return (
     <S.SidebarContainer $expanded={expanded}>
-      <S.LogoWrapper
-        $expanded={expanded}
-        onClick={() => setExpanded((v) => !v)}
-      >
-        <S.LogoButton>
+      <S.LogoWrapper $expanded={expanded}>
+        <S.LogoButton
+          $expanded={expanded}
+          onClick={() => expanded && navigate("/")}
+        >
           <IconAI width={32} height={32} />
         </S.LogoButton>
-        {expanded && <S.LogoTitle>StartHub AI</S.LogoTitle>}
+        <S.LogoContent $expanded={expanded}>
+          <S.LogoTitle>StartHub AI</S.LogoTitle>
+        </S.LogoContent>
+        <S.ToggleButton
+          $expanded={expanded}
+          onClick={() => setExpanded((v) => !v)}
+          title={expanded ? "사이드바 닫기" : "사이드바 열기"}
+        >
+          <SidebarIcon width={expanded ? 20 : 24} height={expanded ? 20 : 24} />
+        </S.ToggleButton>
       </S.LogoWrapper>
 
       {expanded && <S.SectionLabel>StartHub</S.SectionLabel>}
