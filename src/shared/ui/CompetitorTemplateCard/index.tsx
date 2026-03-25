@@ -3,9 +3,10 @@ import * as S from "./style";
 import { ReactComponent as Plus } from "@assets/icons/plus.svg";
 import { useNavigate } from "react-router-dom";
 import { useGetCompetitorAnalyses } from "@/features/competitor/getCompetitorAnalyses/useGetCompetitorAnalyses";
-import { CompetitorCardData } from "@/entities/competitor/model/types";
-import BmcTemplate from "@assets/images/bmc에시.png";
 import { CompetitorCardSkeleton } from "./CompetitorCardSkeleton";
+import { bmcApi } from "@/entities/bmc/api/bmc";
+import { BmcData } from "@/entities/bmc/model/types";
+import BmcCard from "@/shared/ui/BmcCard";
 
 const formatDate = (dateString?: string): string => {
   const date = dateString ? new Date(dateString) : new Date();
@@ -22,6 +23,7 @@ const formatDate = (dateString?: string): string => {
 const CompetitorTemplateCard: React.FC = () => {
   const navigate = useNavigate();
   const { data: analysesData, isLoading, refetch } = useGetCompetitorAnalyses();
+  const [bmcList, setBmcList] = React.useState<BmcData[]>([]);
 
   React.useEffect(() => {
     refetch();
@@ -29,6 +31,18 @@ const CompetitorTemplateCard: React.FC = () => {
     window.addEventListener('focus', handleFocus);
     return () => window.removeEventListener('focus', handleFocus);
   }, [refetch]);
+
+  React.useEffect(() => {
+    const fetchBmcList = async () => {
+      try {
+        const response = await bmcApi.getCanvases();
+        setBmcList(response.data);
+      } catch (error) {
+        console.error('BMC 리스트 조회 실패:', error);
+      }
+    };
+    fetchBmcList();
+  }, []);
 
   const handleEmptyCardClick = () => navigate("/competitor/bmc-selection");
 
@@ -50,7 +64,11 @@ const CompetitorTemplateCard: React.FC = () => {
     }
   };
 
-  const cardData: CompetitorCardData[] = React.useMemo(() => {
+  const handleRefresh = () => {
+    refetch();
+  };
+
+  const cardData = React.useMemo(() => {
     if (!analysesData?.data) return [];
 
     const sortedData = [...analysesData.data].sort((a, b) => {
@@ -66,12 +84,17 @@ const CompetitorTemplateCard: React.FC = () => {
       }
     });
 
-    return Array.from(uniqueByBmcId.values()).map(item => ({
-      bmcId: item.bmcId,
-      title: item.userBmc.title,
-      date: formatDate(item.createdAt),
-    }));
-  }, [analysesData]);
+    return Array.from(uniqueByBmcId.values()).map(item => {
+      const bmcData = bmcList.find(bmc => bmc.id === item.bmcId);
+
+      return {
+        bmcId: item.bmcId,
+        title: item.userBmc.title,
+        date: formatDate(item.createdAt),
+        imageUrl: bmcData?.imageUrl || item.userBmc.imageUrl,
+      };
+    });
+  }, [analysesData, bmcList]);
 
   if (isLoading) {
     return <CompetitorCardSkeleton />;
@@ -92,13 +115,16 @@ const CompetitorTemplateCard: React.FC = () => {
           </S.BmcImageContainer>
 
           {cardData.map(card => (
-            <S.BmcImageContainer key={card.bmcId} onClick={() => handleCardClick(card.bmcId)}>
-              <S.ImageWrapper>
-                <img src={BmcTemplate} alt={card.title} />
-              </S.ImageWrapper>
-              <S.BmcTitle>{card.title}</S.BmcTitle>
-              <S.BmcDate>{card.date}</S.BmcDate>
-            </S.BmcImageContainer>
+            <BmcCard
+              key={card.bmcId}
+              id={card.bmcId}
+              title={card.title}
+              date={card.date}
+              imageUrl={card.imageUrl}
+              type="competitor"
+              onCardClick={() => handleCardClick(card.bmcId)}
+              onDelete={handleRefresh}
+            />
           ))}
         </S.CardRow>
       </S.MainContent>

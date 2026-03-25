@@ -13,6 +13,7 @@ export interface UserBmc {
   valueProposition: string;
   targetCustomer: string;
   keyStrengths: string[];
+  imageUrl?: string;
 }
 
 export interface UserScale {
@@ -65,4 +66,5 @@ export interface CompetitorCardData {
   bmcId: number;
   title: string;
   date: string;
+  imageUrl?: string;
 }
