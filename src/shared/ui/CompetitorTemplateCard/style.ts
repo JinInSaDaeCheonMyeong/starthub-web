@@ -27,13 +27,6 @@ export const TitleSection = styled.div`
   width: 100%;
 `;
 
-export const IconText = styled.p`
-  font-size: 20px;
-  text-align: left;
-  color: #2466f4;
-  margin: 0;
-`;
-
 export const Title = styled.p`
   font: ${StartHubFont.Pretendard.Body1.Medium};
 `;
@@ -89,24 +82,4 @@ export const PlusIconWrapper = styled.div`
     height: 70px;
     fill: ${StartHubColors.Primary};
   }
-`;
-
-export const BmcTitle = styled.p`
-  color: ${StartHubColors.Black1};
-  ${StartHubFont.Pretendard.Caption1.Regular};
-  margin: 5px;
-  margin-left: -1px;
-`;
-
-export const BmcDate = styled.p`
-  color: ${StartHubColors.Gray1};
-  ${StartHubFont.Pretendard.Caption2.Regular};
-  margin: 0;
-  padding: 0;
-`;
-
-export const EmptyText = styled.p`
-  color: ${StartHubColors.Gray1};
-  ${StartHubFont.Pretendard.Body2.Regular};
-  margin: 20px 0;
 `;
