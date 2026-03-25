@@ -4,12 +4,15 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import ChatSidebar from "@/shared/ui/AISidebar";
 import StartHubAITextarea from "@/shared/ui/AITextarea";
+import AITypingIndicator from "@/shared/ui/AITypingIndicator";
+import AIErrorMessage from "@/shared/ui/AIErrorMessage";
 import { useGetMyProfile } from "@/features/auth/getProfile/model/useGetMyProfile";
 import { useStreamMessage } from "@/features/chatAI/hooks/useStreamMessage";
 import { useGetSessionDetail } from "@/features/chatAI/hooks/useGetSessionDetail";
 import { useCreateSession } from "@/features/chatAI/hooks/useCreateSession";
 import { markdownComponents } from "@/features/chatAI/utils/markdownComponents";
 import { parseAnnotations } from "@/features/chatAI/utils/parseAnnotations";
+import { convertEnumToKorean } from "@/features/chatAI/utils/convertEnumToKorean";
 import * as S from "./style";
 
 interface DisplayMessage {
@@ -32,6 +35,7 @@ const ChatPage = () => {
   };
 
   const [messages, setMessages] = useState<DisplayMessage[]>([]);
+  const [error, setError] = useState<string | null>(null);
   const messageListRef = useRef<HTMLDivElement>(null);
   const pendingMessageRef = useRef<string | null>(null);
 
@@ -65,6 +69,7 @@ const ChatPage = () => {
       setMessages((prev) => [...prev, userMsg]);
 
       try {
+        setError(null);
         const result = await send(sessionId, text);
         if (result) {
           const aiMsg: DisplayMessage = {
@@ -75,6 +80,9 @@ const ChatPage = () => {
           setMessages((prev) => [...prev, aiMsg]);
         }
       } catch (err) {
+        const errorMessage =
+          err instanceof Error ? err.message : "스트리밍 실패";
+        setError(errorMessage);
         console.error("스트리밍 실패:", err);
       }
     },
@@ -129,10 +137,12 @@ const ChatPage = () => {
         onChatClick={(id) => {
           setActiveSessionId(id);
           setMessages([]);
+          setError(null);
         }}
         onNewChat={() => {
           setActiveSessionId(null);
           setMessages([]);
+          setError(null);
         }}
       />
 
@@ -165,10 +175,15 @@ const ChatPage = () => {
                     remarkPlugins={[remarkGfm]}
                     components={markdownComponents}
                   >
-                    {msg.text}
+                    {convertEnumToKorean(msg.text)}
                   </ReactMarkdown>
                 </S.AIMessageWrapper>
               ),
+            )}
+            {streaming && !streamingText && (
+              <S.AIMessageWrapper>
+                <AITypingIndicator />
+              </S.AIMessageWrapper>
             )}
             {streaming && streamingText && (
               <S.AIMessageWrapper>
@@ -176,9 +191,12 @@ const ChatPage = () => {
                   remarkPlugins={[remarkGfm]}
                   components={markdownComponents}
                 >
-                  {streamingText}
+                  {convertEnumToKorean(streamingText)}
                 </ReactMarkdown>
               </S.AIMessageWrapper>
+            )}
+            {error && (
+              <AIErrorMessage message={error} onRetry={() => setError(null)} />
             )}
           </S.MessageList>
         )}

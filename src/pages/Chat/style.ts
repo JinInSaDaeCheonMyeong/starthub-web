@@ -33,6 +33,7 @@ export const WelcomeInput = styled.div`
   justify-content: center;
   margin-bottom: 30px;
   margin-top: 10px;
+  max-width: 700px;
 `;
 
 export const WelcomeTitle = styled.p`
@@ -117,6 +118,7 @@ export const AIMessageWrapper = styled.div`
   align-self: flex-start;
   max-width: 100%;
   user-select: text;
+  line-height: 1.8;
 
   p {
     margin: 0 0 6px;
