@@ -9,6 +9,11 @@ export default function StyledComponentsRegistry({
 }: {
   children: React.ReactNode
 }) {
+  // 브라우저에서는 SSR 로직 건너뛰기
+  if (typeof window !== 'undefined') {
+    return <>{children}</>
+  }
+
   const [styledComponentsStyleSheet] = useState(() => new ServerStyleSheet())
 
   useServerInsertedHTML(() => {
@@ -16,8 +21,6 @@ export default function StyledComponentsRegistry({
     styledComponentsStyleSheet.instance.clearTag()
     return <>{styles}</>
   })
-
-  if (typeof window !== 'undefined') return <>{children}</>
 
   return (
     <StyleSheetManager sheet={styledComponentsStyleSheet.instance}>
