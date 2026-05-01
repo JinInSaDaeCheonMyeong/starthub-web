@@ -7,7 +7,7 @@ interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
 }
 
 const StartHubAxios = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL,
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
   withCredentials: true,
   timeout: 10000,
   headers: {
@@ -45,7 +45,7 @@ StartHubAxios.interceptors.response.use(
         }
 
         const refreshResponse = await axios.post(
-          `${import.meta.env.VITE_API_BASE_URL}/user/reissue`,
+          `${process.env.NEXT_PUBLIC_API_URL}/user/reissue`,
           { refreshToken },
           {
             headers: {
