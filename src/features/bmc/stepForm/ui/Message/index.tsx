@@ -2,7 +2,7 @@ import * as S from "./style";
 import { ReactComponent as UserProfile } from "@/assets/images/user-profile.svg";
 import { ReactComponent as StartHubProfile } from "@/assets/images/starthub-profile.svg";
 import TypeHangul from "@/shared/ui/TypeHangul";
-import { useMemo, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 type MessageProps = {
   message: string;
@@ -15,15 +15,10 @@ const Message = ({
   message,
   isMine,
   enableTyping = false,
-  questionNumber = 0,
 }: MessageProps) => {
   const [showFallback, setShowFallback] = useState(false);
   const [isTypingComplete, setIsTypingComplete] = useState(!enableTyping);
   const [hasStartedTyping, setHasStartedTyping] = useState(false);
-  const messageId = useMemo(
-    () => `typing-message-${questionNumber}`,
-    [questionNumber]
-  );
 
   useEffect(() => {
     if (enableTyping) {
@@ -45,7 +40,7 @@ const Message = ({
       setIsTypingComplete(true);
       setHasStartedTyping(false);
     }
-  }, [enableTyping, messageId, message]);
+  }, [enableTyping, message]);
 
   const handleTypingComplete = () => {
     setIsTypingComplete(true);
@@ -67,12 +62,10 @@ const Message = ({
       <StartHubProfile width={40} height={40} />
       <div>
         <p style={{ marginBottom: 3 }}>스타트허브 AI</p>
-        <S.StartHubMessageBubbleWrapper id={messageId}>
+        <S.StartHubMessageBubbleWrapper>
           {enableTyping && !isTypingComplete && !showFallback ? (
             <TypeHangul
               text={message}
-              speed={100}
-              targetId={messageId}
               onComplete={handleTypingComplete}
               onStart={handleTypingStart}
             />
