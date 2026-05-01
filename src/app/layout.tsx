@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Script from 'next/script'
 import { Providers } from './providers'
 import Layout from '@/shared/ui/Layout'
 
@@ -22,14 +21,6 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <Script
-          src="https://unpkg.com/hangul-js"
-          strategy="beforeInteractive"
-        />
-        <Script
-          src="https://unpkg.com/type-hangul@latest/dist/type-hangul.min.js"
-          strategy="beforeInteractive"
-        />
         <Providers>
           <Layout>
             {children}
