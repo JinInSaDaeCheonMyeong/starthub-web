@@ -1,12 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
 import { userApi } from "@/entities/user/api/user";
 import { cookieUtils } from "@/shared/lib/utils/cookieUtils";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { useAuthStore } from "@/app/model/stores/useAuthStore";
 
 export const useSignIn = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const setIsLoggedIn = useAuthStore((s) => s.setIsLoggedIn);
 
   const {
@@ -24,9 +24,9 @@ export const useSignIn = () => {
         setIsLoggedIn(true);
         toast.success("로그인에 성공했습니다.");
         if (isFirstLogin === true) {
-          navigate("/onboarding", { replace: true });
+          router.replace("/onboarding");
         } else {
-          navigate("/", { replace: true });
+          router.replace("/");
         }
       } else {
         console.error("응답 데이터가 없습니다:", response);

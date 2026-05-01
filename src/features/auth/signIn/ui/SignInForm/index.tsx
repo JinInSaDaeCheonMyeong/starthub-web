@@ -1,3 +1,4 @@
+"use client";
 import {
   StartHubButton,
   StartHubTextField,
@@ -7,7 +8,7 @@ import { StartHubLogo } from "@assets/logo";
 import SocialButton from "@/features/auth/social/ui/SocialButton";
 import { StartHubColors, StartHubFont } from "@/shared/design";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import * as S from "./style";
 import { useSignIn } from "../../model/useSignIn";
 
@@ -103,7 +104,7 @@ const SignInBox = () => {
           <StartHubCheckBox checked={autoSignIn} onChange={setAutoSignIn} />
           <p>자동 로그인</p>
         </S.AutoSignInField>
-        <Link to="/sign-up" style={{ textDecoration: "none" }}>
+        <Link href="/sign-up" style={{ textDecoration: "none" }}>
           <p>회원가입</p>
         </Link>
       </S.SignInOptions>

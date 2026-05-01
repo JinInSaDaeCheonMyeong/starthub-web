@@ -1,12 +1,13 @@
+"use client";
 import { CreateSessionRequest } from "@/entities/bmc";
 import { bmcApi } from "@/entities/bmc/api/bmc";
 import useSessionStore from "@/entities/bmc/model/useSessionStore";
 import useQuestionStore from "@/entities/bmc/model/useQuestionStore";
-import { useNavigate } from "react-router-dom"
+import { useRouter } from "next/navigation"
 import { toast } from "react-toastify";
 
 export const useCreateSessions = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const { setSessionId } = useSessionStore();
   const { resetStore } = useQuestionStore();
 
@@ -19,7 +20,7 @@ export const useCreateSessions = () => {
 
       toast.success("세션이 생성되었습니다.");
       setSessionId(sessionId, data.title, new Date(createdAt), data.templateType);
-      navigate("/bmc/generate");
+      router.push("/bmc/generate");
 
     } catch (error) {
       toast.error('세션 생성에 실패했습니다.');
