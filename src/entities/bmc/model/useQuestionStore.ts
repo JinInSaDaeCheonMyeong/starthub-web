@@ -75,8 +75,32 @@ const useQuestionStore = create<QuestionStore>()(
               bmcStore.resetBmc();
             });
           } catch (error) {
-            set({ isLoading: false });
-            throw error;
+            console.error("Failed to load questions:", error);
+            // 로그인이 필요한 경우 기본 질문들을 설정
+            const defaultQuestions = [
+              { questionNumber: 1, question: "당신의 비즈니스 아이디어를 간단하게 설명해주세요. 어떤 제품이나 서비스를 제공하시나요?" },
+              { questionNumber: 2, question: "당신의 제품/서비스를 이용할 주요 고객층은 누구인가요?" },
+              { questionNumber: 3, question: "고객에게 제공할 핵심 가치는 무엇이며, 어떤 문제를 해결해주나요?" },
+              { questionNumber: 4, question: "고객이 당신의 제품/서비스를 어떤 경로로 만나게 될까요?" },
+              { questionNumber: 5, question: "고객과 어떤 관계를 맺고 유지할 계획인가요?" },
+              { questionNumber: 6, question: "수익은 어떤 방식으로 창출할 예정인가요?" },
+              { questionNumber: 7, question: "비즈니스 운영에 필요한 핵심 자원은 무엇인가요?" },
+              { questionNumber: 8, question: "핵심 가치를 제공하기 위해 수행해야 할 주요 활동은 무엇인가요?" },
+              { questionNumber: 9, question: "협력해야 할 주요 파트너나 공급업체는 어디인가요?" },
+              { questionNumber: 10, question: "비즈니스 운영에 필요한 주요 비용 항목들은 무엇인가요?" }
+            ];
+
+            set({
+              questions: defaultQuestions,
+              isLoaded: true,
+              isLoading: false,
+              currentQuestionIndex: 0,
+            });
+
+            import("@/entities/bmc/model/useBmcStore").then(({ useBmcStore }) => {
+              const bmcStore = useBmcStore.getState();
+              bmcStore.resetBmc();
+            });
           }
         },
 
