@@ -1,8 +1,10 @@
-import { useNavigate } from "react-router-dom";
+'use client'
+
+import { useRouter } from "next/navigation";
 import * as S from "./style";
 
 const BoxMenu = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   return (
     <S.BoxContainer>
@@ -15,7 +17,7 @@ const BoxMenu = () => {
         <S.BoxButton
           $bgColor="#FF71AF"
           $hvColor="#e85c9c"
-          onClick={() => {navigate("/bmc")}}
+          onClick={() => {router.push("/bmc")}}
         >
           바로가기
         </S.BoxButton>
@@ -31,7 +33,7 @@ const BoxMenu = () => {
             $bgColor="#64DD91"
             $hvColor="#4fc97d"
             onClick={() => {
-              navigate("/competitor");
+              router.push("/competitor");
             }}
           >
             바로가기
@@ -52,7 +54,7 @@ const BoxMenu = () => {
             $bgColor="#D290FB"
             $hvColor="#b875df"
             onClick={() => {
-              navigate("/notices");
+              router.push("/notices");
             }}
           >
             바로가기

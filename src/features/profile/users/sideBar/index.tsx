@@ -1,5 +1,6 @@
+"use client";
 import React from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useRouter, usePathname } from "next/navigation";
 import * as S from "./style";
 import { toast } from "react-toastify";
 import StartHubAxios from "@/shared/api/customAxios/StartHubAxios";
@@ -9,15 +10,15 @@ import { USER_QUERY_KEYS } from "@/entities/user/queryKey";
 import { useAuthStore } from "@/app/model/stores/useAuthStore";
 
 const MyPage: React.FC = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
+  const router = useRouter();
+  const pathname = usePathname();
   const queryClient = useQueryClient();
   const setIsLoggedIn = useAuthStore((s) => s.setIsLoggedIn);
 
   const isProfileActive =
-    location.pathname === "/my-profile" ||
-    location.pathname === "/my-profile-edit";
-  const isLikeActive = location.pathname === "/like-list";
+    pathname === "/my-profile" ||
+    pathname === "/my-profile-edit";
+  const isLikeActive = pathname === "/like-list";
 
   const tryLogout = async () => {
     try {
@@ -28,7 +29,7 @@ const MyPage: React.FC = () => {
         queryKey: USER_QUERY_KEYS.user.getUserProfile,
       });
       toast.success("로그아웃에 성공했습니다");
-      navigate("/"); 
+      router.push("/"); 
     } catch (error) {
       toast.error("로그아웃에 실패했습니다");
     }
@@ -50,14 +51,14 @@ const MyPage: React.FC = () => {
     <S.Sidebar>
       <S.SidebarItem
         className={isProfileActive ? "active" : ""}
-        onClick={() => navigate("/my-profile")}
+        onClick={() => router.push("/my-profile")}
       >
         프로필
       </S.SidebarItem>
 
       <S.SidebarItem
         className={isLikeActive ? "active" : ""}
-        onClick={() => navigate("/like-list")}
+        onClick={() => router.push("/like-list")}
       >
         좋아요
       </S.SidebarItem>
