@@ -1,6 +1,5 @@
 import type { Metadata } from 'next'
 import { Providers } from './providers'
-import { GlobalStyle } from '@/shared/style/webfont.style'
 
 export const metadata: Metadata = {
   title: 'StartHub',
@@ -21,7 +20,6 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <GlobalStyle />
         <Providers>{children}</Providers>
       </body>
     </html>

@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "type-check": "tsc --noEmit"
+    "type-check": "tsc --noEmit",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:debug": "playwright test --debug"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.80.7",
@@ -21,12 +24,14 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-markdown": "^10.1.0",
+    "react-router-dom": "^7.14.2",
     "react-toastify": "^11.0.5",
     "remark-gfm": "^4.0.1",
     "styled-components": "^6.1.18",
     "zustand": "^5.0.5"
   },
   "devDependencies": {
+    "@playwright/test": "^1.59.1",
     "@svgr/webpack": "^8.1.0",
     "@types/html2pdf.js": "^0.10.0",
     "@types/js-cookie": "^3.0.6",
