@@ -14,7 +14,7 @@ test.describe('기본 페이지 네비게이션', () => {
     await page.goto('/')
 
     // URL 확인
-    await expect(page).toHaveURL('http://localhost:3001/')
+    await expect(page).toHaveURL('http://localhost:3000/')
 
     // 페이지 타이틀 확인 (비즈니스 로직)
     await expect(page).toHaveTitle(/StartHub/i)
@@ -24,7 +24,7 @@ test.describe('기본 페이지 네비게이션', () => {
     await page.goto('/sign-in')
 
     // URL 확인
-    await expect(page).toHaveURL('http://localhost:3001/sign-in')
+    await expect(page).toHaveURL('http://localhost:3000/sign-in')
 
     // 로그인 폼 존재 확인 (구조 비의존)
     // TODO: data-testid 추가 후 업데이트
@@ -34,7 +34,7 @@ test.describe('기본 페이지 네비게이션', () => {
   test('회원가입 페이지로 이동할 수 있다', async ({ page }) => {
     await page.goto('/sign-up')
 
-    await expect(page).toHaveURL('http://localhost:3001/sign-up')
+    await expect(page).toHaveURL('http://localhost:3000/sign-up')
 
     // TODO: data-testid 추가 후 업데이트
     // await expect(page.getByTestId('auth-signup-form')).toBeVisible()
@@ -43,7 +43,7 @@ test.describe('기본 페이지 네비게이션', () => {
   test('BMC 페이지로 이동할 수 있다', async ({ page }) => {
     await page.goto('/bmc')
 
-    await expect(page).toHaveURL('http://localhost:3001/bmc')
+    await expect(page).toHaveURL('http://localhost:3000/bmc')
 
     // TODO: 로그인 상태에 따른 조건부 렌더링 테스트 추가
   })
@@ -51,7 +51,7 @@ test.describe('기본 페이지 네비게이션', () => {
   test('공지사항 페이지로 이동할 수 있다', async ({ page }) => {
     await page.goto('/notices')
 
-    await expect(page).toHaveURL('http://localhost:3001/notices')
+    await expect(page).toHaveURL('http://localhost:3000/notices')
 
     // TODO: data-testid 추가 후 검색 기능 테스트
     // await expect(page.getByTestId('notice-search')).toBeVisible()

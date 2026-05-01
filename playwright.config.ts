@@ -16,7 +16,7 @@ export default defineConfig({
   reporter: 'html',
 
   use: {
-    baseURL: 'http://localhost:3001',
+    baseURL: 'http://localhost:3000',
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
   },
@@ -29,9 +29,5 @@ export default defineConfig({
     // Firefox, Safari는 필요시 추가
   ],
 
-  webServer: {
-    command: 'npm run dev',
-    url: 'http://localhost:3001',
-    reuseExistingServer: !process.env.CI,
-  },
+  // webServer는 이미 실행 중인 서버 사용
 });
