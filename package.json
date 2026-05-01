@@ -27,6 +27,7 @@
     "react-hook-form": "^7.74.0",
     "react-markdown": "^10.1.0",
     "react-toastify": "^11.0.5",
+    "react-type-animation": "^3.2.0",
     "remark-gfm": "^4.0.1",
     "styled-components": "^6.1.18",
     "zod": "^4.4.1",
