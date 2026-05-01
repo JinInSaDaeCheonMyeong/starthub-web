@@ -41,35 +41,35 @@ const SignUpBox = ({
   loadingStates,
   fieldErrors
 }: SignUpBoxProps) => {
-  const isVerificationCodeEmpty = !formData.verificationCode.trim();
-  const isEmailEmpty = !formData.email.trim();
+  const isVerificationCodeEmpty = !formData?.verificationCode?.trim();
+  const isEmailEmpty = !formData?.email?.trim();
 
   const isPasswordValid = useMemo(
-    () => PASSWORD_REGEX.test(formData.password),
-    [formData.password]
+    () => formData?.password ? PASSWORD_REGEX.test(formData.password) : false,
+    [formData?.password]
   );
 
   return (
     <>
       <S.EmailContainer>
         <S.InputLabel>이메일</S.InputLabel>
-        <S.VerificationCodeContainer $hasError={!!fieldErrors.email}>
+        <S.VerificationCodeContainer $hasError={!!fieldErrors?.email}>
           <div style={{display : "flex", justifyContent:"space-between", width:"100%"}}>
           <StartHubTextField
             type="text"
-            value={formData.email}
+            value={formData?.email || ''}
             placeholder="이메일을 입력해주세요"
             onChange={(e) => handleFormChange("email", e.target.value)}
             width={200}
             isDisabled={isEmailVerified}
-            supportingText={fieldErrors.email}
+            supportingText={fieldErrors?.email}
             
           />
           <S.VerifyButton
             onClick={handleSendVerificationCode}
-            disabled={isEmailEmpty || loadingStates.sendCode || isEmailVerified}
+            disabled={isEmailEmpty || loadingStates?.sendCode || isEmailVerified}
           >
-            {loadingStates.sendCode
+            {loadingStates?.sendCode
               ? "전송중..."
               : isEmailVerified
               ? "인증완료"
@@ -84,7 +84,7 @@ const SignUpBox = ({
       <S.VerificationWrapper>
         <StartHubTextField
           type="text"
-          value={formData.verificationCode}
+          value={formData?.verificationCode || ''}
           placeholder="인증번호를 입력해주세요"
           onChange={(e) => handleFormChange("verificationCode", e.target.value)}
           onKeyDown={(e) => {
@@ -92,14 +92,14 @@ const SignUpBox = ({
           }}
           width={320}
           isDisabled={isEmailVerified}
-          supportingText={fieldErrors.verificationCode}
+          supportingText={fieldErrors?.verificationCode}
         />
         <S.InputButton
           onClick={handleVerifyCode}
-          disabled={isVerificationCodeEmpty || loadingStates.verifyCode || isEmailVerified}
+          disabled={isVerificationCodeEmpty || loadingStates?.verifyCode || isEmailVerified}
           $isActive={!isVerificationCodeEmpty && !isEmailVerified}
         >
-          {loadingStates.verifyCode
+          {loadingStates?.verifyCode
             ? "확인중..."
             : isEmailVerified
             ? "인증완료"
@@ -108,26 +108,26 @@ const SignUpBox = ({
       </S.VerificationWrapper>
 
       <S.InputLabel>비밀번호</S.InputLabel>
-      <S.PasswordInputContainer $hasError={!!fieldErrors.password}>
+      <S.PasswordInputContainer $hasError={!!fieldErrors?.password}>
         <StartHubTextField
           type="password"
-          value={formData.password}
+          value={formData?.password || ''}
           placeholder="비밀번호를 입력해주세요"
           onChange={(e) => handleFormChange("password", e.target.value)}
           width={320}
-          isError={!!fieldErrors.password}
-          supportingText={fieldErrors.password || (!isPasswordValid && formData.password ? "비밀번호는 영문, 숫자, 특수문자를 포함한 8~16자여야 합니다." : "")}
+          isError={!!fieldErrors?.password}
+          supportingText={fieldErrors?.password || (!isPasswordValid && formData?.password ? "비밀번호는 영문, 숫자, 특수문자를 포함한 8~16자여야 합니다." : "")}
         />
       </S.PasswordInputContainer>
-      <S.PasswordInputContainer $hasError={!!fieldErrors.confirmPassword}>
+      <S.PasswordInputContainer $hasError={!!fieldErrors?.confirmPassword}>
         <StartHubTextField
           type="password"
-          value={formData.confirmPassword}
+          value={formData?.confirmPassword || ''}
           placeholder="비밀번호를 다시 입력해주세요"
           onChange={(e) => handleFormChange("confirmPassword", e.target.value)}
           width={320}
-          isError={!!fieldErrors.confirmPassword}
-          supportingText={fieldErrors.confirmPassword || (formData.password !== formData.confirmPassword && formData.confirmPassword ? "비밀번호가 일치하지 않습니다." : "")}
+          isError={!!fieldErrors?.confirmPassword}
+          supportingText={fieldErrors?.confirmPassword || (formData?.password !== formData?.confirmPassword && formData?.confirmPassword ? "비밀번호가 일치하지 않습니다." : "")}
         />
       </S.PasswordInputContainer>
     </>
