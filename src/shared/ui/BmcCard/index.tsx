@@ -1,4 +1,5 @@
-import { useNavigate } from "react-router-dom";
+"use client";
+import { useRouter } from "next/navigation";
 import { ReactComponent as ImageIcon } from "@assets/images/templates/no-image.svg";
 import { ReactComponent as DotsIcon } from "@assets/icons/dots.svg";
 import * as S from "./style";
@@ -18,7 +19,7 @@ interface BmcCardProps {
 }
 
 const BmcCard = ({ id, title, date, imageUrl, type = "bmc", onDelete, onCardClick }: BmcCardProps) => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [isDeleting, setIsDeleting] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -27,9 +28,9 @@ const BmcCard = ({ id, title, date, imageUrl, type = "bmc", onDelete, onCardClic
     if (onCardClick) {
       onCardClick();
     } else if (type === "bmc") {
-      navigate(`/bmc/detail/${id}`);
+      router.push(`/bmc/detail/${String(id)}`);
     } else if (type === "competitor") {
-      navigate(`/competitor/analysis?bmcId=${id}`);
+      router.push(`/competitor/analysis?bmcId=${String(id)}`);
     }
   };
 

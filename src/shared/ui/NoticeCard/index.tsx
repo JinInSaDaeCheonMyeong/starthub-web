@@ -1,3 +1,5 @@
+'use client'
+
 import * as S from "./style";
 import { ReactComponent as Map } from "@assets/category/map.svg";
 import { ReactComponent as Person } from "@assets/category/person.svg";
@@ -5,7 +7,7 @@ import { ReactComponent as KStartupIcon } from "@assets/category/k.svg";
 import { ReactComponent as BuildingIcon } from "@assets/category/building.svg";
 import { getNoticeCategoryInfo } from "@/shared/utils/NoticeCategory/noticeCategory";
 import { NoticeType } from "@/entities/notice/model/notice.type";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 
 interface NoticeCardProps {
   notice: NoticeType;
@@ -13,7 +15,7 @@ interface NoticeCardProps {
 
 const NoticeCard = ({ notice }: NoticeCardProps) => {
   const categoryInfo = getNoticeCategoryInfo(notice.supportField);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const getApplyTargetDisplay = () => {
     if (!notice.targetAge) return "";
@@ -81,7 +83,7 @@ const NoticeCard = ({ notice }: NoticeCardProps) => {
   return (
     <S.NoticeContainer
       onClick={() => {
-        navigate(`/notice/${notice.id}`);
+        router.push(`/notice/${String(notice.id)}`);
       }}
       style={{ cursor: "pointer" }}
     >

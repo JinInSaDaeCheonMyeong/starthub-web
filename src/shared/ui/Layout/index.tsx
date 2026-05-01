@@ -1,8 +1,10 @@
+'use client'
+
 import React from "react";
 import Header from "@/widgets/Header";
 import Footer from "@/widgets/Footer";
 import ChatAIWidget from "@/widgets/chatAI";
-import { useLocation } from "react-router-dom";
+import { usePathname } from "next/navigation";
 import { useGetMyProfile } from "@/features/auth/getProfile/model/useGetMyProfile";
 import styled from "styled-components";
 
@@ -11,10 +13,10 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  const location = useLocation();
+  const pathname = usePathname();
   const { data } = useGetMyProfile();
 
-  const path = location.pathname;
+  const path = pathname;
   const hidePatterns: RegExp[] = [
     /^\/sign-in$/, 
     /^\/sign-up$/, 

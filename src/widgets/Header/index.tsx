@@ -1,15 +1,17 @@
+'use client'
+
 import * as S from "./style";
 import { ReactComponent as LogoIcon } from "@/assets/logo/logoIcon.svg";
 import { StartHubButton } from "@/shared/ui/Button/index";
 import { StartHubColors, StartHubFont } from "@/shared/design";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useRouter, usePathname } from "next/navigation";
 import { useGetMyProfile } from "@/features/auth/getProfile/model/useGetMyProfile";
 import { ReactComponent as DefaultProfile } from "@assets/icons/profile.svg";
 
 const Header = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const currentPath = location.pathname;
+  const router = useRouter();
+  const pathname = usePathname();
+  const currentPath = pathname;
   const { data } = useGetMyProfile();
 
   return (
@@ -31,27 +33,27 @@ const Header = () => {
           <LogoIcon
             width={104}
             height={18}
-            onClick={() => navigate("/")}
+            onClick={() => router.push("/")}
             style={{ cursor: "pointer" }}
           />
           <div style={{ display: "flex", flexDirection: "row" }}>
-            <S.StyleLink to="/notices" $active={currentPath === "/notices"}>
+            <S.StyleLink href="/notices" $active={currentPath === "/notices"}>
               공고
             </S.StyleLink>
             <S.StyleLink
-              to="/competitor"
+              href="/competitor"
               $active={currentPath === "/competitor"}
             >
               경쟁사 분석
             </S.StyleLink>
-            <S.StyleLink to="/bmc" $active={currentPath === "/bmc"}>
+            <S.StyleLink href="/bmc" $active={currentPath === "/bmc"}>
               BMC 설계
             </S.StyleLink>
-            <S.StyleLink to="/chat" $active={currentPath === "/chat"}>
+            <S.StyleLink href="/chat" $active={currentPath === "/chat"}>
               Hub AI
             </S.StyleLink>
             <S.StyleLink
-              to="/my-profile"
+              href="/my-profile"
               $active={currentPath === "/my-profile"}
             >
               My 비즈니스
@@ -63,13 +65,13 @@ const Header = () => {
               {data.profileImage ? (
                 <img
                   src={data.profileImage}
-                  onClick={() => navigate("/my-profile")}
+                  onClick={() => router.push("/my-profile")}
                 />
               ) : (
                 <DefaultProfile
                   width={40}
                   height={40}
-                  onClick={() => navigate("/my-profile")}
+                  onClick={() => router.push("/my-profile")}
                 />
               )}
             </S.WelcomeContainer>
@@ -78,7 +80,7 @@ const Header = () => {
               text="로그인"
               backgroundColor={StartHubColors.Primary}
               onClick={() => {
-                navigate("/sign-in");
+                router.push("/sign-in");
               }}
               customStyle={{ width: "10%", whiteSpace: "nowrap" }}
               height={36}

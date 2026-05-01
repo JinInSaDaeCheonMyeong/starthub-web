@@ -1,7 +1,8 @@
+"use client";
 import React from "react";
 import * as S from "./style";
 import { ReactComponent as Plus } from "@assets/icons/plus.svg";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { useGetCompetitorAnalyses } from "@/features/competitor/getCompetitorAnalyses/useGetCompetitorAnalyses";
 import { CompetitorCardSkeleton } from "./CompetitorCardSkeleton";
 import { bmcApi } from "@/entities/bmc/api/bmc";
@@ -21,7 +22,7 @@ const formatDate = (dateString?: string): string => {
 };
 
 const CompetitorTemplateCard: React.FC = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const { data: analysesData, isLoading, refetch } = useGetCompetitorAnalyses();
   const [bmcList, setBmcList] = React.useState<BmcData[]>([]);
 
@@ -44,23 +45,14 @@ const CompetitorTemplateCard: React.FC = () => {
     fetchBmcList();
   }, []);
 
-  const handleEmptyCardClick = () => navigate("/competitor/bmc-selection");
+  const handleEmptyCardClick = () => router.push("/competitor/bmc-selection");
 
   const handleCardClick = (bmcId: number) => {
     if (!analysesData) return;
 
     const selectedAnalysis = analysesData.data.find(item => item.bmcId === bmcId);
     if (selectedAnalysis) {
-      navigate(`/competitor/analysis?bmcId=${bmcId}`, {
-        state: {
-          analysisData: {
-            data: selectedAnalysis,
-            status: analysesData.status,
-            message: analysesData.message,
-            statusCode: analysesData.statusCode,
-          },
-        },
-      });
+      router.push(`/competitor/analysis?bmcId=${String(bmcId)}`);
     }
   };
 
