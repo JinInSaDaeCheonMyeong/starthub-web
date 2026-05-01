@@ -16,9 +16,19 @@ const nextConfig = {
     ];
   },
   webpack(config) {
+    // SVG를 React Component로 import하기 위한 설정
     config.module.rules.push({
       test: /\.svg$/,
-      use: ['@svgr/webpack'],
+      use: [
+        {
+          loader: '@svgr/webpack',
+          options: {
+            typescript: true,
+            icon: true,
+            exportType: 'named',
+          },
+        },
+      ],
     });
     return config;
   },
