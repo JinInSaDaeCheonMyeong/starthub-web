@@ -1,9 +1,9 @@
+"use client";
 import { useEffect, useState } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
+import { useSearchParams, useRouter } from "next/navigation";
 import { useQueryClient } from "@tanstack/react-query";
 import MarketAnalysis from "@/features/competitor/marketAnalysis/ui/MarketAnalysis/index";
 import { MarketAnalysisSkeleton } from "@/features/competitor/marketAnalysis/ui/MarketAnalysisSkeleton";
-import Layout from "@/shared/ui/Layout";
 import LoadingModal from "@/shared/ui/LoadingModal";
 import { competitorApi } from "@/entities/competitor/api/competitor";
 import { MarketAnalysisResponse } from "@/features/competitor/marketAnalysis/types";
@@ -36,7 +36,7 @@ const getErrorMessage = (error: unknown): string => {
 
 const CompetitorCreate = () => {
   const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
+  const router = useRouter();
   const queryClient = useQueryClient();
   const bmcId = searchParams.get("bmcId");
 
@@ -97,29 +97,29 @@ const CompetitorCreate = () => {
 
   if (loading) {
     return (
-      <Layout>
+      <>
         <LoadingModal
           isOpen={loading}
           message={"경쟁사 분석을 진행 중입니다.\n약 1분 정도 소요됩니다."}
         />
         <MarketAnalysisSkeleton />
-      </Layout>
+      </>
     );
   }
 
   if (error) {
     return (
-      <Layout>
+      <>
         <p>{error}</p>
-        <button onClick={() => navigate("/competitor")}>
+        <button onClick={() => router.push("/competitor")}>
           목록으로 돌아가기
         </button>
-      </Layout>
+      </>
     );
   }
 
   return (
-    <Layout>
+    <>
       {serverData ? (
         <MarketAnalysis
           data={serverData}
@@ -128,7 +128,7 @@ const CompetitorCreate = () => {
       ) : (
         <div>데이터가 없습니다.</div>
       )}
-    </Layout>
+    </>
   );
 };
 

@@ -1,5 +1,6 @@
+"use client";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import * as S from "./style";
 import { StartHubLogo } from "@/assets/logo";
@@ -18,7 +19,7 @@ const INITIAL_FORM_DATA: OnboardingFormData = {
 };
 
 const Onboarding = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [formData, setFormData] =
     useState<OnboardingFormData>(INITIAL_FORM_DATA);
 
@@ -61,9 +62,9 @@ const Onboarding = () => {
     sessionStorage.setItem("onboardingBasicInfo", JSON.stringify(basicInfo));
 
     if (formData.status === "예비") {
-      navigate("/onboarding/pre-startup");
+      router.push("/onboarding/pre-startup");
     } else if (formData.status === "초기") {
-      navigate("/onboarding/early-startup");
+      router.push("/onboarding/early-startup");
     }
   };
 

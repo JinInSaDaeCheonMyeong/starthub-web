@@ -1,6 +1,6 @@
+"use client";
 import FoldArrow from "@/shared/ui/FoldArrow";
-import Layout from "@/shared/ui/Layout";
-import { useParams } from "react-router-dom";
+import { useParams } from "next/navigation";
 import NoticeCard from "@/shared/ui/NoticeCard";
 import { NoticeSkeleton } from "@/shared/ui/NoticeSkeleton";
 import styled from "styled-components";
@@ -35,11 +35,11 @@ type NoticeTypeParam = keyof typeof TYPE_CONFIG;
 
 const NoticeListUpPage = () => {
   const { type } = useParams<{ type: NoticeTypeParam }>();
-  const config = TYPE_CONFIG[type || "recommend"];
+  const config = TYPE_CONFIG[type as NoticeTypeParam] || TYPE_CONFIG.recommend;
 
   const searchData = useGetNoticeSearch({
-    supportField: config.supportField,
-    targetRegion: config.targetRegion,
+    supportField: config?.supportField,
+    targetRegion: config?.targetRegion,
     page: 0,
     size: 20,
     sort: "createdAt,desc",
@@ -52,7 +52,7 @@ const NoticeListUpPage = () => {
     type === "recommend" ? (data as NoticeType[]) : (data as any)?.content;
 
   return (
-    <Layout>
+    <>
       <FoldArrow title={config.title} />
       <div style={{ height: "100%", minHeight:"100vh" }}>
         <NoticeListContainer>
@@ -65,7 +65,7 @@ const NoticeListUpPage = () => {
               ))}
         </NoticeListContainer>
       </div>
-    </Layout>
+    </>
   );
 };
 

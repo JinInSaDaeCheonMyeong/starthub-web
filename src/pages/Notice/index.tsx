@@ -1,4 +1,3 @@
-import Layout from "@/shared/ui/Layout";
 import SearchNotice from "@/features/notice/ui/searchNotice";
 import { useState, useEffect, useCallback } from "react";
 import NoticeCard from "@/shared/ui/NoticeCard";
@@ -33,7 +32,7 @@ const NoticePage = () => {
   const shouldHideFilters = data?.content?.[0]?.isNatural === true;
 
   return (
-    <Layout>
+    <>
       <SearchNotice onFilterChange={handleFilterChange} hideFilters={shouldHideFilters} />
 
       <S.NoticeContentContainer>
@@ -67,7 +66,7 @@ const NoticePage = () => {
           onPageChange={(page) => setCurrentPage(page)}
         />
       )}
-    </Layout>
+    </>
   );
 };
 

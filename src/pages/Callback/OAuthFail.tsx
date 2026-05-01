@@ -1,10 +1,11 @@
+"use client";
 import { useEffect } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 
 const OAuthFail = () => {
-  const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
+  const router = useRouter();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     const error = searchParams.get("error");
@@ -21,8 +22,8 @@ const OAuthFail = () => {
     const message =
       (error && errorMessageMap[error]) || "소셜 로그인에 실패하였습니다.";
     toast.error(message);
-    navigate("/sign-in", { replace: true });
-  }, [navigate, searchParams]);
+    router.replace("/sign-in");
+  }, [router, searchParams]);
 
   return null;
 };

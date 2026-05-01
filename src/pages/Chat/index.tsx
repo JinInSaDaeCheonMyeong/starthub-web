@@ -1,5 +1,6 @@
+"use client";
 import { useState, useRef, useEffect, useCallback } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useRouter } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import ChatSidebar from "@/shared/ui/AISidebar";
@@ -22,15 +23,16 @@ interface DisplayMessage {
 }
 
 const ChatPage = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const sessionIdParam = searchParams.get("sessionId");
   const activeSessionId = sessionIdParam ? Number(sessionIdParam) : null;
 
   const setActiveSessionId = (id: number | null) => {
     if (id !== null) {
-      setSearchParams({ sessionId: String(id) });
+      router.push(`?sessionId=${String(id)}`);
     } else {
-      setSearchParams({});
+      router.push(window.location.pathname);
     }
   };
 

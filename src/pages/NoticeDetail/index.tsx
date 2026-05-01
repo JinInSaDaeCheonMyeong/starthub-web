@@ -1,7 +1,7 @@
-import { useParams } from "react-router-dom";
+"use client";
+import { useParams } from "next/navigation";
 import { useGetNoticeDetail } from "@/features/notice/getNoticeDetail/useGetNoticeDetail";
 import { useAuthStore } from "@/app/model/stores/useAuthStore";
-import Layout from "@/shared/ui/Layout";
 import DetailContent from "./ui/DetailContent";
 import DetailSkeleton from "./ui/DetailSkeleton";
 
@@ -14,7 +14,7 @@ const NoticeDetailPage = () => {
   const { data, isLoading } = useGetNoticeDetail(noticeId, isLoggedIn);
 
   return (
-    <Layout>
+    <>
       {isLoading ? (
         <DetailSkeleton />
       ) : data ? (
@@ -22,7 +22,7 @@ const NoticeDetailPage = () => {
       ) : (
         <></>
       )}
-    </Layout>
+    </>
   );
 };
 

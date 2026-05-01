@@ -1,5 +1,6 @@
+"use client";
 import { useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { BmcCanvas } from "@/widgets/bmc/BmcCanvas";
 import * as S from "@/widgets/bmc/BmcCanvas/style";
 import {
@@ -12,7 +13,7 @@ import {
 import Header from "@/widgets/Header";
 
 const BmcDetailPage = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const isMountedRef = useRef(true);
   const captureInProgressRef = useRef(false);
   const { bmcData, setBmcData, isLoading } = useBmcData();
@@ -97,7 +98,7 @@ const BmcDetailPage = () => {
         onCancelEdit={handleCancelEdit}
         onSaveEdit={handleSaveEdit}
         onDownload={() => handleDownloadPDF(bmcData!)}
-        onBackToList={() => navigate("/bmc")}
+        onBackToList={() => router.push("/bmc")}
       />
     </S.Container>
   );

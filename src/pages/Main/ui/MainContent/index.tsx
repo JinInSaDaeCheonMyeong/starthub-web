@@ -61,7 +61,7 @@ const RecommendedAINotice = () => {
     return (
       <>
         <img
-          src={AiNotice}
+          src={AiNotice.src}
           alt="AI 공고 로그인 유도 배너"
           style={{ width: "1040px", height: "auto" }}
         />

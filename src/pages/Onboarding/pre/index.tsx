@@ -1,5 +1,6 @@
+"use client";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import * as S from "./style";
 import { StartHubLogo } from "@/assets/logo";
@@ -15,7 +16,7 @@ interface PreOnboardingData {
 }
 
 const Onboarding = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [categories, setCategories] = useState<string[]>([]);
   const [preData, setPreData] = useState<PreOnboardingData | null>(null);
   const preOnboardingMutation = usePreOnboarding();
@@ -46,7 +47,7 @@ const Onboarding = () => {
     const basicInfoStr = sessionStorage.getItem("onboardingBasicInfo");
     if (!basicInfoStr) {
       toast.error("기본 정보를 찾을 수 없습니다. 처음부터 다시 시작해주세요.");
-      navigate("/onboarding");
+      router.push("/onboarding");
       return;
     }
 
@@ -65,7 +66,7 @@ const Onboarding = () => {
     preOnboardingMutation.mutate(onboardingData, {
       onSuccess: () => {
         sessionStorage.removeItem("onboardingBasicInfo");
-        navigate("/");
+        router.push("/");
       }
     });
   };
