@@ -1,6 +1,6 @@
 'use client'
 
-import EarlyOnboarding from '@/pages/Onboarding/early'
+import EarlyOnboarding from '@/page-components/Onboarding/early'
 
 export default function EarlyStartupPage() {
   return <EarlyOnboarding />

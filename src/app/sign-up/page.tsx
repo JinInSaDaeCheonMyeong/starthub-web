@@ -1,6 +1,6 @@
 'use client'
 
-import SignUpPage from '@/pages/SignUp'
+import SignUpPage from '@/page-components/SignUp'
 
 export default function SignUp() {
   return <SignUpPage />

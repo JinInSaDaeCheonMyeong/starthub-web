@@ -1,6 +1,6 @@
 'use client'
 
-import Onboarding from '@/pages/Onboarding'
+import Onboarding from '@/page-components/Onboarding'
 
 export default function OnboardingPage() {
   return <Onboarding />

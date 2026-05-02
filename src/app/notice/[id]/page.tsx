@@ -1,6 +1,6 @@
 'use client'
 
-import NoticeDetailPage from '@/pages/NoticeDetail'
+import NoticeDetailPage from '@/page-components/NoticeDetail'
 
 export default function NoticeDetail({ params }: { params: { id: string } }) {
   return <NoticeDetailPage />

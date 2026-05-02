@@ -1,6 +1,6 @@
 'use client'
 
-import CompetitorList from '@/pages/Competitor/List'
+import CompetitorList from '@/page-components/Competitor/List'
 
 export default function CompetitorListPage() {
   return <CompetitorList />

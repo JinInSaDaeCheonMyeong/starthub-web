@@ -1,6 +1,6 @@
 'use client'
 
-import BmcPage from '@/pages/Bmc/BmcPage'
+import BmcPage from '@/page-components/Bmc/BmcPage'
 
 export default function BmcListPage() {
   return <BmcPage />

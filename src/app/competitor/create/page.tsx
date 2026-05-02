@@ -1,6 +1,6 @@
 'use client'
 
-import CompetitorCreate from '@/pages/Competitor/Create'
+import CompetitorCreate from '@/page-components/Competitor/Create'
 
 export default function CompetitorCreatePage() {
   return <CompetitorCreate />

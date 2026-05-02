@@ -1,6 +1,6 @@
 'use client'
 
-import MainPage from '@/pages/Main'
+import MainPage from '@/page-components/Main'
 
 export default function HomePage() {
   return <MainPage />
