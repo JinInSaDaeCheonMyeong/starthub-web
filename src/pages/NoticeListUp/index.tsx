@@ -34,7 +34,8 @@ const TYPE_CONFIG = {
 type NoticeTypeParam = keyof typeof TYPE_CONFIG;
 
 const NoticeListUpPage = () => {
-  const { type } = useParams<{ type: NoticeTypeParam }>();
+  const params = useParams<{ type: NoticeTypeParam }>();
+  const type = params?.type;
   const config = TYPE_CONFIG[type as NoticeTypeParam] || TYPE_CONFIG.recommend;
 
   const searchData = useGetNoticeSearch({

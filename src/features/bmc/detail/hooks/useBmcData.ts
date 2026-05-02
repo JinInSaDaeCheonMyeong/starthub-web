@@ -5,7 +5,8 @@ import { bmcApi } from '@/entities/bmc/api/bmc';
 import { BmcData } from '@/entities/bmc/model/types';
 
 export const useBmcData = () => {
-  const { id } = useParams<{ id: string }>();
+  const params = useParams<{ id: string }>();
+  const id = params?.id;
   const [bmcData, setBmcData] = useState<BmcData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 

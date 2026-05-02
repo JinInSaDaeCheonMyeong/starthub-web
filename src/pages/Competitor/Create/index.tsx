@@ -35,10 +35,10 @@ const getErrorMessage = (error: unknown): string => {
 };
 
 const CompetitorCreate = () => {
-  const [searchParams] = useSearchParams();
+  const searchParams = useSearchParams();
   const router = useRouter();
   const queryClient = useQueryClient();
-  const bmcId = searchParams.get("bmcId");
+  const bmcId = searchParams?.get("bmcId");
 
   const [serverData, setServerData] = useState<MarketAnalysisResponse | null>(
     null

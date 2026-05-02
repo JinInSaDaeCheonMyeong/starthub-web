@@ -8,7 +8,7 @@ const OAuthFail = () => {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    const error = searchParams.get("error");
+    const error = searchParams?.get("error");
     if (error) {
       console.error("OAuth login failed:", error);
     }

@@ -6,8 +6,8 @@ import DetailContent from "./ui/DetailContent";
 import DetailSkeleton from "./ui/DetailSkeleton";
 
 const NoticeDetailPage = () => {
-  const { id } = useParams();
-  const noticeId = parseInt(id!, 10);
+  const params = useParams();
+  const noticeId = parseInt(params?.id as string, 10);
 
   const { isLoggedIn } = useAuthStore();
 

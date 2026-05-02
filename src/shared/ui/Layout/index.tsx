@@ -16,13 +16,13 @@ const Layout = ({ children }: LayoutProps) => {
   const pathname = usePathname();
   const { data } = useGetMyProfile();
 
-  const path = pathname;
+  const path = pathname || '';
   const hidePatterns: RegExp[] = [
-    /^\/sign-in$/, 
-    /^\/sign-up$/, 
-    /^\/onboarding(?:$|\/)/, 
-    /^\/oauth(?:$|\/)/, 
-    /^\/callback(?:$|\/)/, 
+    /^\/sign-in$/,
+    /^\/sign-up$/,
+    /^\/onboarding(?:$|\/)/,
+    /^\/oauth(?:$|\/)/,
+    /^\/callback(?:$|\/)/,
   ];
   const hideChat = hidePatterns.some((r) => r.test(path));
 

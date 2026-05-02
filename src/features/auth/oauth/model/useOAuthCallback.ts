@@ -16,9 +16,9 @@ export const useOAuthCallback = () => {
     if (hasProcessed.current) return;
     hasProcessed.current = true;
 
-    const accessToken = searchParams.get("accessToken");
-    const refreshToken = searchParams.get("refreshToken");
-    const isFirstLogin = searchParams.get("isFirstLogin");
+    const accessToken = searchParams?.get("accessToken");
+    const refreshToken = searchParams?.get("refreshToken");
+    const isFirstLogin = searchParams?.get("isFirstLogin");
 
     // URL에서 토큰 정보 즉시 제거
     window.history.replaceState(null, "", window.location.pathname);

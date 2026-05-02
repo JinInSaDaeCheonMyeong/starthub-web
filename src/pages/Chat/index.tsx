@@ -25,7 +25,7 @@ interface DisplayMessage {
 const ChatPage = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const sessionIdParam = searchParams.get("sessionId");
+  const sessionIdParam = searchParams?.get("sessionId");
   const activeSessionId = sessionIdParam ? Number(sessionIdParam) : null;
 
   const setActiveSessionId = (id: number | null) => {

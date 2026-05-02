@@ -7,7 +7,7 @@ import { MarketAnalysisResponse } from "@/features/competitor/marketAnalysis/typ
 
 const CompetitorAnalysis = () => {
   const searchParams = useSearchParams();
-  const bmcId = searchParams.get("bmcId");
+  const bmcId = searchParams?.get("bmcId");
 
   // Next.js에서는 location.state가 없으므로 다른 방법으로 데이터 전달 필요
   // 예: query parameter나 context, 또는 서버에서 데이터 fetch
