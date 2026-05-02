@@ -5,7 +5,7 @@ const NotMyPage = () => {
   return (
     <WrapNotMyPage>
       <WrapContent>
-        <img src={NoUser} style={{ width: "198px", height: "auto" }}></img>
+        <img src={NoUser.src} style={{ width: "198px", height: "auto" }}></img>
         <p>로그인 후 더 많은 서비스를 이용하실 수 있어요</p>
         USER NOT FOUND
       </WrapContent>
