@@ -1,7 +1,7 @@
 'use client'
 
-import SignUpForm from '@/features/auth/signUp/ui/SignUpForm'
+import SignUpPage from '@/pages/SignUp'
 
-export default function SignUpPage() {
-  return <SignUpForm />
+export default function SignUp() {
+  return <SignUpPage />
 }
