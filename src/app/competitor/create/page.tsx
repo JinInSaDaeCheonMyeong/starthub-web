@@ -1,7 +1,8 @@
 'use client'
 
-export const dynamic = 'force-dynamic'
 import CompetitorCreate from '@/page-components/Competitor/Create'
+
+export const dynamic = 'force-dynamic'
 
 export default function CompetitorCreatePage() {
   return <CompetitorCreate />

@@ -1,7 +1,8 @@
 'use client'
 
-export const dynamic = 'force-dynamic'
 import CallbackPage from '@/page-components/Callback'
+
+export const dynamic = 'force-dynamic'
 
 export default function OAuthCallbackPage() {
   return <CallbackPage />
