@@ -1,7 +1,6 @@
 import * as S from "./style";
 import { Competitor } from "../../types";
 import { formatTextWithBold } from "../../utils/textFormatter";
-import defaultLogo from "@assets/images/default=business.svg?url";
 
 interface CompetitorCardProps {
   competitor: Competitor;
@@ -11,10 +10,11 @@ const CompetitorCard = ({ competitor }: CompetitorCardProps) => (
   <S.CompetitorCard>
     <S.CompetitorHeader>
       <S.CompetitorLogo
-        src={competitor.logoUrl || defaultLogo}
+        src={competitor.logoUrl || "/assets/images/default-business.svg"}
         alt={`${competitor.name} logo`}
         onError={(e) => {
-          e.currentTarget.src = defaultLogo;
+          const target = e.currentTarget as HTMLImageElement;
+          target.src = "/assets/images/default-business.svg";
         }}
       />
       <S.CompetitorName>{competitor.name}</S.CompetitorName>

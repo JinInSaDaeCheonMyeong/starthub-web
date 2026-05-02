@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { StartHubColors, StartHubFont } from "@/shared/design";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 interface StyleLinkProps {
   $active?: boolean;
@@ -14,16 +14,16 @@ export const HeadersContainer = styled.div`
   width: 100%;
 `;
 
-export const HeaderContainer = styled.div`
+export const HeaderContainer = styled.header`
   width: 100%;
   border-bottom: 1px solid ${StartHubColors.Gray3};
   height: 78px;
   background: rgb(255, 255, 255, 50%);
-  backdrop-filter: blur(20px); 
+  backdrop-filter: blur(20px);
   display: flex;
   align-items: center;
   justify-content: center;
-  
+
   /* 모달 열릴 때 스크롤바 너비만큼 자동 보정 */
   padding-right: var(--scrollbar-width, 0px);
 `;

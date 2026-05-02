@@ -1,4 +1,5 @@
-import { useNavigate } from "react-router-dom";
+"use client";
+import { useRouter } from "next/navigation";
 import BmcTemplate from "@assets/images/bmc에시.png";
 import * as S from "./style";
 
@@ -9,17 +10,17 @@ interface BmcCardProps {
 }
 
 const BmcCard = ({ bmcId, title, date }: BmcCardProps) => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleClick = () => {
     // BMC 선택 시 경쟁사 분석 생성 페이지로 이동 (POST 요청)
-    navigate(`/competitor/create?bmcId=${bmcId}`);
+    router.push(`/competitor/create?bmcId=${String(bmcId)}`);
   };
 
   return (
     <S.BmcImageContainer onClick={handleClick}>
       <S.ImageWrapper>
-        <img src={BmcTemplate} alt={title} />
+        <img src={BmcTemplate.src} alt={title} />
         <S.Title>{title}</S.Title>
         <S.Date>{date}</S.Date>
       </S.ImageWrapper>

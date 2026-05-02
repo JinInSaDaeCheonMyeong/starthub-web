@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
-import * as I from "@/assets/icons/bmc/index.ts";
-import { useBmcStore } from "@/entities/bmc/model/useBmcStore.ts";
+import * as I from "@/assets/icons/bmc/index";
+import { useBmcStore } from "@/entities/bmc/model/useBmcStore";
 import * as S from "./style";
 import { StepItem } from "../model/types";
 

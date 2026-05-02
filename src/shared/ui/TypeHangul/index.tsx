@@ -1,60 +1,39 @@
-import { useEffect, useRef } from 'react';
+import { TypeAnimation } from 'react-type-animation';
+import { useEffect } from 'react';
 
-interface TypeHangulOptions {
-  text?: string;
-  intervalType?: number;
-  intervalRemove?: number;
-  useBlink?: boolean;
-  useBlinkWith?: string;
-  useBlinkSpeed?: number;
-  delay?: number;
-  longPressSpeed?: number;
-}
-
-interface TypeHangulLibrary {
-  type: (selector: string | HTMLElement, options?: TypeHangulOptions) => void;
-  remove: (selector: string | HTMLElement, options?: TypeHangulOptions) => void;
-  removeWrite: (selector: string | HTMLElement, options?: TypeHangulOptions) => void;
-}
-
-declare global {
-  interface Window {
-    TypeHangul: TypeHangulLibrary;
-  }
-}
-
-interface TypeHangulProps {
+interface TypeAnimationProps {
   text: string;
   speed?: number;
-  targetId: string;
+  targetId?: string;
+  onComplete?: () => void;
+  onStart?: () => void;
 }
 
-const TypeHangul = ({ text, speed = 0.01, targetId }: TypeHangulProps) => {
-  const hasTyped = useRef(false);
-
+const TypeHangul = ({ text, onComplete, onStart }: TypeAnimationProps) => {
   useEffect(() => {
-    hasTyped.current = false;
-  }, [targetId]);
+    // 타이핑 시작 콜백
+    if (onStart) {
+      onStart();
+    }
+  }, [onStart]);
 
-  useEffect(() => {
-    if (hasTyped.current || !window.TypeHangul) return;
-    
-    const element = document.getElementById(targetId);
-    if (!element) return;
-
-    element.textContent = '';
-    hasTyped.current = true;
-    
-    window.TypeHangul.type(`#${targetId}`, {
-      text: text,
-      intervalType: speed,
-      useBlink: true,
-      useBlinkWith: '|',
-      useBlinkSpeed: 3,
-    });
-  }, [text, speed, targetId]);
-
-  return null;
+  return (
+    <TypeAnimation
+      sequence={[
+        text,
+        () => {
+          // 타이핑 완료 콜백
+          if (onComplete) {
+            onComplete();
+          }
+        }
+      ]}
+      speed={50} // speed는 words per minute (1-99)
+      style={{ display: 'inline-block', minHeight: '1.2em' }}
+      cursor={true}
+      repeat={0}
+    />
+  );
 };
 
 export default TypeHangul;

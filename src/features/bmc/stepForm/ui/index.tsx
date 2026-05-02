@@ -1,5 +1,6 @@
+"use client";
 import { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import * as S from "./style";
 import { StepFormProps } from "../model/types";
 import useQuestionStore from "@/entities/bmc/model/useQuestionStore";
@@ -25,7 +26,7 @@ const BmcStepForm = ({ stepId, placeholder }: StepFormProps) => {
     setIsGeneratingBmc,
   } = useQuestionStore();
   const { getSessionId } = useSessionStore();
-  const navigate = useNavigate();
+  const router = useRouter();
   const currentQuestion = getCurrentQuestion();
   const isLastQuestion = currentQuestionIndex >= questions.length - 1;
 
@@ -115,18 +116,26 @@ const BmcStepForm = ({ stepId, placeholder }: StepFormProps) => {
 
     if (!sessionData) {
       toast.error("세션이 없습니다. 새로운 BMC를 생성해주세요.");
-      navigate("/bmc");
+      router.push("/bmc");
       return;
     }
 
     setIsSubmitting(true);
+
+    // 입력 필드 즉시 초기화
+    setCurrentInput("");
+
+    // 텍스트 영역 높이 리셋
+    if (textAreaRef.current) {
+      textAreaRef.current.style.height = "auto";
+    }
 
     try {
       await submitAnswer(currentQuestion.questionNumber, trimmedInput);
 
       setTimeout(() => {
         scrollToBottom();
-      });
+      }, 100);
 
       if (isLastQuestion) {
         try {
@@ -136,11 +145,10 @@ const BmcStepForm = ({ stepId, placeholder }: StepFormProps) => {
             sessionId: sessionData.sessionId,
           });
 
-
           const bmcId = bmcResponse.data.id;
           toast.success("BMC가 성공적으로 생성되었습니다!");
 
-          navigate(`/bmc/detail/${bmcId}`);
+          router.push(`/bmc/${bmcId}`);
         } catch {
           toast.error("BMC 생성에 실패했습니다. 다시 시도해주세요.");
           setIsGeneratingBmc(false);
@@ -175,37 +183,26 @@ const BmcStepForm = ({ stepId, placeholder }: StepFormProps) => {
     );
   }
 
-  const currentAnswer = currentQuestion
-    ? answers[currentQuestion.questionNumber]
-    : "";
 
   return (
     <S.FormContainer>
       <S.ChatContainer>
         <S.MessagesContainer ref={messagesContainerRef}>
-          {questions.slice(0, currentQuestionIndex).map((question) => {
+          {questions.slice(0, currentQuestionIndex + 1).map((question, index) => {
             const answer = answers[question.questionNumber];
+            const isCurrentQuestion = index === currentQuestionIndex;
             return (
               <div key={question.questionNumber}>
                 <Message
                   isMine={false}
                   message={question.question}
-                  enableTyping={false}
+                  enableTyping={isCurrentQuestion && !answer}
                   questionNumber={question.questionNumber}
                 />
                 {answer && <Message isMine={true} message={answer} />}
               </div>
             );
           })}
-
-          <Message
-            isMine={false}
-            message={currentQuestion.question}
-            enableTyping={true}
-            questionNumber={currentQuestion.questionNumber}
-          />
-
-          {currentAnswer && <Message isMine={true} message={currentAnswer} />}
         </S.MessagesContainer>
         <S.TextAreaContainer>
           <S.TextArea

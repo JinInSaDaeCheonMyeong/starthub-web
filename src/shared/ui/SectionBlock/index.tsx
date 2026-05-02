@@ -1,7 +1,9 @@
+'use client'
+
 import styled from "styled-components";
 import { StartHubFont } from "@/shared/design";
 import { ReactComponent as Arrow } from "@assets/icons/arrow.svg";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 
 interface SectionBlockProps {
   title: string;
@@ -10,11 +12,11 @@ interface SectionBlockProps {
 }
 
 const SectionBlock = ({ title, children, path }: SectionBlockProps) => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   return (
     <>
-      <LabelSection onClick={() => navigate(path)}>
+      <LabelSection onClick={() => router.push(path)}>
         <p>{title}</p>
         <Arrow />
       </LabelSection>

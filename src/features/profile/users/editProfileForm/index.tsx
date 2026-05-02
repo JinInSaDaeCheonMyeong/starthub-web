@@ -1,10 +1,11 @@
+"use client";
 import React, { useState, useEffect, useMemo } from "react";
 import * as S from "./style";
 import { StartHubButton, StartHubTextField } from "@/shared/ui";
 import { StartHubFont } from "@/shared/design/text/StartHubFont";
 import { StartHubColors } from "@/shared/design";
 import SideBar from "@/features/profile/users/sideBar";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import { useProfile, useUpdateProfile } from "@/shared/hooks/Profile";
 import {
   INITIAL_FORM_DATA,
@@ -18,7 +19,7 @@ import {
 } from "../utils/profileFormHelpers";
 
 const EditProfileForm: React.FC = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const { data: profileData, isLoading } = useProfile();
   const { mutate: updateProfile, isPending } = useUpdateProfile();
 
@@ -48,7 +49,7 @@ const EditProfileForm: React.FC = () => {
     const profileUpdateData = formatFormToProfile(formData);
     updateProfile(profileUpdateData, {
       onSuccess: () => {
-        navigate("/my-profile");
+        router.push("/my-profile");
       },
     });
   };

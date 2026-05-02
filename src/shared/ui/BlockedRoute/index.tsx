@@ -1,5 +1,6 @@
+"use client";
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 
 interface BlockedRouteProps {
@@ -8,12 +9,12 @@ interface BlockedRouteProps {
 }
 
 const BlockedRoute = ({ message, redirectTo = "/" }: BlockedRouteProps) => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   useEffect(() => {
     toast.error(message);
-    navigate(redirectTo);
-  }, [message, redirectTo, navigate]);
+    router.push(redirectTo);
+  }, [message, redirectTo, router]);
 
   return null;
 };

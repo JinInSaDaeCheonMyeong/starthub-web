@@ -3,6 +3,7 @@ import * as S from "./style";
 import { Competitor, UserBmc } from "../../types";
 import { formatTextWithBold } from "../../utils/textFormatter";
 import BmcSidebar from "../BmcSidebar";
+import defaultLogo from "@assets/images/default=business.svg";
 
 interface CompetitorSectionProps {
   domesticCompetitors: Competitor[];
@@ -16,7 +17,7 @@ const CompetitorSection: React.FC<CompetitorSectionProps> = ({
   userBmc,
 }) => {
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
-    e.currentTarget.src = "@/assets/images/default=business.svg";
+    e.currentTarget.src = (defaultLogo as any).src;
   };
 
   const renderCompetitorCards = (competitorList: Competitor[]) => (
@@ -25,7 +26,7 @@ const CompetitorSection: React.FC<CompetitorSectionProps> = ({
         <S.CompetitorCard key={index}>
           <S.CompetitorHeader>
             <img
-              src={competitor.logoUrl || "@/assets/images/default=business.svg"}
+              src={competitor.logoUrl || (defaultLogo as any).src}
               alt={`${competitor.name} logo`}
               onError={handleImageError}
               style={{

@@ -8,8 +8,8 @@ import { SignUpFormData, SignUpFieldErrors } from '@/entities/user/model/types';
 export const useSignUpForm = () => {
   const signUpMutation = useSignUp();
 
-  const [formData, setFormData] = useState<SignUpFormData>(resetFormData);
-  const [fieldErrors, setFieldErrors] = useState<SignUpFieldErrors>(resetFieldErrors);
+  const [formData, setFormData] = useState<SignUpFormData>(resetFormData());
+  const [fieldErrors, setFieldErrors] = useState<SignUpFieldErrors>(resetFieldErrors());
   const [agreeCheckedItems, setAgreeCheckedItems] = useState<boolean[]>(
     new Array(SIGNUP_AGREE_ITEMS.length).fill(false)
   );

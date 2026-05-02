@@ -1,5 +1,6 @@
+"use client";
 import { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import * as S from "./style";
 import { ReactComponent as IconAI } from "@/assets/logo/Icon-AI.svg";
 import { ReactComponent as SquareAndPencilIcon } from "@/assets/icons/square.and.pencil.svg";
@@ -38,7 +39,7 @@ const AISidebar = ({
   const [editValue, setEditValue] = useState("");
   const menuRef = useRef<HTMLDivElement>(null);
   const editInputRef = useRef<HTMLInputElement>(null);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -87,7 +88,7 @@ const AISidebar = ({
       <S.LogoWrapper $expanded={expanded}>
         <S.LogoButton
           $expanded={expanded}
-          onClick={() => expanded && navigate("/")}
+          onClick={() => expanded && router.push("/")}
         >
           <IconAI width={32} height={32} />
         </S.LogoButton>
@@ -120,7 +121,7 @@ const AISidebar = ({
         <S.NavButton
           $active={activeMenu === "news"}
           $expanded={expanded}
-          onClick={() => navigate("/notices")}
+          onClick={() => router.push("/notices")}
         >
           <NewspaperIcon width={18} height={18} />
           {expanded && "공고 보러가기"}
@@ -129,7 +130,7 @@ const AISidebar = ({
         <S.NavButton
           $active={activeMenu === "chart"}
           $expanded={expanded}
-          onClick={() => navigate("/competitor")}
+          onClick={() => router.push("/competitor")}
         >
           <ChartBarIcon width={18} height={18} />
           {expanded && "경쟁사 분석"}
@@ -138,7 +139,7 @@ const AISidebar = ({
         <S.NavButton
           $active={activeMenu === "briefcase"}
           $expanded={expanded}
-          onClick={() => navigate("/bmc")}
+          onClick={() => router.push("/bmc")}
         >
           <BriefcaseIcon width={18} height={18} />
           {expanded && "BMC 설계"}

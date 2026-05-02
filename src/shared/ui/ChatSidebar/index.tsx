@@ -1,5 +1,6 @@
+"use client";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import * as S from "./style";
 import { ReactComponent as IconAI } from "@/assets/logo/Icon-AI.svg";
 import { ReactComponent as SquareAndPencilIcon } from "@/assets/icons/square.and.pencil.svg";
@@ -24,7 +25,7 @@ const ChatSidebar = ({
   const { data: chatSessions = [] } = useGetChatSessions();
   const { data: profile } = useGetMyProfile();
   const [expanded, setExpanded] = useState(false);
-  const navigate = useNavigate();
+  const router = useRouter();
 
   return (
     <S.SidebarContainer $expanded={expanded}>
@@ -50,7 +51,7 @@ const ChatSidebar = ({
         <S.NavButton
           $active={activeMenu === "news"}
           $expanded={expanded}
-          onClick={() => navigate("/notices")}
+          onClick={() => router.push("/notices")}
         >
           <NewspaperIcon width={18} height={18} />
           {expanded && "공고 보러가기"}
@@ -59,7 +60,7 @@ const ChatSidebar = ({
         <S.NavButton
           $active={activeMenu === "chart"}
           $expanded={expanded}
-          onClick={() => navigate("/competitor")}
+          onClick={() => router.push("/competitor")}
         >
           <ChartBarIcon width={18} height={18} />
           {expanded && "경쟁사 분석"}
@@ -68,7 +69,7 @@ const ChatSidebar = ({
         <S.NavButton
           $active={activeMenu === "briefcase"}
           $expanded={expanded}
-          onClick={() => navigate("/bmc")}
+          onClick={() => router.push("/bmc")}
         >
           <BriefcaseIcon width={18} height={18} />
           {expanded && "BMC 설계"}

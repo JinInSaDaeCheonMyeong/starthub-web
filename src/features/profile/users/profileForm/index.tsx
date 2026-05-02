@@ -1,5 +1,6 @@
+"use client";
 import React, { useEffect, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 import * as S from "./style";
 import { StartHubButton } from "@/shared/ui";
 import { StartHubColors, StartHubFont } from "@/shared/design";
@@ -16,7 +17,7 @@ import {
 } from "../utils/profileDisplayHelpers";
 
 const ProfileForm: React.FC = () => {
-  const navigate = useNavigate();
+  const router = useRouter();
   const { isLoggedIn } = useAuthStore();
   const { data: profileData, isLoading, isError } = useProfile();
 
@@ -28,7 +29,7 @@ const ProfileForm: React.FC = () => {
   }, [isError, isLoggedIn]);
 
   const handleEditClick = () => {
-    navigate("/my-profile-edit");
+    router.push("/my-profile-edit");
   };
 
   // 프로필 테이블 데이터 메모이제이션
