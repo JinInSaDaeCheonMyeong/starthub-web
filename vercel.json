@@ -1,4 +1,5 @@
 {
+  "framework": "nextjs",
   "functions": {
     "api/[...path].js": {
       "maxDuration": 30
