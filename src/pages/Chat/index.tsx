@@ -14,7 +14,7 @@ import { useCreateSession } from "@/features/chatAI/hooks/useCreateSession";
 import { markdownComponents } from "@/features/chatAI/utils/markdownComponents";
 import { parseAnnotations } from "@/features/chatAI/utils/parseAnnotations";
 import { convertEnumToKorean } from "@/features/chatAI/utils/convertEnumToKorean";
-import * as S from "./style";
+import * as S from "@/styles/pages/Chat-style";
 
 interface DisplayMessage {
   id: number;

@@ -1,7 +1,7 @@
 import SearchNotice from "@/features/notice/ui/searchNotice";
 import { useState, useEffect, useCallback } from "react";
 import NoticeCard from "@/shared/ui/NoticeCard";
-import * as S from "./style";
+import * as S from "@/styles/pages/Notice-style";
 import Pagination from "@/shared/ui/pagination";
 import { NoticeSearchParams } from "@/entities/notice/model/notice.type";
 import { useGetNoticeSearch } from "@/features/notice/getNoticeSearch/useGetNoticeSearch";

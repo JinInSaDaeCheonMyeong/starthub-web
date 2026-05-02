@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import * as S from "./style";
+import * as S from "@/styles/pages/Onboarding-pre-style";
 import { StartHubLogo } from "@/assets/logo";
 import CategorySelector from "@/features/onboarding/categorySelector";
 import { StartHubButton } from "@/shared/ui";

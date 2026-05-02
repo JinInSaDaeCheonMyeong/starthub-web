@@ -1,4 +1,4 @@
-import * as S from "./style";
+import * as S from "@/styles/pages/SignUp-style";
 import { StartHubButton } from "@/shared/ui";
 import { useSignUpForm } from "@/shared/hooks/SignUp/useSignUpForm";
 import { StartHubColors, StartHubFont } from "@/shared/design";

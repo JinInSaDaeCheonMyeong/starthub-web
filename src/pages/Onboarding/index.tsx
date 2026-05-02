@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import * as S from "./style";
+import * as S from "@/styles/pages/Onboarding-style";
 import { StartHubLogo } from "@/assets/logo";
 import { OnboardingFormData } from "@/entities/user/model/types";
 import PersonalInfoForm from "@/features/onboarding/personalInfoForm";

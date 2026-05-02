@@ -1,6 +1,6 @@
 import { BmcStepNavigate } from "@/features/bmc/stepNavigate/index";
 import { BmcContent } from "@/widgets/bmc/BmcContent";
-import * as S from "./style";
+import * as S from "@/styles/pages/Bmc-BmcGeneratePage-style";
 import { useBmcQuestions } from "@/entities/bmc/model/useBmcQuestions";
 import useQuestionStore from "@/entities/bmc/model/useQuestionStore";
 import { useEffect } from "react";

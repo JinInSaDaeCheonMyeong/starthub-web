@@ -1,4 +1,4 @@
-import * as S from "./style";
+import * as S from "@/styles/pages/Main-MainContent-style";
 import BoxMenu from "@/features/boxMenu/ui";
 import SectionBlock from "@/shared/ui/SectionBlock";
 import NoticeCard from "@/shared/ui/NoticeCard";

@@ -1,4 +1,4 @@
-import * as S from "./style";
+import * as S from "@/styles/pages/SignIn-style";
 import SignInBox from "@/features/auth/signIn/ui/SignInForm";
 import { ReactComponent as SignInImage } from "@assets/images/signInImage.svg";
 

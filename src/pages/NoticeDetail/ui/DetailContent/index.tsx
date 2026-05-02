@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import * as S from "./style";
+import * as S from "@/styles/pages/NoticeDetail-DetailContent-style";
 import { getNoticeCategoryInfo } from "@/shared/utils/NoticeCategory/noticeCategory";
 import { NoticeType } from "@/entities/notice/model/notice.type";
 import { useNoticeLike } from "@/features/notice/NoticeLike/ useNoticeLike";
