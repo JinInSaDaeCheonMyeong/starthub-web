@@ -1,7 +1,7 @@
 'use client'
 
-import SignInForm from '@/features/auth/signIn/ui/SignInForm'
+import SignInPage from '@/page-components/SignIn'
 
-export default function SignInPage() {
-  return <SignInForm />
+export default function SignIn() {
+  return <SignInPage />
 }

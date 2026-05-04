@@ -23,14 +23,18 @@ const Layout = ({ children }: LayoutProps) => {
     /^\/oauth(?:$|\/)/,
     /^\/callback(?:$|\/)/,
   ];
-  const hideChat = hidePatterns.some((r) => r.test(path));
+  const hideLayoutElements = hidePatterns.some((r) => r.test(path));
+
+  if (hideLayoutElements) {
+    return <>{children}</>;
+  }
 
   return (
     <div className="flex flex-col items-center pt-[110.8px]">
       <Header />
       {children}
       <Footer />
-      {data && !hideChat && <ChatAIWidget />}
+      {data && <ChatAIWidget />}
     </div>
   );
 };
