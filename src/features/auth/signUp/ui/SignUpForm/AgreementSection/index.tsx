@@ -15,31 +15,41 @@ const AgreementSection: React.FC<AgreementSectionProps> = ({
   onSingleCheck,
 }) => {
   return (
-    <>
-      <div className="flex items-center gap-[10px] my-[5px] w-full max-w-[320px]">
-        <StartHubCheckBox checked={isAllChecked} onChange={onAllCheck} />
-        <label className="flex-grow text-hub-black-1 font-pt-body2-regular">
+    <div className="flex flex-col gap-[10px] w-[320px]">
+      {/* All Agree Section */}
+      <div className="flex items-center gap-[10px] pb-[10px] border-b border-hub-gray-3">
+        <StartHubCheckBox
+          checked={isAllChecked}
+          onChange={onAllCheck}
+        />
+        <p className="font-pt-body2-regular text-black">
           전체 동의
-        </label>
+        </p>
       </div>
 
-      <div className="w-full max-w-[320px] h-[1px] bg-hub-gray-3" />
-
-      {SIGNUP_AGREE_ITEMS.map((agree, index) => (
-        <div
-          key={index}
-          className="flex items-center gap-[10px] my-[5px] w-full max-w-[320px]"
-        >
-          <StartHubCheckBox
-            checked={checkedItems[index]}
-            onChange={(checked) => onSingleCheck(index, checked)}
-          />
-          <label className="flex-1 mr-[8px] text-hub-gray-2 font-pt-caption1-regular">
-            {agree}
-          </label>
-        </div>
-      ))}
-    </>
+      {/* Individual Agreement Items */}
+      <div className="flex flex-col gap-[10px]">
+        {SIGNUP_AGREE_ITEMS.map((agree, index) => (
+          <div
+            key={index}
+            className="flex items-center justify-between"
+          >
+            <div className="flex items-center gap-[6px]">
+              <StartHubCheckBox
+                checked={checkedItems[index]}
+                onChange={(checked) => onSingleCheck(index, checked)}
+              />
+              <p className="font-pt-caption1-regular text-hub-gray-2">
+                {agree}
+              </p>
+            </div>
+            <div className="text-hub-gray-3 text-[14px]">
+              ›
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 
