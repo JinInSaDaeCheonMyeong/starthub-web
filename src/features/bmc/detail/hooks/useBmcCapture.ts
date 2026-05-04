@@ -3,7 +3,6 @@ import { toast } from 'react-toastify';
 import html2canvas from 'html2canvas';
 import { bmcApi } from '@/entities/bmc/api/bmc';
 import { BmcData } from '@/entities/bmc/model/types';
-import { StartHubColors } from '@/shared/design';
 
 export const useBmcCapture = () => {
   const canvasRef = useRef<HTMLDivElement>(null);

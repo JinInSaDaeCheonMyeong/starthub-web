@@ -1,6 +1,4 @@
 import { StartHubButton } from "@/shared/ui";
-import { StartHubColors, StartHubFont } from "@/shared/design";
-import * as S from "@/widgets/bmc/BmcCanvas/style";
 
 interface BmcActionButtonsProps {
   isEditing: boolean;
@@ -22,67 +20,74 @@ export const BmcActionButtons = ({
   onBackToList,
 }: BmcActionButtonsProps) => {
   return (
-    <S.ActionButtons>
+    <div className="flex gap-[10px]">
       {isEditing ? (
         <>
           <StartHubButton
             text="취소"
-            width={200}
             onClick={onCancelEdit}
-            backgroundColor={StartHubColors.White1}
-            typography={StartHubFont.Pretendard.Caption1.Medium}
-            customStyle={{
-              border: `1px solid ${StartHubColors.Gray2}`,
-              color: `${StartHubColors.Gray1}`,
-            }}
+            className="
+              w-[200px]
+              bg-hub-white-1
+              text-hub-gray-1
+              font-pt-caption1-medium
+              border border-hub-gray-2
+            "
           />
+
           <StartHubButton
             text="저장"
-            width={200}
             onClick={onSaveEdit}
-            backgroundColor={hasChanges ? StartHubColors.Primary : StartHubColors.Gray2}
-            typography={StartHubFont.Pretendard.Caption1.Medium}
             disabled={!hasChanges}
-            customStyle={!hasChanges ? {
-              backgroundColor: StartHubColors.Gray2,
-              color: StartHubColors.Gray1,
-              cursor: 'not-allowed'
-            } : undefined}
+            className={`
+              w-[200px]
+              font-pt-caption1-medium
+              ${
+                hasChanges
+                  ? "bg-hub-primary text-hub-white-1"
+                  : "bg-hub-gray-2 text-hub-gray-1 cursor-not-allowed"
+              }
+            `}
           />
         </>
       ) : (
         <>
           <StartHubButton
             text="목록으로 돌아가기"
-            width={200}
             onClick={onBackToList}
-            backgroundColor={StartHubColors.White1}
-            typography={StartHubFont.Pretendard.Caption1.Medium}
-            customStyle={{
-              border: `1px solid ${StartHubColors.Gray2}`,
-              color: `${StartHubColors.Gray1}`,
-            }}
+            className="
+              w-[200px]
+              bg-hub-white-1
+              text-hub-gray-1
+              font-pt-caption1-medium
+              border border-hub-gray-2
+            "
           />
+
           <StartHubButton
             text="BMC 다운로드"
-            width={200}
             onClick={onDownload}
-            backgroundColor={StartHubColors.Primary}
-            typography={StartHubFont.Pretendard.Caption1.Medium}
+            className="
+              w-[200px]
+              bg-hub-primary
+              text-hub-white-1
+              font-pt-caption1-medium
+            "
           />
+
           <StartHubButton
             text="수정하기"
-            width={200}
             onClick={onStartEdit}
-            backgroundColor={StartHubColors.White1}
-            typography={StartHubFont.Pretendard.Caption1.Medium}
-            customStyle={{
-              border: `1px solid ${StartHubColors.Primary}`,
-              color: `${StartHubColors.Primary}`,
-            }}
+            className="
+              w-[200px]
+              bg-hub-white-1
+              text-hub-primary
+              font-pt-caption1-medium
+              border border-hub-primary
+            "
           />
         </>
       )}
-    </S.ActionButtons>
+    </div>
   );
 };

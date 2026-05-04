@@ -1,4 +1,3 @@
-import * as S from "./style";
 import { ReactComponent as UserProfile } from "@/assets/images/user-profile.svg";
 import { ReactComponent as StartHubProfile } from "@/assets/images/starthub-profile.svg";
 import TypeHangul from "@/shared/ui/TypeHangul";
@@ -11,11 +10,7 @@ type MessageProps = {
   questionNumber?: number;
 };
 
-const Message = ({
-  message,
-  isMine,
-  enableTyping = false,
-}: MessageProps) => {
+const Message = ({ message, isMine, enableTyping = false }: MessageProps) => {
   const [showFallback, setShowFallback] = useState(false);
   const [isTypingComplete, setIsTypingComplete] = useState(!enableTyping);
   const [hasStartedTyping, setHasStartedTyping] = useState(false);
@@ -26,7 +21,6 @@ const Message = ({
       setIsTypingComplete(false);
       setHasStartedTyping(false);
 
-      // 5초 후에도 타이핑이 시작되지 않으면 fallback 텍스트 표시
       const fallbackTimer = setTimeout(() => {
         if (!isTypingComplete && !hasStartedTyping) {
           setShowFallback(true);
@@ -53,16 +47,18 @@ const Message = ({
   };
 
   return isMine ? (
-    <S.UserMessageContainer>
-      <S.UserMessageBubbleWrapper>{message}</S.UserMessageBubbleWrapper>
+    <div className="flex justify-end gap-[10px]">
+      <div className="max-w-[410px] bg-hub-white-2 px-5 py-4 rounded-lg select-text cursor-text">
+        {message}
+      </div>
       <UserProfile width={40} height={40} />
-    </S.UserMessageContainer>
+    </div>
   ) : (
-    <S.StartHubMessageContainer>
+    <div className="flex gap-[10px] mb-5">
       <StartHubProfile width={40} height={40} />
       <div>
-        <p style={{ marginBottom: 3 }}>스타트허브 AI</p>
-        <S.StartHubMessageBubbleWrapper>
+        <p className="mb-[3px]">스타트허브 AI</p>
+        <div className="max-w-[410px] bg-[#e9f0fe] px-5 py-4 rounded-lg relative select-text cursor-text">
           {enableTyping && !isTypingComplete && !showFallback ? (
             <TypeHangul
               text={message}
@@ -70,13 +66,11 @@ const Message = ({
               onStart={handleTypingStart}
             />
           ) : (
-            <span style={{ display: 'block', minHeight: '1.2em' }}>
-              {message}
-            </span>
+            <span className="block min-h-[1.2em]">{message}</span>
           )}
-        </S.StartHubMessageBubbleWrapper>
+        </div>
       </div>
-    </S.StartHubMessageContainer>
+    </div>
   );
 };
 

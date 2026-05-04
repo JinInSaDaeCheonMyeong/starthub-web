@@ -1,7 +1,6 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import * as S from "./style";
 import { StepFormProps } from "../model/types";
 import useQuestionStore from "@/entities/bmc/model/useQuestionStore";
 import useSessionStore from "@/entities/bmc/model/useSessionStore";
@@ -15,6 +14,7 @@ const BmcStepForm = ({ stepId, placeholder }: StepFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
+
   const {
     getCurrentQuestion,
     submitAnswer,
@@ -25,23 +25,21 @@ const BmcStepForm = ({ stepId, placeholder }: StepFormProps) => {
     isGeneratingBmc,
     setIsGeneratingBmc,
   } = useQuestionStore();
+
   const { getSessionId } = useSessionStore();
   const router = useRouter();
+
   const currentQuestion = getCurrentQuestion();
   const isLastQuestion = currentQuestionIndex >= questions.length - 1;
 
   useEffect(() => {
     requestAnimationFrame(() => {
-      if (textAreaRef.current) {
-        textAreaRef.current.focus();
-      }
+      textAreaRef.current?.focus();
     });
   }, [stepId]);
 
   useEffect(() => {
-    if (currentQuestion) {
-      setCurrentInput("");
-    }
+    if (currentQuestion) setCurrentInput("");
   }, [currentQuestion]);
 
   const scrollToBottom = () => {
@@ -69,6 +67,7 @@ const BmcStepForm = ({ stepId, placeholder }: StepFormProps) => {
     if (isSubmitting) return;
 
     el.style.height = "auto";
+
     const style = window.getComputedStyle(el);
     const padding =
       parseFloat(style.paddingTop) + parseFloat(style.paddingBottom);
@@ -78,145 +77,126 @@ const BmcStepForm = ({ stepId, placeholder }: StepFormProps) => {
     const newHeight = Math.min(el.scrollHeight, maxHeight);
     el.style.height = `${newHeight}px`;
 
-    if (el.scrollHeight > maxHeight) {
-      el.scrollTop = el.scrollHeight;
-      el.style.overflowY = "auto";
-    } else {
-      el.style.overflowY = "hidden";
-    }
+    el.style.overflowY = el.scrollHeight > maxHeight ? "auto" : "hidden";
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      e.stopPropagation();
-
-      if (!isSubmitting && currentInput.trim()) {
-        handleSubmit();
-      }
+      if (!isSubmitting && currentInput.trim()) handleSubmit();
     }
   };
 
   const handleSubmit = async () => {
-    const trimmedInput = currentInput.trim();
+    const trimmed = currentInput.trim();
 
-    if (trimmedInput.length < 5) {
+    if (trimmed.length < 5) {
       toast.error("최소 5자 이상 입력해주세요.");
       return;
     }
 
-    if (trimmedInput.length > 1000) {
+    if (trimmed.length > 1000) {
       toast.error("최대 1000자까지 입력 가능합니다.");
       return;
     }
 
-    if (!trimmedInput || !currentQuestion) return;
+    if (!currentQuestion) return;
 
     const sessionData = getSessionId();
 
     if (!sessionData) {
-      toast.error("세션이 없습니다. 새로운 BMC를 생성해주세요.");
+      toast.error("세션이 없습니다.");
       router.push("/bmc");
       return;
     }
 
     setIsSubmitting(true);
-
-    // 입력 필드 즉시 초기화
     setCurrentInput("");
-
-    // 텍스트 영역 높이 리셋
-    if (textAreaRef.current) {
-      textAreaRef.current.style.height = "auto";
-    }
+    if (textAreaRef.current) textAreaRef.current.style.height = "auto";
 
     try {
-      await submitAnswer(currentQuestion.questionNumber, trimmedInput);
+      await submitAnswer(currentQuestion.questionNumber, trimmed);
 
-      setTimeout(() => {
-        scrollToBottom();
-      }, 100);
+      setTimeout(scrollToBottom, 100);
 
       if (isLastQuestion) {
         try {
           setIsGeneratingBmc(true);
 
-          const bmcResponse = await bmcApi.generateBmc({
+          const res = await bmcApi.generateBmc({
             sessionId: sessionData.sessionId,
           });
 
-          const bmcId = bmcResponse.data.id;
-          toast.success("BMC가 성공적으로 생성되었습니다!");
-
-          router.push(`/bmc/${bmcId}`);
+          toast.success("BMC 생성 완료");
+          router.push(`/bmc/${res.data.id}`);
         } catch {
-          toast.error("BMC 생성에 실패했습니다. 다시 시도해주세요.");
+          toast.error("BMC 생성 실패");
           setIsGeneratingBmc(false);
         }
       } else {
         moveToNextQuestion();
-
-        setTimeout(() => {
-          scrollToBottom();
-        }, 200);
+        setTimeout(scrollToBottom, 200);
       }
     } catch {
-      toast.error("답변 전송에 실패했습니다. 다시 시도해주세요.");
+      toast.error("전송 실패");
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  if (isGeneratingBmc) {
-    return <BmcGeneratingSkeleton />;
-  }
+  if (isGeneratingBmc) return <BmcGeneratingSkeleton />;
 
   if (!currentQuestion) {
     return (
-      <S.FormContainer>
-        <S.ChatContainer>
-          <S.MessagesContainer>
+      <div className="flex flex-col">
+        <div className="w-[680px] min-h-[650px] bg-hub-white-1 border-2 border-hub-gray-3 rounded-lg flex flex-col justify-between p-[30px_20px]">
+          <div className="flex flex-col gap-5 overflow-y-scroll mb-5 font-pt-caption1-regular">
             <Message isMine={false} message="질문을 불러오는 중입니다..." />
-          </S.MessagesContainer>
-        </S.ChatContainer>
-      </S.FormContainer>
+          </div>
+        </div>
+      </div>
     );
   }
 
-
   return (
-    <S.FormContainer>
-      <S.ChatContainer>
-        <S.MessagesContainer ref={messagesContainerRef}>
-          {questions.slice(0, currentQuestionIndex + 1).map((question, index) => {
-            const answer = answers[question.questionNumber];
-            const isCurrentQuestion = index === currentQuestionIndex;
+    <div className="flex flex-col">
+      <div className="w-[680px] min-h-[650px] bg-hub-white-1 border-2 border-hub-gray-3 rounded-lg flex flex-col justify-between p-[30px_20px]">
+        <div
+          ref={messagesContainerRef}
+          className="flex flex-col gap-5 overflow-y-scroll mb-5 font-pt-caption1-regular"
+        >
+          {questions.slice(0, currentQuestionIndex + 1).map((q, i) => {
+            const answer = answers[q.questionNumber];
+            const isCurrent = i === currentQuestionIndex;
+
             return (
-              <div key={question.questionNumber}>
+              <div key={q.questionNumber}>
                 <Message
                   isMine={false}
-                  message={question.question}
-                  enableTyping={isCurrentQuestion && !answer}
-                  questionNumber={question.questionNumber}
+                  message={q.question}
+                  enableTyping={isCurrent && !answer}
+                  questionNumber={q.questionNumber}
                 />
-                {answer && <Message isMine={true} message={answer} />}
+                {answer && <Message isMine message={answer} />}
               </div>
             );
           })}
-        </S.MessagesContainer>
-        <S.TextAreaContainer>
-          <S.TextArea
+        </div>
+
+        <div className="p-[14px_20px] bg-hub-white-1 border-2 border-hub-gray-3 rounded-xl w-full">
+          <textarea
             ref={textAreaRef}
             rows={1}
-            onKeyDown={handleKeyDown}
             value={currentInput}
             onChange={handleChange}
+            onKeyDown={handleKeyDown}
             placeholder={placeholder}
             disabled={isSubmitting}
+            className="w-full min-h-[1.5em] leading-[1.5] resize-none border-none outline-none overflow-hidden m-0 p-0 block font-pt-caption1-regular placeholder:text-hub-gray-2"
           />
-        </S.TextAreaContainer>
-      </S.ChatContainer>
-    </S.FormContainer>
+        </div>
+      </div>
+    </div>
   );
 };
 

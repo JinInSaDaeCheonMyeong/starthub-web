@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 import * as I from "@/assets/icons/bmc/index";
 import { useBmcStore } from "@/entities/bmc/model/useBmcStore";
-import * as S from "./style";
 import { StepItem } from "../model/types";
 
 const stepItems: StepItem[] = [
@@ -76,7 +75,6 @@ const stepItems: StepItem[] = [
     description: "사업 운영에 들어가는 주요 비용 구조를 정리합니다.",
   },
 ];
-
 const BmcStepNavigate = () => {
   const { isStepCompleted, isStepCurrent, currentStep } = useBmcStore();
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -88,37 +86,54 @@ const BmcStepNavigate = () => {
   }, [currentStep]);
 
   return (
-    <S.Wrapper ref={wrapperRef}>
+    <div
+      ref={wrapperRef}
+      className="flex flex-col gap-5 bg-hub-white-2 overflow-auto h-[650px]"
+    >
       {stepItems.map((step) => {
         const IconComponent = step.icon;
         const isCompleted = isStepCompleted(step.id);
         const isCurrent = isStepCurrent(step.id);
 
         return (
-          <S.StepItem key={step.id}>
-            <S.StepIconWrapper
-              $isCompleted={isCompleted}
-              $isCurrent={isCurrent}
+          <div key={step.id} className="flex gap-[25px] relative">
+            <div
+              className={`
+                w-[50px] h-[50px] flex items-center justify-center rounded-lg
+                ${isCurrent ? "bg-hub-primary text-hub-white-1" : ""}
+                ${!isCurrent && isCompleted ? "bg-[#EAEAEA] text-hub-gray-2" : ""}
+                ${!isCurrent && !isCompleted ? "bg-hub-white-1 text-hub-black-1" : ""}
+              `}
             >
-              <S.StepIcon>
-                <IconComponent />
-              </S.StepIcon>
-            </S.StepIconWrapper>
+              <div className="flex items-center justify-center">
+                <div className="w-6 h-6 [&_*]:fill-current">
+                  <IconComponent />
+                </div>
+              </div>
+            </div>
+
             {isCurrent && step.description ? (
-              <S.StepContent>
-                <div>{step.label}</div>
-                <span>{step.subLabel}</span>
+              <div className="flex flex-col gap-1 w-[340px] h-[90px] px-5 py-4 rounded-lg border-2 border-hub-primary bg-hub-white-1 font-pt-caption2-regular text-hub-black-1">
+                <div className="font-ws-body3">{step.label}</div>
+                <span className="text-hub-primary">{step.subLabel}</span>
                 <div>{step.description}</div>
-              </S.StepContent>
+              </div>
             ) : (
-              <S.StepLabel $isCompleted={isCompleted} $isCurrent={isCurrent}>
+              <div
+                className={`
+                  flex items-center w-[340px] h-[50px] pl-5 rounded-lg font-ws-body3
+                  ${isCurrent ? "bg-hub-white-1 text-hub-black-1 border border-hub-primary" : ""}
+                  ${!isCurrent && isCompleted ? "bg-[#EAEAEA] text-hub-gray-2" : ""}
+                  ${!isCurrent && !isCompleted ? "bg-hub-white-1 text-hub-black-1" : ""}
+                `}
+              >
                 {step.label}
-              </S.StepLabel>
+              </div>
             )}
-          </S.StepItem>
+          </div>
         );
       })}
-    </S.Wrapper>
+    </div>
   );
 };
 
