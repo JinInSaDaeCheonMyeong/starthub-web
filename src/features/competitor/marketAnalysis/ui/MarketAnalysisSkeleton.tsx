@@ -1,243 +1,98 @@
-import styled from "styled-components";
-import { StartHubColors } from "@/shared/design";
-
-const SkeletonContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding-left: 200px;
-  padding-right: 200px;
-  width: 100%;
-  box-sizing: border-box;
-`;
-
-const SkeletonTitle = styled.div`
-  width: 200px;
-  height: 32px;
-  background-color: ${StartHubColors.Gray4};
-  border-radius: 8px;
-  margin-bottom: 40px;
-  animation: pulse 1.5s infinite ease-in-out;
-
-  @keyframes pulse {
-    0% {
-      background-color: ${StartHubColors.Gray4};
-    }
-    50% {
-      background-color: ${StartHubColors.Gray3};
-    }
-    100% {
-      background-color: ${StartHubColors.Gray4};
-    }
-  }
-`;
-
-const SkeletonContentWrapper = styled.div`
-  display: flex;
-  gap: 40px;
-  width: 100%;
-  max-width: 1400px;
-`;
-
-const SkeletonMainContent = styled.div`
-  flex: 1;
-  min-width: 0;
-`;
-
-const SkeletonSection = styled.div`
-  max-width: 700px;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
-`;
-
-const SkeletonSectionTitle = styled.div`
-  width: 150px;
-  height: 24px;
-  background-color: ${StartHubColors.Gray4};
-  border-radius: 6px;
-  margin-bottom: 20px;
-  animation: pulse 1.5s infinite ease-in-out;
-
-  @keyframes pulse {
-    0% {
-      background-color: ${StartHubColors.Gray4};
-    }
-    50% {
-      background-color: ${StartHubColors.Gray3};
-    }
-    100% {
-      background-color: ${StartHubColors.Gray4};
-    }
-  }
-`;
-
-const SkeletonBox = styled.div`
-  width: 100%;
-  height: 80px;
-  background-color: ${StartHubColors.Gray4};
-  border-radius: 10px;
-  margin-bottom: 10px;
-  animation: pulse 1.5s infinite ease-in-out;
-
-  @keyframes pulse {
-    0% {
-      background-color: ${StartHubColors.Gray4};
-    }
-    50% {
-      background-color: ${StartHubColors.Gray3};
-    }
-    100% {
-      background-color: ${StartHubColors.Gray4};
-    }
-  }
-`;
-
-const SkeletonCompetitorGrid = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: flex-start;
-  width: 700px;
-  margin-bottom: 20px;
-`;
-
-const SkeletonCompetitorCard = styled.div`
-  width: 340px;
-  height: 300px;
-  padding: 20px;
-  border: 1px solid ${StartHubColors.Gray3};
-  border-radius: 8px;
-  box-sizing: border-box;
-  background-color: ${StartHubColors.Gray4};
-  animation: pulse 1.5s infinite ease-in-out;
-
-  @keyframes pulse {
-    0% {
-      background-color: ${StartHubColors.Gray4};
-    }
-    50% {
-      background-color: ${StartHubColors.Gray3};
-    }
-    100% {
-      background-color: ${StartHubColors.Gray4};
-    }
-  }
-`;
-
-const SkeletonDivider = styled.div`
-  width: 700px;
-  height: 1px;
-  margin-top: 20px;
-  margin-bottom: 30px;
-  background-color: ${StartHubColors.Gray3};
-  align-self: flex-start;
-`;
-
-const SkeletonInsightGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 25px;
-  margin-bottom: 30px;
-`;
-
-const SkeletonInsightCard = styled.div`
-  height: 200px;
-  padding: 24px;
-  border-radius: 10px;
-  background-color: ${StartHubColors.Gray4};
-  animation: pulse 1.5s infinite ease-in-out;
-
-  @keyframes pulse {
-    0% {
-      background-color: ${StartHubColors.Gray4};
-    }
-    50% {
-      background-color: ${StartHubColors.Gray3};
-    }
-    100% {
-      background-color: ${StartHubColors.Gray4};
-    }
-  }
-`;
-
-const SkeletonSidebar = styled.div`
-  position: sticky;
-  top: 20px;
-  width: 300px;
-  flex-shrink: 0;
-  height: 500px;
-  padding: 20px;
-  border: 1px solid ${StartHubColors.Gray3};
-  border-radius: 10px;
-  background-color: ${StartHubColors.Gray4};
-  align-self: flex-start;
-  animation: pulse 1.5s infinite ease-in-out;
-
-  @keyframes pulse {
-    0% {
-      background-color: ${StartHubColors.Gray4};
-    }
-    50% {
-      background-color: ${StartHubColors.Gray3};
-    }
-    100% {
-      background-color: ${StartHubColors.Gray4};
-    }
-  }
-`;
-
 export const MarketAnalysisSkeleton = () => {
-  return (
-    <SkeletonContainer>
-      <SkeletonTitle />
+  const pulse = "animate-skeleton-pulse";
+  const sectionClass = "max-w-[700px] pb-5 mb-5";
 
-      <SkeletonContentWrapper>
-        <SkeletonMainContent>
+  return (
+    // SkeletonContainer
+    <div className="flex flex-col items-start px-[200px] w-full box-border">
+      {/* SkeletonTitle */}
+      <div
+        className={`w-[200px] h-8 bg-hub-gray-4 rounded-lg mb-10 ${pulse}`}
+      />
+
+      {/* SkeletonContentWrapper */}
+      <div className="flex gap-10 w-full max-w-[1400px]">
+        {/* SkeletonMainContent */}
+        <div className="flex-1 min-w-0">
           {/* User Scale Section */}
-          <SkeletonSection>
-            <SkeletonSectionTitle />
-            <SkeletonBox />
-            <SkeletonBox />
-            <SkeletonBox />
-          </SkeletonSection>
+          <div className={sectionClass}>
+            <div
+              className={`w-[150px] h-6 bg-hub-gray-4 rounded-md mb-5 ${pulse}`}
+            />
+            <div
+              className={`w-full h-20 bg-hub-gray-4 rounded-[10px] mb-2.5 ${pulse}`}
+            />
+            <div
+              className={`w-full h-20 bg-hub-gray-4 rounded-[10px] mb-2.5 ${pulse}`}
+            />
+            <div
+              className={`w-full h-20 bg-hub-gray-4 rounded-[10px] mb-2.5 ${pulse}`}
+            />
+          </div>
 
           {/* Competitor Section */}
-          <SkeletonSection>
-            <SkeletonSectionTitle />
-            <SkeletonCompetitorGrid>
-              <SkeletonCompetitorCard />
-              <SkeletonCompetitorCard />
-            </SkeletonCompetitorGrid>
-            <SkeletonCompetitorGrid>
-              <SkeletonCompetitorCard />
-              <SkeletonCompetitorCard />
-            </SkeletonCompetitorGrid>
-          </SkeletonSection>
+          <div className={sectionClass}>
+            <div
+              className={`w-[150px] h-6 bg-hub-gray-4 rounded-md mb-5 ${pulse}`}
+            />
+            <div className="flex flex-wrap gap-5 justify-start w-[700px] mb-5">
+              <div
+                className={`w-[340px] h-[300px] p-5 border border-hub-gray-3 rounded-lg box-border bg-hub-gray-4 ${pulse}`}
+              />
+              <div
+                className={`w-[340px] h-[300px] p-5 border border-hub-gray-3 rounded-lg box-border bg-hub-gray-4 ${pulse}`}
+              />
+            </div>
+            <div className="flex flex-wrap gap-5 justify-start w-[700px] mb-5">
+              <div
+                className={`w-[340px] h-[300px] p-5 border border-hub-gray-3 rounded-lg box-border bg-hub-gray-4 ${pulse}`}
+              />
+              <div
+                className={`w-[340px] h-[300px] p-5 border border-hub-gray-3 rounded-lg box-border bg-hub-gray-4 ${pulse}`}
+              />
+            </div>
+          </div>
 
-          <SkeletonDivider />
+          {/* SkeletonDivider */}
+          <div className="w-[700px] h-px mt-5 mb-[30px] bg-hub-gray-3 self-start" />
 
           {/* Insight Section */}
-          <SkeletonSection>
-            <SkeletonSectionTitle />
-            <SkeletonInsightGrid>
-              <SkeletonInsightCard />
-              <SkeletonInsightCard />
-            </SkeletonInsightGrid>
-          </SkeletonSection>
+          <div className={sectionClass}>
+            <div
+              className={`w-[150px] h-6 bg-hub-gray-4 rounded-md mb-5 ${pulse}`}
+            />
+            <div className="grid grid-cols-2 gap-[25px] mb-[30px]">
+              <div
+                className={`h-[200px] p-6 rounded-[10px] bg-hub-gray-4 ${pulse}`}
+              />
+              <div
+                className={`h-[200px] p-6 rounded-[10px] bg-hub-gray-4 ${pulse}`}
+              />
+            </div>
+          </div>
 
-          <SkeletonDivider />
+          {/* SkeletonDivider */}
+          <div className="w-[700px] h-px mt-5 mb-[30px] bg-hub-gray-3 self-start" />
 
           {/* Global Expansion Section */}
-          <SkeletonSection>
-            <SkeletonSectionTitle />
-            <SkeletonBox />
-            <SkeletonBox />
-          </SkeletonSection>
-        </SkeletonMainContent>
+          <div className={sectionClass}>
+            <div
+              className={`w-[150px] h-6 bg-hub-gray-4 rounded-md mb-5 ${pulse}`}
+            />
+            <div
+              className={`w-full h-20 bg-hub-gray-4 rounded-[10px] mb-2.5 ${pulse}`}
+            />
+            <div
+              className={`w-full h-20 bg-hub-gray-4 rounded-[10px] mb-2.5 ${pulse}`}
+            />
+          </div>
+        </div>
 
-        {/* BMC Sidebar */}
-        <SkeletonSidebar />
-      </SkeletonContentWrapper>
-    </SkeletonContainer>
+        {/* SkeletonSidebar */}
+        <div
+          className={`sticky top-5 w-[300px] flex-shrink-0 h-[500px] p-5 border border-hub-gray-3 rounded-[10px] bg-hub-gray-4 self-start ${pulse}`}
+        />
+      </div>
+    </div>
   );
 };

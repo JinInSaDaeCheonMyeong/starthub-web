@@ -1,4 +1,3 @@
-import * as S from "./style";
 import { GlobalExpansionStrategy } from "../../types";
 import { removeAngleBrackets } from "../../utils/textFormatter";
 
@@ -10,68 +9,112 @@ const GlobalExpansionSection: React.FC<GlobalExpansionSectionProps> = ({
   globalExpansion,
 }) => {
   return (
-    <S.Section>
-      <S.SectionTitle>3. 해외 시장 진출 및 사업화 방안</S.SectionTitle>
+    // Section
+    <section className="max-w-[700px] pb-5 text-left">
+      {/* SectionTitle */}
+      <p className="font-pt-h1-semibold text-hub-black-1 mb-5">
+        3. 해외 시장 진출 및 사업화 방안
+      </p>
 
-      <S.MarketSection>
-        <S.MarketItem>
-          <S.MarketTitle>우선 진출 시장</S.MarketTitle>
+      {/* MarketSection — 우선 진출 시장 */}
+      <div className="flex flex-col gap-[30px] mb-[30px]">
+        <div className="relative">
+          <h3 className="font-pt-body1-semibold text-hub-primary mb-2.5">
+            우선 진출 시장
+          </h3>
           {globalExpansion.priorityMarkets.map((market, index) => (
-            <S.MarketCard key={index}>
-              <S.MarketCardTitle>{removeAngleBrackets(market)}</S.MarketCardTitle>
-            </S.MarketCard>
+            <div
+              key={index}
+              className="p-5 rounded-[10px] bg-hub-white-1 border border-hub-gray-3 mb-2.5"
+            >
+              <h4 className="font-pt-caption1-medium text-hub-black-1 mb-2.5">
+                {removeAngleBrackets(market)}
+              </h4>
+            </div>
           ))}
-        </S.MarketItem>
-      </S.MarketSection>
+        </div>
+      </div>
 
-      <S.MarketSection>
-        <S.MarketItem>
-          <S.MarketTitle>진입 전략</S.MarketTitle>
+      {/* MarketSection — 진입 전략 */}
+      <div className="flex flex-col gap-[30px] mb-[30px]">
+        <div className="relative">
+          <h3 className="font-pt-body1-semibold text-hub-primary mb-2.5">
+            진입 전략
+          </h3>
           {globalExpansion.entryStrategies.map((strategy, index) => (
-            <S.MarketCard key={index}>
-              <S.MarketCardText>{removeAngleBrackets(strategy)}</S.MarketCardText>
-            </S.MarketCard>
+            <div
+              key={index}
+              className="p-5 rounded-[10px] bg-hub-white-1 border border-hub-gray-3 mb-2.5"
+            >
+              <p className="text-sm font-medium text-hub-black-1 leading-[1.5]">
+                {removeAngleBrackets(strategy)}
+              </p>
+            </div>
           ))}
-        </S.MarketItem>
-      </S.MarketSection>
+        </div>
+      </div>
 
-      <S.MarketItem>
-        <S.MarketTitle>현지화 요구사항</S.MarketTitle>
-        <S.GridLayout>
+      {/* MarketItem — 현지화 요구사항 */}
+      <div className="relative">
+        <h3 className="font-pt-body1-semibold text-hub-primary mb-2.5">
+          현지화 요구사항
+        </h3>
+        <div className="grid grid-cols-2 gap-[25px]">
           {globalExpansion.localizationRequirements.map(
             (requirement, index) => (
-              <S.GridItem key={index}>
-                <S.MarketCardText>{removeAngleBrackets(requirement)}</S.MarketCardText>
-              </S.GridItem>
-            )
+              <div
+                key={index}
+                className="p-5 rounded-[10px] bg-white border border-[#dbdbdb]"
+              >
+                <p className="text-sm font-medium text-hub-black-1 leading-[1.5]">
+                  {removeAngleBrackets(requirement)}
+                </p>
+              </div>
+            ),
           )}
-        </S.GridLayout>
-      </S.MarketItem>
+        </div>
+      </div>
 
-      <S.MarketItem style={{ marginTop: "30px" }}>
-        <S.MarketTitle>파트너십</S.MarketTitle>
-        <S.GridLayout>
+      {/* MarketItem — 파트너십 */}
+      <div className="relative mt-[30px]">
+        <h3 className="font-pt-body1-semibold text-hub-primary mb-2.5">
+          파트너십
+        </h3>
+        <div className="grid grid-cols-2 gap-[25px]">
           {globalExpansion.partnershipOpportunities.map(
             (opportunity, index) => (
-              <S.GridItem key={index}>
-                <S.MarketCardText>{removeAngleBrackets(opportunity)}</S.MarketCardText>
-              </S.GridItem>
-            )
+              <div
+                key={index}
+                className="p-5 rounded-[10px] bg-white border border-[#dbdbdb]"
+              >
+                <p className="text-sm font-medium text-hub-black-1 leading-[1.5]">
+                  {removeAngleBrackets(opportunity)}
+                </p>
+              </div>
+            ),
           )}
-        </S.GridLayout>
-      </S.MarketItem>
+        </div>
+      </div>
 
-      <S.MarketItem style={{ marginTop: "30px" }}>
-        <S.MarketTitle>예상 도전과제</S.MarketTitle>
-        <S.ChallengeList>
+      {/* MarketItem — 예상 도전과제 */}
+      <div className="relative mt-[30px]">
+        <h3 className="font-pt-body1-semibold text-hub-primary mb-2.5">
+          예상 도전과제
+        </h3>
+        <div className="flex flex-col gap-[11px]">
           {globalExpansion.expectedChallenges.map((challenge, index) => (
-            <S.ChallengeItem key={index}>
-              <S.ChallengeText>{removeAngleBrackets(challenge)}</S.ChallengeText>
-            </S.ChallengeItem>
+            <div
+              key={index}
+              className="p-5 rounded-[10px] bg-white border border-[#dbdbdb]"
+            >
+              <p className="text-sm font-medium text-hub-black-1 leading-[1.5]">
+                {removeAngleBrackets(challenge)}
+              </p>
+            </div>
           ))}
-        </S.ChallengeList>
-      </S.MarketItem>
-    </S.Section>
+        </div>
+      </div>
+    </section>
   );
 };
 

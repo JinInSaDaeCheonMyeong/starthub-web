@@ -1,4 +1,3 @@
-import * as S from "./style";
 import { Strengths, Weaknesses } from "../../types";
 import { formatTextWithBold } from "../../utils/textFormatter";
 
@@ -11,49 +10,74 @@ const InsightSection: React.FC<InsightSectionProps> = ({
   strengths,
   weaknesses,
 }) => {
+  const opportunityItemClass =
+    "py-5 px-4 rounded-[10px] bg-[#fafefc] border border-[#dbfbe7] mb-2.5 last:mb-0";
+  const threatItemClass =
+    "py-5 px-4 rounded-[10px] bg-[#fefcfb] border border-[#fefcfb] mb-2.5 last:mb-0";
+
   return (
-    <S.Section>
-      <S.SectionTitle>2. 기회/위협 인사이트</S.SectionTitle>
-      <S.InsightGrid>
-        <S.InsightCard type="opportunity">
-          <S.InsightTitle type="opportunity">기회</S.InsightTitle>
+    // Section
+    <section className="max-w-[700px] pb-5 text-left">
+      {/* SectionTitle */}
+      <p className="font-pt-h1-semibold text-hub-black-1 mb-5">
+        2. 기회/위협 인사이트
+      </p>
+
+      {/* InsightGrid */}
+      <div className="grid grid-cols-2 gap-[25px]">
+        {/* InsightCard — opportunity */}
+        <div className="p-6 rounded-[10px] bg-[#eefdf4] border border-[#d6fae2] select-text">
+          <h3 className="font-pt-body1-semibold text-[#14532d] mb-2.5">기회</h3>
           {strengths.competitiveAdvantages.map((advantage, index) => (
-            <S.InsightItem key={index} type="opportunity">
-              <S.InsightText type="opportunity">{formatTextWithBold(advantage)}</S.InsightText>
-            </S.InsightItem>
+            <div key={index} className={opportunityItemClass}>
+              <p className="font-pt-caption1-regular text-[#14532d] select-text">
+                {formatTextWithBold(advantage)}
+              </p>
+            </div>
           ))}
           {strengths.uniqueValuePropositions.map((proposition, index) => (
-            <S.InsightItem key={index} type="opportunity">
-              <S.InsightText type="opportunity">{formatTextWithBold(proposition)}</S.InsightText>
-            </S.InsightItem>
+            <div key={index} className={opportunityItemClass}>
+              <p className="font-pt-caption1-regular text-[#14532d] select-text">
+                {formatTextWithBold(proposition)}
+              </p>
+            </div>
           ))}
           {strengths.marketOpportunities.map((opportunity, index) => (
-            <S.InsightItem key={index} type="opportunity">
-              <S.InsightText type="opportunity">{formatTextWithBold(opportunity)}</S.InsightText>
-            </S.InsightItem>
+            <div key={index} className={opportunityItemClass}>
+              <p className="font-pt-caption1-regular text-[#14532d] select-text">
+                {formatTextWithBold(opportunity)}
+              </p>
+            </div>
           ))}
-        </S.InsightCard>
+        </div>
 
-        <S.InsightCard type="threat">
-          <S.InsightTitle type="threat">위협</S.InsightTitle>
+        {/* InsightCard — threat */}
+        <div className="p-6 rounded-[10px] bg-[#fff6ef] border border-[#ffe8d2] select-text">
+          <h3 className="font-pt-body1-semibold text-[#7c2d12] mb-2.5">위협</h3>
           {weaknesses.competitiveDisadvantages.map((disadvantage, index) => (
-            <S.InsightItem key={index} type="threat">
-              <S.InsightText type="threat">{formatTextWithBold(disadvantage)}</S.InsightText>
-            </S.InsightItem>
+            <div key={index} className={threatItemClass}>
+              <p className="font-pt-caption1-regular text-[#7c2d12] select-text">
+                {formatTextWithBold(disadvantage)}
+              </p>
+            </div>
           ))}
           {weaknesses.marketChallenges.map((challenge, index) => (
-            <S.InsightItem key={index} type="threat">
-              <S.InsightText type="threat">{formatTextWithBold(challenge)}</S.InsightText>
-            </S.InsightItem>
+            <div key={index} className={threatItemClass}>
+              <p className="font-pt-caption1-regular text-[#7c2d12] select-text">
+                {formatTextWithBold(challenge)}
+              </p>
+            </div>
           ))}
           {weaknesses.resourceLimitations.map((limitation, index) => (
-            <S.InsightItem key={index} type="threat">
-              <S.InsightText type="threat">{formatTextWithBold(limitation)}</S.InsightText>
-            </S.InsightItem>
+            <div key={index} className={threatItemClass}>
+              <p className="font-pt-caption1-regular text-[#7c2d12] select-text">
+                {formatTextWithBold(limitation)}
+              </p>
+            </div>
           ))}
-        </S.InsightCard>
-      </S.InsightGrid>
-    </S.Section>
+        </div>
+      </div>
+    </section>
   );
 };
 
