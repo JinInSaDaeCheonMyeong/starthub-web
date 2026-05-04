@@ -1,7 +1,5 @@
-'use client'
+"use client";
 
-import styled from "styled-components";
-import { StartHubFont } from "@/shared/design";
 import { ReactComponent as Arrow } from "@assets/icons/arrow.svg";
 import { useRouter } from "next/navigation";
 
@@ -16,28 +14,16 @@ const SectionBlock = ({ title, children, path }: SectionBlockProps) => {
 
   return (
     <>
-      <LabelSection onClick={() => router.push(path)}>
-        <p>{title}</p>
-        <Arrow />
-      </LabelSection>
+      <div
+        onClick={() => router.push(path)}
+        className="flex items-center mb-5 cursor-pointer font-pt-h2-semibold"
+      >
+        <p className="mr-[10px]">{title}</p>
+        <Arrow className="w-[15px]" />
+      </div>
       {children}
     </>
   );
 };
 
 export default SectionBlock;
-
-export const LabelSection = styled.div`
-  ${StartHubFont.Pretendard.Headlines2.SemiBold}
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-  cursor: pointer;
-  p {
-    margin-right: 10px;
-  }
-
-  svg {
-    width: 15px;
-  }
-`;

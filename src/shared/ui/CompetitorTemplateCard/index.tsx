@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import * as S from "./style";
 import { ReactComponent as Plus } from "@assets/icons/plus.svg";
 import { useRouter } from "next/navigation";
 import { useGetCompetitorAnalyses } from "@/features/competitor/getCompetitorAnalyses/useGetCompetitorAnalyses";
@@ -29,8 +28,8 @@ const CompetitorTemplateCard: React.FC = () => {
   React.useEffect(() => {
     refetch();
     const handleFocus = () => refetch();
-    window.addEventListener('focus', handleFocus);
-    return () => window.removeEventListener('focus', handleFocus);
+    window.addEventListener("focus", handleFocus);
+    return () => window.removeEventListener("focus", handleFocus);
   }, [refetch]);
 
   React.useEffect(() => {
@@ -39,25 +38,19 @@ const CompetitorTemplateCard: React.FC = () => {
         const response = await bmcApi.getCanvases();
         setBmcList(response.data);
       } catch (error) {
-        console.error('BMC 리스트 조회 실패:', error);
+        console.error("BMC 리스트 조회 실패:", error);
       }
     };
     fetchBmcList();
   }, []);
 
-  const handleEmptyCardClick = () => router.push("/competitor/bmc-selection");
-
   const handleCardClick = (bmcId: number) => {
     if (!analysesData) return;
-
-    const selectedAnalysis = analysesData.data.find(item => item.bmcId === bmcId);
-    if (selectedAnalysis) {
+    const selectedAnalysis = analysesData.data.find(
+      (item) => item.bmcId === bmcId,
+    );
+    if (selectedAnalysis)
       router.push(`/competitor/analysis?bmcId=${String(bmcId)}`);
-    }
-  };
-
-  const handleRefresh = () => {
-    refetch();
   };
 
   const cardData = React.useMemo(() => {
@@ -70,15 +63,12 @@ const CompetitorTemplateCard: React.FC = () => {
     });
 
     const uniqueByBmcId = new Map();
-    sortedData.forEach(item => {
-      if (!uniqueByBmcId.has(item.bmcId)) {
-        uniqueByBmcId.set(item.bmcId, item);
-      }
+    sortedData.forEach((item) => {
+      if (!uniqueByBmcId.has(item.bmcId)) uniqueByBmcId.set(item.bmcId, item);
     });
 
-    return Array.from(uniqueByBmcId.values()).map(item => {
-      const bmcData = bmcList.find(bmc => bmc.id === item.bmcId);
-
+    return Array.from(uniqueByBmcId.values()).map((item) => {
+      const bmcData = bmcList.find((bmc) => bmc.id === item.bmcId);
       return {
         bmcId: item.bmcId,
         title: item.userBmc.title,
@@ -88,25 +78,31 @@ const CompetitorTemplateCard: React.FC = () => {
     });
   }, [analysesData, bmcList]);
 
-  if (isLoading) {
-    return <CompetitorCardSkeleton />;
-  }
+  if (isLoading) return <CompetitorCardSkeleton />;
 
   return (
-    <S.Container>
-      <S.MainContent>
-        <S.TitleSection>
-          <S.Title>경쟁사분석 기능을 사용해보세요!</S.Title>
-        </S.TitleSection>
+    <div className="w-[1025px] mt-10 mr-10 mb-20 min-h-[50vh]">
+      <div className="flex flex-col justify-start items-start w-full gap-6">
+        {/* 타이틀 */}
+        <div className="flex flex-col justify-start items-start w-full">
+          <p className="font-pt-body1-medium">
+            경쟁사분석 기능을 사용해보세요!
+          </p>
+        </div>
 
-        <S.CardRow>
-          <S.BmcImageContainer onClick={handleEmptyCardClick}>
-            <S.PlusIconWrapper>
+        {/* 카드 그리드 */}
+        <div className="grid grid-cols-4 gap-[30px] w-full">
+          {/* 추가 버튼 카드 */}
+          <div
+            onClick={() => router.push("/competitor/bmc-selection")}
+            className="inline-block bg-hub-white-1 cursor-pointer w-[242px] h-[168px] mb-[50px] transition-all duration-300 hover:opacity-50"
+          >
+            <div className="flex items-center justify-center w-[242px] h-[168px] border border-hub-gray-3 rounded-[10px] [&_svg]:w-[70px] [&_svg]:h-[70px] [&_svg]:fill-hub-primary">
               <Plus />
-            </S.PlusIconWrapper>
-          </S.BmcImageContainer>
+            </div>
+          </div>
 
-          {cardData.map(card => (
+          {cardData.map((card) => (
             <BmcCard
               key={card.bmcId}
               id={card.bmcId}
@@ -115,12 +111,12 @@ const CompetitorTemplateCard: React.FC = () => {
               imageUrl={card.imageUrl}
               type="competitor"
               onCardClick={() => handleCardClick(card.bmcId)}
-              onDelete={handleRefresh}
+              onDelete={refetch}
             />
           ))}
-        </S.CardRow>
-      </S.MainContent>
-    </S.Container>
+        </div>
+      </div>
+    </div>
   );
 };
 

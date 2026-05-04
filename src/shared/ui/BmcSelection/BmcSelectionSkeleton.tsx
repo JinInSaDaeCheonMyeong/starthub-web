@@ -1,63 +1,18 @@
-import styled from "styled-components";
-import { StartHubColors } from "@/shared/design";
-import * as S from "./style";
-
-const SkeletonBox = styled.div`
-  background-color: ${StartHubColors.Gray4};
-  animation: pulse 1.5s infinite ease-in-out;
-
-  @keyframes pulse {
-    0% {
-      background-color: ${StartHubColors.Gray4};
-    }
-    50% {
-      background-color: ${StartHubColors.Gray3};
-    }
-    100% {
-      background-color: ${StartHubColors.Gray4};
-    }
-  }
-`;
-
-const SkeletonImage = styled(SkeletonBox)`
-  width: 242px;
-  height: 170px;
-  border-radius: 10px;
-  border: 1px solid ${StartHubColors.Gray3};
-`;
-
-const SkeletonTitle = styled(SkeletonBox)`
-  width: 150px;
-  height: 16px;
-  margin-top: 8px;
-  border-radius: 4px;
-`;
-
-const SkeletonDate = styled(SkeletonBox)`
-  width: 100px;
-  height: 12px;
-  margin-top: 4px;
-  border-radius: 4px;
-`;
-
-const SkeletonCardWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
 export const BmcSelectionSkeleton = () => {
   return (
-    <S.Container>
-      <S.Text>먼저 원하는 BMC를 선택해 주세요.</S.Text>
-      <S.BmcTemplateContainer>
+    <div className="w-[1025px] mt-10 mr-10 mb-20">
+      <p className="font-pt-body1-medium mb-5">
+        먼저 원하는 BMC를 선택해 주세요.
+      </p>
+      <div className="grid grid-cols-4 gap-[30px] w-[1024px]">
         {[...Array(4)].map((_, index) => (
-          <SkeletonCardWrapper key={index}>
-            <SkeletonImage />
-            <SkeletonTitle />
-            <SkeletonDate />
-          </SkeletonCardWrapper>
+          <div key={index} className="flex flex-col">
+            <div className="w-[242px] h-[170px] rounded-[10px] border border-hub-gray-3 animate-skeleton-pulse" />
+            <div className="w-[150px] h-4 mt-2 rounded animate-skeleton-pulse" />
+            <div className="w-[100px] h-3 mt-1 rounded animate-skeleton-pulse" />
+          </div>
         ))}
-      </S.BmcTemplateContainer>
-    </S.Container>
+      </div>
+    </div>
   );
 };

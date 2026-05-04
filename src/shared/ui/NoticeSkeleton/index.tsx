@@ -1,32 +1,5 @@
-import styled from "styled-components";
-import { StartHubColors } from "@/shared/design";
-
-const SkeletonBox = styled.div`
-  width: 250px;
-  height: 150px;
-  background-color: ${StartHubColors.White1};
-  border: 2px solid ${StartHubColors.Gray4};
-  border-radius: 14px;
-  margin-right: 12px;
-  margin-bottom: 12px;
-  display: flex;
-  flex-direction: column;
-  padding: 30px 19px;
-  animation: pulse 1.5s infinite ease-in-out;
-
-  @keyframes pulse {
-    0% {
-      background-color: ${StartHubColors.Gray4};
-    }
-    50% {
-      background-color: ${StartHubColors.Gray3};
-    }
-    100% {
-      background-color: ${StartHubColors.Gray4};
-    }
-  }
-`;
-
 export const NoticeSkeleton = () => {
-  return <SkeletonBox />;
+  return (
+    <div className="w-[250px] h-[150px] border-2 border-hub-gray-4 rounded-[14px] mr-3 mb-3 flex flex-col px-[19px] py-[30px] animate-pulse bg-hub-gray-4 animate-skeleton-pulse" />
+  );
 };

@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import { bmcApi } from "@/entities/bmc/api/bmc";
 import BmcCard from "../CompetitorBmcCard";
 import { BmcSelectionSkeleton } from "./BmcSelectionSkeleton";
-import * as S from "./style";
 
 const BmcList = () => {
   const { data, isLoading, error } = useQuery({
@@ -10,24 +9,26 @@ const BmcList = () => {
     queryFn: bmcApi.getCanvases,
   });
 
-  if (isLoading) {
-    return <BmcSelectionSkeleton />;
-  }
+  if (isLoading) return <BmcSelectionSkeleton />;
 
   if (error) {
     return (
-      <S.Container>
-        <S.Text>BMC 목록을 불러오는데 실패했습니다.</S.Text>
-      </S.Container>
+      <div className="w-[1025px] mt-10 mr-10 mb-20">
+        <p className="font-pt-body1-medium mb-5">
+          BMC 목록을 불러오는데 실패했습니다.
+        </p>
+      </div>
     );
   }
 
   const canvases = data?.data || [];
 
   return (
-    <S.Container>
-      <S.Text>먼저 원하는 BMC를 선택해 주세요.</S.Text>
-      <S.BmcTemplateContainer>
+    <div className="w-[1025px] mt-10 mr-10 mb-20">
+      <p className="font-pt-body1-medium mb-5">
+        먼저 원하는 BMC를 선택해 주세요.
+      </p>
+      <div className="grid grid-cols-4 gap-[30px] w-[1024px] [&_img]:w-[242px] [&_img]:h-[170px] [&_img]:rounded-[10px] [&_img]:border [&_img]:border-hub-gray-3 [&_img:hover]:opacity-50 [&_img:hover]:cursor-pointer">
         {canvases.map((canvas) => (
           <BmcCard
             key={canvas.id}
@@ -36,8 +37,8 @@ const BmcList = () => {
             date={new Date(canvas.createdAt).toLocaleDateString("ko-KR")}
           />
         ))}
-      </S.BmcTemplateContainer>
-    </S.Container>
+      </div>
+    </div>
   );
 };
 
