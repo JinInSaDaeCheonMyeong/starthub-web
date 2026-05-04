@@ -2,7 +2,7 @@ import BmcList from "@/shared/ui/BmcList";
 import BmcTemplateCard from "@/entities/bmc/ui/BmcTemplateCard";
 import { useAuthStore } from "@/app/model/stores/useAuthStore";
 import NotMyPage from "@/features/profile/users/profileForm/ui/NotMyPage";
-import styled from "styled-components";
+
 const BmcPage = () => {
   const { isLoggedIn } = useAuthStore();
   return (
@@ -13,18 +13,12 @@ const BmcPage = () => {
           <BmcList />
         </>
       ) : (
-        <NotMyPageWrap>
+        <div className="min-h-[60vh] flex justify-center">
           <NotMyPage />
-        </NotMyPageWrap>
+        </div>
       )}
     </>
   );
 };
 
 export default BmcPage;
-
-const NotMyPageWrap = styled.div`
-  min-height: 60vh;
-  display: flex;
-  justify-content: center;
-`;

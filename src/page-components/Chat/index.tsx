@@ -14,7 +14,6 @@ import { useCreateSession } from "@/features/chatAI/hooks/useCreateSession";
 import { markdownComponents } from "@/features/chatAI/utils/markdownComponents";
 import { parseAnnotations } from "@/features/chatAI/utils/parseAnnotations";
 import { convertEnumToKorean } from "@/features/chatAI/utils/convertEnumToKorean";
-import * as S from "@/styles/pages/Chat-style";
 
 interface DisplayMessage {
   id: number;
@@ -132,7 +131,7 @@ const ChatPage = () => {
   const hasMessages = messages.length > 0 || streaming;
 
   return (
-    <S.PageWrapper>
+    <div className="flex h-screen overflow-hidden">
       <ChatSidebar
         defaultExpanded={true}
         creatingSession={creatingSession}
@@ -148,72 +147,80 @@ const ChatPage = () => {
         }}
       />
 
-      <S.ChatArea>
+      <div className="flex-1 flex flex-col h-full bg-hub-white-1">
         {!hasMessages ? (
-          <S.WelcomeWrapper>
-            <S.WelcomeTitle>
-              <span>Hub</span>
-              <span> AI</span>
-            </S.WelcomeTitle>
-            <S.WelcomeGreeting>
+          <div className="flex-1 flex flex-col items-center justify-center gap-4 p-6">
+            <p className="text-[56px] font-bold text-center">
+              <span className="text-hub-primary">Hub</span>
+              <span className="text-black"> AI</span>
+            </p>
+            <p className="text-2xl text-black text-center">
               {userName}님! 무엇을 도와드릴까요?
-            </S.WelcomeGreeting>
-            <S.WelcomeInput>
+            </p>
+            <div className="w-full flex justify-center mb-[30px] mt-[10px] max-w-[700px]">
               <StartHubAITextarea
                 onSubmit={handleSend}
                 disabled={streaming}
                 maxWidth="900px"
               />
-            </S.WelcomeInput>
-          </S.WelcomeWrapper>
+            </div>
+          </div>
         ) : (
-          <S.MessageList ref={messageListRef}>
+          <div
+            className="flex-1 overflow-y-auto p-6 flex flex-col items-center gap-3 w-full max-w-[900px] mx-auto"
+            ref={messageListRef}
+          >
             {messages.map((msg) =>
               msg.isUser ? (
-                <S.UserBubble key={msg.id}>{msg.text}</S.UserBubble>
+                <div
+                  key={msg.id}
+                  className="self-end max-w-4/5 p-2.5 rounded-2.5 bg-[#f5f5f5] text-base text-black break-words"
+                >
+                  {msg.text}
+                </div>
               ) : (
-                <S.AIMessageWrapper key={msg.id}>
+                <div key={msg.id} className="self-start max-w-full leading-7">
                   <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
                     components={markdownComponents}
                   >
                     {convertEnumToKorean(msg.text)}
                   </ReactMarkdown>
-                </S.AIMessageWrapper>
+                </div>
               ),
             )}
             {streaming && !streamingText && (
-              <S.AIMessageWrapper>
+              <div className="self-start max-w-full">
                 <AITypingIndicator />
-              </S.AIMessageWrapper>
+              </div>
             )}
             {streaming && streamingText && (
-              <S.AIMessageWrapper>
+              <div className="self-start max-w-full">
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
                   components={markdownComponents}
                 >
                   {convertEnumToKorean(streamingText)}
                 </ReactMarkdown>
-              </S.AIMessageWrapper>
+              </div>
             )}
             {error && (
               <AIErrorMessage message={error} onRetry={() => setError(null)} />
             )}
-          </S.MessageList>
+          </div>
         )}
 
         {hasMessages && (
-          <S.InputArea>
+          <div className="p-4 flex-shrink-0 flex justify-center w-full max-w-[900px] mx-auto">
             <StartHubAITextarea
               onSubmit={handleSend}
               disabled={streaming}
               maxWidth="900px"
             />
-          </S.InputArea>
+          </div>
         )}
-      </S.ChatArea>
-    </S.PageWrapper>
+      </div>
+    </div>
   );
 };
 

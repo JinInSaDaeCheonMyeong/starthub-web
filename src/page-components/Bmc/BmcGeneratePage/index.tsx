@@ -1,6 +1,5 @@
 import { BmcStepNavigate } from "@/features/bmc/stepNavigate/index";
 import { BmcContent } from "@/widgets/bmc/BmcContent";
-import * as S from "@/styles/pages/Bmc-BmcGeneratePage-style";
 import { useBmcQuestions } from "@/entities/bmc/model/useBmcQuestions";
 import useQuestionStore from "@/entities/bmc/model/useQuestionStore";
 import { useEffect } from "react";
@@ -15,19 +14,19 @@ const BmcGeneratePage = () => {
   }, [bmcQuestions]);
 
   return (
-    <S.Container>
+    <div className="h-screen flex flex-col bg-hub-white-2 overflow-hidden">
       <Header />
       {isGeneratingBmc ? (
-        <S.FullWidthWrapper>
+        <div className="mt-[110.8px] flex bg-hub-white-2 w-full h-[calc(100vh-110.8px)] overflow-auto">
           <BmcContent />
-        </S.FullWidthWrapper>
+        </div>
       ) : (
-        <S.Wrapper>
+        <div className="m-auto mt-[110.8px] flex bg-hub-white-2 gap-[55px] p-[34px_0] justify-center w-full h-[calc(100vh-78px)] overflow-auto">
           <BmcStepNavigate />
           <BmcContent />
-        </S.Wrapper>
+        </div>
       )}
-    </S.Container>
+    </div>
   );
 };
 

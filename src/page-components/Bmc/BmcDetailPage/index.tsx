@@ -2,7 +2,6 @@
 import { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { BmcCanvas } from "@/widgets/bmc/BmcCanvas";
-import * as S from "@/widgets/bmc/BmcCanvas/style";
 import {
   useBmcData,
   useBmcCapture,
@@ -83,7 +82,7 @@ const BmcDetailPage = () => {
   if (loadingState) return loadingState;
 
   return (
-    <S.Container>
+    <div className="min-h-screen bg-hub-white-2 py-[40px] px-[20px]">
       <Header />
       <BmcCanvas
         ref={canvasRef}
@@ -100,7 +99,7 @@ const BmcDetailPage = () => {
         onDownload={() => handleDownloadPDF(bmcData!)}
         onBackToList={() => router.push("/bmc")}
       />
-    </S.Container>
+    </div>
   );
 };
 

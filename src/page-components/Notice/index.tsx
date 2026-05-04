@@ -1,7 +1,6 @@
 import SearchNotice from "@/features/notice/ui/searchNotice";
 import { useState, useEffect, useCallback } from "react";
 import NoticeCard from "@/shared/ui/NoticeCard";
-import * as S from "@/styles/pages/Notice-style";
 import Pagination from "@/shared/ui/pagination";
 import { NoticeSearchParams } from "@/entities/notice/model/notice.type";
 import { useGetNoticeSearch } from "@/features/notice/getNoticeSearch/useGetNoticeSearch";
@@ -9,7 +8,9 @@ import { NoticeSkeleton } from "@/shared/ui/NoticeSkeleton";
 
 const NoticePage = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [filters, setFilters] = useState<Omit<NoticeSearchParams, "page" | "size">>({});
+  const [filters, setFilters] = useState<
+    Omit<NoticeSearchParams, "page" | "size">
+  >({});
 
   const { data, isLoading, isError } = useGetNoticeSearch({
     ...filters,
@@ -22,42 +23,46 @@ const NoticePage = () => {
     window.scrollTo(0, 0);
   }, [currentPage]);
 
-  const handleFilterChange = useCallback((
-    newFilters: Omit<NoticeSearchParams, "page" | "size">
-  ) => {
-    setFilters(newFilters);
-    setCurrentPage(1);
-  }, []);
+  const handleFilterChange = useCallback(
+    (newFilters: Omit<NoticeSearchParams, "page" | "size">) => {
+      setFilters(newFilters);
+      setCurrentPage(1);
+    },
+    [],
+  );
 
   const shouldHideFilters = data?.content?.[0]?.isNatural === true;
 
   return (
     <>
-      <SearchNotice onFilterChange={handleFilterChange} hideFilters={shouldHideFilters} />
+      <SearchNotice
+        onFilterChange={handleFilterChange}
+        hideFilters={shouldHideFilters}
+      />
 
-      <S.NoticeContentContainer>
+      <div className="mt-[50px] w-full px-[200px] min-h-[50vh]">
         {isLoading ? (
-          <S.CardWrap>
+          <div className="grid grid-cols-[repeat(auto-fill,_250px)] justify-between gap-y-5 w-full">
             {Array.from({ length: 16 }).map((_, index) => (
               <NoticeSkeleton key={`skeleton-${index}`} />
             ))}
-          </S.CardWrap>
+          </div>
         ) : isError ? (
-          <S.ExceptionMessage>
+          <p className="font-pt-body1-medium flex justify-center mt-[60px]">
             검색 결과가 없습니다.
-          </S.ExceptionMessage>
+          </p>
         ) : !data || data.content.length === 0 ? (
-          <S.ExceptionMessage>
+          <p className="font-pt-body1-medium flex justify-center mt-[60px]">
             검색 조건에 맞는 공고가 없습니다.
-          </S.ExceptionMessage>
+          </p>
         ) : (
-          <S.CardWrap>
+          <div className="grid grid-cols-[repeat(auto-fill,_250px)] justify-between gap-y-5 w-full">
             {data.content.map((notice, index) => (
               <NoticeCard key={`notice-${index}`} notice={notice} />
             ))}
-          </S.CardWrap>
+          </div>
         )}
-      </S.NoticeContentContainer>
+      </div>
 
       {data && data.totalPages > 1 && (
         <Pagination

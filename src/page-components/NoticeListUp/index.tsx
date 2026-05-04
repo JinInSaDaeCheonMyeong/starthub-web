@@ -3,7 +3,6 @@ import FoldArrow from "@/shared/ui/FoldArrow";
 import { useParams } from "next/navigation";
 import NoticeCard from "@/shared/ui/NoticeCard";
 import { NoticeSkeleton } from "@/shared/ui/NoticeSkeleton";
-import styled from "styled-components";
 import { useGetNoticeSearch } from "@/features/notice/getNoticeSearch/useGetNoticeSearch";
 import { useGetNoticeRecommend } from "@/features/notice/getNoticeRecommend/useGetNoticeRecommend";
 import { NoticeType } from "@/entities/notice/model/notice.type";
@@ -55,8 +54,8 @@ const NoticeListUpPage = () => {
   return (
     <>
       <FoldArrow title={config.title} />
-      <div style={{ height: "100%", minHeight:"100vh" }}>
-        <NoticeListContainer>
+      <div className="h-full min-h-screen">
+        <div className="grid grid-cols-4 gap-5 m-5">
           {isLoading
             ? Array.from({ length: 8 }).map((_, idx) => (
                 <NoticeSkeleton key={idx} />
@@ -64,17 +63,10 @@ const NoticeListUpPage = () => {
             : notices?.map((item: NoticeType) => (
                 <NoticeCard key={item.url} notice={item} />
               ))}
-        </NoticeListContainer>
+        </div>
       </div>
     </>
   );
 };
 
 export default NoticeListUpPage;
-
-const NoticeListContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  margin: 20px 0px;
-`;

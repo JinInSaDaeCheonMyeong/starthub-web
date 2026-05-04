@@ -1,4 +1,3 @@
-import * as S from "@/styles/pages/Main-MainContent-style";
 import BoxMenu from "@/features/boxMenu/ui";
 import SectionBlock from "@/shared/ui/SectionBlock";
 import NoticeCard from "@/shared/ui/NoticeCard";
@@ -9,47 +8,12 @@ import { NoticeType } from "@/entities/notice/model/notice.type";
 import AiNotice from "@assets/images/aiNotice.png";
 import { useAuthStore } from "@/app/model/stores/useAuthStore";
 
-const MainContent = () => {
-  const {isLoggedIn} = useAuthStore()
-  const { data } = useGetNoticeRecommend();
-
-  return (
-    <S.ContentContainer>
-      <SectionBlock
-        title="교육 분야 최신 공고 보러가기"
-        path="/notices/education"
-      >
-        <S.BoxMenuContainer>
-          <EducationNotice />
-        </S.BoxMenuContainer>
-      </SectionBlock>
-
-      <SectionBlock
-        title={
-          !isLoggedIn
-            ? "로그인 후 AI 맞춤형 공고를 추천받을 수 있어요!"
-            : "AI 추천 공고"
-        }
-        path={!data ? "/sign-in" : "/notices/recommend"}
-      >
-        <S.NoticeContainer>
-          <RecommendedAINotice />
-        </S.NoticeContainer>
-      </SectionBlock>
-
-      <S.BoxMenuContainer>
-        <BoxMenu />
-      </S.BoxMenuContainer>
-    </S.ContentContainer>
-  );
-};
-
 const RecommendedAINotice = () => {
   const { data, isLoading } = useGetNoticeRecommend();
 
   if (isLoading) {
     return (
-      <div style={{ display: "flex", flexDirection: "row" }}>
+      <div  className="flex flex-row">
         {Array.from({ length: 4 }).map((_, idx) => (
           <NoticeSkeleton key={idx} />
         ))}
@@ -63,14 +27,14 @@ const RecommendedAINotice = () => {
         <img
           src={AiNotice.src}
           alt="AI 공고 로그인 유도 배너"
-          style={{ width: "1040px", height: "auto" }}
+          className="w-[1040px] h-[auto]"
         />
       </>
     );
   }
 
   return (
-      <div style={{ display: "flex", gap: "10px" }}>
+      <div className="flex gap-[10px]">
         {data?.slice(0, 4).map((item: NoticeType) => (
           <NoticeCard key={item.url} notice={item} />
         ))}
@@ -89,7 +53,7 @@ const EducationNotice = () => {
 
   if (isLoading) {
     return (
-      <div style={{ display: "flex", flexDirection:"row" }}>
+      <div className="flex flex-row">
         {Array.from({ length: 4 }).map((_, idx) => (
           <NoticeSkeleton key={idx} />
         ))}
@@ -98,10 +62,45 @@ const EducationNotice = () => {
   }
 
   return (
-    <div style={{ display: "flex", gap: "10px" }}>
+    <div className="flex gap-[10px]">
       {data?.content?.map((item: NoticeType) => (
         <NoticeCard key={item.url} notice={item} />
       ))}
+    </div>
+  );
+};
+
+const MainContent = () => {
+  const {isLoggedIn} = useAuthStore()
+  const { data } = useGetNoticeRecommend();
+
+  return (
+    <div className="w-[1040px] flex justify-center flex-col">
+      <SectionBlock
+        title="교육 분야 최신 공고 보러가기"
+        path="/notices/education"
+      >
+        <div className="flex justify-center mb-10">
+          <EducationNotice />
+        </div>
+      </SectionBlock>
+
+      <SectionBlock
+        title={
+          !isLoggedIn
+            ? "로그인 후 AI 맞춤형 공고를 추천받을 수 있어요!"
+            : "AI 추천 공고"
+        }
+        path={!data ? "/sign-in" : "/notices/recommend"}
+      >
+        <div className="flex justify-center mb-8">
+          <RecommendedAINotice />
+        </div>
+      </SectionBlock>
+
+      <div className="flex justify-center mb-10">
+        <BoxMenu />
+      </div>
     </div>
   );
 };

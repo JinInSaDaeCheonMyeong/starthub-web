@@ -2,12 +2,10 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import * as S from "@/styles/pages/Onboarding-style";
 import { StartHubLogo } from "@/assets/logo";
 import { OnboardingFormData } from "@/entities/user/model/types";
 import PersonalInfoForm from "@/features/onboarding/personalInfoForm";
 import { StartHubButton } from "@/shared/ui";
-import { StartHubColors, StartHubFont } from "@/shared/design";
 
 const INITIAL_FORM_DATA: OnboardingFormData = {
   birthYear: "",
@@ -25,7 +23,7 @@ const Onboarding = () => {
 
   const handleInputChange = (
     field: keyof OnboardingFormData,
-    value: string
+    value: string,
   ) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
   };
@@ -39,7 +37,7 @@ const Onboarding = () => {
     const { birthYear, birthMonth, birthDay } = formData;
     return `${birthYear}-${birthMonth.padStart(2, "0")}-${birthDay.padStart(
       2,
-      "0"
+      "0",
     )}`;
   };
 
@@ -69,14 +67,16 @@ const Onboarding = () => {
   };
 
   return (
-    <S.OnboardingContainer>
-      <S.OnboardingForm>
-        <S.LogoSection>
+    <div className="flex justify-center items-center min-h-screen bg-hub-white-2 p-5">
+      <div className="w-full max-w-[500px] bg-hub-white-1 rounded-[30px] p-[45px] md:p-[30px] sm:p-5">
+        <div className="flex flex-col items-center mb-10">
           <StartHubLogo width={143} height={55} />
-          <S.Label>더 나은 서비스 품질을 위해 정보를 입력해주세요!</S.Label>
-        </S.LogoSection>
+          <div className="font-pt-body1-semibold text-center text-hub-black-1 mt-4">
+            더 나은 서비스 품질을 위해 정보를 입력해주세요!
+          </div>
+        </div>
 
-        <S.SectionContainer>
+        <div className="px-10">
           <PersonalInfoForm
             formData={formData}
             onInputChange={handleInputChange}
@@ -86,15 +86,14 @@ const Onboarding = () => {
             text="다음"
             onClick={handleSubmit}
             height={50}
-            backgroundColor={StartHubColors.Primary}
-            typography={StartHubFont.Pretendard.Body1.SemiBold}
-            textTheme={StartHubColors.White1}
+            backgroundColor="#2466F4"
+            textTheme="#FFFFFF"
             disabled={!isFormValid()}
-            customStyle={{ width: "100%" }}
+            className="font-pt-body1-semibold w-100%"
           />
-        </S.SectionContainer>
-      </S.OnboardingForm>
-    </S.OnboardingContainer>
+        </div>
+      </div>
+    </div>
   );
 };
 

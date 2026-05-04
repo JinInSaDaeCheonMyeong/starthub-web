@@ -2,11 +2,9 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import * as S from "@/styles/pages/Onboarding-early-style";
 import { StartHubLogo } from "@/assets/logo";
 import CategorySelector from "@/features/onboarding/categorySelector";
 import { StartHubButton } from "@/shared/ui";
-import { StartHubColors, StartHubFont } from "@/shared/design";
 import EarlyOnboarding from "@/features/onboarding/earlyOnboarding";
 import { useEarlyOnboarding } from "@/shared/hooks/Onboarding/useEarlyOnboarding";
 import { OnboardingRequest } from "@/entities/user/model/types";
@@ -30,7 +28,7 @@ const Onboarding = () => {
     setCategories((prev) =>
       prev.includes(categoryId)
         ? prev.filter((id) => id !== categoryId)
-        : [...prev, categoryId]
+        : [...prev, categoryId],
     );
   };
 
@@ -60,7 +58,7 @@ const Onboarding = () => {
 
     const onboardingData: OnboardingRequest = {
       ...basicInfo,
-      startupFields: categories.map(category => ({
+      startupFields: categories.map((category) => ({
         businessType: category,
       })),
       startupStatus: "EARLY_STAGE",
@@ -77,26 +75,27 @@ const Onboarding = () => {
       onSuccess: () => {
         sessionStorage.removeItem("onboardingBasicInfo");
         router.push("/");
-      }
+      },
     });
   };
 
-  const isValid = earlyData?.companyName?.trim() &&
-                  earlyData?.numberOfEmployees > 0 &&
-                  categories.length > 0;
+  const isValid =
+    earlyData?.companyName?.trim() &&
+    earlyData?.numberOfEmployees > 0 &&
+    categories.length > 0;
 
   return (
-    <S.OnboardingContainer>
-      <S.OnboardingForm>
-        <S.LogoSection>
+    <div className="flex justify-center items-center min-h-screen bg-hub-white-2 p-5">
+      <div className="w-full max-w-[500px] bg-hub-white-1 rounded-[30px] p-[45px] md:p-[30px] sm:p-5">
+        <div className="flex flex-col items-center mb-10">
           <StartHubLogo width={143} height={55} />
-          <S.Label>더 나은 서비스 품질을 위해 정보를 입력해주세요!</S.Label>
-        </S.LogoSection>
+          <div className="font-pt-body1-semibold text-center text-hub-black-1 mt-4">
+            더 나은 서비스 품질을 위해 정보를 입력해주세요!
+          </div>
+        </div>
 
-        <S.SectionContainer>
-          <EarlyOnboarding 
-            onSubmit={handleEarlyOnboardingSubmit}
-          />
+        <div className="px-10">
+          <EarlyOnboarding onSubmit={handleEarlyOnboardingSubmit} />
 
           <CategorySelector
             selectedCategories={categories}
@@ -107,15 +106,16 @@ const Onboarding = () => {
             text="시작하기"
             onClick={handleFinalSubmit}
             height={50}
-            backgroundColor={isValid ? StartHubColors.Primary : StartHubColors.Gray4}
-            typography={StartHubFont.Pretendard.Body1.SemiBold}
-            textTheme={StartHubColors.White1}
-            customStyle={{ width: "100%" }}
+            backgroundColor={
+              isValid ? "#2466F4" : "#F3F4F6"
+            }
+            textTheme="#FFFFFF"
             disabled={!isValid || earlyOnboardingMutation.isPending}
+            className="font-pt-body1-semibold w-100%"
           />
-        </S.SectionContainer>
-      </S.OnboardingForm>
-    </S.OnboardingContainer>
+        </div>
+      </div>
+    </div>
   );
 };
 

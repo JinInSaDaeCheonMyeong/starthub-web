@@ -1,20 +1,19 @@
 import MainMenu from "@/features/mainMenu/ui";
 import MainContent from "./ui/MainContent";
-import * as S from "@/styles/pages/Main-style";
 import Banner from "@/shared/ui/Banner";
 import AdBanner from "@/shared/ui/AdBanner";
 
 const MainPage = () => {
   return (
     <>
-      <Banner/>
-      <S.CenteredBox>
+      <Banner />
+      <div className="flex justify-center w-full">
         <MainMenu />
-      </S.CenteredBox>
-      <S.CenteredBox>
+      </div>
+      <div className="flex justify-center w-full">
         <MainContent />
-      </S.CenteredBox>
-      <AdBanner/>
+      </div>
+      <AdBanner />
     </>
   );
 };

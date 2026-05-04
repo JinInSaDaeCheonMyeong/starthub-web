@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef } from "react";
-import * as S from "@/styles/pages/NoticeDetail-DetailContent-style";
 import { getNoticeCategoryInfo } from "@/shared/utils/NoticeCategory/noticeCategory";
 import { NoticeType } from "@/entities/notice/model/notice.type";
 import { useNoticeLike } from "@/features/notice/NoticeLike/ useNoticeLike";
@@ -130,23 +129,45 @@ const NoticeDetail = ({ item }: NoticeDetailProps) => {
 
   const isLoading = likeMutation.isPending || unlikeMutation.isPending;
 
+  const getSourceTagStyles = (source: string) => {
+    const baseClasses = "font-pt-body2-semibold px-3 py-1 rounded-[5px]";
+    switch (source) {
+      case "BIZINFO":
+        return `${baseClasses} bg-[#E8F4FE] text-[#0066CC]`;
+      case "K_STARTUP":
+        return `${baseClasses} bg-[#FFF4E6] text-[#FF9500]`;
+      default:
+        return `${baseClasses} bg-[#F0F0F0] text-[#333333]`;
+    }
+  };
+
+  const getTOCItemClasses = (level: number, isActive: boolean) => {
+    const paddingLeft = 16 + (level - 1) * 20;
+    const baseClasses =
+      "font-pt-body1-regular p-2 rounded-[6px] cursor-pointer mb-1";
+    const activeClasses = isActive
+      ? "bg-hub-gray-2 text-hub-primary"
+      : "text-hub-black-1";
+    return `${baseClasses} ${activeClasses}`;
+  };
+
   return (
-    <S.Container>
-      <S.MainContent>
-        <S.NoticeTitle>
-          <S.CategoryContainer>
+    <div className="flex max-w-[1200px] w-full p-[50px_65px] md:flex-col md:gap-5 mb-[150px]">
+      <div className="flex-1 min-w-0 select-text">
+        <div className="border-b border-[#dadada] pb-6 select-text">
+          <div className="flex items-center mb-2 gap-1">
             {categoryInfo.icon}
             <p>{categoryInfo.text}</p>
             {item.source && (
-              <S.SourceTag $source={item.source}>
+              <span className={getSourceTagStyles(item.source)}>
                 {item.source === "BIZINFO"
                   ? "기업마당"
                   : item.source === "K_STARTUP"
                     ? "K-Startup"
                     : item.source}
-              </S.SourceTag>
+              </span>
             )}
-          </S.CategoryContainer>
+          </div>
 
           <h1 className="title">{item.title}</h1>
 
@@ -155,43 +176,48 @@ const NoticeDetail = ({ item }: NoticeDetailProps) => {
           )}
 
           {item.originalFiles && item.originalFiles.length > 0 && (
-            <S.FileLinksSection>
+            <div className="flex flex-col gap-0.5 mt-4">
               {item.originalFiles.map((file, index) => {
                 const isPDF = file.name.toLowerCase().endsWith(".pdf");
                 return isPDF ? (
-                  <S.FileLink
+                  <a
                     key={index}
+                    className="font-pt-caption1-regular text-hub-primary no-underline"
                     href={file.url}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     {file.name}
-                  </S.FileLink>
+                  </a>
                 ) : (
-                  <S.FileLink
+                  <a
                     key={index}
+                    className="font-pt-caption1-regular text-hub-primary no-underline"
                     href={file.url}
                     target="_blank"
                     rel="noopener noreferrer"
                     download
                   >
                     {file.name}
-                  </S.FileLink>
+                  </a>
                 );
               })}
-            </S.FileLinksSection>
+            </div>
           )}
-        </S.NoticeTitle>
+        </div>
 
-        <S.ContentWrapper ref={contentRef}>
+        <div
+          className="leading-6 w-full overflow-x-auto select-text"
+          ref={contentRef}
+        >
           <div
             className="dot_list-wrap"
             dangerouslySetInnerHTML={{ __html: safeContent }}
           />
-        </S.ContentWrapper>
+        </div>
 
         {item.pdfFiles && item.pdfFiles.length > 0 && (
-          <S.PDFSection>
+          <div className="mt-12 pt-8 border-t border-hub-gray-4">
             <p>첨부 문서</p>
             {item.pdfFiles.map((pdf, index) => (
               <PDFViewer
@@ -200,35 +226,43 @@ const NoticeDetail = ({ item }: NoticeDetailProps) => {
                 name={pdf.name}
               />
             ))}
-          </S.PDFSection>
+          </div>
         )}
-      </S.MainContent>
+      </div>
 
-      <S.Sidebar>
+      <aside className="flex-shrink-0 w-[250px] sticky top-[170px] h-fit pl-6">
         {item.isLiked ? (
-          <S.HeartButton onClick={handleUnlikeClick} disabled={isLoading}>
+          <button
+            className="bg-none cursor-pointer border-none"
+            onClick={handleUnlikeClick}
+            disabled={isLoading}
+          >
             <FillHeart />
-          </S.HeartButton>
+          </button>
         ) : (
-          <S.HeartButton onClick={handleLikeClick} disabled={isLoading}>
+          <button
+            className="bg-none cursor-pointer border-none"
+            onClick={handleLikeClick}
+            disabled={isLoading}
+          >
             <Heart />
-          </S.HeartButton>
+          </button>
         )}
         <Share />
-        <S.TableOfContents>
+        <ul className="list-none p-0 m-0 h-fit border-l-2 border-hub-black-1">
           {tableOfContents.map((item) => (
-            <S.TOCItem
+            <li
               key={item.id}
-              level={item.level}
-              $isActive={activeId === item.id}
+              className={getTOCItemClasses(item.level, activeId === item.id)}
+              style={{ paddingLeft: `${16 + (item.level - 1) * 20}px` }}
               onClick={() => scrollToHeading(item.id)}
             >
               {item.text}
-            </S.TOCItem>
+            </li>
           ))}
-        </S.TableOfContents>
-      </S.Sidebar>
-    </S.Container>
+        </ul>
+      </aside>
+    </div>
   );
 };
 
