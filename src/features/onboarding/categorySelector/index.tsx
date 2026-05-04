@@ -10,41 +10,37 @@ const CategorySelector = ({
   onCategoryToggle,
 }: CategorySelectorProps) => {
   return (
-    // Section
-    <div className="mb-8">
-      {/* SectionTitle */}
-      <p className="font-pt-body2-medium text-hub-black-1 mb-2.5">
-        창업 분야(1개 이상) <span className="text-hub-primary text-sm">*</span>
-      </p>
+    <div className="flex flex-col gap-[10px]">
+      {/* Section Title and Description */}
+      <div className="flex flex-col">
+        <p className="font-pt-body2-medium text-hub-black-1">
+          창업 분야(1개 이상) <span className="text-hub-primary">*</span>
+        </p>
+        <p className="font-pt-caption2-regular text-hub-primary mt-1">
+          창업 분야를 알려주시면, 맞춤형 공고를 추천해드릴게요!
+        </p>
+      </div>
 
-      {/* SectionDescription */}
-      <p className="font-pt-caption2-regular text-hub-primary mb-4">
-        창업 분야를 알려주시면, 맞춤형 콘텐츠를 추천해드려요!
-      </p>
-
-      {/* CategoryGrid */}
-      <div className="flex flex-wrap gap-3 mb-4">
+      {/* Category Grid */}
+      <div className="flex flex-wrap gap-[10px]">
         {JOB_CATEGORY.map((category) => {
           const isActive = selectedCategories.includes(category.enum);
           return (
-            // CategoryButton
             <button
               key={category.enum}
               onClick={() => onCategoryToggle(category.enum)}
-              className="inline-flex items-center gap-2 py-2 px-3 w-fit rounded-[10px] font-pt-caption2-regular cursor-pointer transition-all duration-200"
+              className="flex items-center gap-[6px] px-3 py-2 rounded-[10px] font-pt-caption2-regular cursor-pointer transition-all duration-200"
               style={{
                 border: `1px solid ${category.txColor}`,
-                backgroundColor: isActive ? `${category.txColor}30` : "#FFFFFF",
+                backgroundColor: isActive ? `${category.txColor}1A` : "#FFFFFF",
                 color: category.txColor,
               }}
             >
-              {/* CategoryContainer */}
-              <div className="flex items-center gap-2 [&_svg]:w-[18px] [&_svg]:h-[18px]">
-                {category.image}
-                <span
-                  className="text-xs font-medium text-center leading-[1.2]"
-                  style={{ color: category.txColor }}
-                >
+              <div className="flex items-center gap-[6px]">
+                <div className="w-[18px] h-[18px] flex items-center justify-center">
+                  {category.image}
+                </div>
+                <span className="text-[12px] font-pt-caption2-regular whitespace-nowrap">
                   {category.text}
                 </span>
               </div>

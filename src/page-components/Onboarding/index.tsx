@@ -67,30 +67,34 @@ const Onboarding = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-hub-white-2 p-5">
-      <div className="w-full max-w-[500px] bg-hub-white-1 rounded-[30px] p-[45px] md:p-[30px] sm:p-5">
-        <div className="flex flex-col items-center mb-10">
-          <StartHubLogo width={143} height={55} />
-          <div className="font-pt-body1-semibold text-center text-hub-black-1 mt-4">
-            더 나은 서비스 품질을 위해 정보를 입력해주세요!
+    <div className="flex justify-center items-center min-h-screen bg-[#f5f5f5] px-4 py-8 md:px-6 lg:px-8">
+      <div className="w-full max-w-[490px] bg-white rounded-[30px] px-6 py-12 sm:px-8 md:px-[74px] md:py-[60px]">
+        <div className="flex flex-col items-center gap-5">
+          {/* Header */}
+          <div className="flex flex-col items-center gap-[10px]">
+            <StartHubLogo width={134} height={55} />
+            <p className="font-pt-body1-semibold text-center text-hub-black-1 px-4 whitespace-nowrap">
+              더 나은 서비스 품질을 위해 정보를 입력해주세요!
+            </p>
           </div>
-        </div>
 
-        <div className="px-10">
-          <PersonalInfoForm
-            formData={formData}
-            onInputChange={handleInputChange}
-          />
+          {/* Form Container */}
+          <div className="w-full max-w-[340px] flex flex-col gap-5">
+            <PersonalInfoForm
+              formData={formData}
+              onInputChange={handleInputChange}
+            />
 
-          <StartHubButton
-            text="다음"
-            onClick={handleSubmit}
-            height={50}
-            backgroundColor="#2466F4"
-            textTheme="#FFFFFF"
-            disabled={!isFormValid()}
-            className="font-pt-body1-semibold w-100%"
-          />
+            <StartHubButton
+              text="다음"
+              onClick={handleSubmit}
+              height={50}
+              backgroundColor="#2466F4"
+              textTheme="#FFFFFF"
+              disabled={!isFormValid()}
+              className="font-pt-body1-semibold w-full rounded-[10px]"
+            />
+          </div>
         </div>
       </div>
     </div>
