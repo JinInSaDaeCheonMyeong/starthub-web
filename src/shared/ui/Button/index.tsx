@@ -1,108 +1,66 @@
-import styled, { CSSObject } from "styled-components";
-import { StartHubColors } from "@/shared/design/color/StartHubColors";
-import type { Interpolation } from "styled-components";
-
-type FlattenSimpleInterpolation = Interpolation<object>[];
-
 export interface ButtonProps {
   text: string;
   textTheme?: string;
   width?: number;
   height?: number;
-  typography?: FlattenSimpleInterpolation;
-  backgroundColor: string;
+  backgroundColor?: string;
   onClick: () => void;
   disabled?: boolean;
-  customStyle?: CSSObject;
+  className?: string;
   icon?: React.ReactNode;
-  hover?: string;
+  hoverColor?: string;
 }
-
-interface StyledButtonProps {
-  width?: number;
-  height?: number;
-  backgroundColor: string;
-  textTheme?: string;
-  disabled?: boolean;
-  customStyle?: CSSObject;
-  typography?: FlattenSimpleInterpolation;
-  hasIcon?: boolean;
-  hover?: string;
-}
-
-const StyledButton = styled.button.withConfig({
-  shouldForwardProp: (prop) =>
-    ![
-      "backgroundColor",
-      "textTheme",
-      "customStyle",
-      "typography",
-      "hasIcon",
-      "hover",
-    ].includes(prop),
-})<StyledButtonProps>`
-  width: ${({ width }) => (width ? `${width}px` : "100%")};
-  height: ${({ height }) => (height ? `${height}px` : "48px")};
-  background-color: ${({ backgroundColor, disabled }) =>
-    disabled ? StartHubColors.Gray3 : backgroundColor};
-  color: ${({ textTheme, disabled }) =>
-    disabled ? StartHubColors.Gray2 : textTheme ?? StartHubColors.White1};
-  border: none;
-  border-radius: 8px;
-  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
-  display: flex;
-  align-items: center;
-  justify-content: ${({ hasIcon }) => (hasIcon ? "space-between" : "center")};
-  padding: 0 22px;
-  position: relative;
-  &:hover {
-    background-color: ${({ hover, disabled }) =>
-      !disabled && hover ? hover : undefined};
-  }
-  ${({ typography }) => typography}
-  ${({ customStyle }) => customStyle}
-`;
-
-const IconContainer = styled.span`
-  display: flex;
-  align-items: center;
-  position: absolute;
-  left: 22px;
-`;
-
-const TextContainer = styled.span`
-  flex: 1;
-  text-align: center;
-`;
 
 export const StartHubButton = ({
   text,
   textTheme,
   width,
   height,
-  typography,
-  backgroundColor,
+  backgroundColor = "var(--hub-primary)",
   onClick,
   disabled = false,
-  customStyle,
+  className,
   icon,
-  hover,
+  hoverColor,
 }: ButtonProps) => {
   return (
-    <StyledButton
-      width={width}
-      height={height}
-      backgroundColor={backgroundColor}
-      textTheme={textTheme}
+    <button
+      type="button"
       onClick={disabled ? undefined : onClick}
       disabled={disabled}
-      typography={typography}
-      customStyle={customStyle}
-      hasIcon={!!icon}
-      hover={hover}
+      className={[
+        "border-none rounded-lg px-[22px] relative flex items-center",
+        icon ? "justify-between" : "justify-center",
+        disabled ? "cursor-not-allowed" : "cursor-pointer",
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ")}
+      style={{
+        width: width ? `${width}px` : "100%",
+        height: height ? `${height}px` : "48px",
+        backgroundColor: disabled ? "var(--hub-gray-3)" : backgroundColor,
+        color: disabled
+          ? "var(--hub-gray-2)"
+          : (textTheme ?? "var(--hub-white-1)"),
+      }}
+      onMouseEnter={(e) => {
+        if (!disabled && hoverColor) {
+          (e.currentTarget as HTMLButtonElement).style.backgroundColor =
+            hoverColor;
+        }
+      }}
+      onMouseLeave={(e) => {
+        if (!disabled && hoverColor) {
+          (e.currentTarget as HTMLButtonElement).style.backgroundColor =
+            disabled ? "#CFCFCF" : backgroundColor;
+        }
+      }}
     >
-      {icon && <IconContainer>{icon}</IconContainer>}
-      <TextContainer>{text}</TextContainer>
-    </StyledButton>
+      {icon && (
+        <span className="flex items-center absolute left-[22px]">{icon}</span>
+      )}
+      <span className="flex-1 text-center">{text}</span>
+    </button>
   );
 };
