@@ -13,16 +13,18 @@ const SectionBlock = ({ title, children, path }: SectionBlockProps) => {
   const router = useRouter();
 
   return (
-    <>
+    <div className="w-full">
       <div
         onClick={() => router.push(path)}
-        className="flex items-center mb-5 cursor-pointer font-pt-h2-semibold"
+        className="flex items-center mb-5 cursor-pointer font-pt-h2-semibold text-[20px] text-hub-gray-1"
       >
-        <p className="mr-[10px]">{title}</p>
-        <Arrow className="w-[15px]" />
+        <span className="mr-[5px] break-keep">{title}</span>
+        <Arrow className="w-[15px] h-[15px]" />
       </div>
-      {children}
-    </>
+      <div className="w-full">
+        {children}
+      </div>
+    </div>
   );
 };
 
