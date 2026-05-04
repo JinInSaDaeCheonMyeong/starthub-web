@@ -64,12 +64,19 @@ const NoticeCard = ({ notice }: NoticeCardProps) => {
     );
   };
 
+  const getFormattedDate = (period: string) => {
+    if (!period) return period;
+
+    // 날짜에서 시간 부분 제거 (예: "2024.01.01 09:00 ~ 2024.01.31 18:00" -> "2024.01.01 ~ 2024.01.31")
+    return period.replace(/\s+\d{2}:\d{2}/g, '');
+  };
+
   const applyTargetDisplay = getApplyTargetDisplay();
 
   return (
     <div
       onClick={() => router.push(`/notice/${String(notice.id)}`)}
-      className="w-[250px] h-[150px] bg-hub-white-1 border-2 border-hub-gray-4 px-5 py-[19px] rounded-[14px] cursor-pointer"
+      className="w-[250px] min-w-[250px] h-[150px] bg-hub-white-1 border-2 border-hub-gray-4 px-5 py-[19px] rounded-[14px] cursor-pointer"
     >
       {/* 카테고리 */}
       <div className="flex items-center mb-[5px] gap-[6px] [&_svg]:w-[18px] [&_svg]:h-[18px]">
@@ -95,7 +102,7 @@ const NoticeCard = ({ notice }: NoticeCardProps) => {
 
       {/* 모집 기간 */}
       <p className="font-pt-caption2-regular text-[10px] my-[5px]">
-        모집 기간 {notice.receptionPeriod}
+        모집 기간 {getFormattedDate(notice.receptionPeriod)}
       </p>
 
       {/* 태그 */}

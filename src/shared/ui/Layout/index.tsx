@@ -30,7 +30,7 @@ const Layout = ({ children }: LayoutProps) => {
   }
 
   return (
-    <div className="flex flex-col items-center pt-[110.8px]">
+    <div className="flex flex-col items-center">
       <Header />
       {children}
       <Footer />
