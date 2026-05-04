@@ -1,6 +1,6 @@
 import { ChangeEventHandler, KeyboardEventHandler } from "react";
 
-type InputType = "text" | "password" | "number";
+type InputType = "text" | "password" | "number" | "email";
 
 export interface StartHubTextFieldProps {
   type: InputType;
@@ -14,6 +14,7 @@ export interface StartHubTextFieldProps {
   isDisabled?: boolean;
   supportingText?: string;
   className?: string;
+  autoComplete?: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
   onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
 }
@@ -30,6 +31,7 @@ export const StartHubTextField = ({
   isDisabled,
   supportingText,
   className,
+  autoComplete,
   onChange,
   onKeyDown,
 }: StartHubTextFieldProps) => {
@@ -59,14 +61,17 @@ export const StartHubTextField = ({
         value={value}
         placeholder={placeholder}
         disabled={isDisabled}
+        autoComplete={autoComplete}
         onChange={onChange}
         onKeyDown={onKeyDown}
         className={[
           "px-5 h-[50px] rounded-lg outline-none font-pt-caption1-regular",
           "placeholder:text-hub-gray-3",
           isError
-            ? "border border-hub-error focus:border-hub-error mb-0"
-            : "border border-hub-gray-3 focus:border-hub-primary mb-[10px]",
+            ? "border border-hub-error focus:border-hub-error"
+            : supportingText
+            ? "border border-hub-gray-3 focus:border-hub-primary"
+            : "border border-hub-gray-3 focus:border-hub-primary",
           isDisabled
             ? "bg-hub-white-2 text-hub-gray-3 cursor-not-allowed"
             : "bg-white",
@@ -77,7 +82,7 @@ export const StartHubTextField = ({
       />
 
       {supportingText && (
-        <span className="text-hub-error font-pt-body2-regular text-[13px] pb-[10px]">
+        <span className="text-hub-error font-pt-caption1-regular text-[12px] mt-1 block">
           {supportingText}
         </span>
       )}
