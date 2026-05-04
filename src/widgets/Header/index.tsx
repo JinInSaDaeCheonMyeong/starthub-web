@@ -11,6 +11,7 @@ const navLinks = [
   { href: "/notices", label: "공고" },
   { href: "/competitor", label: "경쟁사 분석" },
   { href: "/bmc", label: "BMC 설계" },
+  { href: "/documents", label: "AI 문서 생성" },
   { href: "/chat", label: "Hub AI" },
   { href: "/my-profile", label: "My 비즈니스" },
 ];
