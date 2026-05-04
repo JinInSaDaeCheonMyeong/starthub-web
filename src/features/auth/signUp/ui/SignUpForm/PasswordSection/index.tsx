@@ -1,7 +1,6 @@
 import { StartHubTextField } from "@/shared/ui";
 import { EyeIcon, EyeOffIcon } from "@/assets/icons";
 import { useState } from "react";
-import * as S from "./style";
 
 interface PasswordSectionProps {
   password: string;
@@ -22,7 +21,7 @@ const PasswordSection = ({
   passwordSupportingText = "",
   confirmPasswordSupportingText = "",
   passwordIsError = false,
-  confirmPasswordIsError = false
+  confirmPasswordIsError = false,
 }: PasswordSectionProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -34,9 +33,9 @@ const PasswordSection = ({
     isVisible: boolean,
     setVisible: (val: boolean) => void,
     supportingText: string,
-    isError: boolean
+    isError: boolean,
   ) => (
-    <S.PasswordInputContainer>
+    <div className="relative w-full max-w-[320px] mb-[10px]">
       <StartHubTextField
         type={isVisible ? "text" : "password"}
         value={value}
@@ -45,28 +44,25 @@ const PasswordSection = ({
         width={320}
         isError={isError}
         supportingText={supportingText}
-        customStyle={{
-          whiteSpace: 'nowrap',
-          overflow: 'hidden'
-        }}
+        className="whitespace-nowrap overflow-hidden"
       />
-      <S.IconWrapper>
+
+      <div className="absolute top-1/2 right-[15px] -translate-y-1/2 flex cursor-pointer z-[1]">
         {isVisible ? (
           <EyeIcon width={22} height={17} onClick={() => setVisible(false)} />
         ) : (
-          <EyeOffIcon 
-           width={22} 
-           height={17} 
-           onClick={() => setVisible(true)}
-           />
+          <EyeOffIcon width={22} height={17} onClick={() => setVisible(true)} />
         )}
-      </S.IconWrapper>
-    </S.PasswordInputContainer>
+      </div>
+    </div>
   );
 
   return (
     <>
-      <S.InputLabel>비밀번호</S.InputLabel>
+      <label className="mt-[10px] text-hub-black-1 font-pt-body2-medium">
+        비밀번호
+      </label>
+
       {renderPasswordField(
         password,
         onPasswordChange,
@@ -74,8 +70,9 @@ const PasswordSection = ({
         showPassword,
         setShowPassword,
         passwordSupportingText,
-        passwordIsError
+        passwordIsError,
       )}
+
       {renderPasswordField(
         confirmPassword,
         onConfirmPasswordChange,
@@ -83,7 +80,7 @@ const PasswordSection = ({
         showConfirmPassword,
         setShowConfirmPassword,
         confirmPasswordSupportingText,
-        confirmPasswordIsError
+        confirmPasswordIsError,
       )}
     </>
   );

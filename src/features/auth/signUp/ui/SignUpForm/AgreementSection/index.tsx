@@ -1,4 +1,3 @@
-import * as S from "./style";
 import { StartHubCheckBox } from "@/shared/ui";
 import { SIGNUP_AGREE_ITEMS } from "@/features/auth/signUp/constants/signup.constants";
 
@@ -17,19 +16,28 @@ const AgreementSection: React.FC<AgreementSectionProps> = ({
 }) => {
   return (
     <>
-      <S.CheckboxContainer>
+      <div className="flex items-center gap-[10px] my-[5px] w-full max-w-[320px]">
         <StartHubCheckBox checked={isAllChecked} onChange={onAllCheck} />
-        <S.CheckboxLabelMain>전체 동의</S.CheckboxLabelMain>
-      </S.CheckboxContainer>
-      <S.Divider />
+        <label className="flex-grow text-hub-black-1 font-pt-body2-regular">
+          전체 동의
+        </label>
+      </div>
+
+      <div className="w-full max-w-[320px] h-[1px] bg-hub-gray-3" />
+
       {SIGNUP_AGREE_ITEMS.map((agree, index) => (
-        <S.CheckboxContainer key={index}>
+        <div
+          key={index}
+          className="flex items-center gap-[10px] my-[5px] w-full max-w-[320px]"
+        >
           <StartHubCheckBox
             checked={checkedItems[index]}
             onChange={(checked) => onSingleCheck(index, checked)}
           />
-          <S.CheckboxLabel>{agree}</S.CheckboxLabel>
-        </S.CheckboxContainer>
+          <label className="flex-1 mr-[8px] text-hub-gray-2 font-pt-caption1-regular">
+            {agree}
+          </label>
+        </div>
       ))}
     </>
   );

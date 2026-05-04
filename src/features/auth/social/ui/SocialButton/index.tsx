@@ -1,4 +1,3 @@
-import { StartHubColors, StartHubFont } from "@/shared/design";
 import { Google, Naver, Apple } from "@/assets/icons";
 import { StartHubButton } from "@/shared/ui";
 import { useSocialSignIn } from "../../model/useSocialSignIn";
@@ -11,50 +10,50 @@ const SocialButton = () => {
   return (
     <>
       <StartHubButton
-        icon={<Google style={{ width: "18px", height: "18px" }} />}
+        icon={<Google className="w-[18px] h-[18px]" />}
         text="Google로 로그인"
-        backgroundColor={StartHubColors.White1}
         onClick={handleGoogleSignIn}
-        typography={StartHubFont.Pretendard.Caption1.Medium}
-        width={320}
-        height={50}
-        textTheme={StartHubColors.Black1}
-        customStyle={{
-          boxShadow: `0 0 0 1px ${StartHubColors.Gray3} inset`,
-          marginBottom: "12px",
-        }}
-        hover={StartHubColors.White2}
+        className="
+          w-[320px] h-[50px]
+          mb-[12px]
+          bg-hub-white-1
+          text-hub-black-1
+          font-pt-caption1-medium
+          shadow-[inset_0_0_0_1px_#CFCFCF]
+          hover:bg-hub-white-2
+        "
       />
 
       <StartHubButton
-        icon={<Naver style={{ width: "16px", height: "16px" }} />}
+        icon={<Naver className="w-[16px] h-[16px]" />}
         text="네이버로 로그인"
-        backgroundColor="#00C300"
         onClick={handleNaverSignIn}
-        typography={StartHubFont.Pretendard.Caption1.Medium}
-        width={320}
-        height={50}
-        textTheme={StartHubColors.White1}
-        customStyle={{
-          boxShadow: `0 0 0 1px #00BC00 inset`,
-          marginBottom: "12px",
-        }}
-        hover="#10BC10"
+        className="
+          w-[320px] h-[50px]
+          mb-[12px]
+          bg-[#00C300]
+          text-hub-white-1
+          font-pt-caption1-medium
+          shadow-[inset_0_0_0_1px_#00BC00]
+          hover:bg-[#10BC10]
+        "
       />
 
       <StartHubButton
-        icon={<Apple style={{ width: "14px", height: "17px" }} />}
+        icon={<Apple className="w-[14px] h-[17px]" />}
         text="Apple로 로그인"
-        backgroundColor={StartHubColors.Black1}
         onClick={handleAppleSignIn}
-        typography={StartHubFont.Pretendard.Caption1.Medium}
-        width={320}
-        height={50}
-        textTheme={StartHubColors.White1}
-        customStyle={{ boxShadow: `0 0 0 1px ${StartHubColors.Black1} inset` }}
-        hover={StartHubColors.Black2}
+        className="
+          w-[320px] h-[50px]
+          bg-hub-black-1
+          text-hub-white-1
+          font-pt-caption1-medium
+          shadow-[inset_0_0_0_1px_#000000]
+          hover:bg-hub-black-2
+        "
       />
     </>
   );
 };
+
 export default SocialButton;
