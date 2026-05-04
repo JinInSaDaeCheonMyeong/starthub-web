@@ -24,46 +24,54 @@ const SignUpPage = () => {
   } = useSignUpForm();
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-hub-white-2 p-5">
-      <form
-        onSubmit={(e) => e.preventDefault()}
-        className="w-full max-w-[500px] rounded-[20px] gap-2.5 flex flex-col bg-white p-10 md:p-[30px] md:px-10 sm:p-5 sm:px-5"
-      >
-        <div className="flex flex-col items-center">
-          <StartHubLogo width={143} height={55} />
-        </div>
+    <div className="bg-[#f5f5f5] min-h-screen flex items-center justify-center relative p-5">
+      <div className="bg-white w-[490px] min-h-[729px] rounded-[30px] relative py-[50px]">
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          className="flex flex-col items-center gap-[20px]"
+        >
+          <div className="flex flex-col items-center gap-[10px]">
+            <div className="w-[134px] h-[55px]">
+              <StartHubLogo width={134} height={55} />
+            </div>
+            <p className="font-pt-body1-semibold text-hub-black-1 text-center">
+              회원가입
+            </p>
+          </div>
 
-        <h2>회원가입</h2>
+          <div className="flex flex-col gap-[20px] w-[320px]">
+            <SignUpBox
+              formData={formData}
+              handleFormChange={handleFormChange}
+              handleSendVerificationCode={sendVerificationCode}
+              handleVerifyCode={verifyCode}
+              codeSent={codeSent}
+              isEmailVerified={isEmailVerified}
+              loadingStates={loadingStates}
+              fieldErrors={fieldErrors}
+            />
 
-        <SignUpBox
-          formData={formData}
-          handleFormChange={handleFormChange}
-          handleSendVerificationCode={sendVerificationCode}
-          handleVerifyCode={verifyCode}
-          codeSent={codeSent}
-          isEmailVerified={isEmailVerified}
-          loadingStates={loadingStates}
-          fieldErrors={fieldErrors}
-        />
+            <AgreementSection
+              checkedItems={agreeCheckedItems}
+              isAllChecked={isAllAgreed}
+              onAllCheck={handleAllCheck}
+              onSingleCheck={handleSingleCheck}
+            />
 
-        <AgreementSection
-          checkedItems={agreeCheckedItems}
-          isAllChecked={isAllAgreed}
-          onAllCheck={handleAllCheck}
-          onSingleCheck={handleSingleCheck}
-        />
-
-        <StartHubButton
-          text="회원가입"
-          width={320}
-          height={50}
-          backgroundColor="#2466F4"
-          className="font-pt-body1-semibold margin-top-20"
-          onClick={handleSignUp}
-          textTheme="#FFFFFF"
-          disabled={isLoading}
-        />
-      </form>
+            <StartHubButton
+              text="회원가입"
+              width={320}
+              height={50}
+              backgroundColor="#2466F4"
+              className="font-pt-body1-semibold"
+              onClick={handleSignUp}
+              textTheme="#FFFFFF"
+              hoverColor="#235FE0"
+              disabled={isLoading}
+            />
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
