@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Providers } from './providers'
 import Layout from '@/shared/ui/Layout'
+import './globals.css'
 
 export const metadata: Metadata = {
   title: 'StartHub',
