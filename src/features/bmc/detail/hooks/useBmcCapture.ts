@@ -18,7 +18,7 @@ export const useBmcCapture = () => {
       const originalElement = canvasRef.current;
       const wrapper = document.createElement("div");
       wrapper.style.padding = "40px";
-      wrapper.style.backgroundColor = `${StartHubColors.White1}`;
+      wrapper.style.backgroundColor = "#FFFFFF";
       wrapper.style.display = "inline-block";
       wrapper.style.position = "fixed";
       wrapper.style.left = "-9999px";
@@ -57,7 +57,7 @@ export const useBmcCapture = () => {
       await new Promise((resolve) => setTimeout(resolve, 200));
 
       const canvas = await html2canvas(wrapper, {
-        backgroundColor: `${StartHubColors.White1}`,
+        backgroundColor: "#FFFFFF",
         useCORS: true,
         allowTaint: true,
         scale: 2,
@@ -98,7 +98,7 @@ export const useBmcCapture = () => {
       const originalElement = canvasRef.current;
       const wrapper = document.createElement("div");
       wrapper.style.padding = "40px";
-      wrapper.style.backgroundColor = `${StartHubColors.White1}`;
+      wrapper.style.backgroundColor = "#FFFFFF";
       wrapper.style.display = "inline-block";
       wrapper.style.position = "fixed";
       wrapper.style.left = "-9999px";
@@ -137,7 +137,7 @@ export const useBmcCapture = () => {
       await new Promise((resolve) => setTimeout(resolve, 200));
 
       const canvas = await html2canvas(wrapper, {
-        backgroundColor: `${StartHubColors.White1}`,
+        backgroundColor: "#FFFFFF",
         useCORS: true,
         allowTaint: true,
         scale: 2,
