@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { ReactComponent as LogoIcon } from "@/assets/logo/logoIcon.svg";
 import { StartHubButton } from "@/shared/ui/Button/index";
@@ -8,10 +8,10 @@ import { ReactComponent as DefaultProfile } from "@assets/icons/profile.svg";
 import Link from "next/link";
 
 const navLinks = [
-  { href: "/notices",    label: "공고" },
+  { href: "/notices", label: "공고" },
   { href: "/competitor", label: "경쟁사 분석" },
-  { href: "/bmc",        label: "BMC 설계" },
-  { href: "/chat",       label: "Hub AI" },
+  { href: "/bmc", label: "BMC 설계" },
+  { href: "/chat", label: "Hub AI" },
   { href: "/my-profile", label: "My 비즈니스" },
 ];
 
@@ -44,12 +44,13 @@ const Header = () => {
       >
         <div className="w-full px-[200px] flex items-center justify-between h-full">
           {/* 로고 */}
-          <LogoIcon
-            width={104}
-            height={18}
-            onClick={() => router.push("/")}
+          <Link
+            href="/"
+            aria-label="StartHub 홈으로 이동"
             className="cursor-pointer"
-          />
+          >
+            <LogoIcon width={104} height={18} />
+          </Link>
 
           {/* 네비게이션 */}
           <div className="flex flex-row">
