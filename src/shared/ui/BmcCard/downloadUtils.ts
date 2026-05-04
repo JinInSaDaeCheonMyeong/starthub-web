@@ -2,7 +2,6 @@ import { toast } from "react-toastify";
 import { bmcApi } from "@/entities/bmc/api/bmc";
 import { competitorApi } from "@/entities/competitor/api/competitor";
 import html2canvas from "html2canvas";
-import { StartHubColors } from "@/shared/design";
 import { createElement } from "react";
 import { createRoot } from "react-dom/client";
 import { BmcCanvas } from "@/widgets/bmc/BmcCanvas";
@@ -30,7 +29,7 @@ export const downloadBmc = async (id: number) => {
     const TARGET_WIDTH = 1300;
     const wrapper = document.createElement('div');
     wrapper.style.padding = '40px';
-    wrapper.style.backgroundColor = StartHubColors.White1;
+    wrapper.style.backgroundColor = "#FFFFFF";
     wrapper.style.display = 'inline-block';
     wrapper.style.position = 'fixed';
     wrapper.style.left = '-9999px';
@@ -74,7 +73,7 @@ export const downloadBmc = async (id: number) => {
     }
 
     const canvas = await html2canvas(wrapper, {
-      backgroundColor: StartHubColors.White1,
+      backgroundColor: "#FFFFFF",
       useCORS: true,
       allowTaint: true,
       scale: 2,
@@ -112,7 +111,7 @@ export const downloadCompetitorAnalysis = async (id: number, title: string) => {
     const wrapper = document.createElement('div');
     wrapper.style.width = '794px';
     wrapper.style.padding = '40px';
-    wrapper.style.backgroundColor = '#FFFFFF';
+    wrapper.style.backgroundColor = 'var(--hub-white-1)';
     wrapper.style.position = 'fixed';
     wrapper.style.left = '-9999px';
     wrapper.style.top = '0';
@@ -121,24 +120,24 @@ export const downloadCompetitorAnalysis = async (id: number, title: string) => {
     wrapper.innerHTML = `
       <div style="max-width: 714px; margin: 0 auto;">
         <!-- 헤더 -->
-        <div style="margin-bottom: 40px; padding-bottom: 20px; border-bottom: 2px solid ${StartHubColors.Gray3};">
-          <h1 style="font-size: 32px; color: ${StartHubColors.Black1}; margin-bottom: 10px;">
+        <div style="margin-bottom: 40px; padding-bottom: 20px; border-bottom: 2px solid var(--hub-gray-3);">
+          <h1 style="font-size: 32px; color: var(--hub-black-1); margin-bottom: 10px;">
             경쟁사 분석 리포트
           </h1>
-          <p style="font-size: 18px; color: ${StartHubColors.Gray1}; margin-bottom: 5px;">
+          <p style="font-size: 18px; color: var(--hub-gray-1); margin-bottom: 5px;">
             ${analysisData.userBmc.title}
           </p>
-          <p style="font-size: 14px; color: ${StartHubColors.Gray2};">
+          <p style="font-size: 14px; color: var(--hub-gray-2);">
             생성일: ${new Date(analysisData.createdAt || new Date()).toLocaleDateString('ko-KR')}
           </p>
         </div>
 
         <!-- 1. 사업 개요 -->
         <div style="margin-bottom: 35px;">
-          <h2 style="font-size: 24px; color: ${StartHubColors.Primary}; margin-bottom: 15px;">
+          <h2 style="font-size: 24px; color: var(--hub-primary); margin-bottom: 15px;">
             1. 사업 개요
           </h2>
-          <div style="background: ${StartHubColors.Gray4}; padding: 20px; border-radius: 8px;">
+          <div style="background: var(--hub-gray-4); padding: 20px; border-radius: 8px;">
             <p style="font-size: 16px; line-height: 1.8; margin-bottom: 10px;">
               <strong>가치 제안:</strong> ${processBoldText(analysisData.userBmc.valueProposition)}
             </p>
@@ -153,10 +152,10 @@ export const downloadCompetitorAnalysis = async (id: number, title: string) => {
 
         <!-- 2. 시장 규모 및 위치 -->
         <div style="margin-bottom: 35px;">
-          <h2 style="font-size: 24px; color: ${StartHubColors.Primary}; margin-bottom: 15px;">
+          <h2 style="font-size: 24px; color: var(--hub-primary); margin-bottom: 15px;">
             2. 시장 규모 및 위치
           </h2>
-          <div style="background: ${StartHubColors.Gray4}; padding: 20px; border-radius: 8px;">
+          <div style="background: var(--hub-gray-4); padding: 20px; border-radius: 8px;">
             <p style="font-size: 16px; line-height: 1.8; margin-bottom: 10px;">
               <strong>예상 사용자 규모:</strong> ${processBoldText(analysisData.userScale.estimatedUserBase)}
             </p>
@@ -171,12 +170,12 @@ export const downloadCompetitorAnalysis = async (id: number, title: string) => {
 
         <!-- 3. 주요 경쟁사 분석 -->
         <div style="margin-bottom: 35px;">
-          <h2 style="font-size: 24px; color: ${StartHubColors.Primary}; margin-bottom: 15px;">
+          <h2 style="font-size: 24px; color: var(--hub-primary); margin-bottom: 15px;">
             3. 주요 경쟁사 분석
           </h2>
           ${analysisData.userScale.competitorComparison.map((comp: CompetitorComparison) => `
-            <div style="background: ${StartHubColors.Gray4}; padding: 20px; border-radius: 8px; margin-bottom: 15px;">
-              <h3 style="font-size: 18px; color: ${StartHubColors.Black1}; margin-bottom: 10px;">
+            <div style="background: var(--hub-gray-4); padding: 20px; border-radius: 8px; margin-bottom: 15px;">
+              <h3 style="font-size: 18px; color: var(--hub-black-1); margin-bottom: 10px;">
                 ${comp.name}
               </h3>
               <p style="font-size: 14px; line-height: 1.6; margin-bottom: 8px;">
@@ -194,12 +193,12 @@ export const downloadCompetitorAnalysis = async (id: number, title: string) => {
 
         <!-- 4. 강점 분석 -->
         <div style="margin-bottom: 35px;">
-          <h2 style="font-size: 24px; color: ${StartHubColors.Primary}; margin-bottom: 15px;">
+          <h2 style="font-size: 24px; color: var(--hub-primary); margin-bottom: 15px;">
             4. 강점 분석
           </h2>
-          <div style="background: ${StartHubColors.Gray4}; padding: 20px; border-radius: 8px;">
+          <div style="background: var(--hub-gray-4); padding: 20px; border-radius: 8px;">
             <div style="margin-bottom: 15px;">
-              <h3 style="font-size: 16px; color: ${StartHubColors.Black1}; margin-bottom: 8px;">경쟁 우위</h3>
+              <h3 style="font-size: 16px; color: var(--hub-black-1); margin-bottom: 8px;">경쟁 우위</h3>
               <ul style="margin: 0; padding-left: 20px;">
                 ${analysisData.strengths.competitiveAdvantages.map((adv: string) =>
                   `<li style="line-height: 1.6; margin-bottom: 5px;">${processBoldText(adv)}</li>`
@@ -207,7 +206,7 @@ export const downloadCompetitorAnalysis = async (id: number, title: string) => {
               </ul>
             </div>
             <div style="margin-bottom: 15px;">
-              <h3 style="font-size: 16px; color: ${StartHubColors.Black1}; margin-bottom: 8px;">시장 기회</h3>
+              <h3 style="font-size: 16px; color: var(--hub-black-1); margin-bottom: 8px;">시장 기회</h3>
               <ul style="margin: 0; padding-left: 20px;">
                 ${analysisData.strengths.marketOpportunities.map((opp: string) =>
                   `<li style="line-height: 1.6; margin-bottom: 5px;">${processBoldText(opp)}</li>`
@@ -219,12 +218,12 @@ export const downloadCompetitorAnalysis = async (id: number, title: string) => {
 
         <!-- 5. 약점 분석 -->
         <div style="margin-bottom: 35px;">
-          <h2 style="font-size: 24px; color: ${StartHubColors.Primary}; margin-bottom: 15px;">
+          <h2 style="font-size: 24px; color: var(--hub-primary); margin-bottom: 15px;">
             5. 약점 분석
           </h2>
-          <div style="background: ${StartHubColors.Gray4}; padding: 20px; border-radius: 8px;">
+          <div style="background: var(--hub-gray-4); padding: 20px; border-radius: 8px;">
             <div style="margin-bottom: 15px;">
-              <h3 style="font-size: 16px; color: ${StartHubColors.Black1}; margin-bottom: 8px;">경쟁 열위</h3>
+              <h3 style="font-size: 16px; color: var(--hub-black-1); margin-bottom: 8px;">경쟁 열위</h3>
               <ul style="margin: 0; padding-left: 20px;">
                 ${analysisData.weaknesses.competitiveDisadvantages.map((dis: string) =>
                   `<li style="line-height: 1.6; margin-bottom: 5px;">${processBoldText(dis)}</li>`
@@ -232,7 +231,7 @@ export const downloadCompetitorAnalysis = async (id: number, title: string) => {
               </ul>
             </div>
             <div style="margin-bottom: 15px;">
-              <h3 style="font-size: 16px; color: ${StartHubColors.Black1}; margin-bottom: 8px;">개선 영역</h3>
+              <h3 style="font-size: 16px; color: var(--hub-black-1); margin-bottom: 8px;">개선 영역</h3>
               <ul style="margin: 0; padding-left: 20px;">
                 ${analysisData.weaknesses.improvementAreas.map((area: string) =>
                   `<li style="line-height: 1.6; margin-bottom: 5px;">${processBoldText(area)}</li>`
@@ -244,10 +243,10 @@ export const downloadCompetitorAnalysis = async (id: number, title: string) => {
 
         <!-- 6. 글로벌 확장 전략 -->
         <div style="margin-bottom: 35px;">
-          <h2 style="font-size: 24px; color: ${StartHubColors.Primary}; margin-bottom: 15px;">
+          <h2 style="font-size: 24px; color: var(--hub-primary); margin-bottom: 15px;">
             6. 글로벌 확장 전략
           </h2>
-          <div style="background: ${StartHubColors.Gray4}; padding: 20px; border-radius: 8px;">
+          <div style="background: var(--hub-gray-4); padding: 20px; border-radius: 8px;">
             <p style="font-size: 16px; line-height: 1.8; margin-bottom: 10px;">
               <strong>우선 진출 시장:</strong> ${analysisData.globalExpansionStrategy.priorityMarkets.map(processBoldText).join(', ')}
             </p>
@@ -261,8 +260,8 @@ export const downloadCompetitorAnalysis = async (id: number, title: string) => {
         </div>
 
         <!-- 푸터 -->
-        <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid ${StartHubColors.Gray3}; text-align: center;">
-          <p style="font-size: 14px; color: ${StartHubColors.Gray2};">
+        <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #CFCFCF; text-align: center;">
+          <p style="font-size: 14px; color: #9B9B9B;">
             © 2024 StartHub. 모든 권리 보유.
           </p>
         </div>
