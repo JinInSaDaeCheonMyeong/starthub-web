@@ -5,7 +5,6 @@ import { ReactComponent as LikeIcon } from "@/assets/icons/LikeIcon.svg";
 import { useGetLikedAnnouncements } from "@/features/notice/getLikedAnnouncements/useGetLikedAnnouncements";
 import { NoticeSkeleton } from "@/shared/ui/NoticeSkeleton";
 import Pagination from "@/shared/ui/pagination";
-import * as S from "./style";
 import NotMyPage from "../profileForm/ui/NotMyPage";
 import { useAuthStore } from "@/app/model/stores/useAuthStore";
 
@@ -19,75 +18,82 @@ const LikeListForm: React.FC = () => {
   });
 
   const notices = data?.content || [];
-  const {isLoggedIn} = useAuthStore();
+  const { isLoggedIn } = useAuthStore();
 
   return (
-    <S.Wrapper>
+    // Wrapper
+    <div className="flex w-full box-border pr-[160px] pl-[200px] h-full">
       <SideBar />
+
       {isLoggedIn ? (
-        <S.ContentArea>
+        // ContentArea
+        <div className="flex flex-col justify-between flex-1 pt-[50px] pr-5 pb-5 pl-[60px]">
           <div>
             <LikeIcon
-              style={{ width: "25px", height: "25px" }}
+              className="w-[25px] h-[25px]"
               aria-label="좋아요 아이콘"
             />
-            <S.Title>좋아요 누른 공고</S.Title>
+            {/* Title */}
+            <p className="font-pt-h1-semibold text-hub-black-1 mb-6 mt-2.5 flex items-center">
+              좋아요 누른 공고
+            </p>
           </div>
-          <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
-            <div style={{ flex: 1 }}>
+
+          <div className="flex-1 flex flex-col">
+            <div className="flex-1">
               {isLoading ? (
-                <S.NoticeGrid>
+                // NoticeGrid
+                <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))]">
                   {Array.from({ length: 12 }).map((_, idx) => (
                     <NoticeSkeleton key={idx} />
                   ))}
-                </S.NoticeGrid>
+                </div>
               ) : isError ? (
-                <S.ErrorContainer>
-                  <S.ErrorText>
+                // ErrorContainer
+                <div className="flex flex-col items-center justify-center h-[200px] p-5">
+                  <p className="font-pt-body1-regular text-hub-error mb-2.5">
                     좋아요한 공고를 불러오는 중 오류가 발생했습니다.
-                  </S.ErrorText>
+                  </p>
                   <button
                     onClick={() => refetch()}
-                    style={{
-                      marginTop: "10px",
-                      padding: "8px 16px",
-                      backgroundColor: "#007bff",
-                      color: "white",
-                      border: "none",
-                      borderRadius: "4px",
-                      cursor: "pointer",
-                    }}
+                    className="mt-2.5 py-2 px-4 bg-[#007bff] text-white border-none rounded cursor-pointer"
                   >
                     다시 시도
                   </button>
-                </S.ErrorContainer>
+                </div>
               ) : notices.length === 0 ? (
-                <S.EmptyContainer>
-                  <S.EmptyText>좋아요를 추가해보세요!</S.EmptyText>
-                </S.EmptyContainer>
+                // EmptyContainer
+                <div className="flex justify-center items-center h-[200px]">
+                  <p className="font-pt-body1-regular text-hub-primary">
+                    좋아요를 추가해보세요!
+                  </p>
+                </div>
               ) : (
-                <S.NoticeGrid>
+                // NoticeGrid
+                <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))]">
                   {notices.map((notice) => (
                     <NoticeCard key={notice.url} notice={notice} />
                   ))}
-                </S.NoticeGrid>
+                </div>
               )}
             </div>
+
             {data && data.totalPages > 1 && (
-              <S.PaginationWrapper>
+              // PaginationWrapper
+              <div className="flex justify-center w-full">
                 <Pagination
                   currentPage={currentPage}
                   totalPages={data.totalPages}
                   onPageChange={(page) => setCurrentPage(page)}
                 />
-              </S.PaginationWrapper>
+              </div>
             )}
           </div>
-        </S.ContentArea>
+        </div>
       ) : (
         <NotMyPage />
       )}
-    </S.Wrapper>
+    </div>
   );
 };
 

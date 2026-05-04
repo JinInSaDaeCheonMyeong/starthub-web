@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import { useRouter, usePathname } from "next/navigation";
-import * as S from "./style";
 import { toast } from "react-toastify";
 import StartHubAxios from "@/shared/api/customAxios/StartHubAxios";
 import Cookies from "js-cookie";
@@ -16,8 +15,7 @@ const MyPage: React.FC = () => {
   const setIsLoggedIn = useAuthStore((s) => s.setIsLoggedIn);
 
   const isProfileActive =
-    pathname === "/my-profile" ||
-    pathname === "/my-profile-edit";
+    pathname === "/my-profile" || pathname === "/my-profile-edit";
   const isLikeActive = pathname === "/like-list";
 
   const tryLogout = async () => {
@@ -29,17 +27,14 @@ const MyPage: React.FC = () => {
         queryKey: USER_QUERY_KEYS.user.getUserProfile,
       });
       toast.success("로그아웃에 성공했습니다");
-      router.push("/"); 
+      router.push("/");
     } catch (error) {
       toast.error("로그아웃에 실패했습니다");
     }
   };
 
   const choiceLogout = () => {
-    const choice = confirm("로그아웃 하시겠습니까?");
-    if (choice) {
-      tryLogout();
-    }
+    if (confirm("로그아웃 하시겠습니까?")) tryLogout();
   };
 
   const TERMS_URL =
@@ -47,34 +42,51 @@ const MyPage: React.FC = () => {
   const PRIVACY_URL =
     "https://various-bougon-d76.notion.site/27f507c40eaf80bbb86dfc3db0b06e04";
 
+  const itemBase =
+    "bg-transparent border-none text-left m-0 font-pt-body2-regular cursor-pointer font-normal w-full box-border";
+
   return (
-    <S.Sidebar>
-      <S.SidebarItem
-        className={isProfileActive ? "active" : ""}
+    // Sidebar
+    <aside className="flex flex-col h-[calc(100vh-60px)] bg-hub-white-1 pt-[30px]">
+      <button
         onClick={() => router.push("/my-profile")}
+        className={`${itemBase} pb-5 ${isProfileActive ? "text-hub-black-1" : "text-hub-gray-2"}`}
       >
         프로필
-      </S.SidebarItem>
+      </button>
 
-      <S.SidebarItem
-        className={isLikeActive ? "active" : ""}
+      <button
         onClick={() => router.push("/like-list")}
+        className={`${itemBase} pb-5 ${isLikeActive ? "text-hub-black-1" : "text-hub-gray-2"}`}
       >
         좋아요
-      </S.SidebarItem>
+      </button>
 
-      <S.SidebarItem onClick={() => window.open(TERMS_URL, "_blank")}>
+      <button
+        onClick={() => window.open(TERMS_URL, "_blank")}
+        className={`${itemBase} pb-5 text-hub-gray-2`}
+      >
         서비스 이용 약관
-      </S.SidebarItem>
+      </button>
 
-      <S.SidebarItem onClick={() => window.open(PRIVACY_URL, "_blank")}>
+      <button
+        onClick={() => window.open(PRIVACY_URL, "_blank")}
+        className={`${itemBase} pb-5 text-hub-gray-2`}
+      >
         개인정보처리방침
-      </S.SidebarItem>
+      </button>
 
-      <S.Divider />
+      {/* Divider */}
+      <hr className="border-t border-hub-gray-3 w-[224px]" />
 
-      <S.LogOut onClick={choiceLogout}>로그아웃</S.LogOut>
-    </S.Sidebar>
+      {/* LogOut */}
+      <button
+        onClick={choiceLogout}
+        className="bg-transparent border-none text-left m-0 pt-5 font-pt-body2-regular cursor-pointer font-normal box-border text-hub-error"
+      >
+        로그아웃
+      </button>
+    </aside>
   );
 };
 
