@@ -19,15 +19,15 @@ const getSectionTitleColor = (
 ) => {
   switch (templateType) {
     case "STARTHUB":
-      return "var(--hub-primary)";
+      return "#2466F4";
     case "STARTHUB_DARK":
-      return "var(--hub-gray-1)";
+      return "#242424";
     case "SIMPLE":
-      return "var(--hub-black-1)";
+      return "#000000";
     case "COLOR":
-      return config?.color ?? "var(--hub-black-1)";
+      return config?.color ?? "#000000";
     default:
-      return "var(--hub-black-1)";
+      return "#000000";
   }
 };
 
@@ -37,15 +37,15 @@ const getIconFillColor = (
 ) => {
   switch (templateType) {
     case "STARTHUB":
-      return "var(--hub-primary)";
+      return "#2466F4";
     case "STARTHUB_DARK":
-      return "var(--hub-gray-1)";
+      return "#242424";
     case "SIMPLE":
-      return "var(--hub-black-1)";
+      return "#000000";
     case "COLOR":
-      return config?.color ?? "var(--hub-black-1)";
+      return config?.color ?? "#000000";
     default:
-      return "var(--hub-black-1)";
+      return "#000000";
   }
 };
 

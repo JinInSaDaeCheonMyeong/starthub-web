@@ -16,7 +16,7 @@ export const StartHubButton = ({
   textTheme,
   width,
   height,
-  backgroundColor = "var(--hub-primary)",
+  backgroundColor = "#2466F4",
   onClick,
   disabled = false,
   className,
@@ -39,10 +39,8 @@ export const StartHubButton = ({
       style={{
         width: width ? `${width}px` : "100%",
         height: height ? `${height}px` : "48px",
-        backgroundColor: disabled ? "var(--hub-gray-3)" : backgroundColor,
-        color: disabled
-          ? "var(--hub-gray-2)"
-          : (textTheme ?? "var(--hub-white-1)"),
+        backgroundColor: disabled ? "#CFCFCF" : backgroundColor,
+        color: disabled ? "#9B9B9B" : (textTheme ?? "#FFFFFF"),
       }}
       onMouseEnter={(e) => {
         if (!disabled && hoverColor) {

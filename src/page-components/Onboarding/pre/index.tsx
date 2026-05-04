@@ -93,9 +93,7 @@ const Onboarding = () => {
             text="시작하기"
             onClick={handleFinalSubmit}
             height={50}
-            backgroundColor={
-              isValid ? "#2466F4" : "#F3F4F6"
-            }
+            backgroundColor={isValid ? "#2466F4" : "#F3F4F6"}
             className={"font-pt-body1-semibold w-100%"}
             textTheme="#FFFFFF"
             disabled={!isValid || preOnboardingMutation.isPending}
