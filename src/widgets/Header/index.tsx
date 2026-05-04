@@ -93,6 +93,9 @@ const Header = () => {
               text="로그인"
               onClick={() => router.push("/sign-in")}
               height={36}
+              backgroundColor="#2466F4"
+              textTheme="#FFFFFF"
+              hoverColor="#235FE0"
               className="font-pt-caption1-semibold !w-auto whitespace-nowrap"
             />
           )}
