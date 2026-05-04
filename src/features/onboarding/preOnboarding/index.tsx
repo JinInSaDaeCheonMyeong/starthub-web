@@ -1,5 +1,4 @@
 import { StartHubTextField } from "@/shared/ui";
-import * as S from "./style";
 import { useState } from "react";
 
 interface PreOnboardingData {
@@ -22,17 +21,17 @@ const PreOnboarding = ({ onSubmit }: PreOnboardingProps) => {
   };
 
   return (
-    <S.Section>
-      <S.SectionTitle>창업 위치</S.SectionTitle>
+    <div className="mb-8">
+      <p className="font-pt-body2-medium text-hub-black-1 mb-2.5">창업 위치</p>
       <StartHubTextField
         type="text"
         value={formData.startupLocation}
         placeholder="창업 위치를 입력해주세요"
         onChange={(e) => handleChange(e.target.value)}
-        customStyle={{ height: 50, width: "100%" }}
+        className="height-50px w-100%"
       />
-    </S.Section>
+    </div>
   );
 };
 
-export { PreOnboarding as default, type PreOnboardingProps };
+export default PreOnboarding;

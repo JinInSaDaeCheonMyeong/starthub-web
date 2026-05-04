@@ -1,5 +1,4 @@
 import { StartHubTextField } from "@/shared/ui";
-import * as S from "./style";
 import { useState, useEffect } from "react";
 
 interface EarlyOnboardingData {
@@ -29,9 +28,15 @@ const EarlyOnboarding = ({ onSubmit }: EarlyOnboardingProps) => {
     onSubmit?.(formData);
   }, [formData, onSubmit]);
 
+  const titleClass = "font-pt-body2-medium text-hub-black-1 mb-2.5";
+  const requiredClass = "text-hub-primary text-sm";
+
   return (
-    <S.Section>
-      <S.SectionTitle>회사명 <span>*</span></S.SectionTitle>
+    // Section
+    <div className="mb-8">
+      <h3 className={titleClass}>
+        회사명 <span className={requiredClass}>*</span>
+      </h3>
       <StartHubTextField
         type="text"
         value={formData.companyName}
@@ -39,9 +44,10 @@ const EarlyOnboarding = ({ onSubmit }: EarlyOnboardingProps) => {
         onChange={(e) =>
           setFormData({ ...formData, companyName: e.target.value })
         }
-        customStyle={{ height: 50, width: "100%" }}
+        className="height-50px w-100%"
       />
-      <S.SectionTitle>기업 설명</S.SectionTitle>
+
+      <h3 className={titleClass}>기업 설명</h3>
       <StartHubTextField
         type="text"
         value={formData.companyDescription}
@@ -49,13 +55,18 @@ const EarlyOnboarding = ({ onSubmit }: EarlyOnboardingProps) => {
         onChange={(e) =>
           setFormData({ ...formData, companyDescription: e.target.value })
         }
-        customStyle={{ height: 50, width: "100%" }}
+        className="height-50px w-100%"
       />
-      <S.SectionTitle>기업 인원 <span>*</span></S.SectionTitle>
+
+      <h3 className={titleClass}>
+        기업 인원 <span className={requiredClass}>*</span>
+      </h3>
       <StartHubTextField
         type="number"
         value={
-          formData.numberOfEmployees === 0 ? "" : String(formData.numberOfEmployees)
+          formData.numberOfEmployees === 0
+            ? ""
+            : String(formData.numberOfEmployees)
         }
         placeholder="기업 인원을 입력해주세요"
         onChange={(e) => {
@@ -65,10 +76,10 @@ const EarlyOnboarding = ({ onSubmit }: EarlyOnboardingProps) => {
             numberOfEmployees: value < 0 ? 0 : value,
           });
         }}
-        customStyle={{ height: 50, width: "100%" }}
+        className="height-50px w-100%"
       />
 
-      <S.SectionTitle>기업 사이트</S.SectionTitle>
+      <h3 className={titleClass}>기업 사이트</h3>
       <StartHubTextField
         type="text"
         value={formData.companyWebsite}
@@ -76,9 +87,10 @@ const EarlyOnboarding = ({ onSubmit }: EarlyOnboardingProps) => {
         onChange={(e) =>
           setFormData({ ...formData, companyWebsite: e.target.value })
         }
-        customStyle={{ height: 50, width: "100%" }}
+        className="height-50px w-100%"
       />
-      <S.SectionTitle>창업 위치</S.SectionTitle>
+
+      <h3 className={titleClass}>창업 위치</h3>
       <StartHubTextField
         type="text"
         value={formData.startupLocation}
@@ -86,9 +98,10 @@ const EarlyOnboarding = ({ onSubmit }: EarlyOnboardingProps) => {
         onChange={(e) =>
           setFormData({ ...formData, startupLocation: e.target.value })
         }
-        customStyle={{ height: 50, width: "100%" }}
+        className="height-50px w-100%"
       />
-      <S.SectionTitle>연매출액</S.SectionTitle>
+
+      <h3 className={titleClass}>연매출액</h3>
       <StartHubTextField
         type="number"
         value={
@@ -97,14 +110,11 @@ const EarlyOnboarding = ({ onSubmit }: EarlyOnboardingProps) => {
         placeholder="연매출액을 입력해주세요"
         onChange={(e) => {
           const value = e.target.value === "" ? 0 : Number(e.target.value);
-          setFormData({
-            ...formData,
-            annualRevenue: value < 0 ? 0 : value,
-          });
+          setFormData({ ...formData, annualRevenue: value < 0 ? 0 : value });
         }}
-        customStyle={{ height: 50, width: "100%" }}
+        className="height-50px w-100%"
       />
-    </S.Section>
+    </div>
   );
 };
 
