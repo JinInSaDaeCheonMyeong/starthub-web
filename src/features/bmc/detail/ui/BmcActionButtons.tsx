@@ -26,10 +26,10 @@ export const BmcActionButtons = ({
           <StartHubButton
             text="취소"
             onClick={onCancelEdit}
+            backgroundColor="#FFFFFF"
+            textTheme="#242424"
             className="
               w-[200px]
-              bg-hub-white-1
-              text-hub-gray-1
               font-pt-caption1-medium
               border border-hub-gray-2
             "
@@ -39,15 +39,12 @@ export const BmcActionButtons = ({
             text="저장"
             onClick={onSaveEdit}
             disabled={!hasChanges}
-            className={`
+            backgroundColor={hasChanges ? "#2466F4" : "#9B9B9B"}
+            textTheme={hasChanges ? "#FFFFFF" : "#242424"}
+            className="
               w-[200px]
               font-pt-caption1-medium
-              ${
-                hasChanges
-                  ? "bg-hub-primary text-hub-white-1"
-                  : "bg-hub-gray-2 text-hub-gray-1 cursor-not-allowed"
-              }
-            `}
+            "
           />
         </>
       ) : (
@@ -55,10 +52,10 @@ export const BmcActionButtons = ({
           <StartHubButton
             text="목록으로 돌아가기"
             onClick={onBackToList}
+            backgroundColor="#FFFFFF"
+            textTheme="#242424"
             className="
               w-[200px]
-              bg-hub-white-1
-              text-hub-gray-1
               font-pt-caption1-medium
               border border-hub-gray-2
             "
@@ -67,10 +64,10 @@ export const BmcActionButtons = ({
           <StartHubButton
             text="BMC 다운로드"
             onClick={onDownload}
+            backgroundColor="#2466F4"
+            textTheme="#FFFFFF"
             className="
               w-[200px]
-              bg-hub-primary
-              text-hub-white-1
               font-pt-caption1-medium
             "
           />
@@ -78,10 +75,10 @@ export const BmcActionButtons = ({
           <StartHubButton
             text="수정하기"
             onClick={onStartEdit}
+            backgroundColor="#FFFFFF"
+            textTheme="#2466F4"
             className="
               w-[200px]
-              bg-hub-white-1
-              text-hub-primary
               font-pt-caption1-medium
               border border-hub-primary
             "
