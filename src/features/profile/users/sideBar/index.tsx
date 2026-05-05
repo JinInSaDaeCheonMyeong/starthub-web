@@ -22,6 +22,7 @@ const MyPage: React.FC = () => {
     try {
       await StartHubAxios.post("/user/sign-out");
       Cookies.remove("access_token");
+      Cookies.remove("refresh_token");
       setIsLoggedIn(false);
       queryClient.removeQueries({
         queryKey: USER_QUERY_KEYS.user.getUserProfile,
@@ -46,47 +47,75 @@ const MyPage: React.FC = () => {
     "bg-transparent border-none text-left m-0 font-pt-body2-regular cursor-pointer font-normal w-full box-border";
 
   return (
-    // Sidebar
-    <aside className="flex flex-col h-[calc(100vh-60px)] bg-hub-white-1 pt-[30px]">
-      <button
-        onClick={() => router.push("/my-profile")}
-        className={`${itemBase} pb-5 ${isProfileActive ? "text-hub-black-1" : "text-hub-gray-2"}`}
-      >
-        프로필
-      </button>
+    <>
+      {/* 모바일: 탭 형태 */}
+      <div className="lg:hidden w-full bg-hub-white-1 border-b border-hub-gray-3 fixed top-[90px] sm:top-[95px] md:top-[100px] z-30">
+        <div className="flex justify-center py-2">
+          <div className="flex bg-hub-gray-4 rounded-lg p-1">
+            <button
+              onClick={() => router.push("/my-profile")}
+              className={`px-4 py-2 rounded-md font-pt-caption1-medium text-sm transition-all ${
+                isProfileActive
+                  ? "bg-hub-white-1 text-hub-black-1 shadow-sm"
+                  : "text-hub-gray-2 hover:text-hub-black-1"
+              }`}
+            >
+              프로필
+            </button>
+            <button
+              onClick={() => router.push("/like-list")}
+              className={`px-4 py-2 rounded-md font-pt-caption1-medium text-sm transition-all ${
+                isLikeActive
+                  ? "bg-hub-white-1 text-hub-black-1 shadow-sm"
+                  : "text-hub-gray-2 hover:text-hub-black-1"
+              }`}
+            >
+              좋아요
+            </button>
+          </div>
+        </div>
+      </div>
 
-      <button
-        onClick={() => router.push("/like-list")}
-        className={`${itemBase} pb-5 ${isLikeActive ? "text-hub-black-1" : "text-hub-gray-2"}`}
-      >
-        좋아요
-      </button>
+      {/* 데스크톱: 사이드바 형태 */}
+      <aside className="hidden lg:block lg:fixed lg:left-[calc((100vw-1280px)/2+120px)] lg:top-[158px] lg:w-[224px] bg-hub-white-1 lg:h-auto lg:z-10">
+        <button
+          onClick={() => router.push("/my-profile")}
+          className={`block w-full text-left py-2 text-lg hover:cursor-pointer ${isProfileActive ? "text-hub-black-1 font-medium" : "text-hub-gray-2"}`}
+        >
+          프로필
+        </button>
 
-      <button
-        onClick={() => window.open(TERMS_URL, "_blank")}
-        className={`${itemBase} pb-5 text-hub-gray-2`}
-      >
-        서비스 이용 약관
-      </button>
+        <button
+          onClick={() => router.push("/like-list")}
+          className={`block w-full text-left py-2 text-lg hover:cursor-pointer ${isLikeActive ? "text-hub-black-1 font-medium" : "text-hub-gray-2"}`}
+        >
+          좋아요
+        </button>
 
-      <button
-        onClick={() => window.open(PRIVACY_URL, "_blank")}
-        className={`${itemBase} pb-5 text-hub-gray-2`}
-      >
-        개인정보처리방침
-      </button>
+        <button
+          onClick={() => window.open(TERMS_URL, "_blank")}
+          className="block w-full text-left py-2 text-lg text-hub-gray-2 hover:cursor-pointer"
+        >
+          서비스 이용 약관
+        </button>
 
-      {/* Divider */}
-      <hr className="border-t border-hub-gray-3 w-[224px]" />
+        <button
+          onClick={() => window.open(PRIVACY_URL, "_blank")}
+          className="block w-full text-left py-2 text-lg text-hub-gray-2 hover:cursor-pointer"
+        >
+          개인정보처리방침
+        </button>
 
-      {/* LogOut */}
-      <button
-        onClick={choiceLogout}
-        className="bg-transparent border-none text-left m-0 pt-5 font-pt-body2-regular cursor-pointer font-normal box-border text-hub-error"
-      >
-        로그아웃
-      </button>
-    </aside>
+        <hr className="border-t border-hub-gray-3 w-full my-3" />
+
+        <button
+          onClick={choiceLogout}
+          className="block w-full text-left py-2 text-lg text-hub-error font-medium hover:cursor-pointer"
+        >
+          로그아웃
+        </button>
+      </aside>
+    </>
   );
 };
 

@@ -1,7 +1,7 @@
-'use client'
+'use client';
 
-import EditMyProfile from '@/page-components/EditProfile'
+import EditMyProfile from '@/page-components/EditProfile';
 
 export default function EditMyProfilePage() {
-  return <EditMyProfile />
+  return <EditMyProfile />;
 }
