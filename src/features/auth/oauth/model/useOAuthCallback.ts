@@ -27,8 +27,8 @@ export const useOAuthCallback = () => {
       cookieUtils.setAccessToken(accessToken);
       cookieUtils.setRefreshToken(refreshToken);
       setIsLoggedIn(true);
-      toast.success("로그인에 성공했습니다.");
 
+      // OAuth 로그인 성공 - 토스트 제거하여 중복 방지
       if (isFirstLogin === "true") {
         router.replace("/onboarding");
       } else {
@@ -36,7 +36,7 @@ export const useOAuthCallback = () => {
       }
     } else {
       setError(true);
-      toast.error("로그인에 실패하였습니다.");
+      toast.error("로그인에 실패하였습니다.", { toastId: "oauth-login-failed" });
       router.replace("/sign-in");
     }
   }, [router, searchParams, setIsLoggedIn]);
