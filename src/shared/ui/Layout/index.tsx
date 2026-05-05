@@ -22,6 +22,7 @@ const Layout = ({ children }: LayoutProps) => {
     /^\/onboarding(?:$|\/)/,
     /^\/oauth(?:$|\/)/,
     /^\/callback(?:$|\/)/,
+    /^\/chat(?:$|\/)/,
   ];
   const hideLayoutElements = hidePatterns.some((r) => r.test(path));
 

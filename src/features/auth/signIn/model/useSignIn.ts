@@ -22,7 +22,9 @@ export const useSignIn = () => {
         cookieUtils.setAccessToken(access);
         cookieUtils.setRefreshToken(refresh);
         setIsLoggedIn(true);
-        toast.success("로그인에 성공했습니다.");
+
+        toast.success("로그인에 성공했습니다.", { toastId: "login-success" });
+
         if (isFirstLogin === true) {
           router.replace("/onboarding");
         } else {
@@ -30,11 +32,11 @@ export const useSignIn = () => {
         }
       } else {
         console.error("응답 데이터가 없습니다:", response);
-        toast.error("로그인 응답에 문제가 있습니다.");
+        toast.error("로그인 응답에 문제가 있습니다.", { toastId: "login-error" });
       }
     },
     onError: () => {
-      toast.error("로그인에 실패하였습니다. 이메일과 비밀번호를 확인해주세요.");
+      toast.error("로그인에 실패하였습니다. 이메일과 비밀번호를 확인해주세요.", { toastId: "login-failed" });
     },
   });
 

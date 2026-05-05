@@ -10,7 +10,7 @@ const resolveUrl = (
     case "ANNOUNCEMENT":
       return `https://start-hub.kr/notice/${id}`;
     case "BMC":
-      return `https://start-hub.kr/bmc/detail/${id}`;
+      return `https://start-hub.kr/bmc/${id}`;
     case "ANALYSIS":
       return `https://start-hub.kr/competitor/create?bmcId=${id}`;
     case "SCHEDULE":

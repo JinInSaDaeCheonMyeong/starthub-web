@@ -27,7 +27,7 @@ const BmcChatCard = ({ bmcId }: BmcChatCardProps) => {
   if (!title) return null;
 
   return (
-    <StartHubAIAttachFile title={title} date={date} link={`/bmc/detail/${bmcId}`} />
+    <StartHubAIAttachFile title={title} date={date} link={`/bmc/${bmcId}`} />
   );
 };
 
