@@ -303,6 +303,11 @@
   display: none;
 }
 
+/* 채팅 메시지 목록 스크롤바 숨김 */
+div[class*="flex-1 overflow-y-auto"]::-webkit-scrollbar {
+  display: none !important;
+}
+
 /* Line clamp utility */
 .line-clamp-2 {
   display: -webkit-box;
