@@ -91,4 +91,9 @@ export const ChatAIApi = {
 
     return res.body;
   },
+
+  getQuota: async () => {
+    const res = await StartHubAxios.get("/chatbot/quota");
+    return res.data || res;
+  },
 };

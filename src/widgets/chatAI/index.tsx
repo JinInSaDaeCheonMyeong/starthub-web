@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import AIMessage from "@/shared/ui/AIMessage";
@@ -9,6 +9,7 @@ import { ReactComponent as Logo } from "@/assets/logo/leaf.svg";
 import useChatAI from "./hooks/useChatAI";
 import { markdownComponents } from "@/features/chatAI/utils/markdownComponents";
 import { convertEnumToKorean } from "@/features/chatAI/utils/convertEnumToKorean";
+import { ChatAIApi } from "@/entities/chatAI/api/chatAI";
 
 const ChatAIWidget = () => {
   const {
@@ -17,6 +18,27 @@ const ChatAIWidget = () => {
     streaming, streamingText,
     error, handleSubmit, handleRetry,
   } = useChatAI();
+
+  const [quota, setQuota] = useState(null);
+
+  useEffect(() => {
+    if (open) {
+      console.log('채팅창 열림 - quota API 호출 시도');
+      ChatAIApi.getQuota()
+        .then(data => {
+          console.log('quota API 성공:', data);
+          setQuota(data);
+        })
+        .catch(error => {
+          console.error('quota API 실패:', error);
+        });
+    }
+  }, [open]);
+
+  // quota 상태 확인용
+  useEffect(() => {
+    console.log('quota 상태 변경:', quota);
+  }, [quota]);
 
   const aiMessageClass = `
     max-w-full font-pt-body2-regular text-[11px] px-2 py-3 rounded-[10px] break-words select-text
@@ -47,10 +69,36 @@ const ChatAIWidget = () => {
             open ? "animate-fade-in-up" : "animate-fade-out-down"
           }`}
         >
+          {/* 사용량 정보 */}
+          {quota && quota.weeklyTokensUsed !== undefined && (
+            <div className="px-3 pt-3 pb-0">
+              <div className="bg-blue-50 rounded-lg p-2 text-xs">
+                <div className="flex justify-between mb-1">
+                  <span>사용량</span>
+                  <span>{Math.round((quota.weeklyTokensUsed / quota.weeklyTokenLimit) * 100)}%</span>
+                </div>
+                <div className="bg-gray-200 rounded-full h-1">
+                  <div
+                    className="bg-blue-500 h-1 rounded-full"
+                    style={{width: `${(quota.weeklyTokensUsed / quota.weeklyTokenLimit) * 100}%`}}
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* 디버그용 - quota 데이터 확인 */}
+          {quota && (
+            <div className="px-3 pt-1 text-xs text-gray-500">
+              API 응답: {JSON.stringify(quota).substring(0, 100)}...
+            </div>
+          )}
+
           {/* 메시지 목록 */}
           <div
             ref={messageListRef}
-            className="flex-1 overflow-y-auto pt-[22px] px-2 pb-0 flex flex-col gap-[10px] select-text [scrollbar-width:thin] [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:bg-hub-gray-3 [&::-webkit-scrollbar-thumb]:rounded"
+            className="flex-1 overflow-y-auto pt-[22px] px-2 pb-0 flex flex-col gap-[10px] select-text"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {messages.map((msg) => (
               <React.Fragment key={msg.id}>

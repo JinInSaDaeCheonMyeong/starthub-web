@@ -16,6 +16,7 @@ import { useCreateSession } from "@/features/chatAI/hooks/useCreateSession";
 import { markdownComponents } from "@/features/chatAI/utils/markdownComponents";
 import { parseAnnotations } from "@/features/chatAI/utils/parseAnnotations";
 import { convertEnumToKorean } from "@/features/chatAI/utils/convertEnumToKorean";
+import { ChatAIApi } from "@/entities/chatAI/api/chatAI";
 import { ReactComponent as Logo } from "@/assets/logo/logo.svg";
 
 interface DisplayMessage {
@@ -48,12 +49,25 @@ const ChatPage = () => {
 
   const [messages, setMessages] = useState<DisplayMessage[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [quota, setQuota] = useState(null);
+  const [quotaError, setQuotaError] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
   const messageListRef = useRef<HTMLDivElement>(null);
   const pendingMessageRef = useRef<string | null>(null);
 
   useEffect(() => {
     setMounted(true);
+
+    // quota 정보 조회
+    console.log('Chat 페이지 마운트 - quota API 호출');
+    ChatAIApi.getQuota()
+      .then(data => {
+        console.log('quota API 성공:', data);
+        setQuota(data);
+      })
+      .catch(error => {
+        console.error('quota API 실패:', error);
+      });
   }, []);
 
   const { data: profile } = useGetMyProfile();
@@ -62,6 +76,32 @@ const ChatPage = () => {
   const createSessionMutation = useCreateSession();
   const createSession = createSessionMutation.mutate;
   const creatingSession = (createSessionMutation as any).isLoading ?? false;
+
+  // 사용량 체크 함수
+  const checkQuotaAvailable = () => {
+    if (!quota) return true;
+
+    if (quota.unlimited) return true;
+
+    // 윈도우 토큰 체크 (단기 제한)
+    if (quota.windowTokensRemaining <= 0) {
+      const resetTime = quota.windowResetAt
+        ? new Date(quota.windowResetAt).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' })
+        : '';
+      setQuotaError(`단기 사용량 한도에 도달했습니다. ${resetTime ? `${resetTime}에 초기화됩니다.` : ''}`);
+      return false;
+    }
+
+    // 주간 토큰 체크
+    if (quota.weeklyTokensRemaining <= 0) {
+      const resetDate = new Date(quota.weeklyResetAt).toLocaleDateString('ko-KR', { month: 'long', day: 'numeric' });
+      setQuotaError(`주간 사용량 한도에 도달했습니다. ${resetDate}에 초기화됩니다.`);
+      return false;
+    }
+
+    setQuotaError(null);
+    return true;
+  };
 
   useEffect(() => {
     if (!sessionDetail || streaming || pendingMessageRef.current) return;
@@ -124,6 +164,12 @@ const ChatPage = () => {
 
   const handleSend = async (text: string) => {
     if (!text.trim() || streaming) return;
+
+    // Quota 체크
+    if (!checkQuotaAvailable()) {
+      return;
+    }
+
     const trimmed = text.trim();
 
     if (!activeSessionId) {
@@ -141,6 +187,14 @@ const ChatPage = () => {
     }
 
     await handleSendToSession(activeSessionId, trimmed);
+
+    // 메시지 전송 후 quota 재조회
+    try {
+      const updatedQuota = await ChatAIApi.getQuota();
+      setQuota(updatedQuota);
+    } catch (error) {
+      console.error('quota 재조회 실패:', error);
+    }
   };
 
   const userName = profile?.username ?? "사용자";
@@ -218,11 +272,38 @@ const ChatPage = () => {
             <p className="font-pt-body1-regular lg:font-pt-body2-regular text-hub-black-1 text-center px-4">
               {userName}님! 무엇을 도와드릴까요?
             </p>
+            {/* 사용량 게이지 */}
+            {quota && quota.weeklyTokensUsed !== undefined && (
+              <div className="w-full max-w-175 px-4 mb-3">
+                <div className="max-w-[900px] mx-auto">
+                  <div className="bg-gray-200 rounded-full h-1.5 mb-1">
+                    <div
+                      className={`h-1.5 rounded-full transition-all duration-300 ${
+                        quota.weeklyTokensRemaining <= 0 ? 'bg-red-500' : 'bg-blue-500'
+                      }`}
+                      style={{width: `${Math.min(100, (quota.weeklyTokensUsed / quota.weeklyTokenLimit) * 100)}%`}}
+                    />
+                  </div>
+                  <div className={`text-xs text-center ${
+                    quota.weeklyTokensRemaining <= 0 ? 'text-red-500' : 'text-gray-500'
+                  }`}>
+                    AI 사용량 {Math.round((quota.weeklyTokensUsed / quota.weeklyTokenLimit) * 100)}%
+                  </div>
+                  {quotaError && (
+                    <div className="text-xs text-red-500 text-center mt-1 bg-red-50 rounded px-2 py-1">
+                      {quotaError}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
             <div className="w-full flex justify-center mb-4 lg:mb-7.5 mt-2 lg:mt-2.5 max-w-175 px-4">
               <StartHubAITextarea
                 onSubmit={handleSend}
-                disabled={streaming}
+                disabled={streaming || !!quotaError}
                 maxWidth="900px"
+                placeholder={quotaError ? "사용량 한도 초과" : undefined}
               />
             </div>
           </div>
@@ -271,12 +352,39 @@ const ChatPage = () => {
         )}
 
         {hasMessages && (
-          <div className="p-4 shrink-0 flex justify-center w-full max-w-225 mx-auto">
-            <StartHubAITextarea
-              onSubmit={handleSend}
-              disabled={streaming}
-              maxWidth="100%"
-            />
+          <div className="shrink-0 w-full max-w-225 mx-auto">
+            {/* 사용량 게이지 */}
+            {quota && quota.weeklyTokensUsed !== undefined && (
+              <div className="px-4 pb-2">
+                <div className="bg-gray-200 rounded-full h-1.5 mb-1">
+                  <div
+                    className={`h-1.5 rounded-full transition-all duration-300 ${
+                      quota.weeklyTokensRemaining <= 0 ? 'bg-red-500' : 'bg-blue-500'
+                    }`}
+                    style={{width: `${Math.min(100, (quota.weeklyTokensUsed / quota.weeklyTokenLimit) * 100)}%`}}
+                  />
+                </div>
+                <div className={`text-xs text-center ${
+                  quota.weeklyTokensRemaining <= 0 ? 'text-red-500' : 'text-gray-500'
+                }`}>
+                  AI 사용량 {Math.round((quota.weeklyTokensUsed / quota.weeklyTokenLimit) * 100)}%
+                </div>
+                {quotaError && (
+                  <div className="text-xs text-red-500 text-center mt-1 bg-red-50 rounded px-2 py-1">
+                    {quotaError}
+                  </div>
+                )}
+              </div>
+            )}
+
+            <div className="p-4 flex justify-center">
+              <StartHubAITextarea
+                onSubmit={handleSend}
+                disabled={streaming || !!quotaError}
+                maxWidth="100%"
+                placeholder={quotaError ? "사용량 한도 초과" : undefined}
+              />
+            </div>
           </div>
         )}
       </div>
