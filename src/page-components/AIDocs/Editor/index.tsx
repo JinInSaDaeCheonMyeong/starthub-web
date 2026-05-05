@@ -2,6 +2,7 @@
 
 import { useParams, useRouter } from "next/navigation";
 import { useAIDocsEditor } from "./hooks/useAIDocsEditor";
+import { useState } from "react";
 
 const AIDocsEditorPage = () => {
   const params = useParams<{ id?: string | string[] }>();
@@ -9,6 +10,7 @@ const AIDocsEditorPage = () => {
   const rawId = Array.isArray(params?.id) ? params.id[0] : params?.id;
   const parsedId = rawId ? Number(rawId) : NaN;
   const documentId = Number.isFinite(parsedId) && parsedId > 0 ? parsedId : 0;
+  const [viewMode, setViewMode] = useState<"edit" | "preview">("edit");
 
   const {
     document,
@@ -30,6 +32,7 @@ const AIDocsEditorPage = () => {
     exportFormat,
     setExportFormat,
     exportContent,
+    generatePreviewHtml,
     aiEdit,
   } = useAIDocsEditor({ documentId });
 
@@ -99,13 +102,46 @@ const AIDocsEditorPage = () => {
             className="mb-3 h-12 w-full rounded-md border border-hub-gray-3 px-4 text-[34px] font-semibold outline-none focus:border-hub-primary"
           />
 
-          <textarea
-            ref={textareaRef}
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            className="min-h-140 w-full resize-y rounded-md border border-hub-gray-3 px-4 py-3 text-sm leading-7 outline-none focus:border-hub-primary"
-            placeholder="문서 내용을 입력하세요"
-          />
+          <div className="mb-3 flex gap-2 border-b border-hub-gray-3 pb-2">
+            <button
+              type="button"
+              onClick={() => setViewMode("edit")}
+              className={`px-3 py-2 text-sm font-semibold ${
+                viewMode === "edit"
+                  ? "border-b-2 border-hub-primary text-hub-primary"
+                  : "text-hub-gray-2"
+              }`}
+            >
+              편집
+            </button>
+            <button
+              type="button"
+              onClick={() => setViewMode("preview")}
+              className={`px-3 py-2 text-sm font-semibold ${
+                viewMode === "preview"
+                  ? "border-b-2 border-hub-primary text-hub-primary"
+                  : "text-hub-gray-2"
+              }`}
+            >
+              미리보기
+            </button>
+          </div>
+
+          {viewMode === "edit" ? (
+            <textarea
+              ref={textareaRef}
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              className="min-h-140 w-full resize-y rounded-md border border-hub-gray-3 px-4 py-3 text-sm leading-7 outline-none focus:border-hub-primary"
+              placeholder="문서 내용을 입력하세요"
+            />
+          ) : (
+            <iframe
+              srcDoc={generatePreviewHtml(title, content)}
+              className="min-h-140 w-full resize-y rounded-md border border-hub-gray-3 bg-white"
+              style={{ minHeight: "500px" }}
+            />
+          )}
 
           <div className="mt-4 rounded-md border border-hub-gray-3 p-3">
             <p className="text-sm font-semibold text-hub-gray-1">
@@ -134,10 +170,6 @@ const AIDocsEditorPage = () => {
           <div className="rounded-lg border border-hub-gray-3 bg-white p-4">
             <p className="text-sm font-semibold text-hub-gray-1">문서 정보</p>
             <div className="mt-3 space-y-2 text-xs text-hub-gray-2">
-              <p className="flex items-center justify-between">
-                <span>문서 상태</span>
-                <span>{document?.status ?? "-"}</span>
-              </p>
               <p className="flex items-center justify-between">
                 <span>마지막 수정</span>
                 <span>
@@ -181,7 +213,7 @@ const AIDocsEditorPage = () => {
               value={exportFormat}
               onChange={(e) =>
                 setExportFormat(
-                  e.target.value as "txt" | "pdf" | "docx" | "hwp"
+                  e.target.value as "pdf" | "docx" | "hwp",
                 )
               }
               className="h-10 w-full rounded-md border border-hub-gray-3 px-3 text-sm text-hub-gray-1 outline-none focus:border-hub-primary"
@@ -189,7 +221,6 @@ const AIDocsEditorPage = () => {
               <option value="pdf">PDF</option>
               <option value="docx">DOCX</option>
               <option value="hwp">HWP</option>
-              <option value="txt">TXT</option>
             </select>
           </div>
 
