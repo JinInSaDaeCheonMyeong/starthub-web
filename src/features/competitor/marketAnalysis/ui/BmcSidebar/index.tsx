@@ -47,16 +47,13 @@ const BmcSidebar: React.FC<BmcSidebarProps> = ({ userBmc }) => {
   };
 
   return (
-    // BmcSidebar
+    // BmcSidebar - 반응형
     <div
       className="
-      sticky top-[50px] w-[300px] flex-shrink-0 p-5
-      border border-hub-gray-3 rounded-[10px] bg-hub-white-1
-      max-h-[calc(100vh-90px)] overflow-y-auto self-start
-      [&::-webkit-scrollbar]:w-[6px]
-      [&::-webkit-scrollbar-track]:bg-hub-gray-4 [&::-webkit-scrollbar-track]:rounded-[3px]
-      [&::-webkit-scrollbar-thumb]:bg-hub-gray-2 [&::-webkit-scrollbar-thumb]:rounded-[3px]
-      [&::-webkit-scrollbar-thumb:hover]:bg-hub-gray-1
+      w-full lg:sticky lg:top-[170px] lg:w-[350px] lg:flex-shrink-0 p-4 sm:p-5
+      border border-hub-gray-3 rounded-[8px] sm:rounded-[10px] bg-hub-white-1
+      lg:max-h-[calc(100vh-200px)] lg:overflow-y-auto lg:self-start
+      scrollbar-hide
     "
     >
       {BMC_ITEMS.map((item, index) => {
@@ -69,7 +66,7 @@ const BmcSidebar: React.FC<BmcSidebarProps> = ({ userBmc }) => {
 
         return (
           // BmcItem
-          <div key={index} className="mb-3">
+          <div key={index} className="mb-2">
             {/* BmcItemHeader */}
             <div
               onClick={() => toggleItem(index)}
@@ -82,7 +79,7 @@ const BmcSidebar: React.FC<BmcSidebarProps> = ({ userBmc }) => {
               {/* ToggleIcon */}
               <span
                 className={`
-                  text-xs text-hub-gray-2 transition-transform duration-200
+                  text-sm text-hub-gray-2 transition-transform duration-200
                   ${isOpen ? "rotate-90" : "rotate-0"}
                 `}
               >
@@ -90,11 +87,11 @@ const BmcSidebar: React.FC<BmcSidebarProps> = ({ userBmc }) => {
               </span>
 
               {/* BmcItemTitle */}
-              <div className="flex items-center gap-1.5 font-pt-caption1-semibold text-hub-black-1 [&_svg]:w-4 [&_svg]:h-4">
+              <div className="flex items-center gap-1.5 font-pt-body2-medium text-hub-black-1 [&_svg]:w-4 [&_svg]:h-4">
                 <Icon />
                 {title}
                 {/* BmcItemSubtitle */}
-                <span className="font-pt-caption2-regular text-hub-gray-2">
+                <span className="font-pt-caption1-regular text-hub-gray-2">
                   {subtitle}
                 </span>
               </div>

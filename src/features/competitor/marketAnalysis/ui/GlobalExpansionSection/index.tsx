@@ -10,7 +10,7 @@ const GlobalExpansionSection: React.FC<GlobalExpansionSectionProps> = ({
 }) => {
   return (
     // Section
-    <section className="max-w-[700px] pb-5 text-left">
+    <section className="w-full pb-5 text-left">
       {/* SectionTitle */}
       <p className="font-pt-h1-semibold text-hub-black-1 mb-5">
         3. 해외 시장 진출 및 사업화 방안
@@ -59,7 +59,7 @@ const GlobalExpansionSection: React.FC<GlobalExpansionSectionProps> = ({
         <h3 className="font-pt-body1-semibold text-hub-primary mb-2.5">
           현지화 요구사항
         </h3>
-        <div className="grid grid-cols-2 gap-[25px]">
+        <div className="flex flex-col gap-[11px]">
           {globalExpansion.localizationRequirements.map(
             (requirement, index) => (
               <div
@@ -80,7 +80,7 @@ const GlobalExpansionSection: React.FC<GlobalExpansionSectionProps> = ({
         <h3 className="font-pt-body1-semibold text-hub-primary mb-2.5">
           파트너십
         </h3>
-        <div className="grid grid-cols-2 gap-[25px]">
+        <div className="flex flex-col gap-[11px]">
           {globalExpansion.partnershipOpportunities.map(
             (opportunity, index) => (
               <div

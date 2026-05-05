@@ -5,7 +5,6 @@ import { NoticeSkeleton } from "@/shared/ui/NoticeSkeleton";
 import { useGetNoticeSearch } from "@/features/notice/getNoticeSearch/useGetNoticeSearch";
 import { useGetNoticeRecommend } from "@/features/notice/getNoticeRecommend/useGetNoticeRecommend";
 import { NoticeType } from "@/entities/notice/model/notice.type";
-import AiNotice from "@assets/images/aiNotice.png";
 import { useAuthStore } from "@/app/model/stores/useAuthStore";
 import { useState, useEffect } from "react";
 
@@ -19,7 +18,7 @@ const RnDNotice = () => {
 
   if (isLoading) {
     return (
-      <div className="flex flex-row gap-[10px] justify-start lg:justify-center">
+      <div className="flex gap-2.5 w-full overflow-x-auto lg:overflow-x-visible lg:justify-center">
         {Array.from({ length: 4 }).map((_, idx) => (
           <NoticeSkeleton key={idx} />
         ))}
@@ -28,11 +27,23 @@ const RnDNotice = () => {
   }
 
   return (
-    <div className="flex gap-[10px] w-full justify-start lg:justify-center md:flex-nowrap">
-      {data?.content?.map((item: NoticeType) => (
-        <NoticeCard key={item.url} notice={item} />
-      ))}
-    </div>
+    <>
+      {/* 모바일: 스크롤 형태 */}
+      <div className="lg:hidden flex gap-2.5 w-full overflow-x-auto">
+        {data?.content?.map((item: NoticeType) => (
+          <div key={item.url} className="shrink-0">
+            <NoticeCard notice={item} />
+          </div>
+        ))}
+      </div>
+
+      {/* 데스크톱: 4개 카드 그리드 */}
+      <div className="hidden lg:flex gap-2.5 w-full justify-center">
+        {data?.content?.slice(0, 4).map((item: NoticeType) => (
+          <NoticeCard key={item.url} notice={item} />
+        ))}
+      </div>
+    </>
   );
 };
 
@@ -41,7 +52,7 @@ const RecommendedAINotice = () => {
 
   if (isLoading) {
     return (
-      <div className="flex flex-row gap-[10px] justify-start lg:justify-center">
+      <div className="flex gap-2.5 w-full overflow-x-auto lg:overflow-x-visible lg:justify-center">
         {Array.from({ length: 4 }).map((_, idx) => (
           <NoticeSkeleton key={idx} />
         ))}
@@ -50,11 +61,23 @@ const RecommendedAINotice = () => {
   }
 
   return (
-      <div className="flex gap-[10px] w-full justify-start md:justify-center md:flex-nowrap">
+    <>
+      {/* 모바일: 스크롤 형태 */}
+      <div className="lg:hidden flex gap-2.5 w-full overflow-x-auto">
+        {data?.map((item: NoticeType) => (
+          <div key={item.url} className="shrink-0">
+            <NoticeCard notice={item} />
+          </div>
+        ))}
+      </div>
+
+      {/* 데스크톱: 4개 카드 그리드 */}
+      <div className="hidden lg:flex gap-2.5 w-full justify-center">
         {data?.slice(0, 4).map((item: NoticeType) => (
           <NoticeCard key={item.url} notice={item} />
         ))}
       </div>
+    </>
   );
 };
 
@@ -66,10 +89,9 @@ const EducationNotice = () => {
     sort: "createdAt,desc",
   });
 
-
   if (isLoading) {
     return (
-      <div className="flex flex-row gap-[10px] justify-start lg:justify-center">
+      <div className="flex gap-2.5 w-full overflow-x-auto lg:overflow-x-visible lg:justify-center">
         {Array.from({ length: 4 }).map((_, idx) => (
           <NoticeSkeleton key={idx} />
         ))}
@@ -78,11 +100,23 @@ const EducationNotice = () => {
   }
 
   return (
-    <div className="flex gap-[10px] w-full justify-start lg:justify-center md:flex-nowrap">
-      {data?.content?.map((item: NoticeType) => (
-        <NoticeCard key={item.url} notice={item} />
-      ))}
-    </div>
+    <>
+      {/* 모바일: 스크롤 형태 */}
+      <div className="lg:hidden flex gap-2.5 w-full overflow-x-auto">
+        {data?.content?.map((item: NoticeType) => (
+          <div key={item.url} className="shrink-0">
+            <NoticeCard notice={item} />
+          </div>
+        ))}
+      </div>
+
+      {/* 데스크톱: 4개 카드 그리드 */}
+      <div className="hidden lg:flex gap-2.5 w-full justify-center">
+        {data?.content?.slice(0, 4).map((item: NoticeType) => (
+          <NoticeCard key={item.url} notice={item} />
+        ))}
+      </div>
+    </>
   );
 };
 
@@ -111,9 +145,7 @@ const MainContent = () => {
             title="교육 분야 최신 공고 보러가기"
             path="/notices/education"
           >
-            <div className="w-full overflow-x-auto lg:overflow-x-visible">
-              <EducationNotice />
-            </div>
+            <EducationNotice />
           </SectionBlock>
         </div>
 
@@ -122,9 +154,7 @@ const MainContent = () => {
             title={sectionTitle}
             path={sectionPath}
           >
-            <div className="w-full overflow-x-auto lg:overflow-x-visible">
-              {mounted && isLoggedIn ? <RecommendedAINotice /> : <RnDNotice />}
-            </div>
+            {mounted && isLoggedIn ? <RecommendedAINotice /> : <RnDNotice />}
           </SectionBlock>
         </div>
 
