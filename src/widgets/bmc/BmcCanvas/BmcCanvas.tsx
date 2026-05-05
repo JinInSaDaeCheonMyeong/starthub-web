@@ -71,23 +71,23 @@ export const BmcCanvas = forwardRef<HTMLDivElement, BmcCanvasProps>(
         return (
           <div
             key={config.id}
-            className="bg-hub-white-1 rounded-lg p-[14px] min-h-[200px] flex flex-col relative transition-all duration-200"
+            className="bg-hub-white-1 rounded-lg p-3 sm:p-[14px] min-h-[150px] sm:min-h-[200px] flex flex-col relative transition-all duration-200 w-full"
             style={{
               gridArea: config.gridArea,
               border: `2px solid ${config.color}`,
             }}
           >
             {/* 섹션 헤더 */}
-            <div className="flex justify-between gap-2 mb-3">
+            <div className="flex justify-between gap-2 mb-2 sm:mb-3">
               <p
-                className="font-pt-body2-semibold text-[16px] font-semibold m-0"
+                className="font-pt-body2-semibold text-sm sm:text-[16px] font-semibold m-0"
                 style={{ color: titleColor }}
               >
                 {config.title}
               </p>
               {templateType !== "SIMPLE" && IconComponent && (
                 <div
-                  className="text-[20px] flex items-center [&_svg]:w-[18px] [&_svg]:h-[18px]"
+                  className="text-[16px] sm:text-[20px] flex items-center [&_svg]:w-[16px] [&_svg]:h-[16px] sm:[&_svg]:w-[18px] sm:[&_svg]:h-[18px]"
                   style={{
                     ["--icon-fill" as string]: iconFill,
                   }}
@@ -110,10 +110,10 @@ export const BmcCanvas = forwardRef<HTMLDivElement, BmcCanvasProps>(
                   onSectionChange?.(config.id as keyof BmcData, e.target.value)
                 }
                 placeholder="내용을 입력하세요..."
-                className="flex-1 text-[14px] leading-[1.6] text-hub-black-1 font-pt-body2-regular border border-hub-gray-3 rounded px-2 py-2 resize-y min-h-[100px] outline-none focus:border-hub-primary placeholder:text-hub-gray-2 whitespace-pre-wrap break-words"
+                className="flex-1 text-xs sm:text-[14px] leading-[1.6] text-hub-black-1 font-pt-body2-regular border border-hub-gray-3 rounded px-2 py-2 resize-y min-h-[80px] sm:min-h-[100px] outline-none focus:border-hub-primary placeholder:text-hub-gray-2 whitespace-pre-wrap break-words"
               />
             ) : (
-              <div className="flex-1 text-[14px] leading-[1.6] text-hub-black-1 font-pt-body2-regular select-text cursor-text whitespace-pre-wrap break-words empty:before:content-['내용이_없습니다.'] empty:before:text-hub-gray-2">
+              <div className="flex-1 text-xs sm:text-[14px] leading-[1.6] text-hub-black-1 font-pt-body2-regular select-text cursor-text whitespace-pre-wrap break-words empty:before:content-['내용이_없습니다.'] empty:before:text-hub-gray-2">
                 {String(bmcData?.[config.id as keyof BmcData] || "")}
               </div>
             )}
@@ -127,21 +127,28 @@ export const BmcCanvas = forwardRef<HTMLDivElement, BmcCanvasProps>(
         <PrintStyles />
         <div ref={ref} style={{ padding: 0 }}>
           {/* 캔버스 헤더 */}
-          <div className="flex justify-between items-center w-full max-w-[1400px] mx-auto mb-5 print:flex print:max-w-[1220px] print:w-[1220px]">
-            <p className="font-ws-title2 text-hub-black-1 m-0">
-              Business Model Canvas
-              <span className="font-pt-body2-medium ml-[10px]">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full mb-4 sm:mb-5 print:flex print:max-w-[1220px] print:w-[1220px] gap-2 sm:gap-0 px-2 sm:px-4 lg:px-6">
+            <div className="flex flex-col">
+              <h1 className="font-ws-title2 text-hub-black-1 m-0 text-lg sm:text-xl lg:text-2xl">
+                Business Model Canvas
+              </h1>
+              <span className="font-pt-body2-medium text-hub-black-1 text-sm sm:text-base">
                 {bmcData?.title}
               </span>
-            </p>
-            <p className="font-ws-body3 text-hub-black-1">
+            </div>
+            <p className="font-ws-body3 text-hub-black-1 text-xs sm:text-sm">
               made by Start<span className="text-hub-primary">Hub</span>
             </p>
           </div>
 
           {/* BMC 그리드 */}
           <div
-            className="grid gap-[10px] mx-auto max-w-[1400px] w-full bg-hub-white-1 box-border print:max-w-[1220px] print:w-[1220px] print:gap-[10px]"
+            className="
+              flex flex-col gap-3
+              md:grid md:gap-[10px]
+              w-full bg-hub-white-1 box-border px-2 sm:px-4 lg:px-6
+              print:max-w-[1220px] print:w-[1220px] print:gap-[10px] print:grid print:mx-auto print:px-0
+            "
             style={{
               gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr",
               gridTemplateRows: "auto auto auto",

@@ -88,7 +88,7 @@ const BmcStepNavigate = () => {
   return (
     <div
       ref={wrapperRef}
-      className="flex flex-col gap-5 bg-hub-white-2 overflow-auto h-[650px]"
+      className="flex flex-col gap-3 sm:gap-4 lg:gap-5 bg-hub-white-1 overflow-auto h-[400px] sm:h-[500px] lg:h-[650px] px-2 sm:px-0"
     >
       {stepItems.map((step) => {
         const IconComponent = step.icon;
@@ -96,38 +96,41 @@ const BmcStepNavigate = () => {
         const isCurrent = isStepCurrent(step.id);
 
         return (
-          <div key={step.id} className="flex gap-[25px] relative">
+          <div key={step.id} className="flex gap-3 sm:gap-4 lg:gap-[25px] relative">
             <div
               className={`
-                w-[50px] h-[50px] flex items-center justify-center rounded-lg
-                ${isCurrent ? "bg-hub-primary text-hub-white-1" : ""}
-                ${!isCurrent && isCompleted ? "bg-[#EAEAEA] text-hub-gray-2" : ""}
-                ${!isCurrent && !isCompleted ? "bg-hub-white-1 text-hub-black-1" : ""}
+                w-10 h-10 sm:w-12 sm:h-12 lg:w-[50px] lg:h-[50px] flex items-center justify-center rounded-[10px] flex-shrink-0
+                ${isCurrent ? "bg-hub-primary" : ""}
+                ${!isCurrent && isCompleted ? "bg-[#EAEAEA]" : ""}
+                ${!isCurrent && !isCompleted ? "bg-hub-white-1 border border-hub-gray-3" : ""}
               `}
             >
-              <div className="flex items-center justify-center">
-                <div className="w-6 h-6 [&_*]:fill-current">
-                  <IconComponent />
-                </div>
-              </div>
+              <IconComponent className={`
+                w-5 h-5 sm:w-6 sm:h-6 lg:w-6 lg:h-6
+                [&_*]:fill-current
+                ${isCurrent ? "text-hub-white-1" : ""}
+                ${!isCurrent && isCompleted ? "text-hub-gray-2" : ""}
+                ${!isCurrent && !isCompleted ? "text-hub-black-1" : ""}
+              `} />
             </div>
 
             {isCurrent && step.description ? (
-              <div className="flex flex-col gap-1 w-[340px] h-[90px] px-5 py-4 rounded-lg border-2 border-hub-primary bg-hub-white-1 font-pt-caption2-regular text-hub-black-1">
-                <div className="font-ws-body3">{step.label}</div>
-                <span className="text-hub-primary">{step.subLabel}</span>
-                <div>{step.description}</div>
+              <div className="flex flex-col gap-1 w-full max-w-[280px] sm:max-w-[320px] lg:w-[340px] min-h-[70px] sm:min-h-[80px] lg:h-[90px] px-3 sm:px-4 lg:px-5 py-3 sm:py-3 lg:py-4 rounded-[10px] border-2 border-hub-primary bg-hub-white-1 text-hub-black-1">
+                <div className="font-ws-body3 text-sm sm:text-base">{step.label}</div>
+                <span className="text-hub-primary text-sm font-pt-caption2-regular">{step.subLabel}</span>
+                <div className="text-xs sm:text-sm font-pt-caption2-regular">{step.description}</div>
               </div>
             ) : (
               <div
                 className={`
-                  flex items-center w-[340px] h-[50px] pl-5 rounded-lg font-ws-body3
+                  flex items-center w-full max-w-[280px] sm:max-w-[320px] lg:w-[340px] h-10 sm:h-12 lg:h-[50px] pl-3 sm:pl-4 lg:pl-5 rounded-[10px] font-ws-body3 text-sm sm:text-base
                   ${isCurrent ? "bg-hub-white-1 text-hub-black-1 border border-hub-primary" : ""}
                   ${!isCurrent && isCompleted ? "bg-[#EAEAEA] text-hub-gray-2" : ""}
-                  ${!isCurrent && !isCompleted ? "bg-hub-white-1 text-hub-black-1" : ""}
+                  ${!isCurrent && !isCompleted ? "bg-hub-white-1 text-hub-black-1 border border-hub-gray-3" : ""}
                 `}
               >
-                {step.label}
+                <span className="block lg:hidden">{step.subLabel}</span>
+                <span className="hidden lg:block">{step.label}</span>
               </div>
             )}
           </div>

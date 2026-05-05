@@ -51,13 +51,13 @@ const Message = ({ message, isMine, enableTyping = false }: MessageProps) => {
       <div className="max-w-[410px] bg-hub-white-2 px-5 py-4 rounded-lg select-text cursor-text">
         {message}
       </div>
-      <UserProfile width={40} height={40} />
+      <UserProfile className="hidden lg:block" width={40} height={40} />
     </div>
   ) : (
     <div className="flex gap-[10px] mb-5">
-      <StartHubProfile width={40} height={40} />
+      <StartHubProfile className="hidden lg:block" width={40} height={40} />
       <div>
-        <p className="mb-[3px]">스타트허브 AI</p>
+        <p className="mb-[3px] lg:block">스타트허브 AI</p>
         <div className="max-w-[410px] bg-[#e9f0fe] px-5 py-4 rounded-lg relative select-text cursor-text">
           {enableTyping && !isTypingComplete && !showFallback ? (
             <TypeHangul

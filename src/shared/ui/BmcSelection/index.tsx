@@ -24,19 +24,42 @@ const BmcList = () => {
   const canvases = data?.data || [];
 
   return (
-    <div className="w-[1025px] mt-10 mr-10 mb-20">
-      <p className="font-pt-body1-medium mb-5">
-        먼저 원하는 BMC를 선택해 주세요.
-      </p>
-      <div className="grid grid-cols-4 gap-[30px] w-[1024px] [&_img]:w-[242px] [&_img]:h-[170px] [&_img]:rounded-[10px] [&_img]:border [&_img]:border-hub-gray-3 [&_img:hover]:opacity-50 [&_img:hover]:cursor-pointer">
-        {canvases.map((canvas) => (
-          <BmcCard
-            key={canvas.id}
-            bmcId={Number(canvas.id)}
-            title={canvas.title}
-            date={new Date(canvas.createdAt).toLocaleDateString("ko-KR")}
-          />
-        ))}
+    <div className="w-full mt-[120px] sm:mt-[130px] md:mt-[140px] lg:mt-[150px] mb-[50px]">
+      <div className="w-full px-4 md:px-8 lg:w-[1040px] lg:mx-auto lg:px-0">
+        <p className="font-pt-body1-medium mb-5">
+          먼저 원하는 BMC를 선택해 주세요.
+        </p>
+
+        {/* 모바일: 리스트, 데스크탑: 카드 그리드 */}
+        <div className="w-full">
+          {/* 모바일 리스트 */}
+          <div className="block lg:hidden w-full">
+            <div className="space-y-3">
+              {canvases.map((canvas) => (
+                <BmcCard
+                  key={canvas.id}
+                  bmcId={Number(canvas.id)}
+                  title={canvas.title}
+                  date={new Date(canvas.createdAt).toLocaleDateString("ko-KR")}
+                  isMobile={true}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* 데스크탑 카드 그리드 */}
+          <div className="hidden lg:grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8 w-full">
+            {canvases.map((canvas) => (
+              <BmcCard
+                key={canvas.id}
+                bmcId={Number(canvas.id)}
+                title={canvas.title}
+                date={new Date(canvas.createdAt).toLocaleDateString("ko-KR")}
+                isMobile={false}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

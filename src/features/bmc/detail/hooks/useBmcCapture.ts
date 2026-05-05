@@ -1,4 +1,4 @@
-import { useRef, useCallback } from "react";
+import { useRef, useCallback, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import html2canvas from "html2canvas";
 import { bmcApi } from "@/entities/bmc/api/bmc";
@@ -7,9 +7,27 @@ import { BmcData } from "@/entities/bmc/model/types";
 export const useBmcCapture = () => {
   const canvasRef = useRef<HTMLDivElement>(null);
   const hasAutoCaptureRef = useRef(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // 모바일 감지
+  useEffect(() => {
+    const checkIsMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkIsMobile();
+    window.addEventListener("resize", checkIsMobile);
+
+    return () => window.removeEventListener("resize", checkIsMobile);
+  }, []);
 
   const captureBmcAndUpload = useCallback(async (bmcId: number) => {
     if (!canvasRef.current) {
+      return;
+    }
+
+    // 모바일에서는 캡처하지 않음
+    if (isMobile) {
       return;
     }
 
@@ -85,7 +103,7 @@ export const useBmcCapture = () => {
     } catch {
       toast.error("BMC 수정에 실패했습니다.");
     }
-  }, []);
+  }, [isMobile]);
 
   const handleDownloadPDF = useCallback(async (bmcData: BmcData) => {
     if (!canvasRef.current || !bmcData) {
@@ -165,5 +183,6 @@ export const useBmcCapture = () => {
     hasAutoCaptureRef,
     captureBmcAndUpload,
     handleDownloadPDF,
+    isMobile,
   };
 };

@@ -20,7 +20,7 @@ export const BmcActionButtons = ({
   onBackToList,
 }: BmcActionButtonsProps) => {
   return (
-    <div className="flex gap-[10px]">
+    <div className="flex flex-col sm:flex-row gap-2 sm:gap-[10px] w-full sm:w-auto">
       {isEditing ? (
         <>
           <StartHubButton
@@ -29,7 +29,7 @@ export const BmcActionButtons = ({
             backgroundColor="#FFFFFF"
             textTheme="#242424"
             className="
-              w-[200px]
+              w-full sm:w-[200px]
               font-pt-caption1-medium
               border border-hub-gray-2
             "
@@ -42,7 +42,7 @@ export const BmcActionButtons = ({
             backgroundColor={hasChanges ? "#2466F4" : "#9B9B9B"}
             textTheme={hasChanges ? "#FFFFFF" : "#242424"}
             className="
-              w-[200px]
+              w-full sm:w-[200px]
               font-pt-caption1-medium
             "
           />
@@ -50,35 +50,35 @@ export const BmcActionButtons = ({
       ) : (
         <>
           <StartHubButton
-            text="목록으로 돌아가기"
+            text="목록"
             onClick={onBackToList}
             backgroundColor="#FFFFFF"
             textTheme="#242424"
             className="
-              w-[200px]
+              w-full sm:w-[120px] lg:w-[200px]
               font-pt-caption1-medium
               border border-hub-gray-2
             "
           />
 
           <StartHubButton
-            text="BMC 다운로드"
+            text="다운로드"
             onClick={onDownload}
             backgroundColor="#2466F4"
             textTheme="#FFFFFF"
             className="
-              w-[200px]
+              w-full sm:w-[120px] lg:w-[200px]
               font-pt-caption1-medium
             "
           />
 
           <StartHubButton
-            text="수정하기"
+            text="수정"
             onClick={onStartEdit}
             backgroundColor="#FFFFFF"
             textTheme="#2466F4"
             className="
-              w-[200px]
+              w-full sm:w-[120px] lg:w-[200px]
               font-pt-caption1-medium
               border border-hub-primary
             "

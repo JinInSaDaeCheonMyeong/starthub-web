@@ -38,7 +38,7 @@ export const StartHubButton = ({
       onClick={disabled ? undefined : onClick}
       disabled={disabled}
       className={[
-        "border-none rounded-lg px-[22px] relative flex items-center",
+        "rounded-lg px-[22px] py-3 relative flex items-center min-h-[44px]",
         icon ? "justify-between" : "justify-center",
         disabled ? "cursor-not-allowed" : "cursor-pointer",
         className,
