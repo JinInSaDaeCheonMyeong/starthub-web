@@ -36,11 +36,11 @@ const Pagination = ({
   };
 
   return (
-    <div className="flex items-center mt-[100px] mb-[30px] gap-5 [&_svg]:w-6 [&_svg]:h-6">
+    <div className="flex items-center justify-center mt-[50px] md:mt-[100px] mb-[30px] gap-2 md:gap-5 [&_svg]:w-5 [&_svg]:h-5 md:[&_svg]:w-6 md:[&_svg]:h-6">
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="border-none bg-transparent cursor-pointer disabled:cursor-not-allowed disabled:opacity-40"
+        className="border-none bg-transparent cursor-pointer disabled:cursor-not-allowed disabled:opacity-40 p-1"
         onMouseEnter={() => setIsLeftHovered(true)}
         onMouseLeave={() => setIsLeftHovered(false)}
       >
@@ -54,7 +54,7 @@ const Pagination = ({
             key={idx}
             onClick={() => onPageChange(page)}
             className={[
-              "cursor-pointer pb-1 font-pt-caption1-regular transition-all duration-200",
+              "cursor-pointer pb-1 px-2 font-pt-caption1-regular transition-all duration-200 text-sm md:text-base",
               isActive
                 ? "text-hub-black-1 border-b-2 border-hub-black-1"
                 : "text-hub-gray-2 border-b-2 border-transparent",
@@ -68,7 +68,7 @@ const Pagination = ({
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="border-none bg-transparent cursor-pointer disabled:cursor-not-allowed disabled:opacity-40"
+        className="border-none bg-transparent cursor-pointer disabled:cursor-not-allowed disabled:opacity-40 p-1"
         onMouseEnter={() => setIsRightHovered(true)}
         onMouseLeave={() => setIsRightHovered(false)}
       >
