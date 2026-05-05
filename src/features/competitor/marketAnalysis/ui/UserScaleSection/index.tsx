@@ -14,10 +14,10 @@ const UserScaleSection: React.FC<UserScaleSectionProps> = ({ userScale }) => {
         1. 사용자 규모 분석
       </p>
 
-      {/* CardGrid */}
-      <div className="flex gap-2.5 mb-5">
+      {/* CardGrid - 반응형: 모바일 세로, 데스크탑 가로 */}
+      <div className="flex flex-col lg:flex-row lg:gap-2.5 gap-5 mb-5">
         {/* Card — 예상 사용자 기반 규모 */}
-        <div className="flex-1">
+        <div className="w-full lg:flex-1">
           <h4 className="font-pt-body2-semibold text-hub-black-1 mb-2.5">
             예상 사용자 기반 규모
           </h4>
@@ -29,7 +29,7 @@ const UserScaleSection: React.FC<UserScaleSectionProps> = ({ userScale }) => {
         </div>
 
         {/* Card — 시장 내 위치 */}
-        <div className="flex-1">
+        <div className="w-full lg:flex-1">
           <h4 className="font-pt-body2-semibold text-hub-black-1 mb-2.5">
             시장 내 위치
           </h4>
@@ -41,7 +41,7 @@ const UserScaleSection: React.FC<UserScaleSectionProps> = ({ userScale }) => {
         </div>
 
         {/* Card — 성장 잠재력 */}
-        <div className="flex-1">
+        <div className="w-full lg:flex-1">
           <h4 className="font-pt-body2-semibold text-hub-black-1 mb-2.5">
             성장 잠재력
           </h4>

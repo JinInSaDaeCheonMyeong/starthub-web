@@ -17,16 +17,16 @@ const InsightSection: React.FC<InsightSectionProps> = ({
 
   return (
     // Section
-    <section className="max-w-[700px] pb-5 text-left">
+    <section className="w-full pb-5 text-left">
       {/* SectionTitle */}
       <p className="font-pt-h1-semibold text-hub-black-1 mb-5">
         2. 기회/위협 인사이트
       </p>
 
-      {/* InsightGrid */}
-      <div className="grid grid-cols-2 gap-[25px]">
+      {/* InsightGrid - 반응형: 모바일 세로, 데스크탑 가로 */}
+      <div className="flex flex-col lg:grid lg:grid-cols-2 lg:gap-[25px] gap-[30px]">
         {/* InsightCard — opportunity */}
-        <div className="p-6 rounded-[10px] bg-[#eefdf4] border border-[#d6fae2] select-text">
+        <div className="w-full p-6 rounded-[10px] bg-[#eefdf4] border border-[#d6fae2] select-text">
           <h3 className="font-pt-body1-semibold text-[#14532d] mb-2.5">기회</h3>
           {strengths.competitiveAdvantages.map((advantage, index) => (
             <div key={index} className={opportunityItemClass}>
@@ -52,7 +52,7 @@ const InsightSection: React.FC<InsightSectionProps> = ({
         </div>
 
         {/* InsightCard — threat */}
-        <div className="p-6 rounded-[10px] bg-[#fff6ef] border border-[#ffe8d2] select-text">
+        <div className="w-full p-6 rounded-[10px] bg-[#fff6ef] border border-[#ffe8d2] select-text">
           <h3 className="font-pt-body1-semibold text-[#7c2d12] mb-2.5">위협</h3>
           {weaknesses.competitiveDisadvantages.map((disadvantage, index) => (
             <div key={index} className={threatItemClass}>
