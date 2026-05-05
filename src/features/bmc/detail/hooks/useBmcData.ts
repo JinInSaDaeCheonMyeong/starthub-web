@@ -4,9 +4,9 @@ import { useParams } from 'next/navigation';
 import { bmcApi } from '@/entities/bmc/api/bmc';
 import { BmcData } from '@/entities/bmc/model/types';
 
-export const useBmcData = () => {
+export const useBmcData = (propId?: string) => {
   const params = useParams<{ id: string }>();
-  const id = params?.id;
+  const id = propId || params?.id;
   const [bmcData, setBmcData] = useState<BmcData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 

@@ -15,6 +15,7 @@ interface BmcCardProps {
   type?: "bmc" | "competitor";
   onDelete?: () => void;
   onCardClick?: () => void;
+  isMobile?: boolean;
 }
 
 const BmcCard = ({
@@ -25,6 +26,7 @@ const BmcCard = ({
   type = "bmc",
   onDelete,
   onCardClick,
+  isMobile = false,
 }: BmcCardProps) => {
   const router = useRouter();
   const [isDeleting, setIsDeleting] = useState(false);
@@ -35,7 +37,7 @@ const BmcCard = ({
     if (onCardClick) {
       onCardClick();
     } else if (type === "bmc") {
-      router.push(`/bmc/detail/${String(id)}`);
+      router.push(`/bmc/${String(id)}`);
     } else if (type === "competitor") {
       router.push(`/competitor/analysis?bmcId=${String(id)}`);
     }
@@ -95,8 +97,64 @@ const BmcCard = ({
     }
   };
 
+  if (isMobile) {
+    // 모바일 리스트 형태
+    return (
+      <div
+        onClick={handleClick}
+        className="flex items-center justify-between p-4 bg-white border border-hub-gray-3 rounded-lg cursor-pointer hover:bg-hub-gray-4 transition-colors relative"
+      >
+        <div className="flex-1">
+          <h3 className="font-pt-body2-medium text-hub-black-1 mb-1">
+            {title}
+          </h3>
+          <p className="font-pt-caption2-regular text-hub-gray-2">
+            {date}
+          </p>
+        </div>
+
+        {/* 점 메뉴 버튼 */}
+        <button
+          onClick={handleDotsClick}
+          className={[
+            "ml-4 p-2 bg-transparent border-none flex items-center justify-center transition-opacity duration-200 [&_svg]:fill-hub-gray-2",
+            isDeleting
+              ? "cursor-not-allowed opacity-50"
+              : "cursor-pointer hover:opacity-70",
+          ].join(" ")}
+        >
+          <DotsIcon width={20} height={20} />
+        </button>
+
+        {/* 드롭다운 */}
+        {showDropdown && (
+          <div
+            ref={dropdownRef}
+            className="absolute top-[50px] right-4 bg-hub-white-1 border border-hub-gray-3 rounded-lg shadow-[0_2px_8px_rgba(0,0,0,0.1)] z-[100] overflow-hidden min-w-[120px]"
+          >
+            <button
+              onClick={handleDownload}
+              className="w-full px-4 py-[10px] bg-transparent border-none text-left cursor-pointer font-pt-caption1-regular text-hub-black-1 hover:bg-hub-gray-4 border-b border-hub-gray-4 transition-colors duration-200"
+            >
+              다운로드
+            </button>
+            {type === "bmc" && (
+              <button
+                onClick={handleDelete}
+                className="w-full px-4 py-[10px] bg-transparent border-none text-left cursor-pointer font-pt-caption1-regular text-hub-error hover:bg-hub-gray-4 transition-colors duration-200"
+              >
+                삭제
+              </button>
+            )}
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // 데스크탑 카드 형태
   return (
-    <div className="inline-block rounded-[10px] bg-hub-white-1 w-[242px] h-full transition-all duration-300 relative">
+    <div className="inline-block rounded-[10px] bg-hub-white-1 w-full max-w-[242px] h-full transition-all duration-300 relative">
       {/* 이미지 + 텍스트 래퍼 */}
       <div
         onClick={handleClick}
@@ -110,13 +168,13 @@ const BmcCard = ({
             className="w-full h-[170px] rounded-[10px] border border-hub-gray-3"
           />
         ) : (
-          <div className="rounded-[10px] w-[242px] h-[170px] flex items-center justify-center border border-hub-gray-3">
+          <div className="rounded-[10px] w-full h-[170px] flex items-center justify-center border border-hub-gray-3">
             <ImageIcon width={60} height={60} />
           </div>
         )}
 
         {/* 텍스트 영역 */}
-        <div className="flex pt-1 flex-row items-start justify-between bg-hub-white-1 relative">
+        <div className="flex pt-3 flex-row items-start justify-between bg-hub-white-1 relative px-3">
           <div className="flex flex-col gap-[2px] flex-1">
             <p className="font-pt-caption1-regular text-hub-black-1">{title}</p>
             <p className="font-pt-caption2-regular text-hub-gray-1">{date}</p>

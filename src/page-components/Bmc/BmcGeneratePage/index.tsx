@@ -14,18 +14,24 @@ const BmcGeneratePage = () => {
   }, [bmcQuestions]);
 
   return (
-    <div className="h-screen flex flex-col bg-hub-white-2 overflow-hidden">
+    <div className="min-h-screen bg-hub-white-2">
       <Header />
-      {isGeneratingBmc ? (
-        <div className="mt-[110.8px] flex bg-hub-white-2 w-full h-[calc(100vh-110.8px)] overflow-auto">
-          <BmcContent />
-        </div>
-      ) : (
-        <div className="m-auto mt-[110.8px] flex bg-hub-white-2 gap-[55px] p-[34px_0] justify-center w-full h-[calc(100vh-78px)] overflow-auto">
-          <BmcStepNavigate />
-          <BmcContent />
-        </div>
-      )}
+      <div className="lg:pt-[120px] lg:min-h-[calc(100vh-120px)] bg-hub-white-1">
+        {isGeneratingBmc ? (
+          <div className="flex justify-center w-full px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-6">
+            <BmcContent />
+          </div>
+        ) : (
+          <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-[55px] px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-[34px] justify-center w-full">
+            <div className="hidden lg:flex lg:justify-center lg:w-auto">
+              <BmcStepNavigate />
+            </div>
+            <div className="flex justify-center lg:justify-start w-full">
+              <BmcContent />
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

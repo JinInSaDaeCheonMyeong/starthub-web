@@ -155,8 +155,19 @@ const useQuestionStore = create<QuestionStore>()(
 
             await bmcApi.createAnswer(requestData);
 
-          } catch {
-            toast.error("답변 전송에 실패했습니다.")
+          } catch (error: any) {
+            console.error("답변 전송 실패:", error);
+
+            // 이미 표시된 답변을 롤백
+            set((prevState) => {
+              const newAnswers = { ...prevState.answers };
+              delete newAnswers[questionNumber];
+              return { answers: newAnswers };
+            });
+
+            // 상세한 에러 메시지 표시
+            const errorMessage = error?.response?.data?.message || "답변 전송에 실패했습니다.";
+            toast.error(errorMessage);
           }
         },
 
