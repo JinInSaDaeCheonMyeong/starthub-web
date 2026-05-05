@@ -58,20 +58,20 @@ const SearchNotice = ({
 
   return (
     // SearchNoticeContainer
-    <div className="flex flex-col items-center mt-[60px]">
-      <h1 className="font-pt-h1-semibold mb-[30px]">공고 찾기</h1>
+    <div className="flex flex-col items-center mt-[120px] sm:mt-[130px] md:mt-[140px] lg:mt-[150px] px-4">
+      <h1 className="font-pt-h1-semibold mb-[20px] md:mb-[30px] text-xl sm:text-2xl md:text-3xl text-center">공고 찾기</h1>
 
       <StartHubSearchBar
         value={search}
         onChange={handleSearchChange}
         onKeyDown={handleKeyDown}
-        className="w-552px"
+        className="w-full max-w-[350px] sm:max-w-[450px] md:max-w-[552px]"
         placeholder="제목이나 자연어로 공고를 검색해보세요!"
       />
 
       {!hideFilters && (
         // DropdownContainer
-        <div className="flex gap-4 mt-5 flex-nowrap">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 mt-4 md:mt-5 w-full max-w-[350px] sm:max-w-[600px] md:max-w-[800px]">
           <StartHubDropdown
             options={[
               { value: "", label: "지원분야" },

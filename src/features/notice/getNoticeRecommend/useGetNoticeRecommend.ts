@@ -16,7 +16,7 @@ export const useGetNoticeRecommend = (
     staleTime: 1000 * 60 * 5,
     gcTime: 1000 * 60 * 10,
     retry: false,
-    enabled: isLoggedIn,
+    enabled: true, // 로그인 여부와 관계없이 항상 호출
     ...options,
   });
 };
