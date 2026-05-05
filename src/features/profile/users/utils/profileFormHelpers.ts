@@ -32,17 +32,17 @@ export const INITIAL_FORM_DATA: ProfileFormData = {
 export const formatProfileToForm = (profile: ProfileData): ProfileFormData => {
   const birthDate = new Date(profile.birth);
   return {
-    username: profile.username,
-    gender: profile.gender,
+    username: profile.username || "",
+    gender: profile.gender || "",
     birthYear: birthDate.getFullYear().toString(),
     birthMonth: (birthDate.getMonth() + 1).toString(),
     birthDay: birthDate.getDate().toString(),
-    companyName: profile.companyName,
-    companyDescription: profile.companyDescription,
-    startupLocation: profile.startupLocation,
-    annualRevenue: profile.annualRevenue.toString(),
-    numberOfEmployees: profile.numberOfEmployees.toString(),
-    companyWebsite: profile.companyWebsite,
+    companyName: profile.companyName || "",
+    companyDescription: profile.companyDescription || "",
+    startupLocation: profile.startupLocation || "",
+    annualRevenue: profile.annualRevenue ? profile.annualRevenue.toString() : "",
+    numberOfEmployees: profile.numberOfEmployees ? profile.numberOfEmployees.toString() : "",
+    companyWebsite: profile.companyWebsite || "",
   };
 };
 
@@ -62,12 +62,27 @@ export const formatFormToProfile = (formData: ProfileFormData): Partial<ProfileD
   };
 };
 
-export const validateRequiredFields = (formData: ProfileFormData): boolean => {
-  const { username, gender, birthYear, birthMonth, birthDay, companyName } = formData;
+export const validateRequiredFields = (formData: ProfileFormData, startupStatus?: string): boolean => {
+  const { username, gender, birthYear, birthMonth, birthDay, companyName, startupLocation } = formData;
 
-  if (!username.trim() || !gender || !birthYear || !birthMonth || !birthDay || !companyName.trim()) {
+  // 공통 필수 항목
+  if (!username.trim() || !gender || !birthYear || !birthMonth || !birthDay) {
     toast.error("필수 항목을 입력해주세요");
     return false;
+  }
+
+  // 예비 창업인 경우: 이름, 성별, 생년월일, 창업 위치만 필수
+  if (startupStatus === "PRE_STARTUP") {
+    if (!startupLocation.trim()) {
+      toast.error("필수 항목을 입력해주세요");
+      return false;
+    }
+  } else {
+    // 초기 창업, 스케일업 창업인 경우: 이름, 성별, 생년월일, 회사명, 창업 위치 필수
+    if (!companyName.trim() || !startupLocation.trim()) {
+      toast.error("필수 항목을 입력해주세요");
+      return false;
+    }
   }
 
   return true;

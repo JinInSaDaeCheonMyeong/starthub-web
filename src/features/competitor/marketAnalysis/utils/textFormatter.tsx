@@ -1,5 +1,4 @@
 import React from "react";
-import { StartHubColors } from "@/shared/design";
 
 export const formatTextWithBold = (text: string, useColor: boolean = false) => {
   const parts = text.split(/(<<?[^<>]+>>?)/g);
@@ -12,7 +11,7 @@ export const formatTextWithBold = (text: string, useColor: boolean = false) => {
           key={index}
           style={{
             fontWeight: 600,
-            ...(useColor && { color: StartHubColors.Primary })
+            ...(useColor && { color: "#2466F4" })
           }}
         >
           {content}
@@ -30,7 +29,7 @@ export const removeAngleBrackets = (text: string): string => {
 export const formatBmcContent = (content?: string): React.ReactNode => {
   if (!content) return "내용이 없습니다.";
   return content.split(/- /).filter(Boolean).map((line, index) => (
-    <div key={index} style={{ marginBottom: '8px' }}>
+    <div key={index} className="mb-[8px]">
       {index > 0 && '- '}{line}
     </div>
   ));

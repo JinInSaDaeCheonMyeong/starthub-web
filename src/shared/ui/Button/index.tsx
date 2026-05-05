@@ -1,108 +1,68 @@
-import styled, { CSSObject } from "styled-components";
-import { StartHubColors } from "@/shared/design/color/StartHubColors";
-import type { Interpolation } from "styled-components";
-
-type FlattenSimpleInterpolation = Interpolation<object>[];
-
 export interface ButtonProps {
   text: string;
   textTheme?: string;
   width?: number;
   height?: number;
-  typography?: FlattenSimpleInterpolation;
   backgroundColor: string;
   onClick: () => void;
   disabled?: boolean;
-  customStyle?: CSSObject;
+  className?: string;
   icon?: React.ReactNode;
-  hover?: string;
+  hoverColor?: string;
+  type?: "button" | "submit" | "reset";
 }
-
-interface StyledButtonProps {
-  width?: number;
-  height?: number;
-  backgroundColor: string;
-  textTheme?: string;
-  disabled?: boolean;
-  customStyle?: CSSObject;
-  typography?: FlattenSimpleInterpolation;
-  hasIcon?: boolean;
-  hover?: string;
-}
-
-const StyledButton = styled.button.withConfig({
-  shouldForwardProp: (prop) =>
-    ![
-      "backgroundColor",
-      "textTheme",
-      "customStyle",
-      "typography",
-      "hasIcon",
-      "hover",
-    ].includes(prop),
-})<StyledButtonProps>`
-  width: ${({ width }) => (width ? `${width}px` : "100%")};
-  height: ${({ height }) => (height ? `${height}px` : "48px")};
-  background-color: ${({ backgroundColor, disabled }) =>
-    disabled ? StartHubColors.Gray3 : backgroundColor};
-  color: ${({ textTheme, disabled }) =>
-    disabled ? StartHubColors.Gray2 : textTheme ?? StartHubColors.White1};
-  border: none;
-  border-radius: 8px;
-  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
-  display: flex;
-  align-items: center;
-  justify-content: ${({ hasIcon }) => (hasIcon ? "space-between" : "center")};
-  padding: 0 22px;
-  position: relative;
-  &:hover {
-    background-color: ${({ hover, disabled }) =>
-      !disabled && hover ? hover : undefined};
-  }
-  ${({ typography }) => typography}
-  ${({ customStyle }) => customStyle}
-`;
-
-const IconContainer = styled.span`
-  display: flex;
-  align-items: center;
-  position: absolute;
-  left: 22px;
-`;
-
-const TextContainer = styled.span`
-  flex: 1;
-  text-align: center;
-`;
 
 export const StartHubButton = ({
   text,
   textTheme,
   width,
   height,
-  typography,
   backgroundColor,
   onClick,
   disabled = false,
-  customStyle,
+  className,
   icon,
-  hover,
+  hoverColor,
+  type = "button",
 }: ButtonProps) => {
+  const dynamicStyle = {
+    ...(width && { width: `${width}px` }),
+    ...(height && { height: `${height}px` }),
+    backgroundColor: disabled ? "#CFCFCF" : backgroundColor,
+    color: disabled ? "#9B9B9B" : (textTheme || "#FFFFFF"),
+  };
+
   return (
-    <StyledButton
-      width={width}
-      height={height}
-      backgroundColor={backgroundColor}
-      textTheme={textTheme}
+    <button
+      type={type}
       onClick={disabled ? undefined : onClick}
       disabled={disabled}
-      typography={typography}
-      customStyle={customStyle}
-      hasIcon={!!icon}
-      hover={hover}
+      className={[
+        "rounded-lg px-[22px] py-3 relative flex items-center min-h-[44px]",
+        icon ? "justify-between" : "justify-center",
+        disabled ? "cursor-not-allowed" : "cursor-pointer",
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ")}
+      style={dynamicStyle}
+      onMouseEnter={(e) => {
+        if (!disabled && hoverColor) {
+          (e.currentTarget as HTMLButtonElement).style.backgroundColor =
+            hoverColor;
+        }
+      }}
+      onMouseLeave={(e) => {
+        if (!disabled && hoverColor) {
+          (e.currentTarget as HTMLButtonElement).style.backgroundColor =
+            disabled ? "#CFCFCF" : (backgroundColor || "");
+        }
+      }}
     >
-      {icon && <IconContainer>{icon}</IconContainer>}
-      <TextContainer>{text}</TextContainer>
-    </StyledButton>
+      {icon && (
+        <span className="flex items-center absolute left-[22px]">{icon}</span>
+      )}
+      <span className="flex-1 text-center">{text}</span>
+    </button>
   );
 };

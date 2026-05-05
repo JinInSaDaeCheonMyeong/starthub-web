@@ -1,2 +1,2 @@
 export { BmcCanvas } from './BmcCanvas';
-export * from './style';
+// export * from './style';

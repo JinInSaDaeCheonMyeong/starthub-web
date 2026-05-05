@@ -1,25 +1,24 @@
-import * as S from "./style";
+"use client";
 import { ReactComponent as FoldArrowIcon } from "@assets/icons/fold-arrow.svg";
-import { useNavigate } from "react-router-dom";
-
-
+import { useRouter } from "next/navigation";
 
 interface FoldArrowProps {
   title: string;
   backPath?: string;
 }
 
-const FoldArrow= ({ title, backPath = "/" }: FoldArrowProps) => {
-  const navigate = useNavigate();
+const FoldArrow = ({ title, backPath = "/" }: FoldArrowProps) => {
+  const router = useRouter();
 
   return (
-    <S.FoldArrowContainer>
-      <FoldArrowIcon onClick={() => navigate(backPath)} />
-      <span>{title}</span>
-    </S.FoldArrowContainer>
+    <div className="flex items-center self-start mb-6">
+      <FoldArrowIcon
+        onClick={() => router.push(backPath)}
+        className="w-[15px] cursor-pointer"
+      />
+      <span className="font-pt-h2-semibold ml-[10px]">{title}</span>
+    </div>
   );
 };
 
 export default FoldArrow;
-
-

@@ -11,7 +11,6 @@ import {
   ValueProposition,
 } from '@/assets/icons/bmc';
 import { BmcTemplateType } from './types';
-import { StartHubColors } from '@/shared/design';
 
 export interface BmcSectionConfig {
   id: string;
@@ -35,39 +34,39 @@ const COLOR_TEMPLATE_COLORS: Record<string, string> = {
 };
 
 const STARTHUB_COLORS: Record<string, string> = {
-  keyPartners: `${StartHubColors.Primary}`,
-  keyActivities: `${StartHubColors.Primary}`,
-  valueProposition: `${StartHubColors.Primary}`,
-  customerRelationships: `${StartHubColors.Primary}`,
-  customerSegments: `${StartHubColors.Primary}`,
-  keyResources: `${StartHubColors.Primary}`,
-  channels: `${StartHubColors.Primary}`,
-  costStructure: `${StartHubColors.Primary}`,
-  revenueStreams: `${StartHubColors.Primary}`,
+  keyPartners: "#2466F4",
+  keyActivities: "#2466F4",
+  valueProposition: "#2466F4",
+  customerRelationships: "#2466F4",
+  customerSegments: "#2466F4",
+  keyResources: "#2466F4",
+  channels: "#2466F4",
+  costStructure: "#2466F4",
+  revenueStreams: "#2466F4",
 };
 
 const STARTHUB_DARK_COLORS: Record<string, string> = {
-  keyPartners: `${StartHubColors.Gray1}`,
-  keyActivities: `${StartHubColors.Gray1}`,
-  valueProposition: `${StartHubColors.Gray1}`,
-  customerRelationships: `${StartHubColors.Gray1}`,
-  customerSegments: `${StartHubColors.Gray1}`,
-  keyResources: `${StartHubColors.Gray1}`,
-  channels: `${StartHubColors.Gray1}`,
-  costStructure: `${StartHubColors.Gray1}`,
-  revenueStreams: `${StartHubColors.Gray1}`,
+  keyPartners: "#242424",
+  keyActivities: "#242424",
+  valueProposition: "#242424",
+  customerRelationships: "#242424",
+  customerSegments: "#242424",
+  keyResources: "#242424",
+  channels: "#242424",
+  costStructure: "#242424",
+  revenueStreams: "#242424",
 };
 
 const SIMPLE_COLORS: Record<string, string> = {
-  keyPartners: `${StartHubColors.Black1}`,
-  keyActivities: `${StartHubColors.Black1}`,
-  valueProposition: `${StartHubColors.Black1}`,
-  customerRelationships: `${StartHubColors.Black1}`,
-  customerSegments: `${StartHubColors.Black1}`,
-  keyResources: `${StartHubColors.Black1}`,
-  channels: `${StartHubColors.Black1}`,
-  costStructure: `${StartHubColors.Black1}`,
-  revenueStreams: `${StartHubColors.Black1}`,
+  keyPartners: "#000000",
+  keyActivities: "#000000",
+  valueProposition: "#000000",
+  customerRelationships: "#000000",
+  customerSegments: "#000000",
+  keyResources: "#000000",
+  channels: "#000000",
+  costStructure: "#000000",
+  revenueStreams: "#000000",
 };
 
 const TEMPLATE_COLOR_MAP: Record<BmcTemplateType, Record<string, string>> = {

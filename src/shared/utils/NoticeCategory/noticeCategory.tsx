@@ -73,8 +73,8 @@ const NOTICE_CATEGORY = [
 export const getNoticeCategoryInfo = (categoryEnum: string) => {
   return (
     NOTICE_CATEGORY.find((item) => item.enum === categoryEnum) || {
-      text: " ",
-      icon: " ",
+      text: "",
+      icon: null,
     }
   );
 };

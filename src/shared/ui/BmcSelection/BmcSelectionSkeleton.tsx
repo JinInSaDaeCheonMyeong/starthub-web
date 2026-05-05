@@ -1,63 +1,42 @@
-import styled from "styled-components";
-import { StartHubColors } from "@/shared/design";
-import * as S from "./style";
-
-const SkeletonBox = styled.div`
-  background-color: ${StartHubColors.Gray4};
-  animation: pulse 1.5s infinite ease-in-out;
-
-  @keyframes pulse {
-    0% {
-      background-color: ${StartHubColors.Gray4};
-    }
-    50% {
-      background-color: ${StartHubColors.Gray3};
-    }
-    100% {
-      background-color: ${StartHubColors.Gray4};
-    }
-  }
-`;
-
-const SkeletonImage = styled(SkeletonBox)`
-  width: 242px;
-  height: 170px;
-  border-radius: 10px;
-  border: 1px solid ${StartHubColors.Gray3};
-`;
-
-const SkeletonTitle = styled(SkeletonBox)`
-  width: 150px;
-  height: 16px;
-  margin-top: 8px;
-  border-radius: 4px;
-`;
-
-const SkeletonDate = styled(SkeletonBox)`
-  width: 100px;
-  height: 12px;
-  margin-top: 4px;
-  border-radius: 4px;
-`;
-
-const SkeletonCardWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
 export const BmcSelectionSkeleton = () => {
   return (
-    <S.Container>
-      <S.Text>먼저 원하는 BMC를 선택해 주세요.</S.Text>
-      <S.BmcTemplateContainer>
-        {[...Array(4)].map((_, index) => (
-          <SkeletonCardWrapper key={index}>
-            <SkeletonImage />
-            <SkeletonTitle />
-            <SkeletonDate />
-          </SkeletonCardWrapper>
-        ))}
-      </S.BmcTemplateContainer>
-    </S.Container>
+    <div className="w-full mt-[120px] sm:mt-[130px] md:mt-[140px] lg:mt-[150px] mb-[50px]">
+      <div className="w-full px-4 md:px-8 lg:w-[1040px] lg:mx-auto lg:px-0">
+        <p className="font-pt-body1-medium mb-5">
+          먼저 원하는 BMC를 선택해 주세요.
+        </p>
+
+        {/* 모바일: 리스트, 데스크탑: 카드 그리드 */}
+        <div className="w-full">
+          {/* 모바일 리스트 스켈레톤 */}
+          <div className="block lg:hidden w-full">
+            <div className="space-y-3">
+              {[...Array(4)].map((_, index) => (
+                <div key={index} className="flex items-center justify-between p-4 bg-white border border-hub-gray-3 rounded-lg">
+                  <div className="flex-1">
+                    <div className="w-[150px] h-4 bg-hub-gray-4 rounded animate-skeleton-pulse mb-2" />
+                    <div className="w-[100px] h-3 bg-hub-gray-4 rounded animate-skeleton-pulse" />
+                  </div>
+                  <div className="ml-4 w-6 h-6 bg-hub-gray-4 rounded animate-skeleton-pulse" />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* 데스크탑 카드 그리드 스켈레톤 */}
+          <div className="hidden lg:grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8 w-full">
+            {[...Array(4)].map((_, index) => (
+              <div key={index} className="flex flex-col w-full max-w-[242px] mx-auto">
+                <div className="w-full aspect-[242/170] bg-hub-gray-4 rounded-[10px] border border-hub-gray-3 animate-skeleton-pulse" />
+                <div className="p-3">
+                  <div className="w-[150px] h-4 bg-hub-gray-4 rounded animate-skeleton-pulse mb-2" />
+                  <div className="w-[100px] h-3 bg-hub-gray-4 rounded animate-skeleton-pulse" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };

@@ -1,7 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import styled, { CSSObject } from "styled-components";
-import { StartHubFont } from "@/shared/design/text/StartHubFont";
-import { StartHubColors } from "@/shared/design/color/StartHubColors";
 import { ReactComponent as ChevronDown } from "@assets/icons/chevron-down.svg";
 
 export interface DropdownOption {
@@ -15,105 +12,9 @@ export interface StartHubDropdownProps {
   placeholder?: string;
   width?: number;
   isDisabled?: boolean;
-  customStyle?: CSSObject;
+  className?: string;
   onChange: (value: string) => void;
 }
-
-const Wrapper = styled.div<{ width?: number }>`
-  position: relative;
-  display: inline-block;
-  width: ${({ width }) => (width ? `${width}px` : "fit-content")};
-`;
-
-const DropdownButton = styled.button.withConfig({
-  shouldForwardProp: (prop) => !["customStyle", "$isOpen"].includes(prop),
-})<{ customStyle?: CSSObject; $isOpen: boolean }>`
-  display: inline-flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 12px;
-  height: 40px;
-  ${StartHubFont.Pretendard.Caption1.Regular}
-  border: 1px solid ${({ $isOpen }) =>
-    $isOpen ? StartHubColors.Primary : StartHubColors.Gray3};
-  border-radius: 8px;
-  background: white;
-  cursor: pointer;
-  outline: none;
-  white-space: nowrap;
-  width: fit-content;
-  min-width: 120px;
-
-  &:hover {
-    border-color: ${StartHubColors.Primary};
-  }
-
-  &:disabled {
-    background-color: ${StartHubColors.White2};
-    color: ${StartHubColors.Gray3};
-    cursor: not-allowed;
-  }
-
-  ${({ customStyle }) => customStyle || ""}
-`;
-
-const DropdownText = styled.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "$isPlaceholder",
-})<{ $isPlaceholder: boolean }>`
-  color: ${({ $isPlaceholder }) =>
-    $isPlaceholder ? StartHubColors.Gray3 : StartHubColors.Black1};
-  padding-right: 8px;
-`;
-
-const ChevronIcon = styled(ChevronDown).withConfig({
-  shouldForwardProp: (prop) => prop !== "$isOpen",
-})<{ $isOpen: boolean }>`
-  width: 16px;
-  height: 16px;
-  fill: ${StartHubColors.Gray3};
-  transition: transform 0.2s ease;
-  transform: ${({ $isOpen }) => ($isOpen ? "rotate(180deg)" : "rotate(0deg)")};
-`;
-
-const DropdownList = styled.ul.withConfig({
-  shouldForwardProp: (prop) => prop !== "$isOpen",
-})<{ $isOpen: boolean }>`
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: white;
-  border: 1px solid ${StartHubColors.Gray3};
-  border-radius: 8px;
-  border-top: none;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  max-height: 200px;
-  overflow-y: auto;
-  z-index: 1000;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-
-  display: ${({ $isOpen }) => ($isOpen ? "block" : "none")};
-`;
-
-const DropdownItem = styled.li`
-  padding: 12px 20px;
-  ${StartHubFont.Pretendard.Caption1.Regular}
-  color: ${StartHubColors.Black1};
-  cursor: pointer;
-
-  &:hover {
-    background-color: ${StartHubColors.Gray3};
-  }
-
-  &:last-child {
-    border-bottom-left-radius: 8px;
-    border-bottom-right-radius: 8px;
-  }
-`;
 
 export const StartHubDropdown = ({
   options,
@@ -121,7 +22,7 @@ export const StartHubDropdown = ({
   placeholder = "선택해주세요",
   width,
   isDisabled,
-  customStyle,
+  className,
   onChange,
 }: StartHubDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -132,9 +33,7 @@ export const StartHubDropdown = ({
   const isPlaceholder = !selectedOption || value === "";
 
   const handleToggle = () => {
-    if (!isDisabled) {
-      setIsOpen(!isOpen);
-    }
+    if (!isDisabled) setIsOpen((prev) => !prev);
   };
 
   const handleOptionClick = (optionValue: string) => {
@@ -151,38 +50,55 @@ export const StartHubDropdown = ({
         setIsOpen(false);
       }
     };
-
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
-    <Wrapper width={width} ref={dropdownRef}>
-      <DropdownButton
+    <div
+      ref={dropdownRef}
+      className="relative inline-block"
+      style={{ width: width ? `${width}px` : "fit-content" }}
+    >
+      {/* 버튼 */}
+      <button
         type="button"
         onClick={handleToggle}
         disabled={isDisabled}
-        customStyle={customStyle}
-        $isOpen={isOpen}
+        className={[
+          "inline-flex items-center justify-between px-3 h-10 rounded-lg bg-white outline-none whitespace-nowrap min-w-[120px] w-fit font-pt-caption1-regular transition-colors",
+          isOpen ? "border border-hub-primary" : "border border-hub-gray-3",
+          "hover:border-hub-primary",
+          "disabled:bg-hub-white-2 disabled:text-hub-gray-3 disabled:cursor-not-allowed",
+          className,
+        ]
+          .filter(Boolean)
+          .join(" ")}
       >
-        <DropdownText $isPlaceholder={isPlaceholder}>
+        <span
+          className={`pr-2 ${isPlaceholder ? "text-hub-gray-3" : "text-hub-black-1"}`}
+        >
           {displayText}
-        </DropdownText>
-        <ChevronIcon $isOpen={isOpen} />
-      </DropdownButton>
+        </span>
+        <ChevronDown
+          className={`w-4 h-4 fill-hub-gray-3 transition-transform duration-200 ${isOpen ? "rotate-180" : "rotate-0"}`}
+        />
+      </button>
 
-      <DropdownList $isOpen={isOpen}>
-        {options.map((option) => (
-          <DropdownItem
-            key={option.value}
-            onClick={() => handleOptionClick(option.value)}
-          >
-            {option.label}
-          </DropdownItem>
-        ))}
-      </DropdownList>
-    </Wrapper>
+      {/* 리스트 */}
+      {isOpen && (
+        <ul className="absolute top-full left-0 right-0 bg-white border border-hub-gray-3 border-t-0 rounded-b-lg max-h-[200px] overflow-y-auto z-[1000] m-0 p-0 list-none shadow-[0_2px_8px_rgba(0,0,0,0.1)]">
+          {options.map((option) => (
+            <li
+              key={option.value}
+              onClick={() => handleOptionClick(option.value)}
+              className="px-5 py-3 font-pt-caption1-regular text-hub-black-1 cursor-pointer hover:bg-hub-gray-3 last:rounded-b-lg"
+            >
+              {option.label}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 };

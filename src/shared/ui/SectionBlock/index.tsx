@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import { StartHubFont } from "@/shared/design";
+"use client";
+
 import { ReactComponent as Arrow } from "@assets/icons/arrow.svg";
-import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/navigation";
 
 interface SectionBlockProps {
   title: string;
@@ -10,32 +10,22 @@ interface SectionBlockProps {
 }
 
 const SectionBlock = ({ title, children, path }: SectionBlockProps) => {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   return (
-    <>
-      <LabelSection onClick={() => navigate(path)}>
-        <p>{title}</p>
-        <Arrow />
-      </LabelSection>
-      {children}
-    </>
+    <div className="w-full">
+      <div
+        onClick={() => router.push(path)}
+        className="flex items-center mb-5 cursor-pointer font-pt-h2-semibold text-[20px] text-hub-gray-1"
+      >
+        <span className="mr-[5px] break-keep">{title}</span>
+        <Arrow className="w-[15px] h-[15px]" />
+      </div>
+      <div className="w-full">
+        {children}
+      </div>
+    </div>
   );
 };
 
 export default SectionBlock;
-
-export const LabelSection = styled.div`
-  ${StartHubFont.Pretendard.Headlines2.SemiBold}
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-  cursor: pointer;
-  p {
-    margin-right: 10px;
-  }
-
-  svg {
-    width: 15px;
-  }
-`;

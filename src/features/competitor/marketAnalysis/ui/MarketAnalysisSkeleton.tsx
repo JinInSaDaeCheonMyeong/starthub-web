@@ -1,243 +1,115 @@
-import styled from "styled-components";
-import { StartHubColors } from "@/shared/design";
-
-const SkeletonContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding-left: 200px;
-  padding-right: 200px;
-  width: 100%;
-  box-sizing: border-box;
-`;
-
-const SkeletonTitle = styled.div`
-  width: 200px;
-  height: 32px;
-  background-color: ${StartHubColors.Gray4};
-  border-radius: 8px;
-  margin-bottom: 40px;
-  animation: pulse 1.5s infinite ease-in-out;
-
-  @keyframes pulse {
-    0% {
-      background-color: ${StartHubColors.Gray4};
-    }
-    50% {
-      background-color: ${StartHubColors.Gray3};
-    }
-    100% {
-      background-color: ${StartHubColors.Gray4};
-    }
-  }
-`;
-
-const SkeletonContentWrapper = styled.div`
-  display: flex;
-  gap: 40px;
-  width: 100%;
-  max-width: 1400px;
-`;
-
-const SkeletonMainContent = styled.div`
-  flex: 1;
-  min-width: 0;
-`;
-
-const SkeletonSection = styled.div`
-  max-width: 700px;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
-`;
-
-const SkeletonSectionTitle = styled.div`
-  width: 150px;
-  height: 24px;
-  background-color: ${StartHubColors.Gray4};
-  border-radius: 6px;
-  margin-bottom: 20px;
-  animation: pulse 1.5s infinite ease-in-out;
-
-  @keyframes pulse {
-    0% {
-      background-color: ${StartHubColors.Gray4};
-    }
-    50% {
-      background-color: ${StartHubColors.Gray3};
-    }
-    100% {
-      background-color: ${StartHubColors.Gray4};
-    }
-  }
-`;
-
-const SkeletonBox = styled.div`
-  width: 100%;
-  height: 80px;
-  background-color: ${StartHubColors.Gray4};
-  border-radius: 10px;
-  margin-bottom: 10px;
-  animation: pulse 1.5s infinite ease-in-out;
-
-  @keyframes pulse {
-    0% {
-      background-color: ${StartHubColors.Gray4};
-    }
-    50% {
-      background-color: ${StartHubColors.Gray3};
-    }
-    100% {
-      background-color: ${StartHubColors.Gray4};
-    }
-  }
-`;
-
-const SkeletonCompetitorGrid = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: flex-start;
-  width: 700px;
-  margin-bottom: 20px;
-`;
-
-const SkeletonCompetitorCard = styled.div`
-  width: 340px;
-  height: 300px;
-  padding: 20px;
-  border: 1px solid ${StartHubColors.Gray3};
-  border-radius: 8px;
-  box-sizing: border-box;
-  background-color: ${StartHubColors.Gray4};
-  animation: pulse 1.5s infinite ease-in-out;
-
-  @keyframes pulse {
-    0% {
-      background-color: ${StartHubColors.Gray4};
-    }
-    50% {
-      background-color: ${StartHubColors.Gray3};
-    }
-    100% {
-      background-color: ${StartHubColors.Gray4};
-    }
-  }
-`;
-
-const SkeletonDivider = styled.div`
-  width: 700px;
-  height: 1px;
-  margin-top: 20px;
-  margin-bottom: 30px;
-  background-color: ${StartHubColors.Gray3};
-  align-self: flex-start;
-`;
-
-const SkeletonInsightGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 25px;
-  margin-bottom: 30px;
-`;
-
-const SkeletonInsightCard = styled.div`
-  height: 200px;
-  padding: 24px;
-  border-radius: 10px;
-  background-color: ${StartHubColors.Gray4};
-  animation: pulse 1.5s infinite ease-in-out;
-
-  @keyframes pulse {
-    0% {
-      background-color: ${StartHubColors.Gray4};
-    }
-    50% {
-      background-color: ${StartHubColors.Gray3};
-    }
-    100% {
-      background-color: ${StartHubColors.Gray4};
-    }
-  }
-`;
-
-const SkeletonSidebar = styled.div`
-  position: sticky;
-  top: 20px;
-  width: 300px;
-  flex-shrink: 0;
-  height: 500px;
-  padding: 20px;
-  border: 1px solid ${StartHubColors.Gray3};
-  border-radius: 10px;
-  background-color: ${StartHubColors.Gray4};
-  align-self: flex-start;
-  animation: pulse 1.5s infinite ease-in-out;
-
-  @keyframes pulse {
-    0% {
-      background-color: ${StartHubColors.Gray4};
-    }
-    50% {
-      background-color: ${StartHubColors.Gray3};
-    }
-    100% {
-      background-color: ${StartHubColors.Gray4};
-    }
-  }
-`;
-
 export const MarketAnalysisSkeleton = () => {
+  const pulse = "animate-skeleton-pulse";
+
   return (
-    <SkeletonContainer>
-      <SkeletonTitle />
+    // SkeletonContainer - 반응형
+    <div className="w-full mt-[120px] sm:mt-[130px] md:mt-[140px] lg:mt-[150px] mb-[50px]">
+      <div className="w-full px-4 md:px-8 lg:w-[1040px] lg:mx-auto lg:px-0">
+        {/* SkeletonTitle */}
+        <div
+          className={`w-[200px] h-6 sm:h-8 bg-hub-gray-4 rounded-lg mb-5 ${pulse}`}
+        />
 
-      <SkeletonContentWrapper>
-        <SkeletonMainContent>
-          {/* User Scale Section */}
-          <SkeletonSection>
-            <SkeletonSectionTitle />
-            <SkeletonBox />
-            <SkeletonBox />
-            <SkeletonBox />
-          </SkeletonSection>
+        {/* SkeletonContentWrapper - 반응형 레이아웃 */}
+        <div className="flex flex-col lg:flex-row lg:gap-10 w-full">
+          {/* SkeletonMainContent */}
+          <div className="flex-1 min-w-0">
+            {/* BMC Image Skeleton */}
+            <div className="w-full max-w-[700px] mb-6 lg:mb-10">
+              <div
+                className={`w-full h-[200px] sm:h-[300px] bg-hub-gray-4 rounded-[10px] border border-hub-gray-3 ${pulse}`}
+              />
+            </div>
 
-          {/* Competitor Section */}
-          <SkeletonSection>
-            <SkeletonSectionTitle />
-            <SkeletonCompetitorGrid>
-              <SkeletonCompetitorCard />
-              <SkeletonCompetitorCard />
-            </SkeletonCompetitorGrid>
-            <SkeletonCompetitorGrid>
-              <SkeletonCompetitorCard />
-              <SkeletonCompetitorCard />
-            </SkeletonCompetitorGrid>
-          </SkeletonSection>
+            {/* BMC Sidebar Skeleton - 모바일에서만 */}
+            <div className="lg:hidden w-full mb-6">
+              <div
+                className={`w-full h-[400px] p-4 border border-hub-gray-3 rounded-[10px] bg-hub-gray-4 ${pulse}`}
+              />
+            </div>
 
-          <SkeletonDivider />
+            {/* User Scale Section */}
+            <div className="w-full pb-5 mb-5">
+              <div
+                className={`w-[150px] h-5 sm:h-6 bg-hub-gray-4 rounded-md mb-5 ${pulse}`}
+              />
+              {/* 모바일: 세로, 데스크탑: 가로 */}
+              <div className="flex flex-col lg:flex-row lg:gap-2.5 gap-5">
+                <div
+                  className={`w-full lg:flex-1 h-20 bg-hub-gray-4 rounded-[10px] ${pulse}`}
+                />
+                <div
+                  className={`w-full lg:flex-1 h-20 bg-hub-gray-4 rounded-[10px] ${pulse}`}
+                />
+                <div
+                  className={`w-full lg:flex-1 h-20 bg-hub-gray-4 rounded-[10px] ${pulse}`}
+                />
+              </div>
+            </div>
 
-          {/* Insight Section */}
-          <SkeletonSection>
-            <SkeletonSectionTitle />
-            <SkeletonInsightGrid>
-              <SkeletonInsightCard />
-              <SkeletonInsightCard />
-            </SkeletonInsightGrid>
-          </SkeletonSection>
+            {/* Competitor Section */}
+            <div className="w-full pb-5 mb-5">
+              <div
+                className={`w-[150px] h-5 sm:h-6 bg-hub-gray-4 rounded-md mb-5 ${pulse}`}
+              />
+              {/* 모바일: 1열, 데스크탑: 2열 */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
+                <div
+                  className={`w-full h-[200px] sm:h-[250px] p-4 border border-hub-gray-3 rounded-lg bg-hub-gray-4 ${pulse}`}
+                />
+                <div
+                  className={`w-full h-[200px] sm:h-[250px] p-4 border border-hub-gray-3 rounded-lg bg-hub-gray-4 ${pulse}`}
+                />
+              </div>
+            </div>
 
-          <SkeletonDivider />
+            {/* SkeletonDivider */}
+            <div className="w-full h-px mt-5 mb-[30px] bg-hub-gray-3" />
 
-          {/* Global Expansion Section */}
-          <SkeletonSection>
-            <SkeletonSectionTitle />
-            <SkeletonBox />
-            <SkeletonBox />
-          </SkeletonSection>
-        </SkeletonMainContent>
+            {/* Insight Section */}
+            <div className="w-full pb-5 mb-5">
+              <div
+                className={`w-[150px] h-5 sm:h-6 bg-hub-gray-4 rounded-md mb-5 ${pulse}`}
+              />
+              {/* 모바일: 세로, 데스크탑: 가로 */}
+              <div className="flex flex-col lg:grid lg:grid-cols-2 lg:gap-[25px] gap-[30px]">
+                <div
+                  className={`h-[150px] sm:h-[200px] p-4 sm:p-6 rounded-[10px] bg-hub-gray-4 ${pulse}`}
+                />
+                <div
+                  className={`h-[150px] sm:h-[200px] p-4 sm:p-6 rounded-[10px] bg-hub-gray-4 ${pulse}`}
+                />
+              </div>
+            </div>
 
-        {/* BMC Sidebar */}
-        <SkeletonSidebar />
-      </SkeletonContentWrapper>
-    </SkeletonContainer>
+            {/* SkeletonDivider */}
+            <div className="w-full h-px mt-5 mb-[30px] bg-hub-gray-3" />
+
+            {/* Global Expansion Section */}
+            <div className="w-full pb-5 mb-5">
+              <div
+                className={`w-[150px] h-5 sm:h-6 bg-hub-gray-4 rounded-md mb-5 ${pulse}`}
+              />
+              <div
+                className={`w-full h-16 sm:h-20 bg-hub-gray-4 rounded-[10px] mb-2.5 ${pulse}`}
+              />
+              <div
+                className={`w-full h-16 sm:h-20 bg-hub-gray-4 rounded-[10px] mb-2.5 ${pulse}`}
+              />
+              <div
+                className={`w-full h-16 sm:h-20 bg-hub-gray-4 rounded-[10px] mb-2.5 ${pulse}`}
+              />
+            </div>
+          </div>
+
+          {/* SkeletonSidebar - 데스크탑에서만 */}
+          <div className="hidden lg:block lg:w-[350px] lg:flex-shrink-0">
+            <div
+              className={`sticky top-[170px] w-full h-[400px] p-5 border border-hub-gray-3 rounded-[10px] bg-hub-gray-4 ${pulse}`}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };

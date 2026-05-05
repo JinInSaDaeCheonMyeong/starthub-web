@@ -3,7 +3,6 @@ import { ReactComponent as LeftArrow } from "@assets/icons/page-arrow-left.svg";
 import { ReactComponent as RightArrow } from "@assets/icons/page-arrow-right.svg";
 import { ReactComponent as LeftHoverArrow } from "@assets/icons/page-arrow-hover.svg";
 import { ReactComponent as RightHoverArrow } from "@assets/icons/page-arrow-hover-right.svg";
-import * as S from "./style";
 
 interface PaginationProps {
   currentPage: number;
@@ -25,61 +24,57 @@ const Pagination = ({
   const [isRightHovered, setIsRightHovered] = useState(false);
 
   const paginationRange = () => {
-    const maxVisiblePages = 5; 
-
-    if (totalPages <= maxVisiblePages) {
-      return range(1, totalPages);
-    }
+    const maxVisiblePages = 5;
+    if (totalPages <= maxVisiblePages) return range(1, totalPages);
 
     let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
     const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
-
-    if (endPage === totalPages) {
+    if (endPage === totalPages)
       startPage = Math.max(1, totalPages - maxVisiblePages + 1);
-    }
 
     return range(startPage, endPage);
   };
 
-  const pagination = paginationRange();
-
-
   return (
-    <S.Pagination>
+    <div className="flex items-center justify-center mt-[50px] md:mt-[100px] mb-[30px] gap-2 md:gap-5 [&_svg]:w-5 [&_svg]:h-5 md:[&_svg]:w-6 md:[&_svg]:h-6">
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        style={{ border: "none", background: "transparent", cursor: "pointer" }}
+        className="border-none bg-transparent cursor-pointer disabled:cursor-not-allowed disabled:opacity-40 p-1"
         onMouseEnter={() => setIsLeftHovered(true)}
         onMouseLeave={() => setIsLeftHovered(false)}
       >
         {isLeftHovered ? <LeftHoverArrow /> : <LeftArrow />}
       </button>
 
-      {pagination?.map((page, idx) => {
-        const isActive = Number(page) === currentPage;
-
+      {paginationRange().map((page, idx) => {
+        const isActive = page === currentPage;
         return (
-          <S.PageNumber
+          <p
             key={idx}
-            $isActive={isActive}
-            onClick={() => onPageChange(Number(page))}
+            onClick={() => onPageChange(page)}
+            className={[
+              "cursor-pointer pb-1 px-2 font-pt-caption1-regular transition-all duration-200 text-sm md:text-base",
+              isActive
+                ? "text-hub-black-1 border-b-2 border-hub-black-1"
+                : "text-hub-gray-2 border-b-2 border-transparent",
+            ].join(" ")}
           >
             {page}
-          </S.PageNumber>
+          </p>
         );
       })}
 
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        style={{ border: "none", background: "transparent", cursor: "pointer" }}
+        className="border-none bg-transparent cursor-pointer disabled:cursor-not-allowed disabled:opacity-40 p-1"
         onMouseEnter={() => setIsRightHovered(true)}
         onMouseLeave={() => setIsRightHovered(false)}
       >
         {isRightHovered ? <RightHoverArrow /> : <RightArrow />}
       </button>
-    </S.Pagination>
+    </div>
   );
 };
 

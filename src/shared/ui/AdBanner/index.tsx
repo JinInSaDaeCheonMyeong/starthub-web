@@ -1,49 +1,21 @@
-import styled from "styled-components";
 import { ReactComponent as Rocket } from "@/assets/images/rocket.svg";
 import { ReactComponent as Stars } from "@/assets/images/stars.svg";
-import { StartHubColors, StartHubFont } from "@/shared/design";
 
 const AdBanner = () => {
   return (
-    <Backgound>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100%",
-        }}
-      >
-        <RocketImg />
-        <Text>프리미엄 서비스에 대해 궁금하신가요?</Text>
-        <Star />
+    <div
+      className="w-full h-[94px] flex justify-center"
+      style={{ background: "linear-gradient(90deg, #74a0ff 21%, #000000 91%)" }}
+    >
+      <div className="w-full px-4 md:px-8 lg:w-[1040px] lg:mx-auto lg:px-0 flex justify-center items-center h-full">
+        <Rocket className="w-[60px] h-[72px] md:w-[83px] md:h-[100px] mr-3 md:mr-5" />
+        <span className="font-pt-h2-semibold text-hub-white-1 text-sm md:text-base lg:text-lg text-center">
+          프리미엄 서비스에 대해 궁금하신가요?
+        </span>
+        <Stars className="w-[60px] h-[72px] md:w-[86px] md:h-full ml-3 md:ml-5" />
       </div>
-    </Backgound>
+    </div>
   );
 };
 
 export default AdBanner;
-
-const Backgound = styled.div`
-  width: 100%;
-  height: 94px;
-  background: linear-gradient(90deg, #74a0ff 21%, #000000 91%);
-  padding: 0 200px;
-`;
-
-const RocketImg = styled(Rocket)`
-  width: 83px;
-  height: 100px;
-  margin-right: 20px;
-`;
-
-const Text = styled.span`
-  color: ${StartHubColors.White1};
-  ${StartHubFont.Pretendard.Headlines2.SemiBold};
-`;
-
-const Star = styled(Stars)`
-  width: 86px;
-  height: 100%;
-  margin-right: 20px;
-`;

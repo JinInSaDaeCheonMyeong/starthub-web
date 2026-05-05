@@ -13,9 +13,7 @@ export const StartHubCheckBox = ({
   disabled = false,
 }: StartHubCheckBoxProps) => {
   const handleClick = () => {
-    if (!disabled && onChange) {
-      onChange(!checked);
-    }
+    if (!disabled && onChange) onChange(!checked);
   };
 
   return (
@@ -23,15 +21,9 @@ export const StartHubCheckBox = ({
       type="button"
       onClick={handleClick}
       disabled={disabled}
-      style={{
-        background: "transparent",
-        border: "none",
-        padding: 0,
-        cursor: disabled ? "not-allowed" : "pointer",
-        height: "20px",
-      }}
       aria-pressed={checked}
       aria-disabled={disabled}
+      className="bg-transparent border-none p-0 h-5 disabled:cursor-not-allowed cursor-pointer"
     >
       {checked ? (
         <FilledCheckBox width={20} height={20} />

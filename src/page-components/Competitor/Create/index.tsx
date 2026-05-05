@@ -1,0 +1,135 @@
+"use client";
+import { useEffect, useState } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+import { useQueryClient } from "@tanstack/react-query";
+import MarketAnalysis from "@/features/competitor/marketAnalysis/ui/MarketAnalysis/index";
+import { MarketAnalysisSkeleton } from "@/features/competitor/marketAnalysis/ui/MarketAnalysisSkeleton";
+import LoadingModal from "@/shared/ui/LoadingModal";
+import { competitorApi } from "@/entities/competitor/api/competitor";
+import { MarketAnalysisResponse } from "@/features/competitor/marketAnalysis/types";
+import { COMPETITOR_QUERY_KEYS } from "@/entities/competitor/queryKey";
+
+interface ApiError {
+  response?: {
+    status?: number;
+    data?: {
+      message?: string;
+    };
+  };
+  code?: string;
+}
+
+const getErrorMessage = (error: unknown): string => {
+  const apiError = error as ApiError;
+  const status = apiError.response?.status;
+  const message = apiError.response?.data?.message;
+
+  if (apiError.code === "ECONNABORTED") {
+    return "경쟁사 분석 중입니다. 시간이 오래 걸릴 수 있습니다. 잠시 후 다시 시도해주세요.";
+  }
+  if (status === 500)
+    return "서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.";
+  if (status === 404) return "BMC를 찾을 수 없습니다.";
+  if (message) return `${message} (${status || ""})`;
+  return `데이터를 불러오는데 실패했습니다. (${status || "네트워크 오류"})`;
+};
+
+const CompetitorCreate = () => {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const queryClient = useQueryClient();
+  const bmcId = searchParams?.get("bmcId");
+
+  const [serverData, setServerData] = useState<MarketAnalysisResponse | null>(
+    null
+  );
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!bmcId) {
+      setError("BMC ID가 필요합니다.");
+      setLoading(false);
+      return;
+    }
+
+    const createAnalysis = async () => {
+      try {
+        setLoading(true);
+
+        const existingAnalyses = await competitorApi.getCompetitorAnalyses();
+        const hasExisting = existingAnalyses.data.some(
+          (item) => item.bmcId === Number(bmcId)
+        );
+
+        const response = hasExisting
+          ? await competitorApi.regenerateCompetitorAnalysis(Number(bmcId))
+          : await competitorApi.createCompetitorAnalysis(Number(bmcId));
+
+        // response.data가 배열인지 단일 객체인지 확인
+        const analysisData = Array.isArray(response.data) ? response.data[0] : response.data;
+
+        if (analysisData) {
+          const transformedData: MarketAnalysisResponse = {
+            data: analysisData,
+            status: response.status,
+            message: response.message,
+            statusCode: response.statusCode,
+          };
+          setServerData(transformedData);
+        } else {
+          setError("분석 데이터를 받지 못했습니다.");
+        }
+
+        await queryClient.resetQueries({
+          queryKey: COMPETITOR_QUERY_KEYS.competitor.getAnalyses,
+          exact: true,
+        });
+      } catch (error) {
+        setError(getErrorMessage(error));
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    createAnalysis();
+  }, [bmcId, queryClient]);
+
+  if (loading) {
+    return (
+      <>
+        <LoadingModal
+          isOpen={loading}
+          message={"경쟁사 분석을 진행 중입니다.\n약 1분 정도 소요됩니다."}
+        />
+        <MarketAnalysisSkeleton />
+      </>
+    );
+  }
+
+  if (error) {
+    return (
+      <>
+        <p>{error}</p>
+        <button onClick={() => router.push("/competitor")}>
+          목록으로 돌아가기
+        </button>
+      </>
+    );
+  }
+
+  return (
+    <>
+      {serverData ? (
+        <MarketAnalysis
+          data={serverData}
+          bmcId={bmcId ? Number(bmcId) : undefined}
+        />
+      ) : (
+        <div>데이터가 없습니다.</div>
+      )}
+    </>
+  );
+};
+
+export default CompetitorCreate;

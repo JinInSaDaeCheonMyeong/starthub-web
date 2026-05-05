@@ -12,6 +12,18 @@ dist
 dist-ssr
 *.local
 
+# Next.js
+.next/
+out/
+.next
+*.tsbuildinfo
+next-env.d.ts
+
+# Testing
+test-results/
+playwright-report/
+playwright/.cache/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

@@ -1,9 +1,6 @@
 import { ChangeEventHandler, KeyboardEventHandler } from "react";
-import styled, { CSSObject } from "styled-components";
-import { StartHubFont } from "@/shared/design/text/StartHubFont";
-import { StartHubColors } from "@/shared/design/color/StartHubColors";
 
-type InputType = "text" | "password" | "number";
+type InputType = "text" | "password" | "number" | "email";
 
 export interface StartHubTextFieldProps {
   type: InputType;
@@ -16,69 +13,11 @@ export interface StartHubTextFieldProps {
   placeholder: string;
   isDisabled?: boolean;
   supportingText?: string;
-  customStyle?: CSSObject;
+  className?: string;
+  autoComplete?: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
   onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
 }
-
-const Wrapper = styled.div<{ width?: number }>`
-  display: flex;
-  flex-direction: column;
-  width: ${({ width }) => (width ? `${width}px` : "100%")};
-  position: relative;
-`;
-
-const Label = styled.label`
-  font-size: 14px;
-  margin-bottom: 12px;
-  color: ${StartHubColors.Black1};
-  ${StartHubFont.Pretendard.Body1.Medium}
-
-  div {
-    ${StartHubFont.Pretendard.Caption1.Medium}
-    color: ${StartHubColors.Primary};
-    font-size: 14px;
-  }
-`;
-
-const Input = styled.input.withConfig({
-  shouldForwardProp: (prop) => !["customStyle", "isError"].includes(prop),
-})<{ isError?: boolean; customStyle?: CSSObject }>`
-  padding: 20px 20px;
-  ${StartHubFont.Pretendard.Caption1.Regular}
-  border: 1px solid ${({ isError }) =>
-    isError ? StartHubColors.Error : StartHubColors.Gray3};
-  border-radius: 8px;
-  outline: none;
-  height: 50px;
-  margin-bottom: ${({ isError }) => (isError ? "0" : "10px")};
-  &::placeholder {
-    color: ${StartHubColors.Gray3};
-  }
-
-  &:focus {
-    border-color: ${({ isError }) =>
-      isError ? StartHubColors.Error : StartHubColors.Primary};
-  }
-
-  &:disabled {
-    background-color: ${StartHubColors.White2};
-    color: ${StartHubColors.Gray3};
-  }
-
-  ${({ customStyle }) => customStyle || ""}
-`;
-
-const SupportingText = styled.span.withConfig({
-  shouldForwardProp: (prop) => prop !== "isError",
-})<{ isError?: boolean; placeholder?: string }>`
-  color: ${StartHubColors.Error};
-  ${StartHubFont.Pretendard.Body2.Regular}
-  font-size: 13px;
-  left: 0;
-  width: 100%;
-  padding-bottom: 10px;
-`;
 
 export const StartHubTextField = ({
   type,
@@ -91,33 +30,62 @@ export const StartHubTextField = ({
   placeholder,
   isDisabled,
   supportingText,
-  customStyle,
+  className,
+  autoComplete,
   onChange,
   onKeyDown,
 }: StartHubTextFieldProps) => {
   return (
-    <Wrapper width={width}>
+    <div
+      className="flex flex-col relative"
+      style={{ width: width ? `${width}px` : "100%" }}
+    >
       {(label || detailLabel) && (
-        <Label htmlFor={name}>
+        <label
+          htmlFor={name}
+          className="font-pt-body1-medium text-hub-black-1 mb-3"
+        >
           {label}
-          {detailLabel && <div>{detailLabel}</div>}
-        </Label>
+          {detailLabel && (
+            <div className="font-pt-caption1-medium text-hub-primary text-sm">
+              {detailLabel}
+            </div>
+          )}
+        </label>
       )}
-      <Input
+
+      <input
         type={type}
         id={name}
         name={name}
         value={value}
         placeholder={placeholder}
-        isError={isError}
         disabled={isDisabled}
+        autoComplete={autoComplete}
         onChange={onChange}
         onKeyDown={onKeyDown}
-        customStyle={customStyle}
+        className={[
+          "px-5 h-[50px] rounded-lg outline-none font-pt-caption1-regular",
+          "placeholder:text-hub-gray-3",
+          isError
+            ? "border border-hub-error focus:border-hub-error"
+            : supportingText
+            ? "border border-hub-gray-3 focus:border-hub-primary"
+            : "border border-hub-gray-3 focus:border-hub-primary",
+          isDisabled
+            ? "bg-hub-white-2 text-hub-gray-3 cursor-not-allowed"
+            : "bg-white",
+          className,
+        ]
+          .filter(Boolean)
+          .join(" ")}
       />
+
       {supportingText && (
-        <SupportingText isError={true}>{supportingText}</SupportingText>
+        <span className="text-hub-error font-pt-caption1-regular text-[12px] mt-1 block">
+          {supportingText}
+        </span>
       )}
-    </Wrapper>
+    </div>
   );
 };
