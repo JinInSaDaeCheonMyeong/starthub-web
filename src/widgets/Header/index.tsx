@@ -1,7 +1,6 @@
 "use client";
 
 import { ReactComponent as LogoIcon } from "@/assets/logo/logoIcon.svg";
-import { StartHubButton } from "@/shared/ui/Button/index";
 import { useRouter, usePathname } from "next/navigation";
 import { useGetMyProfile } from "@/features/auth/getProfile/model/useGetMyProfile";
 import { ReactComponent as DefaultProfile } from "@assets/icons/profile.svg";
@@ -12,6 +11,7 @@ const navLinks = [
   { href: "/notices", label: "공고" },
   { href: "/competitor", label: "경쟁사 분석" },
   { href: "/bmc", label: "BMC 설계" },
+  { href: "/documents", label: "Doc AI" },
   { href: "/chat", label: "Hub AI" },
   { href: "/my-profile", label: "My 비즈니스" },
 ];
@@ -61,7 +61,7 @@ const Header = () => {
 
             {/* 데스크톱 네비게이션 */}
             <div className="hidden lg:flex items-center gap-8">
-              {navLinks.slice(0, 4).map(({ href, label }) => (
+              {navLinks.slice(0, 5).map(({ href, label }) => (
                 <Link
                   key={href}
                   href={href}
