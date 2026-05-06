@@ -1,16 +1,28 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useAIDocsEditor } from "./hooks/useAIDocsEditor";
-import { useState } from "react";
+import { toast } from "react-toastify";
+import { useAuthStore } from "@/app/model/stores/useAuthStore";
 
 const AIDocsEditorPage = () => {
   const params = useParams<{ id?: string | string[] }>();
   const router = useRouter();
+  const { isLoggedIn } = useAuthStore();
   const rawId = Array.isArray(params?.id) ? params.id[0] : params?.id;
   const parsedId = rawId ? Number(rawId) : NaN;
   const documentId = Number.isFinite(parsedId) && parsedId > 0 ? parsedId : 0;
   const [viewMode, setViewMode] = useState<"edit" | "preview">("edit");
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      toast.info("로그인 후 이용하실 수 있습니다.", {
+        toastId: "login-required-documents-edit",
+      });
+      router.push("/sign-in");
+    }
+  }, [isLoggedIn, router]);
 
   const {
     document,
@@ -44,9 +56,25 @@ const AIDocsEditorPage = () => {
     );
   }
 
+  if (!isLoggedIn) {
+    return (
+      <div className="w-full mt-[120px] sm:mt-[130px] md:mt-[140px] lg:mt-[150px] mb-[50px]">
+        <div className="w-full px-4 md:px-8 lg:w-[1040px] lg:mx-auto lg:px-0">
+          <div className="min-h-[60vh] flex justify-center items-center">
+            <div className="text-center">
+              <p className="font-pt-body2-medium text-hub-gray-2">
+                로그인 페이지로 이동 중...
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   if (isLoading) {
     return (
-      <main className="w-full max-w-7xl px-6 py-10">
+      <main className="w-full mx-auto lg:mx-auto mt-[120px] sm:mt-[130px] md:mt-[140px] lg:mt-[150px] mb-[50px] max-w-7xl px-6 py-10">
         <div className="grid gap-6 lg:grid-cols-[1fr_280px]">
           <div className="h-170 animate-pulse rounded-lg border border-hub-gray-3 bg-white" />
           <div className="space-y-4">
@@ -59,7 +87,7 @@ const AIDocsEditorPage = () => {
   }
 
   return (
-    <main className="w-full max-w-7xl px-6 py-10">
+    <main className="w-full mx-auto lg:mx-auto mt-[120px] sm:mt-[130px] md:mt-[140px] lg:mt-[150px] mb-[50px] max-w-7xl px-6 py-10">
       <div className="grid gap-6 lg:grid-cols-[1fr_280px]">
         <section className="rounded-lg border border-hub-gray-3 bg-white p-5">
           <div className="mb-3 flex items-center justify-between border-b border-hub-gray-4 pb-3">
@@ -212,9 +240,7 @@ const AIDocsEditorPage = () => {
             <select
               value={exportFormat}
               onChange={(e) =>
-                setExportFormat(
-                  e.target.value as "pdf" | "docx" | "hwp",
-                )
+                setExportFormat(e.target.value as "pdf" | "docx" | "hwp")
               }
               className="h-10 w-full rounded-md border border-hub-gray-3 px-3 text-sm text-hub-gray-1 outline-none focus:border-hub-primary"
             >

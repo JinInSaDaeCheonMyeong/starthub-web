@@ -4,6 +4,8 @@ import { ChangeEvent, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 import { documentApi } from "@/entities/document";
+import { useEffect } from "react";
+import { useAuthStore } from "@/app/model/stores/useAuthStore";
 
 const MAX_FILE_SIZE = 20 * 1024 * 1024;
 
@@ -15,10 +17,36 @@ const defaultTitle = () => {
 
 const AIDocsUploadPage = () => {
   const router = useRouter();
+  const { isLoggedIn } = useAuthStore();
   const [title, setTitle] = useState(defaultTitle());
   const [documentType, setDocumentType] = useState("PLAN");
   const [file, setFile] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      toast.info("로그인 후 이용하실 수 있습니다.", {
+        toastId: "login-required-documents-new",
+      });
+      router.push("/sign-in");
+    }
+  }, [isLoggedIn, router]);
+
+  if (!isLoggedIn) {
+    return (
+      <div className="w-full mt-[120px] sm:mt-[130px] md:mt-[140px] lg:mt-[150px] mb-[50px]">
+        <div className="w-full px-4 md:px-8 lg:w-[1040px] lg:mx-auto lg:px-0">
+          <div className="min-h-[60vh] flex justify-center items-center">
+            <div className="text-center">
+              <p className="font-pt-body2-medium text-hub-gray-2">
+                로그인 페이지로 이동 중...
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const fileSizeLabel = useMemo(() => {
     if (!file) return "";
@@ -80,7 +108,7 @@ const AIDocsUploadPage = () => {
   };
 
   return (
-    <main className="w-full max-w-195 px-6 py-10">
+    <main className="w-full mx-auto lg:mx-auto mt-[120px] sm:mt-[130px] md:mt-[140px] lg:mt-[150px] mb-[50px] max-w-195 px-6 py-10">
       <div className="text-center">
         <h1 className="text-[40px] font-bold leading-tight text-hub-primary">
           템플릿을 업로드하세요.

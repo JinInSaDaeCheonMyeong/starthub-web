@@ -1,7 +1,10 @@
 "use client";
 
+import { useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useAIDocsQuestions } from "./hooks/useAIDocsQuestions";
+import { toast } from "react-toastify";
+import { useAuthStore } from "@/app/model/stores/useAuthStore";
 
 const toneChips = [
   { label: "전문적이고 신뢰감 있는", value: "PROFESSIONAL" },
@@ -12,9 +15,35 @@ const toneChips = [
 const AIDocsQuestionsPage = () => {
   const params = useParams<{ id?: string | string[] }>();
   const router = useRouter();
+  const { isLoggedIn } = useAuthStore();
   const rawId = Array.isArray(params?.id) ? params.id[0] : params?.id;
   const parsedId = rawId ? Number(rawId) : NaN;
   const documentId = Number.isFinite(parsedId) && parsedId > 0 ? parsedId : 0;
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      toast.info("로그인 후 이용하실 수 있습니다.", {
+        toastId: "login-required-documents-questions",
+      });
+      router.push("/sign-in");
+    }
+  }, [isLoggedIn, router]);
+
+  if (!isLoggedIn) {
+    return (
+      <div className="w-full mt-[120px] sm:mt-[130px] md:mt-[140px] lg:mt-[150px] mb-[50px]">
+        <div className="w-full px-4 md:px-8 lg:w-[1040px] lg:mx-auto lg:px-0">
+          <div className="min-h-[60vh] flex justify-center items-center">
+            <div className="text-center">
+              <p className="font-pt-body2-medium text-hub-gray-2">
+                로그인 페이지로 이동 중...
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const {
     questions,
@@ -43,7 +72,7 @@ const AIDocsQuestionsPage = () => {
   }
 
   return (
-    <main className="w-full max-w-225 px-6 py-10">
+    <main className="w-full mx-auto lg:mx-auto mt-[120px] sm:mt-[130px] md:mt-[140px] lg:mt-[150px] mb-[50px] max-w-225 px-6 py-10">
       <div className="mb-8 text-center">
         <h1 className="text-2xl font-bold text-hub-gray-1">
           질문에 답하면 AI가 문서를 생성합니다
@@ -116,7 +145,7 @@ const AIDocsQuestionsPage = () => {
                     value={answers[q.id] || ""}
                     onChange={(e) => setTextAnswer(q.id, e.target.value)}
                     placeholder="답변을 입력하세요"
-                    className="mt-4 min-h-22.5 w-full rounded-md border border-hub-gray-3 px-3 py-2 text-sm outline-none focus:border-hub-primary"
+                    className="mt-4 min-h-22.5 w-full rounded-md border border-hub-gray-3 px-3 py-2 text-sm outline-none focus:border-hub-primary resize-none"
                   />
                 )}
               </section>
