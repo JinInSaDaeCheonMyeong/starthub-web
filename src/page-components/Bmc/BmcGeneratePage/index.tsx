@@ -26,7 +26,7 @@ const BmcGeneratePage = () => {
             <div className="hidden lg:flex lg:justify-center lg:w-auto">
               <BmcStepNavigate />
             </div>
-            <div className="flex justify-center lg:justify-start w-full">
+            <div className="flex justify-center w-full">
               <BmcContent />
             </div>
           </div>
