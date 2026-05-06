@@ -22,7 +22,12 @@ export const StartHubSearchBar = ({
 }: StartHubSearchBarProps) => {
   return (
     <div
-      className="flex items-center relative border border-hub-gray-3 rounded-lg px-5 h-10 focus-within:border-hub-primary"
+      className={[
+        "flex items-center relative border border-hub-gray-3 rounded-lg px-5 h-10 focus-within:border-hub-primary",
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ")}
       style={{ width: width ? `${width}px` : "100%" }}
     >
       <Search className="w-5 h-5 mr-3 shrink-0" />
@@ -37,7 +42,6 @@ export const StartHubSearchBar = ({
           "font-pt-caption1-regular border-none outline-none w-full bg-transparent",
           "placeholder:text-hub-gray-3",
           isDisabled ? "text-hub-gray-3 cursor-not-allowed" : "",
-          className,
         ]
           .filter(Boolean)
           .join(" ")}

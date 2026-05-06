@@ -34,7 +34,9 @@ const ChatPage = () => {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      toast.info("로그인 후 이용하실 수 있습니다.", { toastId: "login-required-chat" });
+      toast.info("로그인 후 이용하실 수 있습니다.", {
+        toastId: "login-required-chat",
+      });
       router.push("/sign-in");
     }
   }, [isLoggedIn, router]);
@@ -52,6 +54,7 @@ const ChatPage = () => {
   const [quota, setQuota] = useState(null);
   const [quotaError, setQuotaError] = useState<string | null>(null);
   const [mounted, setMounted] = useState(false);
+  const [shouldAutoScroll, setShouldAutoScroll] = useState(true);
   const messageListRef = useRef<HTMLDivElement>(null);
   const pendingMessageRef = useRef<string | null>(null);
 
@@ -59,14 +62,14 @@ const ChatPage = () => {
     setMounted(true);
 
     // quota 정보 조회
-    console.log('Chat 페이지 마운트 - quota API 호출');
+    console.log("Chat 페이지 마운트 - quota API 호출");
     ChatAIApi.getQuota()
-      .then(data => {
-        console.log('quota API 성공:', data);
+      .then((data) => {
+        console.log("quota API 성공:", data);
         setQuota(data);
       })
-      .catch(error => {
-        console.error('quota API 실패:', error);
+      .catch((error) => {
+        console.error("quota API 실패:", error);
       });
   }, []);
 
@@ -86,16 +89,26 @@ const ChatPage = () => {
     // 윈도우 토큰 체크 (단기 제한)
     if (quota.windowTokensRemaining <= 0) {
       const resetTime = quota.windowResetAt
-        ? new Date(quota.windowResetAt).toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' })
-        : '';
-      setQuotaError(`단기 사용량 한도에 도달했습니다. ${resetTime ? `${resetTime}에 초기화됩니다.` : ''}`);
+        ? new Date(quota.windowResetAt).toLocaleTimeString("ko-KR", {
+            hour: "2-digit",
+            minute: "2-digit",
+          })
+        : "";
+      setQuotaError(
+        `단기 사용량 한도에 도달했습니다. ${resetTime ? `${resetTime}에 초기화됩니다.` : ""}`,
+      );
       return false;
     }
 
     // 주간 토큰 체크
     if (quota.weeklyTokensRemaining <= 0) {
-      const resetDate = new Date(quota.weeklyResetAt).toLocaleDateString('ko-KR', { month: 'long', day: 'numeric' });
-      setQuotaError(`주간 사용량 한도에 도달했습니다. ${resetDate}에 초기화됩니다.`);
+      const resetDate = new Date(quota.weeklyResetAt).toLocaleDateString(
+        "ko-KR",
+        { month: "long", day: "numeric" },
+      );
+      setQuotaError(
+        `주간 사용량 한도에 도달했습니다. ${resetDate}에 초기화됩니다.`,
+      );
       return false;
     }
 
@@ -155,12 +168,22 @@ const ChatPage = () => {
     }
   }, [activeSessionId, handleSendToSession]);
 
-  // 스크롤 하단 유지
+  // 스크롤 하단 유지 - 사용자가 위로 스크롤했을 때는 자동 스크롤 비활성화
   useEffect(() => {
-    if (messageListRef.current) {
+    if (messageListRef.current && shouldAutoScroll) {
       messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
     }
-  }, [messages, streamingText]);
+  }, [messages, streamingText, shouldAutoScroll]);
+
+  // 사용자 스크롤 감지
+  const handleScroll = useCallback(() => {
+    if (!messageListRef.current) return;
+
+    const { scrollTop, scrollHeight, clientHeight } = messageListRef.current;
+    // 하단에서 50px 이내면 자동 스크롤 활성화
+    const isNearBottom = scrollHeight - scrollTop - clientHeight < 50;
+    setShouldAutoScroll(isNearBottom);
+  }, []);
 
   const handleSend = async (text: string) => {
     if (!text.trim() || streaming) return;
@@ -193,7 +216,7 @@ const ChatPage = () => {
       const updatedQuota = await ChatAIApi.getQuota();
       setQuota(updatedQuota);
     } catch (error) {
-      console.error('quota 재조회 실패:', error);
+      console.error("quota 재조회 실패:", error);
     }
   };
 
@@ -214,7 +237,9 @@ const ChatPage = () => {
     return (
       <div className="flex h-screen items-center justify-center">
         <div className="text-center">
-          <p className="font-pt-body2-medium text-hub-gray-2">로그인 페이지로 이동 중...</p>
+          <p className="font-pt-body2-medium text-hub-gray-2">
+            로그인 페이지로 이동 중...
+          </p>
         </div>
       </div>
     );
@@ -279,15 +304,27 @@ const ChatPage = () => {
                   <div className="bg-gray-200 rounded-full h-1.5 mb-1">
                     <div
                       className={`h-1.5 rounded-full transition-all duration-300 ${
-                        quota.weeklyTokensRemaining <= 0 ? 'bg-red-500' : 'bg-blue-500'
+                        quota.weeklyTokensRemaining <= 0
+                          ? "bg-red-500"
+                          : "bg-blue-500"
                       }`}
-                      style={{width: `${Math.min(100, (quota.weeklyTokensUsed / quota.weeklyTokenLimit) * 100)}%`}}
+                      style={{
+                        width: `${Math.min(100, (quota.weeklyTokensUsed / quota.weeklyTokenLimit) * 100)}%`,
+                      }}
                     />
                   </div>
-                  <div className={`text-xs text-center ${
-                    quota.weeklyTokensRemaining <= 0 ? 'text-red-500' : 'text-gray-500'
-                  }`}>
-                    AI 사용량 {Math.round((quota.weeklyTokensUsed / quota.weeklyTokenLimit) * 100)}%
+                  <div
+                    className={`text-xs text-center ${
+                      quota.weeklyTokensRemaining <= 0
+                        ? "text-red-500"
+                        : "text-gray-500"
+                    }`}
+                  >
+                    AI 사용량{" "}
+                    {Math.round(
+                      (quota.weeklyTokensUsed / quota.weeklyTokenLimit) * 100,
+                    )}
+                    %
                   </div>
                   {quotaError && (
                     <div className="text-xs text-red-500 text-center mt-1 bg-red-50 rounded px-2 py-1">
@@ -311,16 +348,20 @@ const ChatPage = () => {
           <div
             className="flex-1 overflow-y-auto p-4 lg:p-6 flex flex-col items-center gap-3 w-full max-w-225 mx-auto"
             ref={messageListRef}
+            onScroll={handleScroll}
           >
             {messages.map((msg) =>
               msg.isUser ? (
                 <div className="flex justify-end w-full" key={msg.id}>
-                  <div className="max-w-[85%] lg:max-w-4/5 p-3 rounded-xl bg-hub-primary text-hub-white-1 font-pt-caption1-regular lg:font-pt-body2-regular wrap-break-word">
+                  <div className="max-w-[85%] lg:max-w-4/5 p-3 rounded-xl text-hub-black-1 bg-[#f5f5f5] font-pt-caption1-regular lg:font-pt-body2-regular wrap-break-word">
                     {msg.text}
                   </div>
                 </div>
               ) : (
-                <div key={msg.id} className="self-start max-w-full p-3 rounded-xl bg-hub-gray-4 font-pt-caption1-regular lg:font-pt-body2-regular text-hub-black-1 leading-relaxed">
+                <div
+                  key={msg.id}
+                  className="self-start max-w-full p-3 rounded-xl text-hub-black-1 leading-relaxed prose prose-sm max-w-none"
+                >
                   <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
                     components={markdownComponents}
@@ -336,7 +377,7 @@ const ChatPage = () => {
               </div>
             )}
             {streaming && streamingText && (
-              <div className="self-start max-w-full p-3 rounded-xl bg-hub-gray-4 font-pt-caption1-regular lg:font-pt-body2-regular text-hub-black-1 leading-relaxed">
+              <div className="self-start max-w-full p-3 rounded-xl text-hub-black-1 leading-relaxed prose prose-sm max-w-none">
                 <ReactMarkdown
                   remarkPlugins={[remarkGfm]}
                   components={markdownComponents}
@@ -359,15 +400,27 @@ const ChatPage = () => {
                 <div className="bg-gray-200 rounded-full h-1.5 mb-1">
                   <div
                     className={`h-1.5 rounded-full transition-all duration-300 ${
-                      quota.weeklyTokensRemaining <= 0 ? 'bg-red-500' : 'bg-blue-500'
+                      quota.weeklyTokensRemaining <= 0
+                        ? "bg-red-500"
+                        : "bg-blue-500"
                     }`}
-                    style={{width: `${Math.min(100, (quota.weeklyTokensUsed / quota.weeklyTokenLimit) * 100)}%`}}
+                    style={{
+                      width: `${Math.min(100, (quota.weeklyTokensUsed / quota.weeklyTokenLimit) * 100)}%`,
+                    }}
                   />
                 </div>
-                <div className={`text-xs text-center ${
-                  quota.weeklyTokensRemaining <= 0 ? 'text-red-500' : 'text-gray-500'
-                }`}>
-                  AI 사용량 {Math.round((quota.weeklyTokensUsed / quota.weeklyTokenLimit) * 100)}%
+                <div
+                  className={`text-xs text-center ${
+                    quota.weeklyTokensRemaining <= 0
+                      ? "text-red-500"
+                      : "text-gray-500"
+                  }`}
+                >
+                  AI 사용량{" "}
+                  {Math.round(
+                    (quota.weeklyTokensUsed / quota.weeklyTokenLimit) * 100,
+                  )}
+                  %
                 </div>
                 {quotaError && (
                   <div className="text-xs text-red-500 text-center mt-1 bg-red-50 rounded px-2 py-1">

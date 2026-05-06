@@ -87,13 +87,6 @@ const ChatAIWidget = () => {
             </div>
           )}
 
-          {/* 디버그용 - quota 데이터 확인 */}
-          {quota && (
-            <div className="px-3 pt-1 text-xs text-gray-500">
-              API 응답: {JSON.stringify(quota).substring(0, 100)}...
-            </div>
-          )}
-
           {/* 메시지 목록 */}
           <div
             ref={messageListRef}
