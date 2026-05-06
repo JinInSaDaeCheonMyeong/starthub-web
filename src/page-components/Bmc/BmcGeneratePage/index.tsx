@@ -22,12 +22,14 @@ const BmcGeneratePage = () => {
             <BmcContent />
           </div>
         ) : (
-          <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-[55px] px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-[34px] justify-center w-full">
-            <div className="hidden lg:flex lg:justify-center lg:w-auto">
-              <BmcStepNavigate />
-            </div>
-            <div className="flex justify-center w-full">
-              <BmcContent />
+          <div className="flex justify-center px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-[34px] w-full">
+            <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-[55px] w-auto">
+              <div className="hidden lg:flex lg:w-auto">
+                <BmcStepNavigate />
+              </div>
+              <div className="flex w-full lg:w-auto">
+                <BmcContent />
+              </div>
             </div>
           </div>
         )}
