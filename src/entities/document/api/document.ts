@@ -52,13 +52,13 @@ export const documentApi = {
     documentId: number,
     data: GenerateDocumentRequest,
   ): Promise<DocumentDetailResponse> =>
-    StartHubAxios.post(`/documents/${documentId}/generate`, data),
+    StartHubAxios.post(`/documents/${documentId}/generate`, data, { timeout: 60000 }),
 
   aiEditDocument: (
     documentId: number,
     data: AiEditDocumentRequest,
   ): Promise<DocumentDetailResponse> =>
-    StartHubAxios.post(`/documents/${documentId}/ai-edit`, data),
+    StartHubAxios.post(`/documents/${documentId}/ai-edit`, data, { timeout: 60000 }),
 
   getDocumentQuestions: (
     documentId: number,
