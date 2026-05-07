@@ -16,17 +16,42 @@ interface MarketAnalysisProps {
 const MarketAnalysis = ({ data, bmcId }: MarketAnalysisProps) => {
   const { userBmc, userScale, strengths, weaknesses, globalExpansionStrategy } =
     data.data;
+
+  // 데이터 구조 디버깅
+  console.log("MarketAnalysis data:", {
+    userBmc,
+    userScale,
+    strengths,
+    weaknesses,
+    globalExpansionStrategy,
+    fullData: data.data
+  });
+
+  // userScale 데이터 상세 확인
+  if (userScale) {
+    console.log("UserScale 상세:", {
+      estimatedUserBase: userScale.estimatedUserBase,
+      estimatedUserBaseType: typeof userScale.estimatedUserBase,
+      marketPosition: userScale.marketPosition,
+      marketPositionType: typeof userScale.marketPosition,
+      growthPotential: userScale.growthPotential,
+      growthPotentialType: typeof userScale.growthPotential
+    });
+  }
+
   const [bmcImageUrl, setBmcImageUrl] = React.useState<
     string | null | undefined
   >(null);
 
+  // competitorComparison 데이터를 국내/해외로 분류
+  const allCompetitors = userScale?.competitorComparison || [];
   const domesticCompetitors =
-    userScale.domesticCompetitors ||
-    userScale.competitorComparison?.slice(0, 2) ||
+    userScale?.domesticCompetitors ||
+    allCompetitors.slice(0, Math.ceil(allCompetitors.length / 2)) ||
     [];
   const foreignCompetitors =
-    userScale.foreignCompetitors ||
-    userScale.competitorComparison?.slice(2, 4) ||
+    userScale?.foreignCompetitors ||
+    allCompetitors.slice(Math.ceil(allCompetitors.length / 2)) ||
     [];
 
   React.useEffect(() => {
@@ -74,10 +99,11 @@ const MarketAnalysis = ({ data, bmcId }: MarketAnalysisProps) => {
             <UserScaleSection userScale={userScale} />
 
             {/* Section - 반응형 */}
-            <section className="w-full pb-5 text-left select-text">
-              <h3 className="text-base sm:text-lg font-semibold text-hub-black-1 mb-2.5 mt-2.5">
-                경쟁사와의 규모 비교
-              </h3>
+            {(domesticCompetitors.length > 0 || foreignCompetitors.length > 0) && (
+              <section className="w-full pb-5 text-left select-text">
+                <h3 className="text-base sm:text-lg font-semibold text-hub-black-1 mb-2.5 mt-2.5">
+                  경쟁사와의 규모 비교
+                </h3>
 
               {domesticCompetitors.length > 0 && (
                 <>
@@ -106,7 +132,8 @@ const MarketAnalysis = ({ data, bmcId }: MarketAnalysisProps) => {
                   </div>
                 </>
               )}
-            </section>
+              </section>
+            )}
 
             {/* Divider - 반응형 */}
             <div className="w-full h-px mt-5 mb-[30px] bg-hub-gray-2 self-start" />

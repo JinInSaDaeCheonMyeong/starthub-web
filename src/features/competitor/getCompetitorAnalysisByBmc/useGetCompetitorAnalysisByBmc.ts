@@ -2,22 +2,22 @@ import { useQuery, UseQueryOptions } from '@tanstack/react-query';
 import { competitorApi } from '@/entities/competitor/api/competitor';
 import { AxiosError } from 'axios';
 import { CompetitorAnalysisResponse } from '@/entities/competitor/model/types';
-import { COMPETITOR_QUERY_KEYS } from '@/entities/competitor/queryKey';
 import { useAuthStore } from '@/app/model/stores/useAuthStore';
 
-export const useGetCompetitorAnalyses = (
+export const useGetCompetitorAnalysisByBmc = (
+  bmcId: number | null,
   options?: UseQueryOptions<CompetitorAnalysisResponse, AxiosError, CompetitorAnalysisResponse>
 ) => {
   const isLoggedIn = useAuthStore((s) => s.isLoggedIn);
 
   return useQuery({
-    queryKey: COMPETITOR_QUERY_KEYS.competitor.getAnalyses,
-    queryFn: () => competitorApi.getCompetitorAnalyses(),
-    staleTime: 0, // 항상 최신 데이터 가져오기
-    gcTime: 0, // 캐시를 즉시 삭제
-    refetchOnMount: true, // 컴포넌트 마운트 시 항상 리페치
-    refetchOnWindowFocus: true, // 윈도우 포커스 시 리페치
-    enabled: isLoggedIn,
+    queryKey: ['competitor', 'analysis', 'bmc', bmcId],
+    queryFn: () => competitorApi.getCompetitorAnalysisByBmcId(bmcId!),
+    staleTime: 0,
+    gcTime: 0,
+    refetchOnMount: true,
+    refetchOnWindowFocus: true,
+    enabled: isLoggedIn && !!bmcId,
     retry: false,
     ...options,
   });

@@ -1,5 +1,5 @@
 import { GlobalExpansionStrategy } from "../../types";
-import { removeAngleBrackets } from "../../utils/textFormatter";
+import { formatTextWithBold } from "../../utils/textFormatter";
 
 interface GlobalExpansionSectionProps {
   globalExpansion: GlobalExpansionStrategy;
@@ -8,6 +8,12 @@ interface GlobalExpansionSectionProps {
 const GlobalExpansionSection: React.FC<GlobalExpansionSectionProps> = ({
   globalExpansion,
 }) => {
+  console.log("GlobalExpansionSection data:", globalExpansion);
+
+  if (!globalExpansion) {
+    return null;
+  }
+
   return (
     // Section
     <section className="w-full pb-5 text-left">
@@ -22,16 +28,65 @@ const GlobalExpansionSection: React.FC<GlobalExpansionSectionProps> = ({
           <h3 className="font-pt-body1-semibold text-hub-primary mb-2.5">
             우선 진출 시장
           </h3>
-          {globalExpansion.priorityMarkets.map((market, index) => (
-            <div
-              key={index}
-              className="p-5 rounded-[10px] bg-hub-white-1 border border-hub-gray-3 mb-2.5"
-            >
-              <h4 className="font-pt-caption1-medium text-hub-black-1 mb-2.5">
-                {removeAngleBrackets(market)}
-              </h4>
-            </div>
-          ))}
+          {globalExpansion?.priorityMarkets?.map((market, index) => {
+            // 전체가 <<>>로 감싸진 경우 (BMC 9번 형식)
+            if (market.startsWith('<<') && market.includes('>>')) {
+              // <<>> 블록들을 분리
+              const blocks = market.match(/<<[^>]+>>/g) || [];
+
+              return blocks.map((block, blockIndex) => {
+                // <<>> 제거하고 내용 추출
+                const cleanedBlock = block.replace(/^<<|>>$/g, '').trim();
+
+                // 줄바꿈으로 제목과 설명 분리
+                const lines = cleanedBlock.split('\n').map(l => l.trim()).filter(l => l);
+                const title = lines[0] || cleanedBlock;
+                const description = lines.slice(1).join(' ');
+
+                return (
+                  <div
+                    key={`${index}-${blockIndex}`}
+                    className="p-5 rounded-[10px] bg-hub-white-1 border border-hub-gray-3 mb-2.5"
+                  >
+                    <h4 className="font-pt-body2-semibold text-hub-black-1 mb-2">
+                      {formatTextWithBold(title)}
+                    </h4>
+                    {description && (
+                      <p className="font-pt-caption1-regular text-hub-gray-1">
+                        {description}
+                      </p>
+                    )}
+                  </div>
+                );
+              });
+            }
+
+            // 일반 형식 (BMC 3번 형식 - 제목과 설명이 분리된 경우)
+            else {
+              // 줄바꿈으로 제목과 설명 분리
+              const lines = market.split('\n').map(l => l.trim()).filter(l => l);
+
+              // 첫 줄이 제목, 나머지가 설명
+              const title = lines[0];
+              const description = lines.slice(1).join(' ');
+
+              return (
+                <div
+                  key={index}
+                  className="p-5 rounded-[10px] bg-hub-white-1 border border-hub-gray-3 mb-2.5"
+                >
+                  <h4 className="font-pt-body2-semibold text-hub-black-1 mb-2">
+                    {formatTextWithBold(title)}
+                  </h4>
+                  {description && (
+                    <p className="font-pt-caption1-regular text-hub-gray-1">
+                      {formatTextWithBold(description)}
+                    </p>
+                  )}
+                </div>
+              );
+            }
+          }).flat()}
         </div>
       </div>
 
@@ -41,13 +96,13 @@ const GlobalExpansionSection: React.FC<GlobalExpansionSectionProps> = ({
           <h3 className="font-pt-body1-semibold text-hub-primary mb-2.5">
             진입 전략
           </h3>
-          {globalExpansion.entryStrategies.map((strategy, index) => (
+          {globalExpansion?.entryStrategies?.map((strategy, index) => (
             <div
               key={index}
               className="p-5 rounded-[10px] bg-hub-white-1 border border-hub-gray-3 mb-2.5"
             >
               <p className="text-sm font-medium text-hub-black-1 leading-[1.5]">
-                {removeAngleBrackets(strategy)}
+                {formatTextWithBold(strategy)}
               </p>
             </div>
           ))}
@@ -60,14 +115,14 @@ const GlobalExpansionSection: React.FC<GlobalExpansionSectionProps> = ({
           현지화 요구사항
         </h3>
         <div className="flex flex-col gap-[11px]">
-          {globalExpansion.localizationRequirements.map(
+          {globalExpansion?.localizationRequirements?.map(
             (requirement, index) => (
               <div
                 key={index}
                 className="p-5 rounded-[10px] bg-white border border-[#dbdbdb]"
               >
                 <p className="text-sm font-medium text-hub-black-1 leading-[1.5]">
-                  {removeAngleBrackets(requirement)}
+                  {formatTextWithBold(requirement)}
                 </p>
               </div>
             ),
@@ -81,14 +136,14 @@ const GlobalExpansionSection: React.FC<GlobalExpansionSectionProps> = ({
           파트너십
         </h3>
         <div className="flex flex-col gap-[11px]">
-          {globalExpansion.partnershipOpportunities.map(
+          {globalExpansion?.partnershipOpportunities?.map(
             (opportunity, index) => (
               <div
                 key={index}
                 className="p-5 rounded-[10px] bg-white border border-[#dbdbdb]"
               >
                 <p className="text-sm font-medium text-hub-black-1 leading-[1.5]">
-                  {removeAngleBrackets(opportunity)}
+                  {formatTextWithBold(opportunity)}
                 </p>
               </div>
             ),
@@ -102,13 +157,13 @@ const GlobalExpansionSection: React.FC<GlobalExpansionSectionProps> = ({
           예상 도전과제
         </h3>
         <div className="flex flex-col gap-[11px]">
-          {globalExpansion.expectedChallenges.map((challenge, index) => (
+          {globalExpansion?.expectedChallenges?.map((challenge, index) => (
             <div
               key={index}
               className="p-5 rounded-[10px] bg-white border border-[#dbdbdb]"
             >
               <p className="text-sm font-medium text-hub-black-1 leading-[1.5]">
-                {removeAngleBrackets(challenge)}
+                {formatTextWithBold(challenge)}
               </p>
             </div>
           ))}

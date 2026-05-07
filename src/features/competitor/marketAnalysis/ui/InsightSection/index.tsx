@@ -10,6 +10,12 @@ const InsightSection: React.FC<InsightSectionProps> = ({
   strengths,
   weaknesses,
 }) => {
+  console.log("InsightSection data:", { strengths, weaknesses });
+
+  if (!strengths || !weaknesses) {
+    return null;
+  }
+
   const opportunityItemClass =
     "py-5 px-4 rounded-[10px] bg-[#fafefc] border border-[#dbfbe7] mb-2.5 last:mb-0";
   const threatItemClass =
@@ -28,21 +34,21 @@ const InsightSection: React.FC<InsightSectionProps> = ({
         {/* InsightCard — opportunity */}
         <div className="w-full p-6 rounded-[10px] bg-[#eefdf4] border border-[#d6fae2] select-text">
           <h3 className="font-pt-body1-semibold text-[#14532d] mb-2.5">기회</h3>
-          {strengths.competitiveAdvantages.map((advantage, index) => (
+          {strengths?.competitiveAdvantages?.map((advantage, index) => (
             <div key={index} className={opportunityItemClass}>
               <p className="font-pt-caption1-regular text-[#14532d] select-text">
                 {formatTextWithBold(advantage)}
               </p>
             </div>
           ))}
-          {strengths.uniqueValuePropositions.map((proposition, index) => (
+          {strengths?.uniqueValuePropositions?.map((proposition, index) => (
             <div key={index} className={opportunityItemClass}>
               <p className="font-pt-caption1-regular text-[#14532d] select-text">
                 {formatTextWithBold(proposition)}
               </p>
             </div>
           ))}
-          {strengths.marketOpportunities.map((opportunity, index) => (
+          {strengths?.marketOpportunities?.map((opportunity, index) => (
             <div key={index} className={opportunityItemClass}>
               <p className="font-pt-caption1-regular text-[#14532d] select-text">
                 {formatTextWithBold(opportunity)}
@@ -54,21 +60,21 @@ const InsightSection: React.FC<InsightSectionProps> = ({
         {/* InsightCard — threat */}
         <div className="w-full p-6 rounded-[10px] bg-[#fff6ef] border border-[#ffe8d2] select-text">
           <h3 className="font-pt-body1-semibold text-[#7c2d12] mb-2.5">위협</h3>
-          {weaknesses.competitiveDisadvantages.map((disadvantage, index) => (
+          {weaknesses?.competitiveDisadvantages?.map((disadvantage, index) => (
             <div key={index} className={threatItemClass}>
               <p className="font-pt-caption1-regular text-[#7c2d12] select-text">
                 {formatTextWithBold(disadvantage)}
               </p>
             </div>
           ))}
-          {weaknesses.marketChallenges.map((challenge, index) => (
+          {weaknesses?.marketChallenges?.map((challenge, index) => (
             <div key={index} className={threatItemClass}>
               <p className="font-pt-caption1-regular text-[#7c2d12] select-text">
                 {formatTextWithBold(challenge)}
               </p>
             </div>
           ))}
-          {weaknesses.resourceLimitations.map((limitation, index) => (
+          {weaknesses?.resourceLimitations?.map((limitation, index) => (
             <div key={index} className={threatItemClass}>
               <p className="font-pt-caption1-regular text-[#7c2d12] select-text">
                 {formatTextWithBold(limitation)}
