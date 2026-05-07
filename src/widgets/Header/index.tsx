@@ -46,8 +46,13 @@ const Header = () => {
 
         {/* 헤더 */}
         <header
-          className="w-full border-b border-hub-gray-3 h-[60px] md:h-[78px] bg-white"
-          style={{ paddingRight: "var(--scrollbar-width, 0px)" }}
+          className="w-full border-b border-hub-gray-3 h-[60px] md:h-[78px]"
+          style={{
+            paddingRight: "var(--scrollbar-width, 0px)",
+            background: "rgb(255 255 255 / 50%)",
+            backdropFilter: "blur(20px)",
+            WebkitBackdropFilter: "blur(20px)",
+          }}
         >
           <div className="w-full px-4 md:px-8 lg:w-[1040px] lg:mx-auto lg:px-0 flex items-center justify-between h-full">
             {/* 로고 */}
@@ -56,7 +61,11 @@ const Header = () => {
               aria-label="StartHub 홈으로 이동"
               className="cursor-pointer"
             >
-              <LogoIcon width={100} height={18} className="md:w-[130px] md:h-[22px]" />
+              <LogoIcon
+                width={100}
+                height={18}
+                className="md:w-[130px] md:h-[22px]"
+              />
             </Link>
 
             {/* 데스크톱 네비게이션 */}
@@ -133,52 +142,52 @@ const Header = () => {
           </div>
         </header>
 
-      {/* 모바일 메뉴 */}
-      {isMobileMenuOpen && (
-        <div className="lg:hidden bg-white border-b border-hub-gray-3 shadow-lg">
-          <div className="px-4 py-4 space-y-3">
-            {navLinks.map(({ href, label }) => (
-              <Link
-                key={href}
-                href={href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className={`block font-pt-caption1-regular py-2 px-3 rounded-lg transition-colors ${
-                  pathname === href
-                    ? "text-hub-primary bg-blue-50"
-                    : "text-hub-gray-1 hover:text-hub-primary hover:bg-gray-50"
-                }`}
-              >
-                {label}
-              </Link>
-            ))}
-
-            {data && (
-              <div className="pt-3 border-t border-hub-gray-4">
-                <div className="flex items-center space-x-3 py-2 px-3">
-                  {data.profileImage ? (
-                    <img
-                      src={data.profileImage}
-                      className="w-8 h-8 rounded-full"
-                    />
-                  ) : (
-                    <DefaultProfile width={32} height={32} />
-                  )}
-                  <span className="text-sm text-hub-gray-1">
-                    {data.username}님
-                  </span>
-                </div>
+        {/* 모바일 메뉴 */}
+        {isMobileMenuOpen && (
+          <div className="lg:hidden bg-white border-b border-hub-gray-3 shadow-lg">
+            <div className="px-4 py-4 space-y-3">
+              {navLinks.map(({ href, label }) => (
                 <Link
-                  href="/my-profile"
+                  key={href}
+                  href={href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block py-2 px-3 text-hub-gray-1 hover:text-hub-primary hover:bg-gray-50 rounded-lg transition-colors"
+                  className={`block font-pt-caption1-regular py-2 px-3 rounded-lg transition-colors ${
+                    pathname === href
+                      ? "text-hub-primary bg-blue-50"
+                      : "text-hub-gray-1 hover:text-hub-primary hover:bg-gray-50"
+                  }`}
                 >
-                  마이페이지
+                  {label}
                 </Link>
-              </div>
-            )}
+              ))}
+
+              {data && (
+                <div className="pt-3 border-t border-hub-gray-4">
+                  <div className="flex items-center space-x-3 py-2 px-3">
+                    {data.profileImage ? (
+                      <img
+                        src={data.profileImage}
+                        className="w-8 h-8 rounded-full"
+                      />
+                    ) : (
+                      <DefaultProfile width={32} height={32} />
+                    )}
+                    <span className="text-sm text-hub-gray-1">
+                      {data.username}님
+                    </span>
+                  </div>
+                  <Link
+                    href="/my-profile"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block py-2 px-3 text-hub-gray-1 hover:text-hub-primary hover:bg-gray-50 rounded-lg transition-colors"
+                  >
+                    마이페이지
+                  </Link>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      )}
+        )}
       </div>
 
       {/* 모바일 메뉴 열렸을 때 배경 블러 오버레이 */}
