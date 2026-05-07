@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Competitor } from "../../types";
 import { formatTextWithBold } from "../../utils/textFormatter";
 
@@ -5,21 +6,35 @@ interface CompetitorCardProps {
   competitor: Competitor;
 }
 
-const CompetitorCard = ({ competitor }: CompetitorCardProps) => (
+const CompetitorCard = ({ competitor }: CompetitorCardProps) => {
+  const [imageLoading, setImageLoading] = useState(true);
+  const [imageError, setImageError] = useState(false);
+
+  return (
   // CompetitorCard - 반응형
   <div className="w-full p-4 sm:p-5 border border-hub-gray-3 rounded-lg box-border select-text">
     {/* CompetitorHeader */}
     <div className="flex items-center gap-2 sm:gap-2.5 mb-3 sm:mb-4">
       {/* CompetitorLogo */}
-      <img
-        src={competitor.logoUrl || "/assets/images/default-business.svg"}
-        alt={`${competitor.name} logo`}
-        className="w-10 h-10 sm:w-[50px] sm:h-[50px] rounded-[8px] sm:rounded-[10px] object-contain flex-shrink-0"
-        onError={(e) => {
-          const target = e.currentTarget as HTMLImageElement;
-          target.src = "/assets/images/default-business.svg";
-        }}
-      />
+      <div className="w-10 h-10 sm:w-[50px] sm:h-[50px] rounded-[8px] sm:rounded-[10px] flex-shrink-0 flex items-center justify-center bg-gray-100">
+        {(imageLoading || imageError) && !competitor.logoUrl && (
+          <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+        )}
+        <img
+          src={competitor.logoUrl || "/assets/images/default-business.svg"}
+          alt={`${competitor.name} logo`}
+          className={`w-full h-full rounded-[8px] sm:rounded-[10px] object-contain ${(imageLoading || imageError) && !competitor.logoUrl ? 'hidden' : ''}`}
+          onLoad={() => setImageLoading(false)}
+          onError={(e) => {
+            const target = e.currentTarget as HTMLImageElement;
+            target.src = "/assets/images/default-business.svg";
+            setImageError(true);
+            setImageLoading(false);
+          }}
+        />
+      </div>
       {/* CompetitorName */}
       <p className="font-pt-body2-semibold text-sm sm:text-base mb-0">{competitor.name}</p>
     </div>
@@ -56,6 +71,7 @@ const CompetitorCard = ({ competitor }: CompetitorCardProps) => (
       </p>
     </div>
   </div>
-);
+  );
+};
 
 export default CompetitorCard;
