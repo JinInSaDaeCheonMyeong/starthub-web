@@ -43,7 +43,6 @@ const Footer = () => {
             <div className="flex flex-col gap-2 mb-4">
               {[
                 { icon: <Email className="w-[14px] h-[14px] mr-[3px]" />, text: "support@start-hub.kr" },
-                { icon: <Call className="w-[14px] h-[14px] mr-[3px]" />,  text: "02-1234-5678" },
                 { icon: <Location className="w-[14px] h-[14px] mr-[3px]" />, text: "대구광역시 달성군 구지면 창리로11길 93" },
               ].map(({ icon, text }) => (
                 <span
