@@ -74,6 +74,7 @@ const ChatPage = () => {
   }, []);
 
   const { data: profile } = useGetMyProfile();
+  const isChatbotBanned = profile?.chatbotBanned ?? false;
   const { streaming, streamingText, send } = useStreamMessage();
   const { data: sessionDetail } = useGetSessionDetail(activeSessionId);
   const createSessionMutation = useCreateSession();
@@ -188,6 +189,9 @@ const ChatPage = () => {
   const handleSend = async (text: string) => {
     if (!text.trim() || streaming) return;
 
+    // 챗봇 차단 사용자 가드
+    if (isChatbotBanned) return;
+
     // Quota 체크
     if (!checkQuotaAvailable()) {
       return;
@@ -297,8 +301,15 @@ const ChatPage = () => {
             <p className="font-pt-body1-regular lg:font-pt-body2-regular text-hub-black-1 text-center px-4">
               {userName}님! 무엇을 도와드릴까요?
             </p>
+            {isChatbotBanned && (
+              <div className="w-full max-w-175 px-4">
+                <div className="max-w-[900px] mx-auto bg-red-50 border border-red-300 rounded-lg text-red-600 text-center text-sm font-medium px-4 py-3">
+                  부적절하거나 악의적인 챗봇 기능 사용으로 사용이 제한되었습니다.
+                </div>
+              </div>
+            )}
             {/* 사용량 게이지 */}
-            {quota && quota.weeklyTokensUsed !== undefined && (
+            {!isChatbotBanned && quota && quota.weeklyTokensUsed !== undefined && (
               <div className="w-full max-w-175 px-4 mb-3">
                 <div className="max-w-[900px] mx-auto">
                   <div className="bg-gray-200 rounded-full h-1.5 mb-1">
@@ -338,9 +349,15 @@ const ChatPage = () => {
             <div className="w-full flex justify-center mb-4 lg:mb-7.5 mt-2 lg:mt-2.5 max-w-175 px-4">
               <StartHubAITextarea
                 onSubmit={handleSend}
-                disabled={streaming || !!quotaError}
+                disabled={streaming || !!quotaError || isChatbotBanned}
                 maxWidth="900px"
-                placeholder={quotaError ? "사용량 한도 초과" : undefined}
+                placeholder={
+                  isChatbotBanned
+                    ? "사용이 제한되었습니다"
+                    : quotaError
+                      ? "사용량 한도 초과"
+                      : undefined
+                }
               />
             </div>
           </div>
@@ -394,8 +411,15 @@ const ChatPage = () => {
 
         {hasMessages && (
           <div className="shrink-0 w-full max-w-225 mx-auto">
+            {isChatbotBanned && (
+              <div className="px-4 pb-2">
+                <div className="bg-red-50 border border-red-300 rounded-lg text-red-600 text-center text-sm font-medium px-4 py-2">
+                  부적절하거나 악의적인 챗봇 기능 사용으로 사용이 제한되었습니다.
+                </div>
+              </div>
+            )}
             {/* 사용량 게이지 */}
-            {quota && quota.weeklyTokensUsed !== undefined && (
+            {!isChatbotBanned && quota && quota.weeklyTokensUsed !== undefined && (
               <div className="px-4 pb-2">
                 <div className="bg-gray-200 rounded-full h-1.5 mb-1">
                   <div
@@ -433,9 +457,15 @@ const ChatPage = () => {
             <div className="p-4 flex justify-center">
               <StartHubAITextarea
                 onSubmit={handleSend}
-                disabled={streaming || !!quotaError}
+                disabled={streaming || !!quotaError || isChatbotBanned}
                 maxWidth="100%"
-                placeholder={quotaError ? "사용량 한도 초과" : undefined}
+                placeholder={
+                  isChatbotBanned
+                    ? "사용이 제한되었습니다"
+                    : quotaError
+                      ? "사용량 한도 초과"
+                      : undefined
+                }
               />
             </div>
           </div>
