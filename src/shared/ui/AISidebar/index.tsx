@@ -30,6 +30,7 @@ const AISidebar = ({
 }: AISidebarProps) => {
   const { data: chatSessions = [] } = useGetSessions();
   const { data: profile } = useGetMyProfile();
+  const isChatbotBanned = profile?.chatbotBanned ?? false;
   const { mutate: deleteSession } = useDeleteSession();
   const { mutate: updateTitle } = useUpdateSessionTitle();
   const [expanded, setExpanded] = useState<boolean>(!!defaultExpanded);
@@ -103,26 +104,30 @@ const AISidebar = ({
       icon: <SquareAndPencilIcon width={18} height={18} />,
       label: "새 채팅",
       onClick: () => {
-        if (!creatingSession) onNewChat?.();
+        if (!creatingSession && !isChatbotBanned) onNewChat?.();
       },
+      disabled: isChatbotBanned,
     },
     {
       key: "news",
       icon: <NewspaperIcon width={18} height={18} />,
       label: "공고 보러가기",
       onClick: () => router.push("/notices"),
+      disabled: false,
     },
     {
       key: "chart",
       icon: <ChartBarIcon width={18} height={18} />,
       label: "경쟁사 분석",
       onClick: () => router.push("/competitor"),
+      disabled: false,
     },
     {
       key: "briefcase",
       icon: <BriefcaseIcon width={18} height={18} />,
       label: "BMC 설계",
       onClick: () => router.push("/bmc"),
+      disabled: false,
     },
   ];
 
@@ -211,15 +216,20 @@ const AISidebar = ({
           expanded || !isMobile ? "items-stretch pt-0" : "items-center pt-[10px]"
         }`}
       >
-        {navItems.map(({ key, icon, label, onClick }) => {
+        {navItems.map(({ key, icon, label, onClick, disabled }) => {
           const isActive = activeMenu === key;
           const showLabel = expanded || !isMobile;
           return (
             <button
               key={key}
               onClick={onClick}
+              disabled={disabled}
+              title={disabled ? "사용이 제한되었습니다" : undefined}
               className={[
-                "flex items-center h-8 border-none rounded-lg cursor-pointer text-[13px] font-medium transition-colors [&_svg]:shrink-0",
+                "flex items-center h-8 border-none rounded-lg text-[13px] font-medium transition-colors [&_svg]:shrink-0",
+                disabled
+                  ? "cursor-not-allowed opacity-40"
+                  : "cursor-pointer",
                 showLabel
                   ? "justify-start gap-[10px] px-2 w-auto"
                   : "justify-center w-8 p-0",
@@ -227,9 +237,11 @@ const AISidebar = ({
                   ? "bg-[rgba(36,102,244,0.08)]"
                   : "bg-transparent",
                 isActive ? "text-hub-primary" : "text-hub-black-1",
-                showLabel
-                  ? "hover:bg-[rgba(36,102,244,0.08)] hover:text-hub-primary"
-                  : "hover:text-hub-primary",
+                disabled
+                  ? ""
+                  : showLabel
+                    ? "hover:bg-[rgba(36,102,244,0.08)] hover:text-hub-primary"
+                    : "hover:text-hub-primary",
               ].join(" ")}
             >
               {icon}

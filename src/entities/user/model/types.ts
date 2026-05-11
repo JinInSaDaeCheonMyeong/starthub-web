@@ -186,6 +186,7 @@ export interface UserData {
   numberOfEmployees?: number;
   companyWebsite?: string;
   annualRevenue?: number;
+  chatbotBanned?: boolean;
 }
 
 export interface UserResponse {

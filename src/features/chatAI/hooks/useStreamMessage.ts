@@ -2,6 +2,7 @@ import { useCallback, useRef, useState } from "react";
 import { ChatAIApi } from "@/entities/chatAI/api/chatAI";
 import { useQueryClient } from "@tanstack/react-query";
 import { CHAT_QUERY_KEYS } from "@/entities/chatAI/queryKey";
+import { USER_QUERY_KEYS } from "@/entities/user/queryKey";
 import { parseAnnotations } from "@/features/chatAI/utils/parseAnnotations";
 
 interface UseStreamMessageReturn {
@@ -75,6 +76,12 @@ export const useStreamMessage = (): UseStreamMessageReturn => {
 
         return parseAnnotations(accumulated);
       } catch (err) {
+        const status = (err as { status?: number })?.status;
+        if (status === 403) {
+          queryClient.invalidateQueries({
+            queryKey: USER_QUERY_KEYS.user.getUserProfile,
+          });
+        }
         const msg =
           err instanceof Error
             ? err.message

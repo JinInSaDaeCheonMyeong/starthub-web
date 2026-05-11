@@ -86,7 +86,11 @@ export const ChatAIApi = {
     );
 
     if (!res.ok || !res.body) {
-      throw new Error(`Stream request failed: ${res.status}`);
+      const err = new Error(`Stream request failed: ${res.status}`) as Error & {
+        status?: number;
+      };
+      err.status = res.status;
+      throw err;
     }
 
     return res.body;
