@@ -309,7 +309,7 @@ const ChatPage = () => {
               </div>
             )}
             {/* 사용량 게이지 */}
-            {quota && quota.weeklyTokensUsed !== undefined && (
+            {!isChatbotBanned && quota && quota.weeklyTokensUsed !== undefined && (
               <div className="w-full max-w-175 px-4 mb-3">
                 <div className="max-w-[900px] mx-auto">
                   <div className="bg-gray-200 rounded-full h-1.5 mb-1">
@@ -419,7 +419,7 @@ const ChatPage = () => {
               </div>
             )}
             {/* 사용량 게이지 */}
-            {quota && quota.weeklyTokensUsed !== undefined && (
+            {!isChatbotBanned && quota && quota.weeklyTokensUsed !== undefined && (
               <div className="px-4 pb-2">
                 <div className="bg-gray-200 rounded-full h-1.5 mb-1">
                   <div

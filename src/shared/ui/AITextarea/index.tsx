@@ -91,7 +91,10 @@ const StartHubAITextarea = ({
       {/* 입력 영역 */}
       <div
         className={[
-          "relative w-full flex border border-hub-gray-3 bg-hub-white-1 overflow-visible transition-all duration-[160ms] ease-in-out focus-within:border-hub-primary",
+          "relative w-full flex border overflow-visible transition-all duration-[160ms] ease-in-out",
+          disabled
+            ? "border-gray-300 bg-gray-100 opacity-70"
+            : "border-hub-gray-3 bg-hub-white-1 focus-within:border-hub-primary",
           expanded
             ? "items-start px-[18px] pt-[18px] pb-7 rounded-2xl min-h-[160px] h-auto"
             : "items-center px-14 rounded-full h-[50px]",
@@ -108,10 +111,14 @@ const StartHubAITextarea = ({
         />
         <button
           type="button"
-          onClick={() => openFilePicker()}
+          onClick={() => {
+            if (!disabled) openFilePicker();
+          }}
           aria-hidden
+          disabled={disabled}
           className={[
-            "absolute left-3 w-10 h-10 flex items-center justify-center rounded-full z-[3] cursor-pointer bg-transparent border-none outline-none transition-all duration-[160ms] ease-in-out",
+            "absolute left-3 w-10 h-10 flex items-center justify-center rounded-full z-[3] bg-transparent border-none outline-none transition-all duration-[160ms] ease-in-out",
+            disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer",
             expanded ? "top-auto bottom-[18px]" : "top-1/2 -translate-y-1/2",
           ].join(" ")}
         >
