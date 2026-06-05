@@ -21,6 +21,10 @@ const processBoldText = (text: string) => {
 };
 
 export const downloadBmc = async (id: number) => {
+  const [{ default: html2canvas }, { jsPDF }] = await Promise.all([
+    import("html2canvas"),
+    import("jspdf"),
+  ]);
   try {
     const response = await bmcApi.getCanvasesDetail(id.toString());
     const bmcData = response.data;
@@ -102,6 +106,10 @@ export const downloadBmc = async (id: number) => {
 };
 
 export const downloadCompetitorAnalysis = async (id: number, title: string) => {
+    const [{ default: html2canvas }, { jsPDF }] = await Promise.all([
+      import("html2canvas"),
+      import("jspdf"),
+    ]);
   try {
     const analysesResponse = await competitorApi.getCompetitorAnalyses();
     const analysisData = analysesResponse.data.find(

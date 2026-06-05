@@ -2,9 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { documentApi } from "@/entities/document";
 import type { DocumentDetail, DocumentHistoryItem } from "@/entities/document";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
-import { Document, Packer, Paragraph, TextRun } from "docx";
+import type { Paragraph, TextRun } from "docx";
 
 type UseAIDocsEditorParams = {
   documentId: number;
@@ -229,181 +227,6 @@ const createHiddenPreviewFrame = (html: string): Promise<HTMLIFrameElement> =>
     document.body.appendChild(iframe);
   });
 
-const htmlToDocxRuns = (
-  node: Node,
-  styles: { bold?: boolean; italic?: boolean; underline?: boolean } = {},
-): TextRun[] => {
-  const runs: TextRun[] = [];
-
-  const walk = (
-    currentNode: Node,
-    currentStyles: { bold?: boolean; italic?: boolean; underline?: boolean },
-  ) => {
-    if (currentNode.nodeType === Node.TEXT_NODE) {
-      const text = currentNode.textContent ?? "";
-
-      if (!text) {
-        return;
-      }
-
-      runs.push(
-        new TextRun({
-          text,
-          bold: currentStyles.bold,
-          italics: currentStyles.italic,
-          underline: currentStyles.underline ? { type: "single" } : undefined,
-        }),
-      );
-      return;
-    }
-
-    if (currentNode.nodeType !== Node.ELEMENT_NODE) {
-      return;
-    }
-
-    const element = currentNode as HTMLElement;
-    const tagName = element.tagName.toLowerCase();
-
-    if (tagName === "br") {
-      runs.push(new TextRun({ break: 1 }));
-      return;
-    }
-
-    const nextStyles = {
-      bold: currentStyles.bold || tagName === "strong" || tagName === "b",
-      italic: currentStyles.italic || tagName === "em" || tagName === "i",
-      underline: currentStyles.underline || tagName === "u",
-    };
-
-    Array.from(element.childNodes).forEach((child) => walk(child, nextStyles));
-  };
-
-  walk(node, styles);
-  return runs;
-};
-
-const htmlToDocxParagraphs = (html: string): Paragraph[] => {
-  const wrapper = document.createElement("div");
-  wrapper.innerHTML = html;
-  const paragraphs: Paragraph[] = [];
-
-  const pushParagraphsFromElement = (element: HTMLElement) => {
-    const tagName = element.tagName.toLowerCase();
-
-    if (/^h[1-6]$/.test(tagName)) {
-      const level = Number(tagName.slice(1));
-      const heading =
-        level === 1
-          ? "Heading1"
-          : level === 2
-            ? "Heading2"
-            : level === 3
-              ? "Heading3"
-              : level === 4
-                ? "Heading4"
-                : level === 5
-                  ? "Heading5"
-                  : "Heading6";
-
-      paragraphs.push(
-        new Paragraph({
-          children: htmlToDocxRuns(element),
-          heading,
-          spacing: { after: 180 },
-        }),
-      );
-      return;
-    }
-
-    if (tagName === "p") {
-      paragraphs.push(
-        new Paragraph({
-          children: htmlToDocxRuns(element),
-          spacing: { after: 120, line: 360, lineRule: "auto" },
-        }),
-      );
-      return;
-    }
-
-    if (tagName === "blockquote") {
-      paragraphs.push(
-        new Paragraph({
-          children: htmlToDocxRuns(element),
-          indent: { left: 720 },
-          spacing: { after: 120 },
-        }),
-      );
-      return;
-    }
-
-    if (tagName === "ul") {
-      Array.from(element.children).forEach((child) => {
-        if (child.tagName.toLowerCase() !== "li") return;
-        paragraphs.push(
-          new Paragraph({
-            children: htmlToDocxRuns(child),
-            bullet: { level: 0 },
-            spacing: { after: 60 },
-          }),
-        );
-      });
-      return;
-    }
-
-    if (tagName === "ol") {
-      Array.from(element.children).forEach((child, index) => {
-        if (child.tagName.toLowerCase() !== "li") return;
-        paragraphs.push(
-          new Paragraph({
-            children: [
-              new TextRun({ text: `${index + 1}. ` }),
-              ...htmlToDocxRuns(child),
-            ],
-            spacing: { after: 60 },
-          }),
-        );
-      });
-      return;
-    }
-
-    if (tagName === "li") {
-      paragraphs.push(
-        new Paragraph({
-          children: htmlToDocxRuns(element),
-          bullet: { level: 0 },
-          spacing: { after: 60 },
-        }),
-      );
-      return;
-    }
-
-    Array.from(element.children).forEach((child) => {
-      if (child instanceof HTMLElement) {
-        pushParagraphsFromElement(child);
-      }
-    });
-  };
-
-  Array.from(wrapper.children).forEach((child) => {
-    if (child instanceof HTMLElement) {
-      pushParagraphsFromElement(child);
-    }
-  });
-
-  if (paragraphs.length === 0) {
-    const fallbackText = wrapper.textContent?.trim();
-
-    if (fallbackText) {
-      paragraphs.push(
-        new Paragraph({
-          children: [new TextRun({ text: fallbackText })],
-        }),
-      );
-    }
-  }
-
-  return paragraphs;
-};
 
 export const useAIDocsEditor = ({ documentId }: UseAIDocsEditorParams) => {
   const [documentDetail, setDocumentDetail] = useState<DocumentDetail | null>(
@@ -537,6 +360,10 @@ export const useAIDocsEditor = ({ documentId }: UseAIDocsEditorParams) => {
 
   const exportAsPdf = async () => {
     let previewFrame: HTMLIFrameElement | null = null;
+      const [{ default: html2canvas }, { default: jsPDF }] = await Promise.all([
+        import("html2canvas"),
+        import("jspdf"),
+      ]);
 
     try {
       previewFrame = await createHiddenPreviewFrame(
@@ -633,6 +460,190 @@ export const useAIDocsEditor = ({ documentId }: UseAIDocsEditorParams) => {
   };
 
   const exportAsDocx = async () => {
+    const { Document, Packer, Paragraph, TextRun } = await import("docx");
+    const htmlToDocxRuns = (
+      node: Node,
+      styles: { bold?: boolean; italic?: boolean; underline?: boolean } = {},
+    ): TextRun[] => {
+      const runs: TextRun[] = [];
+
+      const walk = (
+        currentNode: Node,
+        currentStyles: {
+          bold?: boolean;
+          italic?: boolean;
+          underline?: boolean;
+        },
+      ) => {
+        if (currentNode.nodeType === Node.TEXT_NODE) {
+          const text = currentNode.textContent ?? "";
+
+          if (!text) {
+            return;
+          }
+
+          runs.push(
+            new TextRun({
+              text,
+              bold: currentStyles.bold,
+              italics: currentStyles.italic,
+              underline: currentStyles.underline
+                ? { type: "single" }
+                : undefined,
+            }),
+          );
+          return;
+        }
+
+        if (currentNode.nodeType !== Node.ELEMENT_NODE) {
+          return;
+        }
+
+        const element = currentNode as HTMLElement;
+        const tagName = element.tagName.toLowerCase();
+
+        if (tagName === "br") {
+          runs.push(new TextRun({ break: 1 }));
+          return;
+        }
+
+        const nextStyles = {
+          bold: currentStyles.bold || tagName === "strong" || tagName === "b",
+          italic: currentStyles.italic || tagName === "em" || tagName === "i",
+          underline: currentStyles.underline || tagName === "u",
+        };
+
+        Array.from(element.childNodes).forEach((child) =>
+          walk(child, nextStyles),
+        );
+      };
+
+      walk(node, styles);
+      return runs;
+    };
+
+    const htmlToDocxParagraphs = (html: string): Paragraph[] => {
+      const wrapper = document.createElement("div");
+      wrapper.innerHTML = html;
+      const paragraphs: Paragraph[] = [];
+
+      const pushParagraphsFromElement = (element: HTMLElement) => {
+        const tagName = element.tagName.toLowerCase();
+
+        if (/^h[1-6]$/.test(tagName)) {
+          const level = Number(tagName.slice(1));
+          const heading =
+            level === 1
+              ? "Heading1"
+              : level === 2
+                ? "Heading2"
+                : level === 3
+                  ? "Heading3"
+                  : level === 4
+                    ? "Heading4"
+                    : level === 5
+                      ? "Heading5"
+                      : "Heading6";
+
+          paragraphs.push(
+            new Paragraph({
+              children: htmlToDocxRuns(element),
+              heading,
+              spacing: { after: 180 },
+            }),
+          );
+          return;
+        }
+
+        if (tagName === "p") {
+          paragraphs.push(
+            new Paragraph({
+              children: htmlToDocxRuns(element),
+              spacing: { after: 120, line: 360, lineRule: "auto" },
+            }),
+          );
+          return;
+        }
+
+        if (tagName === "blockquote") {
+          paragraphs.push(
+            new Paragraph({
+              children: htmlToDocxRuns(element),
+              indent: { left: 720 },
+              spacing: { after: 120 },
+            }),
+          );
+          return;
+        }
+
+        if (tagName === "ul") {
+          Array.from(element.children).forEach((child) => {
+            if (child.tagName.toLowerCase() !== "li") return;
+            paragraphs.push(
+              new Paragraph({
+                children: htmlToDocxRuns(child),
+                bullet: { level: 0 },
+                spacing: { after: 60 },
+              }),
+            );
+          });
+          return;
+        }
+
+        if (tagName === "ol") {
+          Array.from(element.children).forEach((child, index) => {
+            if (child.tagName.toLowerCase() !== "li") return;
+            paragraphs.push(
+              new Paragraph({
+                children: [
+                  new TextRun({ text: `${index + 1}. ` }),
+                  ...htmlToDocxRuns(child),
+                ],
+                spacing: { after: 60 },
+              }),
+            );
+          });
+          return;
+        }
+
+        if (tagName === "li") {
+          paragraphs.push(
+            new Paragraph({
+              children: htmlToDocxRuns(element),
+              bullet: { level: 0 },
+              spacing: { after: 60 },
+            }),
+          );
+          return;
+        }
+
+        Array.from(element.children).forEach((child) => {
+          if (child instanceof HTMLElement) {
+            pushParagraphsFromElement(child);
+          }
+        });
+      };
+
+      Array.from(wrapper.children).forEach((child) => {
+        if (child instanceof HTMLElement) {
+          pushParagraphsFromElement(child);
+        }
+      });
+
+      if (paragraphs.length === 0) {
+        const fallbackText = wrapper.textContent?.trim();
+
+        if (fallbackText) {
+          paragraphs.push(
+            new Paragraph({
+              children: [new TextRun({ text: fallbackText })],
+            }),
+          );
+        }
+      }
+
+      return paragraphs;
+    };
     try {
       const renderedHtml = buildRenderableBodyHtml(content);
       const contentParagraphs = htmlToDocxParagraphs(renderedHtml);
