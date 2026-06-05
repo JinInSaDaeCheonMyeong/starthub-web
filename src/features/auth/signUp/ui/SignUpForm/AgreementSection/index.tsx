@@ -16,7 +16,6 @@ const AgreementSection: React.FC<AgreementSectionProps> = ({
 }) => {
   return (
     <div className="flex flex-col gap-[10px] w-[320px]">
-      {/* All Agree Section */}
       <div className="flex items-center gap-[10px] pb-[10px] border-b border-hub-gray-3">
         <StartHubCheckBox
           checked={isAllChecked}
@@ -27,7 +26,6 @@ const AgreementSection: React.FC<AgreementSectionProps> = ({
         </p>
       </div>
 
-      {/* Individual Agreement Items */}
       <div className="flex flex-col gap-[10px]">
         {SIGNUP_AGREE_ITEMS.map((agree, index) => (
           <div

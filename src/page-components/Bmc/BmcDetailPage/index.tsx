@@ -37,7 +37,6 @@ const BmcDetailPage = ({ id }: BmcDetailPageProps) => {
     handleSaveEdit,
   } = useBmcEdit(bmcData, setBmcData, captureBmcAndUpload);
 
-  // BMC 데이터 로드 후 imageUrl이 없으면 자동 캡처 (모바일 제외)
   useEffect(() => {
     let timeoutId: NodeJS.Timeout | null = null;
 
@@ -53,7 +52,6 @@ const BmcDetailPage = ({ id }: BmcDetailPageProps) => {
       captureInProgressRef.current = true;
 
       timeoutId = setTimeout(async () => {
-        // 컴포넌트 unmount 확인
         if (!isMountedRef.current) {
           captureInProgressRef.current = false;
           return;
@@ -62,7 +60,6 @@ const BmcDetailPage = ({ id }: BmcDetailPageProps) => {
         try {
           await captureBmcAndUpload(bmcData.id);
         } finally {
-          // 컴포넌트가 여전히 mounted 상태일 때만 업데이트
           if (isMountedRef.current) {
             captureInProgressRef.current = false;
           }
@@ -77,7 +74,6 @@ const BmcDetailPage = ({ id }: BmcDetailPageProps) => {
     };
   }, [bmcData, isLoading, hasAutoCaptureRef, captureBmcAndUpload, isMobile]);
 
-  // Cleanup: 컴포넌트 unmount 시 추적
   useEffect(() => {
     return () => {
       isMountedRef.current = false;

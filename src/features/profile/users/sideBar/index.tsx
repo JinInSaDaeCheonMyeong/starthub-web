@@ -48,7 +48,6 @@ const MyPage: React.FC = () => {
 
   return (
     <>
-      {/* 모바일: 탭 형태 */}
       <div className="lg:hidden w-full bg-hub-white-1 border-b border-hub-gray-3 fixed top-[90px] sm:top-[95px] md:top-[100px] z-30">
         <div className="flex justify-center py-2">
           <div className="flex bg-hub-gray-4 rounded-lg p-1">
@@ -76,7 +75,6 @@ const MyPage: React.FC = () => {
         </div>
       </div>
 
-      {/* 데스크톱: 사이드바 형태 */}
       <aside className="hidden lg:block lg:fixed lg:left-[calc((100vw-1280px)/2+120px)] lg:top-[158px] lg:w-[224px] bg-hub-white-1 lg:h-auto lg:z-10">
         <button
           onClick={() => router.push("/my-profile")}

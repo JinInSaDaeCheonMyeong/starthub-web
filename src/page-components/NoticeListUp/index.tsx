@@ -62,7 +62,6 @@ const NoticeListUpPage = () => {
       <div className="w-full px-4 md:px-8 lg:w-[1040px] lg:mx-auto lg:px-0">
         <FoldArrow title={config.title} />
         <div className="h-full min-h-screen mt-8">
-          {/* 모바일: 리스트 형태 */}
           <div className="lg:hidden space-y-3 sm:space-y-4">
             {isLoading
               ? Array.from({ length: 8 }).map((_, idx) => (
@@ -96,7 +95,6 @@ const NoticeListUpPage = () => {
                 ))}
           </div>
 
-          {/* 데스크톱: NoticeCard 그리드 형태 */}
           <div className="hidden lg:grid lg:grid-cols-3 xl:grid-cols-4 gap-4">
             {isLoading
               ? Array.from({ length: 12 }).map((_, idx) => (

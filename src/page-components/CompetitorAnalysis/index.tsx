@@ -11,12 +11,10 @@ const CompetitorAnalysis = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const bmcId = searchParams?.get("bmcId");
-  const analysisId = searchParams?.get("analysisId");
 
   const { isLoggedIn } = useAuthStore();
   const { data: analysesData, isLoading, isError, refetch } = useGetCompetitorAnalyses();
 
-  // bmcId가 변경될 때마다 리페치
   useEffect(() => {
     if (bmcId) {
       refetch();
@@ -30,7 +28,6 @@ const CompetitorAnalysis = () => {
     }
   }, [isLoggedIn, router]);
 
-  // 로그인하지 않은 경우
   if (!isLoggedIn) {
     return (
       <div className="w-full mt-[120px] sm:mt-[130px] md:mt-[140px] lg:mt-[150px] mb-[50px]">
@@ -45,12 +42,10 @@ const CompetitorAnalysis = () => {
     );
   }
 
-  // 로딩 중
   if (isLoading) {
     return <MarketAnalysisSkeleton />;
   }
 
-  // 에러 발생
   if (isError || !analysesData) {
     return (
       <div className="w-full mt-[120px] sm:mt-[130px] md:mt-[140px] lg:mt-[150px] mb-[50px]">
@@ -71,7 +66,6 @@ const CompetitorAnalysis = () => {
     );
   }
 
-  // 데이터가 없는 경우
   if (!analysesData?.data || analysesData.data.length === 0) {
     return (
       <div className="w-full mt-[120px] sm:mt-[130px] md:mt-[140px] lg:mt-[150px] mb-[50px]">
@@ -92,16 +86,11 @@ const CompetitorAnalysis = () => {
     );
   }
 
-  // bmcId에 해당하는 분석 데이터 찾기
   const selectedAnalysis = bmcId && analysesData.data
     ? analysesData.data.find(analysis => analysis.bmcId === Number(bmcId))
     : analysesData.data[0];
 
-  // 디버깅: bmcId로 찾을 수 없을 때 사용 가능한 BMC ID 목록 표시
-  if (bmcId && !selectedAnalysis) {
-    console.log(`BMC ID ${bmcId}에 대한 분석을 찾을 수 없습니다.`);
-    console.log('사용 가능한 BMC ID:', analysesData.data.map(a => a.bmcId));
-  }
+
 
   if (!selectedAnalysis) {
     return (

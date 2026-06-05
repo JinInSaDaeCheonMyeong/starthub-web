@@ -61,7 +61,6 @@ const ChatPage = () => {
   useEffect(() => {
     setMounted(true);
 
-    // quota 정보 조회
     console.log("Chat 페이지 마운트 - quota API 호출");
     ChatAIApi.getQuota()
       .then((data) => {
@@ -81,13 +80,11 @@ const ChatPage = () => {
   const createSession = createSessionMutation.mutate;
   const creatingSession = (createSessionMutation as any).isLoading ?? false;
 
-  // 사용량 체크 함수
   const checkQuotaAvailable = () => {
     if (!quota) return true;
 
     if (quota.unlimited) return true;
 
-    // 윈도우 토큰 체크 (단기 제한)
     if (quota.windowTokensRemaining <= 0) {
       const resetTime = quota.windowResetAt
         ? new Date(quota.windowResetAt).toLocaleTimeString("ko-KR", {
@@ -101,7 +98,6 @@ const ChatPage = () => {
       return false;
     }
 
-    // 주간 토큰 체크
     if (quota.weeklyTokensRemaining <= 0) {
       const resetDate = new Date(quota.weeklyResetAt).toLocaleDateString(
         "ko-KR",
@@ -160,7 +156,6 @@ const ChatPage = () => {
     [send],
   );
 
-  // 새 세션 생성 후 대기 중인 메시지 전송
   useEffect(() => {
     if (activeSessionId && pendingMessageRef.current) {
       const text = pendingMessageRef.current;
@@ -169,19 +164,16 @@ const ChatPage = () => {
     }
   }, [activeSessionId, handleSendToSession]);
 
-  // 스크롤 하단 유지 - 사용자가 위로 스크롤했을 때는 자동 스크롤 비활성화
   useEffect(() => {
     if (messageListRef.current && shouldAutoScroll) {
       messageListRef.current.scrollTop = messageListRef.current.scrollHeight;
     }
   }, [messages, streamingText, shouldAutoScroll]);
 
-  // 사용자 스크롤 감지
   const handleScroll = useCallback(() => {
     if (!messageListRef.current) return;
 
     const { scrollTop, scrollHeight, clientHeight } = messageListRef.current;
-    // 하단에서 50px 이내면 자동 스크롤 활성화
     const isNearBottom = scrollHeight - scrollTop - clientHeight < 50;
     setShouldAutoScroll(isNearBottom);
   }, []);
@@ -189,10 +181,8 @@ const ChatPage = () => {
   const handleSend = async (text: string) => {
     if (!text.trim() || streaming) return;
 
-    // 챗봇 차단 사용자 가드
     if (isChatbotBanned) return;
 
-    // Quota 체크
     if (!checkQuotaAvailable()) {
       return;
     }
@@ -200,7 +190,6 @@ const ChatPage = () => {
     const trimmed = text.trim();
 
     if (!activeSessionId) {
-      // 세션이 없으면 새로 생성 후 메시지 전송
       pendingMessageRef.current = trimmed;
       createSession(
         { title: trimmed.slice(0, 20) },
@@ -215,7 +204,6 @@ const ChatPage = () => {
 
     await handleSendToSession(activeSessionId, trimmed);
 
-    // 메시지 전송 후 quota 재조회
     try {
       const updatedQuota = await ChatAIApi.getQuota();
       setQuota(updatedQuota);
@@ -251,7 +239,6 @@ const ChatPage = () => {
 
   return (
     <div className="flex h-screen overflow-hidden">
-      {/* 데스크톱 사이드바 */}
       <div className="hidden lg:block">
         <ChatSidebar
           defaultExpanded={true}
@@ -269,7 +256,6 @@ const ChatPage = () => {
         />
       </div>
 
-      {/* 모바일 사이드바 오버레이 */}
       <div className="lg:hidden">
         <ChatSidebar
           defaultExpanded={false}
@@ -288,7 +274,6 @@ const ChatPage = () => {
       </div>
 
       <div className="flex-1 flex flex-col h-full bg-hub-white-1 lg:ml-0">
-        {/* 모바일 헤더 - 숨김 */}
         <div className="hidden">
           <Logo className="h-8" />
         </div>
@@ -308,7 +293,6 @@ const ChatPage = () => {
                 </div>
               </div>
             )}
-            {/* 사용량 게이지 */}
             {!isChatbotBanned && quota && quota.weeklyTokensUsed !== undefined && (
               <div className="w-full max-w-175 px-4 mb-3">
                 <div className="max-w-[900px] mx-auto">
@@ -418,7 +402,6 @@ const ChatPage = () => {
                 </div>
               </div>
             )}
-            {/* 사용량 게이지 */}
             {!isChatbotBanned && quota && quota.weeklyTokensUsed !== undefined && (
               <div className="px-4 pb-2">
                 <div className="bg-gray-200 rounded-full h-1.5 mb-1">

@@ -30,9 +30,7 @@ const BmcList = () => {
           먼저 원하는 BMC를 선택해 주세요.
         </p>
 
-        {/* 모바일: 리스트, 데스크탑: 카드 그리드 */}
         <div className="w-full">
-          {/* 모바일 리스트 */}
           <div className="block lg:hidden w-full">
             <div className="space-y-3">
               {canvases.map((canvas) => (
@@ -47,7 +45,6 @@ const BmcList = () => {
             </div>
           </div>
 
-          {/* 데스크탑 카드 그리드 */}
           <div className="hidden lg:grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8 w-full">
             {canvases.map((canvas) => (
               <BmcCard

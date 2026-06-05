@@ -135,7 +135,6 @@ const cleanMarkdownForExport = (text: string): string => {
   return (wrapper.textContent || "").replace(/\n\n\n+/g, "\n\n").trim();
 };
 
-// 미리보기용 HTML 생성
 const generatePreviewHtml = (
   title: string,
   content: string,

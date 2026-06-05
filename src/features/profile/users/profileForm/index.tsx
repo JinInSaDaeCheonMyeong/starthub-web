@@ -63,9 +63,7 @@ const ProfileForm: React.FC = () => {
       <div className="pt-[150px] sm:pt-[150px] md:pt-[160px] lg:pt-0">
         {isLoggedIn ? (
           <div className="w-full max-w-[1280px] mx-auto">
-            {/* 메인 컨텐츠 영역 */}
             <div className="px-4 lg:pl-[384px] lg:pr-[120px] lg:pt-[158px] pb-[50px]">
-            {/* HeaderSection */}
             <div className="mb-[50px]">
               <p className="font-pt-h1-semibold text-hub-black-1 mb-[9px] text-lg lg:text-2xl">
                 "어제의 꿈은 오늘의 희망이며 내일의 현실이다."
@@ -77,7 +75,6 @@ const ProfileForm: React.FC = () => {
               </h2>
             </div>
 
-            {/* 프로필 테이블 */}
             <div className="space-y-0">
               {profileTableData.map(({ label, value }) => (
                 <div key={label}>
@@ -106,7 +103,6 @@ const ProfileForm: React.FC = () => {
               />
             </div>
 
-            {/* 모바일: 추가 메뉴 */}
             <div className="lg:hidden border-t border-hub-gray-3 pt-6 space-y-4">
               <button
                 onClick={() => window.open("https://various-bougon-d76.notion.site/27f507c40eaf80acbf4afba41b9964b7", "_blank")}

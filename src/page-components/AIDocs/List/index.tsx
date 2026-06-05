@@ -67,7 +67,6 @@ const DocumentCard = ({
   };
 
   if (isMobile) {
-    // 모바일 리스트 형태
     return (
       <div
         onClick={() => router.push(`/documents/${doc.id}/edit`)}
@@ -82,7 +81,6 @@ const DocumentCard = ({
           </p>
         </div>
 
-        {/* 점 메뉴 버튼 */}
         <button
           onClick={handleDotsClick}
           className={[
@@ -95,7 +93,6 @@ const DocumentCard = ({
           <DotsIcon width={20} height={20} />
         </button>
 
-        {/* 드롭다운 */}
         {showDropdown && (
           <div
             ref={dropdownRef}
@@ -113,7 +110,6 @@ const DocumentCard = ({
     );
   }
 
-  // 데스크탑 카드 형태
   return (
     <div
       onClick={() => router.push(`/documents/${doc.id}/edit`)}
@@ -128,7 +124,6 @@ const DocumentCard = ({
         </p>
       </div>
 
-      {/* 점 메뉴 버튼 */}
       <button
         onClick={handleDotsClick}
         className={[
@@ -141,7 +136,6 @@ const DocumentCard = ({
         <DotsIcon width={20} height={20} />
       </button>
 
-      {/* 드롭다운 */}
       {showDropdown && (
         <div
           ref={dropdownRef}
@@ -221,7 +215,6 @@ const AIDocsListPage = () => {
 
         {isLoading ? (
           <>
-            {/* 모바일 스켈레톤 */}
             <div className="block lg:hidden w-full">
               <div className="space-y-3 mb-10">
                 {Array.from({ length: 6 }).map((_, idx) => (
@@ -239,7 +232,6 @@ const AIDocsListPage = () => {
               </div>
             </div>
 
-            {/* 데스크탑 스켈레톤 */}
             <div className="hidden lg:block lg:space-y-3 mb-10">
               {Array.from({ length: 8 }).map((_, idx) => (
                 <div
@@ -267,7 +259,6 @@ const AIDocsListPage = () => {
           </div>
         ) : (
           <>
-            {/* 리스트 뷰 */}
             <div className="w-full">
               <div className="space-y-3 mb-10">
                 <button

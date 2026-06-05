@@ -6,7 +6,6 @@ export const SIGNUP_AGREE_ITEMS = [
     "[필수] 스타트허브 개인정보 수집 및 이용 동의"
 ]
 
-// 초기 폼 데이터
 export const INITIAL_FORM_DATA: SignUpFormData = {
   email: '',
   password: '',
@@ -14,7 +13,6 @@ export const INITIAL_FORM_DATA: SignUpFormData = {
   verificationCode: ''
 };
 
-// 초기 필드 에러
 export const INITIAL_FIELD_ERRORS: SignUpFieldErrors = {
   email: '',
   password: '',
@@ -23,13 +21,11 @@ export const INITIAL_FIELD_ERRORS: SignUpFieldErrors = {
   agreement: ''
 };
 
-// 초기 로딩 상태
 export const INITIAL_LOADING_STATES: SignUpLoadingStates = {
   sendCode: false,
   verifyCode: false
 };
 
-// 에러 메시지 상수
 export const ERROR_MESSAGES = {
   REQUIRED_EMAIL: '이메일을 입력해주세요',
   REQUIRED_PASSWORD: '비밀번호를 입력해주세요',
@@ -42,14 +38,12 @@ export const ERROR_MESSAGES = {
   SIGNUP_FAILED: '회원가입 중 오류가 발생했습니다.'
 } as const;
 
-// 성공 메시지 상수
 export const SUCCESS_MESSAGES = {
   VERIFICATION_CODE_SENT: '인증번호가 발송되었습니다.',
   EMAIL_VERIFIED: '이메일 인증이 완료되었습니다.',
   SIGNUP_SUCCESS: '회원가입이 성공했습니다!'
 } as const;
 
-// 폼 필드 이름
 export const FORM_FIELDS = {
   EMAIL: 'email',
   PASSWORD: 'password',

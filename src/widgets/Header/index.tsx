@@ -29,7 +29,6 @@ const Header = () => {
   return (
     <>
       <div className="fixed top-0 left-0 z-[1000] w-full">
-        {/* 피드백 배너 - 모든 화면에서 표시 */}
         <div className="w-full">
           <p className="font-pt-caption1-regular bg-hub-primary text-hub-white-1 text-center py-2 text-xs lg:text-sm">
             더 나은 스타트허브를 위해 피드백을 남겨주세요!{" "}
@@ -44,7 +43,6 @@ const Header = () => {
           </p>
         </div>
 
-        {/* 헤더 */}
         <header
           className="w-full border-b border-hub-gray-3 h-[60px] md:h-[78px]"
           style={{
@@ -55,7 +53,6 @@ const Header = () => {
           }}
         >
           <div className="w-full px-4 md:px-8 lg:w-[1040px] lg:mx-auto lg:px-0 flex items-center justify-between h-full">
-            {/* 로고 */}
             <Link
               href="/"
               aria-label="StartHub 홈으로 이동"
@@ -68,7 +65,6 @@ const Header = () => {
               />
             </Link>
 
-            {/* 데스크톱 네비게이션 */}
             <div className="hidden lg:flex items-center gap-8">
               {navLinks.slice(0, 5).map(({ href, label }) => (
                 <Link
@@ -83,7 +79,6 @@ const Header = () => {
               ))}
             </div>
 
-            {/* 유저 영역 */}
             <div className="flex items-center gap-2">
               {data ? (
                 <div className="hidden md:flex items-center gap-2">
@@ -116,7 +111,6 @@ const Header = () => {
                 </div>
               )}
 
-              {/* 햄버거 메뉴 버튼 (모바일/태블릿) */}
               <button
                 onClick={toggleMobileMenu}
                 className="lg:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1 ml-2"
@@ -142,7 +136,6 @@ const Header = () => {
           </div>
         </header>
 
-        {/* 모바일 메뉴 */}
         {isMobileMenuOpen && (
           <div className="lg:hidden bg-white border-b border-hub-gray-3 shadow-lg">
             <div className="px-4 py-4 space-y-3">
@@ -190,7 +183,6 @@ const Header = () => {
         )}
       </div>
 
-      {/* 모바일 메뉴 열렸을 때 배경 블러 오버레이 */}
       {isMobileMenuOpen && (
         <div
           className="fixed inset-0 bg-black/20 backdrop-blur-sm z-[999]"

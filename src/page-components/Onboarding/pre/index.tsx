@@ -75,7 +75,6 @@ const Onboarding = () => {
     <div className="flex justify-center items-center min-h-screen bg-[#f5f5f5] px-4 py-8 md:px-6 lg:px-8">
       <div className="w-full max-w-[490px] bg-white rounded-[30px] px-6 py-12 sm:px-8 md:px-[74px] md:py-[60px]">
         <div className="flex flex-col items-center gap-5">
-          {/* Header */}
           <div className="flex flex-col items-center gap-[10px]">
             <StartHubLogo width={134} height={55} />
             <p className="font-pt-body1-semibold text-center text-hub-black-1 px-4 whitespace-nowrap">
@@ -83,7 +82,6 @@ const Onboarding = () => {
             </p>
           </div>
 
-          {/* Form Container */}
           <div className="w-full max-w-[340px] flex flex-col gap-5">
             <PreOnboarding onSubmit={handlePreOnboardingSubmit} />
 

@@ -58,7 +58,6 @@ const StartHubAITextarea = ({
       className={`flex flex-col gap-2 w-full ${className ?? ""}`}
       style={{ maxWidth }}
     >
-      {/* 파일 칩 목록 */}
       {files.length > 0 && (
         <div className="flex gap-2 items-center w-full py-2 overflow-x-auto overflow-y-hidden whitespace-nowrap scroll-smooth [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           {files.map((f, i) => (
@@ -88,7 +87,6 @@ const StartHubAITextarea = ({
         </div>
       )}
 
-      {/* 입력 영역 */}
       <div
         className={[
           "relative w-full flex border overflow-visible transition-all duration-[160ms] ease-in-out",
@@ -100,7 +98,6 @@ const StartHubAITextarea = ({
             : "items-center px-14 rounded-full h-[50px]",
         ].join(" ")}
       >
-        {/* 파일 첨부 버튼 */}
         <input
           ref={fileInputRef}
           type="file"
@@ -125,7 +122,6 @@ const StartHubAITextarea = ({
           <PlusIcon />
         </button>
 
-        {/* 텍스트에어리어 */}
         <textarea
           ref={(el) => {
             taRef.current = el;
@@ -147,7 +143,6 @@ const StartHubAITextarea = ({
           style={{ resize: "none", overflow: "hidden" }}
         />
 
-        {/* 전송 버튼 */}
         <button
           onClick={() => {
             if (!disabled) handleSubmit();

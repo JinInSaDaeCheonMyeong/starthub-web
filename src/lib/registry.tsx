@@ -9,7 +9,6 @@ export default function StyledComponentsRegistry({
 }: {
   children: React.ReactNode
 }) {
-  // 브라우저에서는 SSR 로직 건너뛰기
   if (typeof window !== 'undefined') {
     return <>{children}</>
   }

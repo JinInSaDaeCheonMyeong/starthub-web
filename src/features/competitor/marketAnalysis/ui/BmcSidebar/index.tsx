@@ -47,7 +47,6 @@ const BmcSidebar: React.FC<BmcSidebarProps> = ({ userBmc }) => {
   };
 
   return (
-    // BmcSidebar - 반응형
     <div
       className="
       w-full lg:sticky lg:top-[170px] lg:w-[350px] lg:flex-shrink-0 p-4 sm:p-5
@@ -65,9 +64,7 @@ const BmcSidebar: React.FC<BmcSidebarProps> = ({ userBmc }) => {
           : BMC_ICONS[iconType].default;
 
         return (
-          // BmcItem
           <div key={index} className="mb-2">
-            {/* BmcItemHeader */}
             <div
               onClick={() => toggleItem(index)}
               className={`
@@ -76,7 +73,6 @@ const BmcSidebar: React.FC<BmcSidebarProps> = ({ userBmc }) => {
                 ${isOpen ? "[&_div]:text-hub-primary [&_span]:text-hub-primary" : ""}
               `}
             >
-              {/* ToggleIcon */}
               <span
                 className={`
                   text-sm text-hub-gray-2 transition-transform duration-200
@@ -86,18 +82,15 @@ const BmcSidebar: React.FC<BmcSidebarProps> = ({ userBmc }) => {
                 ▶
               </span>
 
-              {/* BmcItemTitle */}
               <div className="flex items-center gap-1.5 font-pt-body2-medium text-hub-black-1 [&_svg]:w-4 [&_svg]:h-4">
                 <Icon />
                 {title}
-                {/* BmcItemSubtitle */}
                 <span className="font-pt-caption1-regular text-hub-gray-2">
                   {subtitle}
                 </span>
               </div>
             </div>
 
-            {/* BmcItemContent */}
             {isOpen && (
               <div className="py-3 pr-4 pl-8 font-pt-caption1-regular text-hub-black-1 leading-[1.5]">
                 {isLoading && !hasLoaded

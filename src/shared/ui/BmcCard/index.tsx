@@ -98,7 +98,6 @@ const BmcCard = ({
   };
 
   if (isMobile) {
-    // 모바일 리스트 형태
     return (
       <div
         onClick={handleClick}
@@ -113,7 +112,6 @@ const BmcCard = ({
           </p>
         </div>
 
-        {/* 점 메뉴 버튼 */}
         <button
           onClick={handleDotsClick}
           className={[
@@ -126,7 +124,6 @@ const BmcCard = ({
           <DotsIcon width={20} height={20} />
         </button>
 
-        {/* 드롭다운 */}
         {showDropdown && (
           <div
             ref={dropdownRef}
@@ -152,15 +149,12 @@ const BmcCard = ({
     );
   }
 
-  // 데스크탑 카드 형태
   return (
     <div className="inline-block rounded-[10px] bg-hub-white-1 w-full max-w-[242px] h-full transition-all duration-300 relative">
-      {/* 이미지 + 텍스트 래퍼 */}
       <div
         onClick={handleClick}
         className="h-full bg-hub-white-1 w-full flex flex-col cursor-pointer"
       >
-        {/* 이미지 */}
         {imageUrl ? (
           <img
             src={imageUrl}
@@ -173,14 +167,12 @@ const BmcCard = ({
           </div>
         )}
 
-        {/* 텍스트 영역 */}
         <div className="flex pt-3 flex-row items-start justify-between bg-hub-white-1 relative px-3">
           <div className="flex flex-col gap-[2px] flex-1">
             <p className="font-pt-caption1-regular text-hub-black-1">{title}</p>
             <p className="font-pt-caption2-regular text-hub-gray-1">{date}</p>
           </div>
 
-          {/* 점 메뉴 버튼 */}
           <button
             onClick={handleDotsClick}
             className={[
@@ -193,7 +185,6 @@ const BmcCard = ({
             <DotsIcon width={20} height={20} />
           </button>
 
-          {/* 드롭다운 */}
           {showDropdown && (
             <div
               ref={dropdownRef}

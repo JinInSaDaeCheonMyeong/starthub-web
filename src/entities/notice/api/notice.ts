@@ -29,7 +29,7 @@ export const NoticeApi = {
   },
   getNoticeRecommend: async (): Promise<NoticeType[]> => {
     const res = await StartHubAxios.get(`/announcements/recommendations`, {
-      timeout: 30000, // 30초로 타임아웃 연장 (AI 처리 시간 고려)
+      timeout: 30000,
     });
     return res.data;
   },

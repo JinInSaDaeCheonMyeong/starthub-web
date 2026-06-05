@@ -58,10 +58,8 @@ const MainMenu = () => {
   const router = useRouter();
 
   return (
-    // MenuContainer
     <div className="flex flex-wrap justify-center gap-4 md:gap-8 py-6 md:py-10 pb-8 md:pb-[50px] px-4">
       {menuItems.map((item, idx) => (
-        // MenuButton
         <div
           key={idx}
           role="button"

@@ -82,7 +82,7 @@ export const useBmcEdit = (
       toast.success("BMC가 성공적으로 수정되었습니다!");
 
       if (captureBmcAndUpload) {
-        await new Promise((resolve) => setTimeout(resolve, 500)); // DOM 업데이트 대기
+        await new Promise((resolve) => setTimeout(resolve, 500)); 
         await captureBmcAndUpload(bmcData.id);
       }
     } catch (error) {

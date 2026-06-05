@@ -25,7 +25,6 @@ const HiringCard = ({
 
   return (
     <div className="w-[250px] h-[150px] bg-hub-white-1 rounded-[14px] border-2 border-hub-gray-4 px-4 py-[25px] mr-auto">
-      {/* 카테고리 */}
       <div className="flex items-center my-1 [&_svg]:w-[18px] [&_svg]:h-[18px] [&_svg]:mr-1">
         {categoryInfo.image}
         <span
@@ -36,15 +35,12 @@ const HiringCard = ({
         </span>
       </div>
 
-      {/* 회사 설명 */}
       <p className="font-pt-body1-semibold">{companyDescription}</p>
 
-      {/* 회사명 · 위치 */}
       <span className="text-[#3e3e3e] font-pt-caption2-medium">
         {companyName} | 서울 강남구 · 경력 무관
       </span>
 
-      {/* 태그 */}
       <div className="flex mt-2">
         {[
           { icon: <Electron />, label: "적극 채용 중" },

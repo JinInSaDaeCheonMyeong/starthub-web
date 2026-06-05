@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 
-// 시/도 및 구/군 데이터
 const LOCATIONS = {
   "서울특별시": ["강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구"],
   "부산광역시": ["강서구", "금정구", "기장군", "남구", "동구", "동래구", "부산진구", "북구", "사상구", "사하구", "서구", "수영구", "연제구", "영도구", "중구", "해운대구"],
@@ -25,7 +24,6 @@ const PreOnboarding = ({ onSubmit }: PreOnboardingProps) => {
   const [selectedCity, setSelectedCity] = useState<string>("");
   const [selectedDistrict, setSelectedDistrict] = useState<string>("");
 
-  // 지역 선택 시 전체 주소 업데이트
   useEffect(() => {
     if (selectedCity && selectedDistrict && selectedCity.trim() !== "" && selectedDistrict.trim() !== "") {
       const newData = { startupLocation: `${selectedCity} ${selectedDistrict}` };
@@ -35,14 +33,13 @@ const PreOnboarding = ({ onSubmit }: PreOnboardingProps) => {
 
   const handleCityChange = (city: string) => {
     setSelectedCity(city);
-    setSelectedDistrict(""); // 시/도 변경 시 구/군 초기화
+    setSelectedDistrict(""); 
   };
 
   return (
     <div className="flex flex-col gap-[10px]">
       <p className="font-pt-body2-medium text-hub-black-1">창업 위치</p>
       <div className="flex gap-[10px]">
-        {/* 시/도 선택 */}
         <div className="relative flex-1">
           <select
             value={selectedCity}
@@ -63,7 +60,6 @@ const PreOnboarding = ({ onSubmit }: PreOnboardingProps) => {
           </div>
         </div>
 
-        {/* 구/군 선택 */}
         <div className="relative flex-1">
           <select
             value={selectedDistrict}

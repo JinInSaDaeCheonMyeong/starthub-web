@@ -67,7 +67,6 @@ const NoticeCard = ({ notice }: NoticeCardProps) => {
   const getFormattedDate = (period: string) => {
     if (!period) return period;
 
-    // 날짜에서 시간 부분 제거 (예: "2024.01.01 09:00 ~ 2024.01.31 18:00" -> "2024.01.01 ~ 2024.01.31")
     return period.replace(/\s+\d{2}:\d{2}/g, '');
   };
 
@@ -78,7 +77,6 @@ const NoticeCard = ({ notice }: NoticeCardProps) => {
       onClick={() => router.push(`/notice/${String(notice.id)}`)}
       className="w-[250px] min-w-[250px] h-[150px] bg-hub-white-1 border-2 border-hub-gray-4 px-5 py-[19px] rounded-[14px] cursor-pointer"
     >
-      {/* 카테고리 */}
       <div className="flex items-center mb-[5px] gap-[6px] [&_svg]:w-[18px] [&_svg]:h-[18px]">
         {categoryInfo.icon}
         <span className="font-pt-caption2-regular text-hub-primary">
@@ -86,7 +84,6 @@ const NoticeCard = ({ notice }: NoticeCardProps) => {
         </span>
       </div>
 
-      {/* 제목 */}
       <div
         className="font-pt-caption1-semibold text-[14px] text-hub-gray-1 overflow-hidden text-ellipsis"
         style={{
@@ -100,12 +97,10 @@ const NoticeCard = ({ notice }: NoticeCardProps) => {
         {notice.title}
       </div>
 
-      {/* 모집 기간 */}
       <p className="font-pt-caption2-regular text-[10px] my-[5px]">
         모집 기간 {getFormattedDate(notice.receptionPeriod)}
       </p>
 
-      {/* 태그 */}
       <div className="flex gap-1">
         <div className="flex items-center justify-center h-5 w-fit bg-hub-gray-4 font-pt-caption2-regular px-[6px] rounded-[4px]">
           <Map className="mr-[2px]" />

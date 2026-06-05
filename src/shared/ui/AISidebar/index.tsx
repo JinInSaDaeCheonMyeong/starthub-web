@@ -42,7 +42,6 @@ const AISidebar = ({
   const editInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
-  // 모바일 감지
   useEffect(() => {
     const checkIsMobile = () => {
       setIsMobile(window.innerWidth < 1024);
@@ -54,7 +53,6 @@ const AISidebar = ({
     return () => window.removeEventListener("resize", checkIsMobile);
   }, []);
 
-  // 모바일에서 expanded 상태 관리
   useEffect(() => {
     if (isMobile) {
       setExpanded(false);
@@ -133,7 +131,6 @@ const AISidebar = ({
 
   return (
     <>
-      {/* 모바일 오버레이 배경 */}
       {isMobile && expanded && (
         <div
           className="fixed inset-0 bg-black/50 z-40"
@@ -152,13 +149,11 @@ const AISidebar = ({
               : "w-12"
         }`}
       >
-      {/* 로고 영역 */}
       <div
         className={`flex items-center gap-2 p-2 relative transition-all duration-200 overflow-visible ${
           expanded ? "justify-between mb-3" : "justify-center mb-[26px] group"
         }`}
       >
-        {/* 로고 버튼 */}
         <div
           onClick={() => {
             if (isMobile && !expanded) {
@@ -178,7 +173,6 @@ const AISidebar = ({
           <IconAI width={32} height={32} />
         </div>
 
-        {/* 로고 타이틀 */}
         {expanded && (
           <div className="flex items-center gap-2 flex-1">
             <span className="font-pt-body2-medium text-hub-black-1 whitespace-nowrap">
@@ -187,7 +181,6 @@ const AISidebar = ({
           </div>
         )}
 
-        {/* 토글 버튼 - 모바일에서 닫혀있을 때는 숨김 */}
         {!(isMobile && !expanded) && (
           <button
             onClick={() => setExpanded((v) => !v)}
@@ -203,14 +196,12 @@ const AISidebar = ({
         )}
       </div>
 
-      {/* 섹션 레이블 */}
       {expanded && (
         <div className="px-4 py-1 font-pt-caption2-regular text-hub-gray-2 whitespace-nowrap">
           StartHub
         </div>
       )}
 
-      {/* 네비게이션 */}
       <div
         className={`flex flex-col px-2 gap-2 ${
           expanded || !isMobile ? "items-stretch pt-0" : "items-center pt-[10px]"
@@ -255,7 +246,6 @@ const AISidebar = ({
         })}
       </div>
 
-      {/* 채팅 목록 */}
       {expanded && (
         <>
           <hr className="border-none border-t border-[#e5e5e5] mx-3 my-2" />
@@ -299,7 +289,6 @@ const AISidebar = ({
                   </button>
                 )}
 
-                {/* 컨텍스트 메뉴 */}
                 {menuOpenId === session.id && (
                   <div
                     ref={menuRef}
@@ -325,7 +314,6 @@ const AISidebar = ({
         </>
       )}
 
-      {/* 하단 프로필 */}
       <div
         className={`flex items-center gap-[10px] mt-auto ${
           expanded ? "p-3 border-t border-[#e5e5e5]" : "p-2 justify-center"

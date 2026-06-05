@@ -1,7 +1,6 @@
 import { StartHubTextField } from "@/shared/ui";
 import { useState, useEffect } from "react";
 
-// 시/도 및 구/군 데이터
 const LOCATIONS = {
   "서울특별시": ["강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구"],
   "부산광역시": ["강서구", "금정구", "기장군", "남구", "동구", "동래구", "부산진구", "북구", "사상구", "사하구", "서구", "수영구", "연제구", "영도구", "중구", "해운대구"],
@@ -44,7 +43,6 @@ const EarlyOnboarding = ({ onSubmit }: EarlyOnboardingProps) => {
     onSubmit?.(formData);
   }, [formData]);
 
-  // 시/도 변경 시 구/군 초기화 및 전체 주소 업데이트
   useEffect(() => {
     if (selectedCity && selectedDistrict && selectedCity.trim() !== "" && selectedDistrict.trim() !== "") {
       setFormData(prev => ({
@@ -56,7 +54,7 @@ const EarlyOnboarding = ({ onSubmit }: EarlyOnboardingProps) => {
 
   const handleCityChange = (city: string) => {
     setSelectedCity(city);
-    setSelectedDistrict(""); // 시/도 변경 시 구/군 초기화
+    setSelectedDistrict(""); 
   };
 
   const titleClass = "font-pt-body2-medium text-hub-black-1";
@@ -64,7 +62,6 @@ const EarlyOnboarding = ({ onSubmit }: EarlyOnboardingProps) => {
 
   return (
     <div className="flex flex-col gap-5">
-      {/* 회사명 */}
       <div className="flex flex-col gap-[10px]">
         <p className={titleClass}>
           회사명 <span className={requiredClass}>*</span>
@@ -82,7 +79,6 @@ const EarlyOnboarding = ({ onSubmit }: EarlyOnboardingProps) => {
         />
       </div>
 
-      {/* 기업 설명 */}
       <div className="flex flex-col gap-[10px]">
         <p className={titleClass}>
           기업 설명 <span className={requiredClass}>*</span>
@@ -99,7 +95,6 @@ const EarlyOnboarding = ({ onSubmit }: EarlyOnboardingProps) => {
         />
       </div>
 
-      {/* 기업 인원 */}
       <div className="flex flex-col gap-[10px]">
         <p className={titleClass}>
           기업 인원 <span className={requiredClass}>*</span>
@@ -131,7 +126,6 @@ const EarlyOnboarding = ({ onSubmit }: EarlyOnboardingProps) => {
         </div>
       </div>
 
-      {/* 기업 사이트 */}
       <div className="flex flex-col gap-[10px]">
         <p className={titleClass}>기업 사이트</p>
         <StartHubTextField
@@ -147,13 +141,11 @@ const EarlyOnboarding = ({ onSubmit }: EarlyOnboardingProps) => {
         />
       </div>
 
-      {/* 창업 위치 */}
       <div className="flex flex-col gap-[10px]">
         <p className={titleClass}>
           창업 위치 <span className={requiredClass}>*</span>
         </p>
         <div className="flex gap-[10px]">
-          {/* 시/도 선택 */}
           <div className="relative flex-1">
             <select
               value={selectedCity}
@@ -174,7 +166,6 @@ const EarlyOnboarding = ({ onSubmit }: EarlyOnboardingProps) => {
             </div>
           </div>
 
-          {/* 구/군 선택 */}
           <div className="relative flex-1">
             <select
               value={selectedDistrict}
@@ -198,7 +189,6 @@ const EarlyOnboarding = ({ onSubmit }: EarlyOnboardingProps) => {
         </div>
       </div>
 
-      {/* 연매출액 */}
       <div className="flex flex-col gap-[10px]">
         <p className={titleClass}>연매출액</p>
         <div className="relative w-full">

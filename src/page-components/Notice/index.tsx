@@ -45,14 +45,12 @@ const NoticePage = () => {
         <div className="w-full max-w-[1040px]">
           {isLoading ? (
             <>
-              {/* 모바일 스켈레톤: 리스트 형태 */}
               <div className="lg:hidden space-y-4">
                 {Array.from({ length: 10 }).map((_, index) => (
                   <div key={`skeleton-mobile-${index}`} className="animate-pulse bg-hub-gray-4 h-16 rounded-lg"></div>
                 ))}
               </div>
 
-              {/* 데스크톱 스켈레톤: 카드 그리드 형태 */}
               <div className="hidden lg:block">
                 <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-6 xl:grid-cols-4">
                   {Array.from({ length: 16 }).map((_, index) => (
@@ -71,7 +69,6 @@ const NoticePage = () => {
             </p>
           ) : (
             <>
-              {/* 모바일: 리스트 형태 */}
               <div className="lg:hidden space-y-3">
                 {data.content.map((notice, index) => (
                   <div
@@ -113,7 +110,6 @@ const NoticePage = () => {
                 ))}
               </div>
 
-              {/* 데스크톱: NoticeCard 그리드 형태 */}
               <div className="hidden lg:block">
                 <div className="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-6 xl:grid-cols-4">
                   {data.content.map((notice, index) => (

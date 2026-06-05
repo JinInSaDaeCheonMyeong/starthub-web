@@ -11,7 +11,6 @@ const CategorySelector = ({
 }: CategorySelectorProps) => {
   return (
     <div className="flex flex-col gap-[10px]">
-      {/* Section Title and Description */}
       <div className="flex flex-col">
         <p className="font-pt-body2-medium text-hub-black-1">
           창업 분야(1개 이상) <span className="text-hub-primary">*</span>
@@ -21,7 +20,6 @@ const CategorySelector = ({
         </p>
       </div>
 
-      {/* Category Grid */}
       <div className="flex flex-wrap gap-[10px]">
         {JOB_CATEGORY.map((category) => {
           const isActive = selectedCategories.includes(category.enum);

@@ -20,7 +20,6 @@ export const useOAuthCallback = () => {
     const refreshToken = searchParams?.get("refreshToken");
     const isFirstLogin = searchParams?.get("isFirstLogin");
 
-    // URL에서 토큰 정보 즉시 제거
     window.history.replaceState(null, "", window.location.pathname);
 
     if (accessToken && refreshToken) {
@@ -28,7 +27,6 @@ export const useOAuthCallback = () => {
       cookieUtils.setRefreshToken(refreshToken);
       setIsLoggedIn(true);
 
-      // OAuth 로그인 성공 - 토스트 제거하여 중복 방지
       if (isFirstLogin === "true") {
         router.replace("/onboarding");
       } else {

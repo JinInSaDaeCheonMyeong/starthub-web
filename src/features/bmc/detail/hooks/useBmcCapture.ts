@@ -9,7 +9,6 @@ export const useBmcCapture = () => {
   const hasAutoCaptureRef = useRef(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  // 모바일 감지
   useEffect(() => {
     const checkIsMobile = () => {
       setIsMobile(window.innerWidth < 768);
@@ -26,7 +25,6 @@ export const useBmcCapture = () => {
       return;
     }
 
-    // 모바일에서는 캡처하지 않음
     if (isMobile) {
       return;
     }

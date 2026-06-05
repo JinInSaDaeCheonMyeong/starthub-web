@@ -56,7 +56,6 @@ const NoticeDetail = ({ item }: NoticeDetailProps) => {
       showSuccessToast("링크가 복사되었습니다!");
     } catch (error) {
       console.error('Failed to copy link:', error);
-      // Fallback: 수동 선택으로 복사
       const textArea = document.createElement('textarea');
       textArea.value = window.location.href;
       document.body.appendChild(textArea);

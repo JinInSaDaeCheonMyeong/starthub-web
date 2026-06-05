@@ -39,9 +39,7 @@ const BmcTemplateCard = () => {
       <div className="w-full mt-10">
         <p className="font-pt-h2-semibold mb-5">BMC를 작성해보세요!</p>
 
-        {/* 모바일: 리스트 형태, 데스크탑: 카드 그리드 */}
         <div className="w-full">
-          {/* 모바일 리스트 */}
           <div className="block lg:hidden w-full">
             <div className="space-y-3 mb-10">
               {templates.map(({ component: Svg, type, title }) => (
@@ -71,7 +69,6 @@ const BmcTemplateCard = () => {
             </div>
           </div>
 
-          {/* 데스크탑 카드 그리드 */}
           <div className="hidden lg:grid grid-cols-2 lg:grid-cols-4 gap-6 w-full">
             {templates.map(({ component: Svg, type, title }) => (
               <div key={type} className="w-full max-w-[242px] mx-auto bg-hub-white-1">

@@ -6,9 +6,7 @@ export const BmcSelectionSkeleton = () => {
           먼저 원하는 BMC를 선택해 주세요.
         </p>
 
-        {/* 모바일: 리스트, 데스크탑: 카드 그리드 */}
         <div className="w-full">
-          {/* 모바일 리스트 스켈레톤 */}
           <div className="block lg:hidden w-full">
             <div className="space-y-3">
               {[...Array(4)].map((_, index) => (
@@ -23,7 +21,6 @@ export const BmcSelectionSkeleton = () => {
             </div>
           </div>
 
-          {/* 데스크탑 카드 그리드 스켈레톤 */}
           <div className="hidden lg:grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8 w-full">
             {[...Array(4)].map((_, index) => (
               <div key={index} className="flex flex-col w-full max-w-[242px] mx-auto">

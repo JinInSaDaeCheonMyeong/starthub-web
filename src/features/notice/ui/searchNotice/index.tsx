@@ -57,7 +57,6 @@ const SearchNotice = ({
   ]);
 
   return (
-    // SearchNoticeContainer
     <div className="flex flex-col items-center mt-[120px] sm:mt-[130px] md:mt-[140px] lg:mt-[150px] px-4">
       <h1 className="font-pt-h1-semibold mb-[20px] md:mb-[30px] text-xl sm:text-2xl md:text-3xl text-center">공고 찾기</h1>
 
@@ -70,7 +69,6 @@ const SearchNotice = ({
       />
 
       {!hideFilters && (
-        // DropdownContainer
         <div className="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 mt-4 md:mt-5 w-full max-w-[350px] sm:max-w-[600px] md:max-w-[800px]">
           <StartHubDropdown
             options={[

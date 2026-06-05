@@ -2,7 +2,6 @@ import { ReactComponent as Plus } from "@assets/icons/plus.svg";
 
 const BmcCreateButton = () => {
   return (
-    // ButtonContainer
     <div
       onClick={() => {}}
       className="
@@ -11,7 +10,6 @@ const BmcCreateButton = () => {
         hover:border-hub-primary hover:bg-hub-white-2
       "
     >
-      {/* PlusIcon */}
       <div className="w-[60px] h-[60px] flex items-center justify-center [&_svg]:w-full [&_svg]:h-full [&_svg]:fill-hub-primary">
         <Plus />
       </div>

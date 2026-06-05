@@ -59,7 +59,6 @@ const ChatSidebar = ({
         expanded ? "w-[240px]" : "w-12"
       }`}
     >
-      {/* 로고 */}
       <div
         onClick={() => setExpanded((v) => !v)}
         className={`flex items-center gap-2 p-2 cursor-pointer ${expanded ? "mb-3" : "mb-[26px]"}`}
@@ -74,14 +73,12 @@ const ChatSidebar = ({
         )}
       </div>
 
-      {/* 섹션 레이블 */}
       {expanded && (
         <div className="px-4 py-1 font-pt-caption2-regular text-hub-gray-2 whitespace-nowrap">
           StartHub
         </div>
       )}
 
-      {/* 네비게이션 */}
       <div
         className={`flex flex-col px-2 ${
           expanded ? "items-stretch gap-2" : "items-center gap-[18px]"
@@ -115,7 +112,6 @@ const ChatSidebar = ({
         })}
       </div>
 
-      {/* 채팅 목록 */}
       {expanded && (
         <>
           <hr className="border-none border-t border-[#e5e5e5] mx-3 my-2" />
@@ -136,7 +132,6 @@ const ChatSidebar = ({
         </>
       )}
 
-      {/* 하단 프로필 */}
       <div
         className={[
           "flex items-center gap-[10px] mt-auto",
