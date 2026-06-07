@@ -1,5 +1,4 @@
 import { ReactComponent as Email } from "@assets/icons/email.svg";
-import { ReactComponent as Call } from "@assets/icons/call.svg";
 import { ReactComponent as Location } from "@assets/icons/location.svg";
 
 const Footer = () => {
