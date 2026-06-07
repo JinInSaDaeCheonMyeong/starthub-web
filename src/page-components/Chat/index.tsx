@@ -1,14 +1,12 @@
 "use client";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { toast } from "react-toastify";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import ChatSidebar from "@/shared/ui/AISidebar";
 import StartHubAITextarea from "@/shared/ui/AITextarea";
 import AITypingIndicator from "@/shared/ui/AITypingIndicator";
 import AIErrorMessage from "@/shared/ui/AIErrorMessage";
-import { useAuthStore } from "@/app/model/stores/useAuthStore";
 import { useGetMyProfile } from "@/features/auth/getProfile/model/useGetMyProfile";
 import { useStreamMessage } from "@/features/chatAI/hooks/useStreamMessage";
 import { useGetSessionDetail } from "@/features/chatAI/hooks/useGetSessionDetail";
@@ -28,18 +26,8 @@ interface DisplayMessage {
 const ChatPage = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const { isLoggedIn } = useAuthStore();
   const sessionIdParam = searchParams?.get("sessionId");
   const activeSessionId = sessionIdParam ? Number(sessionIdParam) : null;
-
-  useEffect(() => {
-    if (!isLoggedIn) {
-      toast.info("로그인 후 이용하실 수 있습니다.", {
-        toastId: "login-required-chat",
-      });
-      router.push("/sign-in");
-    }
-  }, [isLoggedIn, router]);
 
   const setActiveSessionId = (id: number | null) => {
     if (id !== null) {
@@ -220,18 +208,6 @@ const ChatPage = () => {
       <div className="flex h-screen items-center justify-center">
         <div className="text-center">
           <p className="font-pt-body2-medium text-hub-gray-2">로딩 중...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!isLoggedIn) {
-    return (
-      <div className="flex h-screen items-center justify-center">
-        <div className="text-center">
-          <p className="font-pt-body2-medium text-hub-gray-2">
-            로그인 페이지로 이동 중...
-          </p>
         </div>
       </div>
     );

@@ -1,28 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { useAIDocsEditor } from "./hooks/useAIDocsEditor";
-import { toast } from "react-toastify";
-import { useAuthStore } from "@/app/model/stores/useAuthStore";
+
 
 const AIDocsEditorPage = () => {
   const params = useParams<{ id?: string | string[] }>();
   const router = useRouter();
-  const { isLoggedIn } = useAuthStore();
   const rawId = Array.isArray(params?.id) ? params.id[0] : params?.id;
   const parsedId = rawId ? Number(rawId) : NaN;
   const documentId = Number.isFinite(parsedId) && parsedId > 0 ? parsedId : 0;
   const [viewMode, setViewMode] = useState<"edit" | "preview">("edit");
 
-  useEffect(() => {
-    if (!isLoggedIn) {
-      toast.info("로그인 후 이용하실 수 있습니다.", {
-        toastId: "login-required-documents-edit",
-      });
-      router.push("/sign-in");
-    }
-  }, [isLoggedIn, router]);
 
   const {
     document,
@@ -56,21 +46,6 @@ const AIDocsEditorPage = () => {
     );
   }
 
-  if (!isLoggedIn) {
-    return (
-      <div className="w-full mt-[120px] sm:mt-[130px] md:mt-[140px] lg:mt-[150px] mb-[50px]">
-        <div className="w-full px-4 md:px-8 lg:w-[1040px] lg:mx-auto lg:px-0">
-          <div className="min-h-[60vh] flex justify-center items-center">
-            <div className="text-center">
-              <p className="font-pt-body2-medium text-hub-gray-2">
-                로그인 페이지로 이동 중...
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   if (isLoading) {
     return (
