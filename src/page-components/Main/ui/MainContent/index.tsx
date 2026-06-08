@@ -28,7 +28,6 @@ const RnDNotice = () => {
 
   return (
     <>
-      {/* 모바일: 스크롤 형태 */}
       <div className="lg:hidden flex gap-2.5 w-full overflow-x-auto">
         {data?.content?.map((item: NoticeType) => (
           <div key={item.url} className="shrink-0">
@@ -37,7 +36,6 @@ const RnDNotice = () => {
         ))}
       </div>
 
-      {/* 데스크톱: 4개 카드 그리드 */}
       <div className="hidden lg:flex gap-2.5 w-full justify-center">
         {data?.content?.slice(0, 4).map((item: NoticeType) => (
           <NoticeCard key={item.url} notice={item} />
@@ -62,7 +60,6 @@ const RecommendedAINotice = () => {
 
   return (
     <>
-      {/* 모바일: 스크롤 형태 */}
       <div className="lg:hidden flex gap-2.5 w-full overflow-x-auto">
         {data?.map((item: NoticeType) => (
           <div key={item.url} className="shrink-0">
@@ -71,7 +68,6 @@ const RecommendedAINotice = () => {
         ))}
       </div>
 
-      {/* 데스크톱: 4개 카드 그리드 */}
       <div className="hidden lg:flex gap-2.5 w-full justify-center">
         {data?.slice(0, 4).map((item: NoticeType) => (
           <NoticeCard key={item.url} notice={item} />
@@ -101,7 +97,6 @@ const EducationNotice = () => {
 
   return (
     <>
-      {/* 모바일: 스크롤 형태 */}
       <div className="lg:hidden flex gap-2.5 w-full overflow-x-auto">
         {data?.content?.map((item: NoticeType) => (
           <div key={item.url} className="shrink-0">
@@ -110,7 +105,6 @@ const EducationNotice = () => {
         ))}
       </div>
 
-      {/* 데스크톱: 4개 카드 그리드 */}
       <div className="hidden lg:flex gap-2.5 w-full justify-center">
         {data?.content?.slice(0, 4).map((item: NoticeType) => (
           <NoticeCard key={item.url} notice={item} />
@@ -128,7 +122,6 @@ const MainContent = () => {
     setMounted(true);
   }, []);
 
-  // 서버사이드 렌더링 시에는 기본값 표시
   const sectionTitle = mounted
     ? (isLoggedIn ? "AI 추천 공고" : "R&D 분야 최신 공고")
     : "R&D 분야 최신 공고";

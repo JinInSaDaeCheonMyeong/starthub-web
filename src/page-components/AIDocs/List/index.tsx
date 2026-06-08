@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import { ReactComponent as DotsIcon } from "@assets/icons/dots.svg";
 import { documentApi } from "@/entities/document";
 import type { DocumentSummary } from "@/entities/document";
-import { useAuthStore } from "@/app/model/stores/useAuthStore";
 
 const formatDate = (date: string) => {
   const d = new Date(date);
@@ -67,7 +66,6 @@ const DocumentCard = ({
   };
 
   if (isMobile) {
-    // 모바일 리스트 형태
     return (
       <div
         onClick={() => router.push(`/documents/${doc.id}/edit`)}
@@ -82,7 +80,6 @@ const DocumentCard = ({
           </p>
         </div>
 
-        {/* 점 메뉴 버튼 */}
         <button
           onClick={handleDotsClick}
           className={[
@@ -95,7 +92,6 @@ const DocumentCard = ({
           <DotsIcon width={20} height={20} />
         </button>
 
-        {/* 드롭다운 */}
         {showDropdown && (
           <div
             ref={dropdownRef}
@@ -113,7 +109,6 @@ const DocumentCard = ({
     );
   }
 
-  // 데스크탑 카드 형태
   return (
     <div
       onClick={() => router.push(`/documents/${doc.id}/edit`)}
@@ -128,7 +123,6 @@ const DocumentCard = ({
         </p>
       </div>
 
-      {/* 점 메뉴 버튼 */}
       <button
         onClick={handleDotsClick}
         className={[
@@ -141,7 +135,6 @@ const DocumentCard = ({
         <DotsIcon width={20} height={20} />
       </button>
 
-      {/* 드롭다운 */}
       {showDropdown && (
         <div
           ref={dropdownRef}
@@ -161,34 +154,8 @@ const DocumentCard = ({
 
 const AIDocsListPage = () => {
   const router = useRouter();
-  const { isLoggedIn } = useAuthStore();
   const [documents, setDocuments] = useState<DocumentSummary[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    if (!isLoggedIn) {
-      toast.info("로그인 후 이용하실 수 있습니다.", {
-        toastId: "login-required-documents",
-      });
-      router.push("/sign-in");
-    }
-  }, [isLoggedIn, router]);
-
-  if (!isLoggedIn) {
-    return (
-      <div className="w-full mt-[120px] sm:mt-[130px] md:mt-[140px] lg:mt-[150px] mb-[50px]">
-        <div className="w-full px-4 md:px-8 lg:w-[1040px] lg:mx-auto lg:px-0">
-          <div className="min-h-[60vh] flex justify-center items-center">
-            <div className="text-center">
-              <p className="font-pt-body2-medium text-hub-gray-2">
-                로그인 페이지로 이동 중...
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   const fetchDocuments = async (showLoading = true) => {
     try {
@@ -221,7 +188,6 @@ const AIDocsListPage = () => {
 
         {isLoading ? (
           <>
-            {/* 모바일 스켈레톤 */}
             <div className="block lg:hidden w-full">
               <div className="space-y-3 mb-10">
                 {Array.from({ length: 6 }).map((_, idx) => (
@@ -239,7 +205,6 @@ const AIDocsListPage = () => {
               </div>
             </div>
 
-            {/* 데스크탑 스켈레톤 */}
             <div className="hidden lg:block lg:space-y-3 mb-10">
               {Array.from({ length: 8 }).map((_, idx) => (
                 <div
@@ -267,7 +232,6 @@ const AIDocsListPage = () => {
           </div>
         ) : (
           <>
-            {/* 리스트 뷰 */}
             <div className="w-full">
               <div className="space-y-3 mb-10">
                 <button

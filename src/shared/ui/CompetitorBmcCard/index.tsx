@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import BmcTemplate from "@assets/images/bmc에시.png";
+import BmcTemplate from "@assets/images/bmc-example.png";
 
 interface BmcCardProps {
   bmcId: number;
@@ -13,7 +13,6 @@ const BmcCard = ({ bmcId, title, date, isMobile = false }: BmcCardProps) => {
   const router = useRouter();
 
   if (isMobile) {
-    // 모바일 리스트 형태
     return (
       <div
         onClick={() => router.push(`/competitor/create?bmcId=${String(bmcId)}`)}
@@ -34,7 +33,6 @@ const BmcCard = ({ bmcId, title, date, isMobile = false }: BmcCardProps) => {
     );
   }
 
-  // 데스크탑 카드 형태
   return (
     <div
       onClick={() => router.push(`/competitor/create?bmcId=${String(bmcId)}`)}

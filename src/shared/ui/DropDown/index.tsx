@@ -60,7 +60,6 @@ export const StartHubDropdown = ({
       className="relative inline-block"
       style={{ width: width ? `${width}px` : "fit-content" }}
     >
-      {/* 버튼 */}
       <button
         type="button"
         onClick={handleToggle}
@@ -85,7 +84,6 @@ export const StartHubDropdown = ({
         />
       </button>
 
-      {/* 리스트 */}
       {isOpen && (
         <ul className="absolute top-full left-0 right-0 bg-white border border-hub-gray-3 border-t-0 rounded-b-lg max-h-[200px] overflow-y-auto z-[1000] m-0 p-0 list-none shadow-[0_2px_8px_rgba(0,0,0,0.1)]">
           {options.map((option) => (

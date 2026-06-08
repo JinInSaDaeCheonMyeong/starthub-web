@@ -76,7 +76,6 @@ const useQuestionStore = create<QuestionStore>()(
             });
           } catch (error) {
             console.error("Failed to load questions:", error);
-            // 로그인이 필요한 경우 기본 질문들을 설정
             const defaultQuestions = [
               { questionNumber: 1, question: "당신의 비즈니스 아이디어를 간단하게 설명해주세요. 어떤 제품이나 서비스를 제공하시나요?" },
               { questionNumber: 2, question: "당신의 제품/서비스를 이용할 주요 고객층은 누구인가요?" },
@@ -158,14 +157,12 @@ const useQuestionStore = create<QuestionStore>()(
           } catch (error: any) {
             console.error("답변 전송 실패:", error);
 
-            // 이미 표시된 답변을 롤백
             set((prevState) => {
               const newAnswers = { ...prevState.answers };
               delete newAnswers[questionNumber];
               return { answers: newAnswers };
             });
 
-            // 상세한 에러 메시지 표시
             const errorMessage = error?.response?.data?.message || "답변 전송에 실패했습니다.";
             toast.error(errorMessage);
           }

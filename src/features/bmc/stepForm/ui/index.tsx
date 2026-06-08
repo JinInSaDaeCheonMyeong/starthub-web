@@ -140,7 +140,6 @@ const BmcStepForm = ({ stepId, placeholder }: StepFormProps) => {
         setTimeout(scrollToBottom, 200);
       }
     } catch (error: any) {
-      // submitAnswer에서 이미 에러 토스트를 보여주므로 여기서는 로그만 기록
       console.error("답변 제출 실패:", error);
     } finally {
       setIsSubmitting(false);
@@ -149,13 +148,11 @@ const BmcStepForm = ({ stepId, placeholder }: StepFormProps) => {
 
   if (isGeneratingBmc) return <BmcGeneratingSkeleton />;
 
-  // 프로그레스 계산
   const progressPercentage = Math.round(((currentQuestionIndex + 1) / questions.length) * 100);
 
   if (!currentQuestion) {
     return (
       <div className="flex flex-col w-full h-full">
-        {/* 모바일 프로그레스바 - 고정 위치 (로딩 상태) */}
         <div className="block lg:hidden fixed top-[90px] sm:top-[100px] left-0 right-0 bg-hub-white-2 z-10 px-4 py-3 border-b border-hub-gray-4 h-[60px] sm:h-[65px]">
           <div className="flex items-center justify-between mb-2">
             <span className="text-sm font-pt-caption1-medium text-hub-gray-2">진행률</span>
@@ -166,7 +163,6 @@ const BmcStepForm = ({ stepId, placeholder }: StepFormProps) => {
           </div>
         </div>
 
-        {/* 모바일에서 프로그레스바 아래 남은 공간을 모두 채우는 컨테이너 (로딩 상태) */}
         <div className="lg:hidden flex justify-center items-start p-4 mt-[150px] sm:mt-[165px]">
           <div className="w-full max-w-[680px] h-[500px] sm:h-[600px] bg-hub-white-1 border-2 border-hub-gray-3 rounded-lg flex flex-col p-4 sm:p-6">
             <div className="flex flex-col gap-3 sm:gap-4 overflow-y-auto mb-4 sm:mb-5 font-pt-caption1-regular flex-1 min-h-0">
@@ -178,7 +174,6 @@ const BmcStepForm = ({ stepId, placeholder }: StepFormProps) => {
           </div>
         </div>
 
-        {/* 데스크톱 레이아웃 (로딩 상태) */}
         <div className="hidden lg:flex w-[680px] lg:h-[650px] bg-hub-white-1 border-2 border-hub-gray-3 rounded-lg flex-col p-4 sm:p-6 lg:p-[30px_20px]">
           <div className="flex flex-col gap-3 sm:gap-4 lg:gap-5 overflow-y-auto mb-4 sm:mb-5 font-pt-caption1-regular flex-1 min-h-0">
             <Message isMine={false} message="질문을 불러오는 중입니다..." />
@@ -193,7 +188,6 @@ const BmcStepForm = ({ stepId, placeholder }: StepFormProps) => {
 
   return (
     <div className="flex flex-col w-full h-full">
-      {/* 모바일 프로그레스바 - 고정 위치 */}
       <div className="block lg:hidden fixed top-[90px] sm:top-[100px] left-0 right-0 bg-hub-white-2 z-10 px-4 py-3 border-b border-hub-gray-4 h-[60px] sm:h-[65px]">
         <div className="flex items-center justify-between mb-2">
           <span className="text-sm font-pt-caption1-medium text-hub-gray-2">
@@ -209,7 +203,6 @@ const BmcStepForm = ({ stepId, placeholder }: StepFormProps) => {
         </div>
       </div>
 
-      {/* 모바일에서 프로그레스바 아래 남은 공간을 모두 채우는 컨테이너 */}
       <div className="lg:hidden flex justify-center items-start p-4 mt-[150px] sm:mt-[165px]">
         <div className="w-full max-w-[680px] h-[500px] sm:h-[600px] bg-hub-white-1 border-2 border-hub-gray-3 rounded-lg flex flex-col p-4 sm:p-6">
           <div
@@ -260,7 +253,6 @@ const BmcStepForm = ({ stepId, placeholder }: StepFormProps) => {
         </div>
       </div>
 
-      {/* 데스크톱 레이아웃 */}
       <div className="hidden lg:flex w-[680px] lg:h-[650px] bg-hub-white-1 border-2 border-hub-gray-3 rounded-lg flex-col p-4 sm:p-6 lg:p-[30px_20px]">
         <div
           ref={messagesContainerRef}

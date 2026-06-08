@@ -77,7 +77,6 @@ export const BmcCanvas = forwardRef<HTMLDivElement, BmcCanvasProps>(
               border: `2px solid ${config.color}`,
             }}
           >
-            {/* 섹션 헤더 */}
             <div className="flex justify-between gap-2 mb-2 sm:mb-3">
               <p
                 className="font-pt-body2-semibold text-sm sm:text-[16px] font-semibold m-0"
@@ -96,13 +95,11 @@ export const BmcCanvas = forwardRef<HTMLDivElement, BmcCanvasProps>(
                     style={{
                       ["--fill-color" as string]: iconFill,
                     }}
-                    // SVG path fill은 인라인 style로 처리
                   />
                 </div>
               )}
             </div>
 
-            {/* 내용 */}
             {isEdit ? (
               <textarea
                 value={String(bmcData?.[config.id as keyof BmcData] || "")}
@@ -126,7 +123,6 @@ export const BmcCanvas = forwardRef<HTMLDivElement, BmcCanvasProps>(
       <>
         <PrintStyles />
         <div ref={ref} style={{ padding: 0 }}>
-          {/* 캔버스 헤더 */}
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center w-full mb-4 sm:mb-5 print:flex print:max-w-[1220px] print:w-[1220px] gap-2 sm:gap-0 px-2 sm:px-4 lg:px-6">
             <div className="flex flex-col">
               <h1 className="font-ws-title2 text-hub-black-1 m-0 text-lg sm:text-xl lg:text-2xl">
@@ -141,7 +137,6 @@ export const BmcCanvas = forwardRef<HTMLDivElement, BmcCanvasProps>(
             </p>
           </div>
 
-          {/* BMC 그리드 */}
           <div
             className="
               flex flex-col gap-3

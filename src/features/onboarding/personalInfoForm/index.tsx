@@ -62,7 +62,6 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
 
   return (
     <div className="flex flex-col gap-5">
-      {/* 생년월일 섹션 */}
       <div className="flex flex-col gap-[10px]">
         <div className="flex flex-col">
           <p className={titleClass}>생년월일</p>
@@ -131,7 +130,6 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
         </div>
       </div>
 
-      {/* 성별 섹션 */}
       <div className="flex flex-col gap-[10px]">
         <div className="flex flex-col">
           <p className={titleClass}>성별</p>
@@ -155,7 +153,6 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
         </div>
       </div>
 
-      {/* 이름 섹션 */}
       <div className="flex flex-col gap-[10px]">
         <div className="flex flex-col">
           <p className={titleClass}>이름</p>
@@ -172,7 +169,6 @@ const PersonalInfoForm: React.FC<PersonalInfoFormProps> = ({
         />
       </div>
 
-      {/* 창업 상태 섹션 */}
       <div className="flex flex-col gap-[10px]">
         <div className="flex flex-col">
           <p className={titleClass}>창업 상태</p>

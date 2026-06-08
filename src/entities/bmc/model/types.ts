@@ -7,7 +7,7 @@ export interface Question {
   answer: string | null;
 }
 
-// BMC 세션 응답 데이터
+
 export interface BmcResponseData {
   id: string;
   sessionId: number;
@@ -18,7 +18,7 @@ export interface BmcResponseData {
   questions: Question[];
 }
 
-// 경쟁사 분석용 BMC 세션 데이터
+
 export interface CompetitorBmcSessionData {
   title: string;
   id: string;
@@ -79,7 +79,7 @@ export interface CreateBmcRequest {
   sessionId: number;
 }
 
-// BMC 캔버스 데이터
+
 export interface BmcData {
   id: number;
   title: string;
@@ -99,7 +99,6 @@ export interface BmcData {
   updatedAt: Date;
 }
 
-// 경쟁사 분석용 BMC 데이터
 export interface CompetitorBmcData {
   id: string;
   title: string;

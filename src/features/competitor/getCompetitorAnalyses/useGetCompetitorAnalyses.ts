@@ -13,10 +13,10 @@ export const useGetCompetitorAnalyses = (
   return useQuery({
     queryKey: COMPETITOR_QUERY_KEYS.competitor.getAnalyses,
     queryFn: () => competitorApi.getCompetitorAnalyses(),
-    staleTime: 0, // 항상 최신 데이터 가져오기
-    gcTime: 0, // 캐시를 즉시 삭제
-    refetchOnMount: true, // 컴포넌트 마운트 시 항상 리페치
-    refetchOnWindowFocus: true, // 윈도우 포커스 시 리페치
+    staleTime: 0, 
+    gcTime: 0,
+    refetchOnMount: true, 
+    refetchOnWindowFocus: true, 
     enabled: isLoggedIn,
     retry: false,
     ...options,

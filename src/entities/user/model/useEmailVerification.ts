@@ -16,7 +16,7 @@ export const useEmailVerification = (email: string) => {
       return;
     }
 
-    // 이메일 유효성 검사
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       onError("올바른 이메일 형식이 아닙니다");
@@ -37,7 +37,7 @@ export const useEmailVerification = (email: string) => {
         config: error?.config
       });
 
-      // 더 구체적인 에러 메시지
+
       if (error?.response?.status === 404) {
         onError("이메일 서비스를 찾을 수 없습니다");
       } else if (error?.response?.status === 400) {
@@ -77,7 +77,6 @@ export const useEmailVerification = (email: string) => {
         status: error?.response?.status,
       });
 
-      // 더 구체적인 에러 메시지
       if (error?.response?.status === 400) {
         onError(error?.response?.data?.message || "잘못된 인증번호입니다");
       } else if (error?.response?.status === 404) {

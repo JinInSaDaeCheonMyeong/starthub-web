@@ -9,7 +9,6 @@ const SocialButton = () => {
 
   return (
     <div className="w-full flex flex-col gap-[15px]">
-      {/* Divider with text */}
       <div className="relative w-full">
         <div className="absolute inset-0 flex items-center">
           <div className="w-full border-t border-hub-gray-3"></div>
@@ -21,7 +20,6 @@ const SocialButton = () => {
         </div>
       </div>
 
-      {/* Social Login Buttons */}
       <div className="flex flex-col gap-[10px]">
         <StartHubButton
           icon={<Google className="w-[22px] h-[22px]" />}

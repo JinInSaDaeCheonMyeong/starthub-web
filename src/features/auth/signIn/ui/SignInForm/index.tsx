@@ -44,7 +44,6 @@ const SignInBox = () => {
 
   return (
     <div className="w-full max-w-[320px] flex flex-col items-center">
-      {/* Logo and Title */}
       <div className="flex flex-col items-center gap-[5px] mb-[60px]">
         <StartHubLogo className="w-[134px] h-[55px]" />
         <p className="text-hub-black-1 font-pt-body1-semibold text-center">
@@ -53,7 +52,6 @@ const SignInBox = () => {
         </p>
       </div>
 
-      {/* Form */}
       <form
         className="w-full flex flex-col gap-[10px] mb-[20px]"
         onSubmit={(e) => {
@@ -91,7 +89,6 @@ const SignInBox = () => {
           autoComplete="current-password"
         />
 
-        {/* Login Button */}
         <StartHubButton
           type="submit"
           text="로그인"
@@ -110,7 +107,6 @@ const SignInBox = () => {
         />
       </form>
 
-      {/* Auto Login and Sign Up */}
       <div className="w-full flex items-center justify-between mb-[15px]">
         <div className="flex items-center gap-[8px]">
           <StartHubCheckBox checked={autoSignIn} onChange={setAutoSignIn} />
@@ -126,7 +122,6 @@ const SignInBox = () => {
         </Link>
       </div>
 
-      {/* Social Login */}
       <SocialButton />
     </div>
   );

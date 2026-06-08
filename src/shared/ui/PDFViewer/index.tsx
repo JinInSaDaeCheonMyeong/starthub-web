@@ -6,7 +6,6 @@ interface PDFViewerProps {
 const PDFViewer = ({ pdfUrl, name }: PDFViewerProps) => {
   const displayName = name || pdfUrl.split("/").pop() || "document.pdf";
 
-  // Google Docs Viewer를 사용하여 PDF 표시
   const viewerUrl = `https://docs.google.com/viewer?url=${encodeURIComponent(pdfUrl)}&embedded=true`;
 
   return (

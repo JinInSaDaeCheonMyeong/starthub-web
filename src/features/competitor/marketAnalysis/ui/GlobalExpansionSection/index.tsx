@@ -15,30 +15,23 @@ const GlobalExpansionSection: React.FC<GlobalExpansionSectionProps> = ({
   }
 
   return (
-    // Section
     <section className="w-full pb-5 text-left">
-      {/* SectionTitle */}
       <p className="font-pt-h1-semibold text-hub-black-1 mb-5">
         3. 해외 시장 진출 및 사업화 방안
       </p>
 
-      {/* MarketSection — 우선 진출 시장 */}
       <div className="flex flex-col gap-[30px] mb-[30px]">
         <div className="relative">
           <h3 className="font-pt-body1-semibold text-hub-primary mb-2.5">
             우선 진출 시장
           </h3>
           {globalExpansion?.priorityMarkets?.map((market, index) => {
-            // 전체가 <<>>로 감싸진 경우 (BMC 9번 형식)
             if (market.startsWith('<<') && market.includes('>>')) {
-              // <<>> 블록들을 분리
               const blocks = market.match(/<<[^>]+>>/g) || [];
 
               return blocks.map((block, blockIndex) => {
-                // <<>> 제거하고 내용 추출
                 const cleanedBlock = block.replace(/^<<|>>$/g, '').trim();
 
-                // 줄바꿈으로 제목과 설명 분리
                 const lines = cleanedBlock.split('\n').map(l => l.trim()).filter(l => l);
                 const title = lines[0] || cleanedBlock;
                 const description = lines.slice(1).join(' ');
@@ -61,12 +54,9 @@ const GlobalExpansionSection: React.FC<GlobalExpansionSectionProps> = ({
               });
             }
 
-            // 일반 형식 (BMC 3번 형식 - 제목과 설명이 분리된 경우)
             else {
-              // 줄바꿈으로 제목과 설명 분리
               const lines = market.split('\n').map(l => l.trim()).filter(l => l);
 
-              // 첫 줄이 제목, 나머지가 설명
               const title = lines[0];
               const description = lines.slice(1).join(' ');
 
@@ -90,7 +80,6 @@ const GlobalExpansionSection: React.FC<GlobalExpansionSectionProps> = ({
         </div>
       </div>
 
-      {/* MarketSection — 진입 전략 */}
       <div className="flex flex-col gap-[30px] mb-[30px]">
         <div className="relative">
           <h3 className="font-pt-body1-semibold text-hub-primary mb-2.5">
@@ -109,7 +98,6 @@ const GlobalExpansionSection: React.FC<GlobalExpansionSectionProps> = ({
         </div>
       </div>
 
-      {/* MarketItem — 현지화 요구사항 */}
       <div className="relative">
         <h3 className="font-pt-body1-semibold text-hub-primary mb-2.5">
           현지화 요구사항
@@ -130,7 +118,6 @@ const GlobalExpansionSection: React.FC<GlobalExpansionSectionProps> = ({
         </div>
       </div>
 
-      {/* MarketItem — 파트너십 */}
       <div className="relative mt-[30px]">
         <h3 className="font-pt-body1-semibold text-hub-primary mb-2.5">
           파트너십
@@ -151,7 +138,6 @@ const GlobalExpansionSection: React.FC<GlobalExpansionSectionProps> = ({
         </div>
       </div>
 
-      {/* MarketItem — 예상 도전과제 */}
       <div className="relative mt-[30px]">
         <h3 className="font-pt-body1-semibold text-hub-primary mb-2.5">
           예상 도전과제

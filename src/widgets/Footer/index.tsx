@@ -1,5 +1,4 @@
 import { ReactComponent as Email } from "@assets/icons/email.svg";
-import { ReactComponent as Call } from "@assets/icons/call.svg";
 import { ReactComponent as Location } from "@assets/icons/location.svg";
 
 const Footer = () => {
@@ -7,10 +6,8 @@ const Footer = () => {
     <div className="w-full bg-hub-white-2 border-t border-[#e5e5e5] select-text">
       <div className="max-w-[1200px] mx-auto px-5 pt-10 pb-5">
 
-        {/* 상단 */}
         <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr_1fr] gap-10 md:gap-[40px] mb-10">
 
-          {/* 로고 + 설명 */}
           <div className="flex flex-col gap-3">
             <div className="font-ws-title1">
               Start<span className="text-hub-primary font-ws-title1">Hub</span>
@@ -22,7 +19,6 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* 링크 */}
           <div className="grid grid-cols-2 md:grid-cols-3 gap-5">
             <div className="flex flex-col gap-2">
               <h4 className="font-pt-body2-semibold text-hub-black-1 m-0 mb-3">고객지원</h4>
@@ -37,7 +33,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* 연락처 */}
           <div className="flex flex-col gap-3">
             <h4 className="font-pt-body2-semibold text-hub-black-1 m-0 mb-3">연락처</h4>
             <div className="flex flex-col gap-2 mb-4">
@@ -57,7 +52,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* 하단 */}
         <div className="border-t border-[#e5e5e5] pt-5 flex flex-col md:flex-row md:justify-between md:items-center gap-3">
           <div className="flex flex-col gap-1 text-right md:text-left">
             <span className="font-pt-caption2-regular text-hub-gray-2">(주)스타트허브</span>

@@ -66,7 +66,6 @@ const CompetitorCreate = () => {
           ? await competitorApi.regenerateCompetitorAnalysis(Number(bmcId))
           : await competitorApi.createCompetitorAnalysis(Number(bmcId));
 
-        // response.data가 배열인지 단일 객체인지 확인
         const analysisData = Array.isArray(response.data) ? response.data[0] : response.data;
 
         if (analysisData) {

@@ -37,7 +37,6 @@ const BoxMenu = () => {
 
   return (
     <div className="flex flex-col lg:flex-row w-full gap-4 lg:gap-[19px] justify-center">
-      {/* BMC 설계하기 */}
       <div className="w-full lg:w-[334px] h-[274px] bg-[#fff1f7] rounded-[20px] flex flex-col items-center justify-center px-[50px] py-[30px]">
         <div className="flex flex-col gap-[16px] items-start w-[255px]">
           <div className="flex flex-col gap-[4px] items-start text-[#ff71af] w-full">
@@ -62,9 +61,7 @@ const BoxMenu = () => {
         </div>
       </div>
 
-      {/* 가운데 컬럼 */}
       <div className="flex flex-col gap-[14px] items-start w-full lg:w-[334px] lg:h-[274px] lg:justify-between">
-        {/* 경쟁사 분석 */}
         <div className="bg-[#eafbf0] flex flex-col h-[190px] items-center justify-center px-[50px] py-[20px] rounded-[20px] w-full">
           <div className="flex flex-col gap-[12px] items-start w-[255px]">
             <div className="flex flex-col gap-[6px] items-start text-[#64dd91] w-full">
@@ -86,7 +83,6 @@ const BoxMenu = () => {
           </div>
         </div>
 
-        {/* 더 좋은 서비스 */}
         <div className="bg-[#e8f7ff] flex h-[70px] items-center justify-center px-[44px] py-[45px] rounded-[20px] w-full">
           <p className="font-ws-body1 text-[18px] leading-[1.2] font-semibold text-hub-primary tracking-[-0.072px] whitespace-nowrap">
             더 좋은 서비스를 경험해보세요!
@@ -94,7 +90,6 @@ const BoxMenu = () => {
         </div>
       </div>
 
-      {/* 공고 보기 */}
       <div className="w-full lg:w-[334px] h-[274px] bg-[#f6e8ff] rounded-[20px] flex flex-col items-center justify-center px-[50px] py-[30px]">
         <div className="flex flex-col gap-[16px] items-start w-[255px]">
           <div className="flex flex-col gap-[4px] items-start text-[#d290fb] w-full">

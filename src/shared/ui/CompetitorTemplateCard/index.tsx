@@ -82,7 +82,6 @@ const CompetitorTemplateCard: React.FC = () => {
 
   if (isLoading) return <CompetitorCardSkeleton />;
 
-  // hydration 방지를 위해 mounted 상태 확인
   if (!mounted) {
     return <CompetitorCardSkeleton />;
   }
@@ -90,18 +89,14 @@ const CompetitorTemplateCard: React.FC = () => {
   return (
     <div className="w-full min-h-[50vh]">
       <div className="flex flex-col justify-start items-start w-full gap-6">
-        {/* 타이틀 */}
         <div className="flex flex-col justify-start items-start w-full">
           <p className="font-pt-body1-medium">
             경쟁사분석 기능을 사용해보세요!
           </p>
         </div>
 
-        {/* 모바일: 리스트 형태, 데스크탑: 카드 그리드 */}
         <div className="w-full">
-          {/* 모바일 리스트 */}
           <div className="block lg:hidden w-full">
-            {/* 새로 만들기 버튼 - 항상 표시 */}
             <button
               onClick={() => router.push("/competitor/bmc-selection")}
               className="w-full mb-4 p-4 text-white rounded-lg font-pt-body2-medium transition-colors"
@@ -112,7 +107,6 @@ const CompetitorTemplateCard: React.FC = () => {
               경쟁사 분석 생성하기
             </button>
 
-            {/* 리스트 아이템들 */}
             {cardData.length > 0 ? (
               <div className="space-y-3">
                 {cardData.map((card) => (
@@ -147,9 +141,7 @@ const CompetitorTemplateCard: React.FC = () => {
             )}
           </div>
 
-          {/* 데스크탑 카드 그리드 */}
           <div className="hidden lg:grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8 w-full">
-            {/* 추가 버튼 카드 */}
             <div
               onClick={() => router.push("/competitor/bmc-selection")}
               className="inline-block bg-hub-white-1 cursor-pointer w-full max-w-[242px] h-[168px] mx-auto transition-all duration-300 hover:opacity-50"

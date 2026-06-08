@@ -51,7 +51,6 @@ const LikeListForm: React.FC = () => {
       <div className="pt-[150px] sm:pt-[150px] md:pt-[160px] lg:pt-0">
         {isLoggedIn ? (
           <div className="w-full">
-            {/* 메인 컨텐츠 영역 */}
             <div className="px-4 lg:pl-[250px] lg:pr-[40px] lg:pt-[40px] pb-[50px]">
           <div className="mb-6">
             <div className="flex items-center gap-3">
@@ -69,14 +68,12 @@ const LikeListForm: React.FC = () => {
             <div className="flex-1">
               {isLoading ? (
                 <>
-                  {/* 모바일: 리스트 스켈레톤 */}
                   <div className="lg:hidden space-y-3">
                     {Array.from({ length: 8 }).map((_, idx) => (
                       <div key={idx} className="bg-hub-gray-4 rounded-lg p-4 animate-skeleton-pulse h-16" />
                     ))}
                   </div>
 
-                  {/* 데스크톱: 카드 스켈레톤 */}
                   <div className="hidden lg:grid lg:grid-cols-[repeat(auto-fill,minmax(250px,1fr))] lg:gap-4">
                     {Array.from({ length: 12 }).map((_, idx) => (
                       <NoticeSkeleton key={idx} />
@@ -103,7 +100,6 @@ const LikeListForm: React.FC = () => {
                 </div>
               ) : (
                 <>
-                  {/* 모바일: 리스트 형태 */}
                   <div className="lg:hidden space-y-3">
                     {notices.map((notice) => (
                       <div
@@ -133,7 +129,6 @@ const LikeListForm: React.FC = () => {
                     ))}
                   </div>
 
-                  {/* 데스크톱: 카드 형태 */}
                   <div className="hidden lg:grid lg:grid-cols-3 lg:gap-6" style={{gridTemplateColumns: 'repeat(3, 250px)'}}>
                     {notices.map((notice) => (
                       <NoticeCard key={notice.url} notice={notice} />
@@ -154,7 +149,6 @@ const LikeListForm: React.FC = () => {
             )}
           </div>
 
-          {/* 모바일: 추가 메뉴 */}
           <div className="lg:hidden border-t border-hub-gray-3 pt-6 space-y-4">
             <button
               onClick={() => window.open("https://various-bougon-d76.notion.site/27f507c40eaf80acbf4afba41b9964b7", "_blank")}

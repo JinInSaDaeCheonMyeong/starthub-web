@@ -35,7 +35,6 @@ const ChatAIWidget = () => {
     }
   }, [open]);
 
-  // quota 상태 확인용
   useEffect(() => {
     console.log('quota 상태 변경:', quota);
   }, [quota]);
@@ -62,14 +61,12 @@ const ChatAIWidget = () => {
 
   return (
     <div className="fixed bottom-8 right-8 z-[1000] flex flex-col items-end gap-3">
-      {/* 채팅창 */}
       {visible && (
         <div
           className={`w-[285px] h-[405px] bg-hub-white-1 border border-hub-gray-3 rounded-[10px] shadow-[0_8px_32px_rgba(0,0,0,0.13)] flex flex-col overflow-hidden ${
             open ? "animate-fade-in-up" : "animate-fade-out-down"
           }`}
         >
-          {/* 사용량 정보 */}
           {quota && quota.weeklyTokensUsed !== undefined && (
             <div className="px-3 pt-3 pb-0">
               <div className="bg-blue-50 rounded-lg p-2 text-xs">
@@ -87,7 +84,6 @@ const ChatAIWidget = () => {
             </div>
           )}
 
-          {/* 메시지 목록 */}
           <div
             ref={messageListRef}
             className="flex-1 overflow-y-auto pt-[22px] px-2 pb-0 flex flex-col gap-[10px] select-text"
@@ -147,14 +143,12 @@ const ChatAIWidget = () => {
             {error && <AIErrorMessage message={error} onRetry={handleRetry} />}
           </div>
 
-          {/* 텍스트에어리어 */}
           <div className="px-[10px] pb-2 shrink-0">
             <StartHubAITextarea compact onSubmit={handleSubmit} disabled={streaming} />
           </div>
         </div>
       )}
 
-      {/* 토글 버튼 */}
       <div
         onClick={toggleOpen}
         className="w-[52px] h-[52px] rounded-full cursor-pointer flex items-center justify-center transition-all duration-200 hover:scale-[1.07] active:scale-[0.96] [&_svg]:w-[26px] [&_svg]:h-[26px]"

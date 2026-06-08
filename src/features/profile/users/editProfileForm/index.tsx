@@ -80,9 +80,7 @@ const EditProfileForm: React.FC = () => {
 
       <div className="pt-[150px] sm:pt-[150px] md:pt-[160px] lg:pt-0">
         <div className="w-full max-w-[1280px] mx-auto">
-          {/* 메인 컨텐츠 영역 */}
           <div className="px-4 lg:pl-[384px] lg:pr-[120px] lg:pt-[158px] pb-[50px]">
-          {/* HeaderSection */}
           <div className="mb-[50px]">
             <p className="font-pt-h1-semibold text-hub-black-1 mb-[9px] text-lg lg:text-2xl">
               "어제의 꿈은 오늘의 희망이며 내일의 현실이다."
@@ -92,7 +90,6 @@ const EditProfileForm: React.FC = () => {
             </h2>
           </div>
 
-        {/* Form */}
         <div className="w-full max-w-none mx-auto lg:mx-0 mb-[60px] flex flex-col gap-0">
           <div className="mb-6">
             <h3 className="font-pt-body2-medium text-hub-black-1 mb-2.5 text-sm lg:text-base">

@@ -15,13 +15,16 @@ interface CompetitorComparison {
   differences: string[];
 }
 
-// <<>> 안의 텍스트 볼드 처리
 const processBoldText = (text: string) => {
   if (!text) return "";
   return text.replace(/<<([^>]+)>>/g, "<strong>$1</strong>");
 };
 
 export const downloadBmc = async (id: number) => {
+  const [{ default: html2canvas }, { jsPDF }] = await Promise.all([
+    import("html2canvas"),
+    import("jspdf"),
+  ]);
   try {
     const response = await bmcApi.getCanvasesDetail(id.toString());
     const bmcData = response.data;
@@ -103,6 +106,10 @@ export const downloadBmc = async (id: number) => {
 };
 
 export const downloadCompetitorAnalysis = async (id: number, title: string) => {
+    const [{ default: html2canvas }, { jsPDF }] = await Promise.all([
+      import("html2canvas"),
+      import("jspdf"),
+    ]);
   try {
     const analysesResponse = await competitorApi.getCompetitorAnalyses();
     const analysisData = analysesResponse.data.find(
@@ -310,25 +317,21 @@ export const downloadCompetitorAnalysis = async (id: number, title: string) => {
         format: "a4",
       });
 
-      // A4 크기 설정 (210mm x 297mm)
       const pdfWidth = 210;
       const pdfHeight = 297;
       const margin = 10;
 
-      // 캔버스 크기에서 PDF 크기로 변환
-      // 실제 콘텐츠 너비를 PDF 너비에 맞춤
       const contentWidth = pdfWidth - margin * 2;
       const imgWidth = canvas.width;
       const imgHeight = canvas.height;
 
-      const ratio = contentWidth / (imgWidth / 2); // scale 2로 생성했으므로 /2
+      const ratio = contentWidth / (imgWidth / 2); 
       const scaledHeight = (imgHeight / 2) * ratio;
 
       const pageContentHeight = pdfHeight - margin * 2;
       const totalPages = Math.ceil(scaledHeight / pageContentHeight);
 
       if (totalPages === 1) {
-        // 한 페이지에 들어가는 경우
         pdf.addImage(
           imgData,
           "PNG",
@@ -338,7 +341,6 @@ export const downloadCompetitorAnalysis = async (id: number, title: string) => {
           scaledHeight,
         );
       } else {
-        // 여러 페이지에 걸쳐 있는 경우
         let position = 0;
 
         for (let i = 0; i < totalPages; i++) {
@@ -346,17 +348,14 @@ export const downloadCompetitorAnalysis = async (id: number, title: string) => {
             pdf.addPage();
           }
 
-          // 현재 페이지에서 그릴 높이 계산
           const pageHeight = Math.min(
             pageContentHeight,
             scaledHeight - position,
           );
 
-          // sourceY 계산 (원본 이미지에서의 위치)
-          const sourceY = (position / ratio) * 2; // scale 2 보정
-          const sourceHeight = (pageHeight / ratio) * 2; // scale 2 보정
+          const sourceY = (position / ratio) * 2; 
+          const sourceHeight = (pageHeight / ratio) * 2; 
 
-          // 페이지별로 이미지 조각 추가
           const pageCanvas = document.createElement("canvas");
           pageCanvas.width = imgWidth;
           pageCanvas.height = sourceHeight;
@@ -390,7 +389,6 @@ export const downloadCompetitorAnalysis = async (id: number, title: string) => {
         }
       }
 
-      // PDF 다운로드
       const date = new Date().toISOString().split("T")[0];
       const filename = `경쟁사분석리포트_${title}_${date}.pdf`;
       pdf.save(filename);

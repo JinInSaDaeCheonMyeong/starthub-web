@@ -50,7 +50,6 @@ const SignUpBox = ({
 
   return (
     <>
-      {/* Email Section */}
       <div className="flex flex-col gap-[10px] w-full">
         <p className="font-pt-body1-medium text-black">
           이메일
@@ -140,7 +139,6 @@ const SignUpBox = ({
         </div>
       </div>
 
-      {/* Password Section */}
       <div className="flex flex-col gap-[10px] w-full">
         <div className="flex gap-[4px] items-center">
           <p className="font-pt-body2-medium text-black">
